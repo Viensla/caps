@@ -1,0 +1,16 @@
+var Sounds;
+
+(function ($){
+    var path = 'assets/sounds/';
+    Sounds = {
+        simpletap1 : new Audio(path+"choc_simple_1.mp3"),
+        simpletap2 : new Audio(path+"choc_simple_2.mp3"),
+        simpletap3 : new Audio(path+"choc_simple_3.mp3"),
+        clink : new Audio(path+"clink.mp3"),
+        capcap : new Audio(path+"capcap.mp3"),
+        pschit1 : new Audio(path+"pschit_1.mp3"),
+        pschit2 : new Audio(path+"pschit_2.mp3"),
+
+        mute : true
+    }
+})(jQuery);

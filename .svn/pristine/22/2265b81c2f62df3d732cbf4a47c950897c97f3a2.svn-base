@@ -1,0 +1,568 @@
+var container, scene, renderer, camera, light, ball, plane, bottle, bottlecaps, axes, initEventHandling, initScene;
+var WIDTH, HEIGHT, VIEW_ANGLE, ASPECT, NEAR, FAR, planeWIDTH, planeHEIGHT;
+
+var elements = [], selected_block = null, mouse_position = new THREE.Vector3, block_offset = new THREE.Vector3, _i, _v3 = new THREE.Vector3, intersect_plane, lookatobj,
+   playedcaps, pilone, mouse;
+
+var _nullVector = new THREE.Vector3(0,0,0);
+
+var onRenderFcts= [];
+
+var lastTimeMsec= null;
+
+var capsYpos = 30;
+
+var clock = new THREE.Clock();
+
+Physijs.scripts.worker = '/js/physijs/physijs_worker.js';
+Physijs.scripts.ammo = 'ammo.js';
+
+container = document.querySelector('.viewport');
+
+WIDTH = window.innerWidth;
+HEIGHT = window.innerHeight;
+
+VIEW_ANGLE = 75;
+ASPECT = WIDTH / HEIGHT;
+NEAR = 0.1;
+FAR = 10000;
+
+
+
+planeWIDTH = 300;
+planeHEIGHT = 300;
+
+
+var y_launcher = 0;
+var y_launcher_inc = 0.2;
+var table_material = Physijs.createMaterial(
+    new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture( 'images/wood.jpg' ), ambient: 0xFFFFFF, opacity: 0.5, transparent: true }),
+    .9, // high friction
+    .2 // low restitution
+);
+table_material.map.wrapS = table_material.map.wrapT = THREE.RepeatWrapping;
+table_material.map.repeat.set( 5, 5 );
+
+
+
+
+var caps_geometry = new THREE.CylinderGeometry(4, 3, 1.2, 32),
+
+    caps_material = Physijs.createMaterial(
+        new THREE.MeshLambertMaterial({
+            color: 0xff0000
+        }), 0.4, 0.8),
+
+    bottlecaps_material = Physijs.createMaterial(
+        new THREE.MeshLambertMaterial({
+            color: 0x00ff00
+        }), 0.4, 0.8),
+
+    maxicaps_material = '';
+
+
+initScene = function() {
+
+    scene = new Physijs.Scene();
+
+    scene.setGravity(new THREE.Vector3( 0, -80, 0 ));
+
+    scene.addEventListener('update', function() {
+
+        if ( selected_block !== null ) {
+
+            _v3.copy( mouse_position ).add( block_offset ).sub( selected_block.position ).multiplyScalar( 5 );
+
+            _v3.y = 10;
+
+            selected_block.setLinearVelocity( _v3 );
+
+            // Reactivate all of the blocks
+            _v3.set( 0, 0, 0 );
+            for ( _i = 0; _i < elements.length; _i++ ) {
+                elements[_i].applyCentralImpulse( _v3 );
+            }
+        }
+
+
+
+
+        scene.simulate(undefined, 2);
+
+    });
+
+    renderer = new THREE.WebGLRenderer({
+        antialias: true
+    });
+
+    renderer.setSize(WIDTH, HEIGHT);
+    renderer.shadowMapEnabled = true;
+    renderer.shadowMapSoft = true;
+    renderer.shadowMapType = THREE.PCFShadowMap;
+    renderer.shadowMapAutoUpdate = true;
+
+    container.appendChild(renderer.domElement);
+
+    create_camera();
+
+    create_lights();
+
+    plane = new Physijs.BoxMesh(
+        new THREE.CubeGeometry(planeWIDTH, planeHEIGHT, 35),
+        table_material ,0, { restitution: .2, friction: .8 });
+    plane.rotation.x = Math.PI/2;
+    plane.position.y = -.5;
+    //plane.rotation.y = Math.PI / 24;
+    plane.receiveShadow = true;
+
+    scene.add(plane);
+
+    intersect_plane = new THREE.Mesh(
+        new THREE.PlaneGeometry( WIDTH, HEIGHT ),
+        new THREE.MeshBasicMaterial({ opacity: 0, transparent: true })
+    );
+
+    intersect_plane.rotation.x = Math.PI / -2;
+    scene.add( intersect_plane );
+
+
+    // ADD AXES *******************************************************
+    axes = buildAxes( 1000 );
+    axes.presence = false;
+    axes.traverse( function ( object ) { object.visible = false; } );
+    scene.add(axes);
+
+    create_bottle(0);
+
+    create_caps();
+
+    create_pilone();
+
+    scene.simulate();
+
+    render();
+
+    initEventHandling();
+
+
+}
+
+function create_camera(){
+
+    camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+
+    var camera_xangle = 30;
+    var camera_yangle = 80;
+
+
+
+    camera.position.set(camera_xangle, camera_yangle, 90);
+    camera.lookAt(scene);
+
+    scene.add(camera);
+
+
+    mouse = {x : 0, y : 0};
+
+    document.addEventListener('mousemove', function(event){
+        mouse.x	= (event.clientX / window.innerWidth ) - 0.5;
+        mouse.y	= (event.clientY / window.innerHeight) - 0.5;
+
+
+        camera.position.x += (mouse.x * 10 - camera.position.x) * (0.5*3) + camera_xangle;
+        camera.position.y += (mouse.y * 5 - camera.position.y) * (0.2*3) + camera_yangle;
+        camera.lookAt(lookatobj);
+    }, false);
+
+}
+function create_lights(){
+
+//    light = new THREE.DirectionalLight(0xffffff);
+//    light.position.set(0, 100, 60);
+//    light.castShadow = true;
+//    light.shadowCameraLeft = -60;
+//    light.shadowCameraTop = -60;
+//    light.shadowCameraRight = 60;
+//    light.shadowCameraBottom = 60;
+//    light.shadowCameraNear = 1;
+//    light.shadowCameraFar = 1000;
+//    light.shadowBias = -.0001;
+//    light.shadowMapWidth = light.shadowMapHeight = 1024;
+//    light.shadowDarkness = .7;
+//
+//    scene.add(light);
+
+
+    var ambientLight= new THREE.AmbientLight( 0x020202 );
+    scene.add( ambientLight);
+
+    var frontLight	= new THREE.DirectionalLight(0xffffff);
+
+    frontLight.position.set(0, 100, 60);
+    frontLight.castShadow = true;
+    frontLight.shadowDarkness = .3;
+    frontLight.shadowBias = -.0001;
+    frontLight.shadowCameraNear = 1;
+    frontLight.shadowMapWidth = 2048;
+    frontLight.shadowMapHeight = 2048;
+    frontLight.shadowCameraLeft = planeWIDTH/2;
+    frontLight.shadowCameraTop = - planeHEIGHT/2;
+    frontLight.shadowCameraRight = - planeWIDTH/2;
+    frontLight.shadowCameraBottom = planeHEIGHT/2;
+
+    scene.add( frontLight );
+
+    var backLight	= new THREE.DirectionalLight('white', 0.75);
+    backLight.position.set(0, -100, -60);
+    scene.add( backLight );
+
+}
+
+
+function create_bottle(xaxis){
+
+    bottle = new Physijs.CylinderMesh(
+        new THREE.CylinderGeometry(3, 5, 30, 32),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff
+            }), 0.4, 0.8),
+        0);
+
+    bottle.position.y = 32;
+    bottle.position.x = xaxis;
+    bottle.position.z = -80;
+
+    bottle.castShadow = true;
+    bottle.receiveShadow = true;
+    scene.add(bottle);
+
+    lookatobj = bottle;
+
+    create_bottlecaps();
+}
+
+function create_bottlecaps(){
+    bottlecaps = new Physijs.CylinderMesh(caps_geometry, bottlecaps_material, 0.3);
+
+    bottlecaps.position.y = bottle.position.y + 16;
+    bottlecaps.position.x = bottle.position.x;
+    bottlecaps.position.z = bottle.position.z;
+
+    bottlecaps.castShadow = true;
+    bottlecaps.receiveShadow = true;
+    scene.add(bottlecaps);
+
+}
+
+function create_pilone(){
+
+
+    pilone = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(3, 3, 2, 100, 100),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: 0xeeeeee,
+                transparent: true,
+                opacity: 0.3
+            }), 0.4, 0.8)
+        ,0);
+
+
+    pilone.position.y = ball.position.y - 1;
+    pilone.position.z = ball.position.z;
+    pilone.rotation.x = Math.PI / -2;
+
+    scene.add(pilone);
+
+}
+
+
+
+
+function create_caps(){
+
+    var maxicaps = Math.random() > 2,
+        mass = 30;
+
+    if(maxicaps){
+        maxicaps_material = Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: 0x000000
+            }), 0.4, 0.8);
+        mass = 20;
+        ball = new Physijs.CylinderMesh(caps_geometry, maxicaps_material, {friction : 0, restitution : 0.6});
+    }else{
+        ball = new Physijs.CylinderMesh(caps_geometry, caps_material, 20, {friction : 0, restitution : 0.8});
+    }
+
+
+
+    var r = {
+        x: Math.PI,
+        y: 0,
+        z: 0
+    };
+
+    console.log(mouse);
+
+
+    ball.rotation.x = Math.PI;
+
+
+
+
+    ball.position.y = 60;
+    ball.position.x = mouse.x*200;
+    ball.position.z = mouse.y*200;
+    ball.castShadow = true;
+    ball.receiveShadow = true;
+
+    scene.add(ball);
+
+    elements.push(ball);
+
+    if(elements.length > 10){
+        var last = elements[0];
+        scene.remove(last);
+        elements.splice(0, 1);
+    }
+}
+
+
+
+function render() {
+
+
+
+    if (ball.position.y <= -50 || ball.position.z <= -500) {
+//        scene.remove(ball);
+        create_caps();
+    }
+
+    if(ball.position.z <= -100){
+        create_caps();
+    }
+
+    if(ball.position.y <= 10){
+
+        ball.setAngularFactor( _nullVector );
+        ball.setLinearFactor( _nullVector );
+
+    }
+
+
+
+    if(bottlecaps.position.y <= bottle.position.y){
+        create_bottlecaps();
+    }
+
+    camera.lookAt(lookatobj.position);
+
+//    if(!selected_block)
+//        intersect_plane.position.y = playedcaps.position.y;
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+}
+
+
+
+initEventHandling = (function() {
+    var _vector = new THREE.Vector3,
+        _vectorAng = new THREE.Vector3,
+        projector = new THREE.Projector(),
+        handleMouseDown, handleMouseMove, handleMouseUp;
+
+    handleMouseDown = function( evt ) {
+        var ray, intersections;
+
+        _vector.set(
+            ( evt.clientX / window.innerWidth ) * 2 - 1,
+            -( evt.clientY / window.innerHeight ) * 2 + 1,
+             1
+        );
+
+        y_launcher = 0;
+
+
+//        projector.unprojectVector( _vector, camera );
+        _vector.unproject(camera);
+
+        ray = new THREE.Raycaster( camera.position, _vector.sub( camera.position ).normalize() );
+        intersections = ray.intersectObjects( elements );
+
+        if ( intersections.length > 0 ) {
+            selected_block = intersections[0].object;
+
+
+            playedcaps = selected_block;
+
+            _vectorAng.set(1, -2, 1);
+
+            _vector.set( 0, 0, 0 );
+
+            selected_block.setAngularFactor( _vector );
+            selected_block.setAngularVelocity( _vector );
+            selected_block.setLinearFactor( _vector );
+            selected_block.setLinearVelocity( _vector );
+
+
+            mouse_position.copy( intersections[0].point );
+
+            block_offset.subVectors( selected_block.position, mouse_position );
+
+            intersect_plane.position.y = mouse_position.y;
+        }
+    };
+
+    handleMouseMove = function( evt ) {
+
+        var ray, intersection,
+            i, scalar;
+
+
+
+        if ( selected_block !== null ) {
+
+            _vector.set(
+                ( evt.clientX / window.innerWidth ) * 2 - 1,
+                -( evt.clientY / window.innerHeight ) * 2 + 1,
+                1
+            );
+//            projector.unprojectVector( _vector, camera );
+            _vector.unproject(camera);
+            ray = new THREE.Raycaster( camera.position, _vector.sub( camera.position ).normalize() );
+            intersection = ray.intersectObject( intersect_plane );
+            mouse_position.copy( intersection[0].point );
+        }
+
+    };
+
+    handleMouseUp = function( evt ) {
+
+        if ( selected_block !== null ) {
+            _vector.set( 1, 1, 1 );
+
+            selected_block.setAngularFactor( _vector );
+
+            selected_block.setLinearFactor( _vector );
+
+            playedcaps = selected_block;
+
+            selected_block = null;
+
+
+        }
+
+
+
+
+
+    };
+
+    return function() {
+        renderer.domElement.addEventListener( 'mousedown', handleMouseDown );
+        renderer.domElement.addEventListener( 'mousemove', handleMouseMove );
+        renderer.domElement.addEventListener( 'mouseup', handleMouseUp );
+    };
+})();
+
+
+
+initScene();
+
+
+
+function buildAxes( length ) {
+    var axes = new THREE.Object3D();
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( length, 0, 0 ), 0xFF0000, false ) ); // +X
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -length, 0, 0 ), 0xFF0000, true) ); // -X
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, length, 0 ), 0x00FF00, false ) ); // +Y
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, -length, 0 ), 0x00FF00, true ) ); // -Y
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, length ), 0x0000FF, false ) ); // +Z
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x0000FF, true ) ); // -Z
+    return axes;
+}
+
+function buildAxis( src, dst, colorHex, dashed ) {
+    var geom = new THREE.Geometry(),
+        mat;
+
+    if(dashed) {
+        mat = new THREE.LineDashedMaterial({ linewidth: 3, color: colorHex, dashSize: 3, gapSize: 3 });
+    } else {
+        mat = new THREE.LineBasicMaterial({ linewidth: 3, color: colorHex });
+    }
+
+    geom.vertices.push( src.clone() );
+    geom.vertices.push( dst.clone() );
+    geom.computeLineDistances(); // This one is SUPER important, otherwise dashed lines will appear as simple plain lines
+
+    var axis = new THREE.Line( geom, mat, THREE.LinePieces );
+
+    return axis;
+
+}
+
+
+document.addEventListener(
+    'keydown',
+    function( ev ) {
+        console.log(ev.keyCode);
+        switch( ev.keyCode ) {
+            case 37:
+                // Left
+
+
+                break;
+
+            case 39:
+                // Right
+
+                break;
+
+            case 38:
+                // Up
+                capsYpos++;
+                ball.position.y = capsYpos;
+                pilone.position.y = capsYpos - 1;
+                break;
+
+            case 40:
+                // Down
+                capsYpos--;
+                ball.position.y = capsYpos;
+                pilone.position.y = capsYpos - 1;
+
+                break;
+
+            case 32:
+                // space
+                create_caps();
+                break;
+
+            case 67:
+                lookatobj = ball;
+                break;
+
+            case 86:
+                lookatobj = bottlecaps;
+                break;
+
+            case 66:
+                lookatobj = scene;
+                break;
+
+            case 65 :
+                if(axes.presence){
+                    axes.traverse( function ( object ) { object.visible = false; } );
+                    axes.presence = false;
+                }else{
+                    axes.traverse( function ( object ) { object.visible = true; } );
+                    axes.presence = true;
+                }
+                break;
+        }
+    }
+);

@@ -1,0 +1,292 @@
+
+
+
+capCollision = function ( collided, linearVelocity, angularVelocity, other ){
+
+    var capPlayed = this;
+    capPlayed.collisions++;
+
+    if(capPlayed.floating) return;
+
+
+    var collision = collided.name;
+
+
+    switch(collision){
+        case 'level':
+            if(!Sounds.mute) Sounds.simpletap2.play();
+            break;
+        case 'tapis':
+            if(!Sounds.mute) Sounds.simpletap1.play();
+            break;
+        case 'floor':
+            if(!Sounds.mute) Sounds.simpletap3.play();
+            break;
+        case 'vlCap':
+
+            if(capPlayed.name == 'player'){
+                collided.collided = true;
+            }
+
+            if(!Sounds.mute) Sounds.capcap.play();
+
+            break;
+        case 'plCap':
+
+            if(capPlayed.name == 'viensla'){
+                collided.collided = true;
+            }
+
+            if(!Sounds.mute) Sounds.pschit1.play();
+
+            break;
+        case 'vlBottle':
+            if(!Sounds.mute) Sounds.clink.play();
+            break;
+        case 'plBottle':
+            if(!Sounds.mute) Sounds.pschit1.play();
+            break;
+        case '':
+            console.log('Unamed hit !');
+            break;
+    }
+
+
+
+    if(collision == 'vlCap'){
+        collided.__dirtyPosition = true;
+    }
+
+
+
+};
+
+
+
+
+function create_caps(who){
+    var randomCaps = Math.random() > 0.8;
+    var mass = randomCaps ? 3 : 2;
+
+    if(typeof who == 'undefined'){
+        who = 'pl';
+    }
+
+
+    var cap_mat;
+    if(who == 'pl'){
+        cap_mat = Player.capmat.clone();
+    }else{
+        cap_mat = Viensla.capmat.clone();
+    }
+
+    cap_mat.side = 2;
+
+
+    ball = new Physijs.CylinderMesh(geo_caps, cap_mat, mass, {friction : 0, restitution : 0.8});
+
+    ball.scale.set(capModelscale,capModelscale,capModelscale);
+
+
+    ball.collisions = 0;
+    ball.addEventListener( 'collision', capCollision );
+
+    var sub = new Physijs.CylinderMesh(
+        new THREE.CylinderGeometry(1.5, 1.5, 0, 32, 32 ),
+        new THREE.MeshLambertMaterial({
+            color: ball.material.materials[1].color,
+            transparent : true,
+            opacity:1
+        })
+        ,0);
+    sub.position.x = 0;
+    sub.position.y = 0.3;
+    sub.position.z = 0;
+
+    ball.add(sub);
+
+
+    ball.position.y = 50;
+    ball.position.x = 0;
+    ball.position.z = playerDistance * globalDirection;
+    ball.castShadow = true;
+    ball.receiveShadow = true;
+
+    scene.add(ball);
+    elements.push(ball);
+
+    playedCaps = ball;
+
+    playedCaps.floating = true;
+
+    playedCaps.name = who == 'vl' ?  'viensla' : 'player';
+
+
+    if(elements.length > 10){
+        var last = elements[0];
+        scene.remove(last);
+        elements.splice(0, 1);
+    }
+
+    if(!Sounds.mute) Sounds.pschit1.play();
+}
+
+
+
+
+
+var power = 0,
+    speedbar = 2,
+    powerDir = speedbar,
+    strengh = 6,
+    playerstrengh = 5;
+
+
+function setPower(){
+    power += powerDir;
+
+    if(power > 100){
+        powerDir = -speedbar;
+    }
+
+    if(power < 0){
+        powerDir = +speedbar;
+    }
+
+    $('.powerbar .bar').height(power+'%');
+}
+
+
+
+
+
+
+initEventHandling = (function() {
+    var projector, ray, intersection,
+        handleMouseDown, handleMouseMove, handleMouseUp,
+        launchVector = new THREE.Vector3,
+        _vector = new THREE.Vector3,
+        _angVector = new THREE.Vector3;
+
+
+    handleMouseDown = function( evt ) {
+
+        if(!playedCaps) return;
+
+        holdingDown = true;
+
+        launchVector.set(1,20, -100);
+
+        power = 0;
+        $('.powerbar').fadeIn();
+
+    };
+
+    handleMouseMove = function( evt ) {
+        var mouseX = evt.clientX,
+            mouseY = evt.clientY;
+
+
+        $('.powerbar').css({left:mouseX+50, top:mouseY-50});
+
+
+        if(!playedCaps) return;
+        mouse3D.set(
+            ( mouseX / window.innerWidth ) * 2 - 1,
+            - ( mouseY / window.innerHeight ) * 2 + 1.07 ,
+            1 );
+
+        mouse3D.unproject(camera);
+
+        dir = mouse3D.sub( camera.position ).normalize();
+
+        distance = - camera.position.z / dir.z;
+
+        DCMP = camera.position.clone().add( dir.multiplyScalar(distance/2) );
+
+        DCMP.z = playerDistance*globalDirection;
+    };
+
+    handleMouseUp = function( evt ) {
+
+        if(!playedCaps) return;
+
+
+
+        holdingDown = false;
+
+        playedCaps.__dirtyPosition = true;
+        playedCaps.floating = false;
+
+        _vector.set( 1, 1, 1 );
+        _angVector.set( Math.random()*10, Math.random()*10, Math.random()*20);
+        playedCaps.setAngularFactor( _vector );
+
+        playedCaps.setLinearFactor( _vector );
+        launchVector.set(1,1, -power*playerstrengh*globalDirection);
+        playedCaps.setLinearVelocity( launchVector );
+        playedCaps.setAngularVelocity( _angVector );
+
+        playedCaps.position.copy(DCMP);
+
+        playedCaps = null;
+
+        power = 0;
+
+        $('.powerbar').fadeOut();
+
+        Player.launched++;
+        Player.totalLaunched++;
+
+        if(Player.launched == Party.capsPerTurn){
+
+
+
+            setTimeout(function(){
+                console.log('viens la attack');
+                Viensla.launched = 0;
+                Player.isPlaying = false;
+                Party.resetStocks();
+
+                Party.vlplay();
+                $('#turn-m p').text('Vienslà\'s turn!');
+                turnm();
+
+            }, 3000);
+
+        }
+
+    };
+
+    return function() {
+        renderer.domElement.addEventListener( 'mousedown', handleMouseDown );
+        renderer.domElement.addEventListener( 'mousemove', handleMouseMove );
+        renderer.domElement.addEventListener( 'mouseup', handleMouseUp );
+    };
+})();
+
+var sphere_traj;
+var middlepos = new THREE.Vector3(0,150,0);
+var endpos = new THREE.Vector3();
+
+function calculate_traj(){
+
+
+
+    var x = DCMP.x;
+    var y = 20;
+    var z = 0;
+
+//    console.log(DCMP);
+
+    z = - ( power*(power/100) + DCMP.y/2 );
+
+    sphere_traj.position.set(x, y, z);
+
+    endpos.set(x, y, z);
+
+//    trajCap.calculate(DCMP, middlepos ,endpos)
+
+//    trajLine.position.set(DCMP);
+
+}

@@ -1,0 +1,137 @@
+
+planeWIDTH = 280;
+planeHEIGHT = 500;
+
+
+var tableSurfaceDim = [100, 2, 20];
+var tablefootSurfaceDim = [80, 40, 2];
+var level, _floor, _tablefoot, _table;
+function create_table(){
+
+
+    //Set Level group
+    level = new Physijs.BoxMesh(
+        new THREE.CubeGeometry( 5, 1, .5 ),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: cblue
+            })
+        ), 0
+    );
+    level.position.x = 0;
+    level.position.y = 0;
+    level.position.z = 0;
+    level.castShadow = true;
+    level.receiveShadow = true;
+
+
+    //Add floor to level
+    _floor = new Physijs.BoxMesh(
+        new THREE.CubeGeometry(planeWIDTH, planeHEIGHT, 35),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: cred
+            })
+        ), 0);
+    _floor.rotation.x = Math.PI/2;
+    _floor.position.x = 0;
+    _floor.position.y = 1;
+    _floor.position.z = 0;
+    _floor.castShadow = true;
+    _floor.receiveShadow = true;
+
+
+
+    level.add(_floor);
+
+
+    //Add table foots
+    _tablefoot = new Physijs.BoxMesh(
+        new THREE.CubeGeometry(tablefootSurfaceDim[0], tablefootSurfaceDim[1], tablefootSurfaceDim[2]),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: cblue
+            })
+        ), 0);
+    _tablefoot.position.x = 0;
+    _tablefoot.position.y = tablefootSurfaceDim[1];
+    _tablefoot.position.z = -90;
+
+    _tablefoot.castShadow = true;
+    _tablefoot.receiveShadow = true;
+
+    level.add(_tablefoot);
+
+
+    _tablefoot = new Physijs.BoxMesh(
+        new THREE.CubeGeometry(tablefootSurfaceDim[0], tablefootSurfaceDim[1], tablefootSurfaceDim[2]),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: cgreen
+            })
+        ), 0);
+    _tablefoot.position.x = 0;
+    _tablefoot.position.y = tablefootSurfaceDim[1];
+    _tablefoot.position.z = 90;
+    _tablefoot.castShadow = true;
+    _tablefoot.receiveShadow = true;
+
+    level.add(_tablefoot);
+
+    //Add table
+
+    _table = new Physijs.BoxMesh(
+        new THREE.CubeGeometry(tableSurfaceDim[0], tableSurfaceDim[1], tableSurfaceDim[2]),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff
+            })
+        ), 0);
+    _table.position.x = 0;
+    _table.position.y = tablefootSurfaceDim[1] +tablefootSurfaceDim[1]/2 ;
+    _table.position.z = -90;
+    _table.castShadow = true;
+    _table.receiveShadow = true;
+    level.add(_table);
+
+    _table = new Physijs.BoxMesh(
+        new THREE.CubeGeometry(tableSurfaceDim[0], tableSurfaceDim[1], tableSurfaceDim[2]),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff
+            })
+        ), 0);
+    _table.position.x = 0;
+    _table.position.y = tablefootSurfaceDim[1] +tablefootSurfaceDim[1]/2 ;
+    _table.position.z = 90;
+    _table.castShadow = true;
+    _table.receiveShadow = true;
+    level.add(_table);
+
+    scene.add(level);
+
+
+
+
+    // SKYDOME
+
+    var vertexShader = document.getElementById( 'vertexShader' ).textContent;
+    var fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
+    var uniforms = {
+        topColor: 	 { type: "c", value: new THREE.Color( 0x0077ff ) },
+        bottomColor: { type: "c", value: new THREE.Color( 0xffffff ) },
+        offset:		 { type: "f", value: 33 },
+        exponent:	 { type: "f", value: 0.6 }
+    }
+    uniforms.topColor.value.copy( hemiLight.color );
+
+    scene.fog.color.copy( uniforms.bottomColor.value );
+
+    var skyGeo = new THREE.SphereGeometry( 4000, 32, 15 );
+    var skyMat = new THREE.ShaderMaterial( { vertexShader: vertexShader, fragmentShader: fragmentShader, uniforms: uniforms, side: THREE.BackSide } );
+
+    var sky = new THREE.Mesh( skyGeo, skyMat );
+    scene.add( sky );
+}
+
+

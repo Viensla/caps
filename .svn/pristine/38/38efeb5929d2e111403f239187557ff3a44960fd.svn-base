@@ -1,0 +1,423 @@
+/* colors */
+var cblue = 0x67AAC1;
+var cyellow = 0xF7D443;
+var cgreen = 0x78AD60;
+var cred = 0xC1676A;
+
+
+
+var container, scene, renderer, light, ball, plane, bottle, bottlecaps, axes, initEventHandling, initScene;
+var WIDTH, HEIGHT, planeWIDTH, planeHEIGHT;
+
+var elements = [], playedCaps = null, mouse_position = new THREE.Vector3, block_offset = new THREE.Vector3, _i, _v3 = new THREE.Vector3, intersect_plane, lookatobj, pilone, mouse,
+    mouse3D = new THREE.Vector3;
+
+var _nullVector = new THREE.Vector3(0,0,0), DCMP  = new THREE.Vector3(0,0,0);
+
+var onRenderFcts= [];
+
+var lastTimeMsec= null;
+
+var capsYpos = 80;
+
+
+var movingCaps = null;
+
+var clock = new THREE.Clock(), dir, distance;
+
+var holdingDown = false;
+
+
+Physijs.scripts.worker = '/js/physijs/physijs_worker.js';
+Physijs.scripts.ammo = 'ammo.js';
+
+container = document.querySelector('.viewport');
+
+WIDTH = window.innerWidth;
+HEIGHT = window.innerHeight;
+
+
+
+var playerDistance = 85;
+var globalDirection = 1;
+
+var capsDae;
+var capsMesh;
+
+var capModelscale = 1.5;
+
+var geo_caps, mat_caps, bottle_geo, bottle_mat;
+
+var $plpart, $vlpart, plscore = 0, vlscore = 0;
+
+function loadCollada(){
+//    var loader = new THREE.ColladaLoader();
+//    loader.options.convertUpAxis = true;
+//    loader.load('models/caps.dae', function (collada) {
+//        capsDae = collada.scene;
+//        console.log(capsDae);
+//
+//        capsDae.scale.x = capsDae.scale.y = capsDae.scale.z = 0.06;
+//        capsDae.updateMatrix();
+//        capsMesh = capsDae.children[0];
+//        caps_test_geometry = new THREE.Mesh( capsMesh.geometry, caps_material);
+//
+//        initScene();
+//    });
+
+    var loader = new THREE.JSONLoader();
+    loader.load( 'models/cap_model.json', function ( cap_geometry, cap_materials ) {
+        loader.load( 'models/bottle_model.json', function ( bottle_geometry, bottle_materials ) {
+            bottle_geo = bottle_geometry;
+            console.log(bottle_geo,  bottle_materials[0]);
+
+            bottle_mat = new THREE.MeshFaceMaterial( bottle_materials );
+
+            cap_materials[0].side = 2;
+//
+            var material = cap_materials[ 0 ];
+//        material.morphTargets = true;
+//        material.color.setHex( 0xffaaaa );
+//        material.ambient.setHex( 0x222222 );
+
+            geo_caps = cap_geometry;
+
+            mat_caps = new THREE.MeshFaceMaterial( cap_materials );
+
+            console.log(mat_caps.materials[0]);
+
+            initScene();
+
+
+        });
+
+
+
+    });
+
+
+}
+
+var table_material = Physijs.createMaterial(
+    new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture( 'images/wood.jpg' ), ambient: 0xFFFFFF, opacity: 1, transparent: true }),
+    .9, // high friction
+    .2 // low restitution
+);
+table_material.map.wrapS = table_material.map.wrapT = THREE.RepeatWrapping;
+table_material.map.repeat.set( 5, 5 );
+
+var chimey_material = Physijs.createMaterial(
+    new THREE.MeshLambertMaterial({ map: THREE.ImageUtils.loadTexture( 'images/caps1.jpg' ), ambient: 0xFFFFFF, opacity: 1, transparent: true }),
+    .9, // high friction
+    .2 // low restitution
+);
+chimey_material.map.wrapS = chimey_material.map.wrapT = THREE.RepeatWrapping;
+chimey_material.map.repeat.set( 5, 5 );
+
+var caps_test_geometry;
+var caps_geometry;
+caps_geometry = new THREE.CylinderGeometry(4, 3, 1.2, 32);
+
+var caps_material = Physijs.createMaterial(
+        new THREE.MeshLambertMaterial({
+            color: cred
+        }), 0.4, 0.8);
+
+
+
+var bottlecaps_material = Physijs.createMaterial(
+        new THREE.MeshLambertMaterial({
+            color: cgreen
+        }), 0.4, 0.8),
+
+initScene = function() {
+
+    $plpart = $('.pl-part');
+    $vlpart = $('.vl-part');
+
+    scene = new Physijs.Scene();
+
+    scene.setGravity(new THREE.Vector3( 0, -80, 0 ));
+
+    scene.fog = new THREE.Fog( 0x050505, 2000, 3500 );
+
+    renderer = new THREE.WebGLRenderer({
+        antialias: true
+    });
+
+    renderer.setSize(WIDTH, HEIGHT);
+    renderer.shadowMapEnabled = true;
+    renderer.shadowMapSoft = true;
+    renderer.shadowMapType = THREE.PCFShadowMap;
+    renderer.shadowMapAutoUpdate = true;
+
+    renderer.gammaInput = true;
+    renderer.gammaOutput = true;
+
+    renderer.setClearColor( scene.fog.color, 1 );
+    container.appendChild(renderer.domElement);
+
+    create_camera();
+
+    create_lights();
+
+    create_table();
+
+    // ADD AXES *******************************************************
+    axes = buildAxes( 1000 );
+    axes.presence = false;
+    axes.traverse( function ( object ) { object.visible = false; } );
+    scene.add(axes);
+
+    BottleViensla.initialize();
+    BottlePlayer.initialize();
+
+    create_caps();
+
+    lookatobj = BottleViensla.bottle;
+
+    scene.simulate();
+
+    initEventHandling();
+
+    render();
+
+    scene.addEventListener('update', function() {
+
+        if(playedCaps){
+            playedCaps.position.copy(DCMP);
+        }
+
+        if(holdingDown){
+            setPower();
+        }
+
+        scene.simulate(undefined, 2);
+
+    });
+}
+
+
+
+
+
+
+
+initEventHandling = (function() {
+    var projector, ray, intersection,
+        handleMouseDown, handleMouseMove, handleMouseUp,
+        launchVector = new THREE.Vector3,
+        _vector = new THREE.Vector3,
+        _angVector = new THREE.Vector3;
+
+
+    handleMouseDown = function( evt ) {
+
+        if(!playedCaps) return;
+
+        holdingDown = true;
+
+        launchVector.set(1,-3, -100);
+
+        power = 0;
+        $('.powerbar').fadeIn();
+    };
+
+    handleMouseMove = function( evt ) {
+         var mouseX = evt.clientX,
+             mouseY = evt.clientY;
+
+
+        $('.powerbar').css({left:mouseX+50, top:mouseY-50});
+
+
+        if(!playedCaps) return;
+//        if(!holdingDown){
+            mouse3D.set(
+                ( mouseX / window.innerWidth ) * 2 - 1,
+                - ( mouseY / window.innerHeight ) * 2 + 1,
+                1 );
+
+            mouse3D.unproject(camera);
+
+            dir = mouse3D.sub( camera.position ).normalize();
+
+            distance = - camera.position.z / dir.z;
+
+            DCMP = camera.position.clone().add( dir.multiplyScalar(distance/2) );
+
+            DCMP.z = playerDistance*globalDirection;
+//        }
+
+
+    };
+
+    handleMouseUp = function( evt ) {
+
+        if(!playedCaps) return;
+
+        holdingDown = false;
+
+        playedCaps.__dirtyPosition = true;
+
+        _vector.set( 1, 1, 1 );
+        _angVector.set( Math.random(), Math.random()*10, Math.random()*20);
+
+        playedCaps.setAngularFactor( _vector );
+
+        playedCaps.setLinearFactor( _vector );
+        launchVector.set(1,-3, -power*strengh*globalDirection);
+        playedCaps.setLinearVelocity( launchVector );
+        playedCaps.setAngularVelocity( _angVector );
+
+        playedCaps.position.copy(DCMP);
+
+        playedCaps = null;
+
+        power = 0;
+
+        $('.powerbar').fadeOut();
+
+        setTimeout(function(){
+            change_camera();
+            create_caps();
+        }, 2000);
+
+    };
+
+    return function() {
+        renderer.domElement.addEventListener( 'mousedown', handleMouseDown );
+        renderer.domElement.addEventListener( 'mousemove', handleMouseMove );
+        renderer.domElement.addEventListener( 'mouseup', handleMouseUp );
+    };
+})();
+
+
+
+
+
+
+
+function render() {
+
+//    if (ball.position.y <= -50 || ball.position.z <= -500) {
+//        create_caps();
+//    }
+//
+//    if(ball.position.z <= -100){
+//        create_caps();
+//    }
+
+//    if(ball.position.y <= 10){
+//        ball.setAngularFactor( _nullVector );
+//        ball.setLinearFactor( _nullVector );
+//    }
+
+    if(BottleViensla.bottlecaps.position.y <= BottleViensla.bottle.position.y){
+        BottleViensla.generateCaps();
+        plscore++;
+        $plpart.find('.score').text(plscore);
+    }
+
+    if(BottlePlayer.bottlecaps.position.y <= BottlePlayer.bottle.position.y){
+        BottlePlayer.generateCaps();
+        vlscore++;
+        $vlpart.find('.score').text(vlscore);
+    }
+
+    camera.lookAt(lookatobj.position);
+
+
+
+    var time = Date.now() * 0.0005;
+
+//    animateFloatingLights(time);
+
+    pointLight.position.x = Math.sin( time ) * 3000;
+    pointLight.position.y = 600;
+    pointLight.position.z = Math.cos( time ) * 3000;
+
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+
+
+}
+
+
+
+function create_caps(){
+    var randomCaps = Math.random() > 0.98;
+    var mass = randomCaps ? 4 : 2;
+
+
+//    var imgTexture2 = THREE.ImageUtils.loadTexture( "images/caps1.jpg" );
+//    imgTexture2.wrapS = imgTexture2.wrapT = THREE.RepeatWrapping;
+//    imgTexture2.anisotropy = 16;
+//    var shininess = 50, specular = 0x333333, bumpScale = 1, shading = THREE.SmoothShading;
+
+
+    var caps_material = Physijs.createMaterial(
+        new THREE.MeshLambertMaterial(mat_caps.materials)
+    );
+
+    caps_material.side = 2;
+    if(randomCaps){
+        caps_material.color.setHex( cred );
+    }else{
+        caps_material.color.setHex( cblue );
+    }
+
+
+
+    ball = new Physijs.CapsuleMesh(geo_caps, caps_material, mass, {friction : 0, restitution : 0.8});
+
+    ball.scale.set(capModelscale,capModelscale,capModelscale);
+
+
+    ball.position.y = 50;
+    ball.position.x = 0;
+    ball.position.z = playerDistance * globalDirection;
+    ball.castShadow = true;
+    ball.receiveShadow = true;
+
+    scene.add(ball);
+    elements.push(ball);
+
+    playedCaps = ball;
+
+    if(elements.length > 10){
+        var last = elements[0];
+        scene.remove(last);
+        elements.splice(0, 1);
+    }
+}
+
+
+var power = 0,
+    speedbar = 2,
+    powerDir = speedbar,
+    strengh = 6;
+
+
+function setPower(){
+    power += powerDir;
+
+    if(power > 100){
+        powerDir = -speedbar;
+    }
+
+    if(power < 0){
+        powerDir = +speedbar;
+    }
+
+    $('.powerbar .bar').height(power+'%');
+}
+
+
+
+$(document).ready(function(){
+    loadCollada();
+
+
+});

@@ -1,0 +1,193 @@
+var timeoutRobot;
+
+var Party = {
+    isPlaying : false,
+    capsPerTurn : 3,
+    lives : 100,
+    create : function(){
+        this.isPlaying = true;
+        Viensla.score = Player.score = Viensla.launched = Player.launched = 0;
+        Viensla.lives = Player.lives = Party.lives;
+
+
+        this.plplay();
+
+        Viensla.isPlaying = false;
+        Player.isPlaying = true;
+
+        this.setLife();
+
+        $('#party').fadeOut();
+
+        $('.capsstock').fadeIn();
+
+
+    },
+    vlplay : function(){
+
+        if(this.isPlaying){
+            if(Viensla.launched < Party.capsPerTurn && !Player.isPlaying){
+
+                $vlpart.find('.capsstock span').eq(Viensla.launched).hide();
+
+                Viensla.isPlaying = true;
+                Player.isPlaying = false;
+                Viensla.launchCaps();
+
+                timeoutRobot = setTimeout(function(){
+                    Party.vlplay();
+                }, 4000);
+
+
+
+            }else{
+                clearTimeout(timeoutRobot);
+                Player.isPlaying = true;
+                Player.launched = 0;
+                Viensla.isPlaying = false;
+                console.log('Viens la no more caps !');
+                this.resetStocks();
+            }
+        }
+
+
+    },
+    plplay : function(){
+        if(this.isPlaying){
+            if(Player.launched < Party.capsPerTurn && !Viensla.isPlaying){
+                $plpart.find('.capsstock span').eq(Player.launched).hide();
+
+                clearTimeout(timeoutRobot);
+
+                globalDirection = 1;
+                create_caps('pl');
+
+
+                Player.isPlaying = true;
+                Viensla.isPlaying = false;
+
+
+            }else{
+
+                Player.isPlaying = false;
+
+                console.log('Player no more caps !');
+
+                Viensla.launched = 0;
+
+                Party.vlplay();
+
+            }
+        }
+    },
+
+    vlcaps : function(){
+        if(this.isPlaying){
+
+            Viensla.score++;
+
+            Player.drunked++;
+
+            Player.lives -= Math.round((10 + 6 - Viensla.launched*2));
+
+            clearTimeout(timeoutRobot);
+
+
+
+            Viensla.isPlaying = false;
+
+            capsm();
+
+            Party.resetStocks();
+
+
+            $vlpart.find('.score').text(Viensla.score);
+
+            setTimeout(function(){
+
+                Player.isPlaying = true;
+                Player.launched = 0;
+                Viensla.isPlaying = false;
+
+                Player.generateCaps();
+                Party.resetStocks();
+
+
+            }, 1000);
+            Party.setLife();
+
+        }
+    },
+
+
+    plcaps : function(){
+        if(this.isPlaying){
+            Player.score++;
+            Viensla.lives -= Math.round((10 + 6 - Player.launched*2));
+
+            Player.isPlaying = false;
+
+            capsm();
+
+            $plpart.find('.score').text(Player.score);
+
+
+            Party.resetStocks();
+
+            setTimeout(function(){
+
+                Viensla.generateCaps();
+                Party.vlplay();
+
+            }, 1000);
+
+            Party.setLife();
+        }
+
+    },
+
+    resetStocks : function(){
+        if(this.isPlaying){
+            $('.capsstock span').show();
+            Viensla.launched = 0;
+            Player.launched = 0;
+        }
+
+    },
+
+    setLife : function(){
+        if(this.isPlaying){
+            var pctPlLife = Math.round(Player.lives / Party.lives * 100);
+            var pctVlLife = Math.round(Viensla.lives / Party.lives * 100);
+
+            $plpart.find('.life').height(pctPlLife+"%");
+            $vlpart.find('.life').height(pctVlLife+"%");
+
+            if(pctPlLife <= 0 || pctVlLife <= 0){
+                Party.isPlaying = false;
+                console.log('PARTY OVER');
+
+
+                $('#party').fadeIn();
+
+
+
+
+
+
+            }
+        }
+    }
+
+}
+
+
+function capsm(){
+    $('#caps-m').show();
+    setTimeout(function(){
+        $('#caps-m').hide();
+    }, 1000);
+
+    if(!Sounds.mute) Sounds.pschit2.play();
+
+}

@@ -1,0 +1,390 @@
+/* colors */
+var cblue = 0x67AAC1;
+var cyellow = 0xF7D443;
+var cgreen = 0x78AD60;
+var cred = 0xC1676A;
+
+var ptpgrey = 0x595556;
+var ptpyellow = 0xfedc2a;
+
+
+
+var container, scene, renderer, light, ball, plane, bottle, bottlecaps, axes, initEventHandling, initScene;
+var WIDTH, HEIGHT, planeWIDTH, planeHEIGHT;
+
+var elements = [], playedCaps = null, mouse_position = new THREE.Vector3, block_offset = new THREE.Vector3, _i, _v3 = new THREE.Vector3, intersect_plane, lookatobj, pilone, mouse,
+    mouse3D = new THREE.Vector3;
+
+var _nullVector = new THREE.Vector3(0,0,0), DCMP  = new THREE.Vector3(0,0,0);
+var _natVector = new THREE.Vector3(1,1,1);
+
+var onRenderFcts= [];
+
+var lastTimeMsec= null;
+
+var capsYpos = 110;
+
+var movingCaps = null;
+
+var clock = new THREE.Clock(), dir, distance;
+
+var holdingDown = false;
+
+
+
+Physijs.scripts.worker = '/js/physijs/physijs_worker.js';
+Physijs.scripts.ammo = 'ammo.js';
+
+container = document.querySelector('.viewport');
+
+WIDTH = window.innerWidth;
+HEIGHT = window.innerHeight;
+
+var playerDistance = 100;
+
+var globalDirection = 1;
+
+var capModelscale = 1.6;
+
+var geo_caps, bottle_geo, bottle_mat;
+
+var $plpart, $vlpart;
+
+var texture;
+
+var composer;
+
+
+
+var caps_material;
+var mat_caps_foster;
+var mat_caps_chimey;
+var mat_caps_ptp;
+function loadBottleTools(){
+    var loader = new THREE.JSONLoader();
+    loader.load( 'model/chimey/chimey.json', function ( cap_geometry, cap_materials ) {
+
+        loader.load( 'model/bottle/bottle_chimey.json', function ( bottle_geometry, bottle_materials ) {
+
+            bottle_geo = bottle_geometry;
+
+
+            var bottle_material = bottle_materials[ 0 ];
+            bottle_material.side = 2;
+            bottle_material.map.anisotropy=0;
+            bottle_material.shininess = 0;
+            bottle_material.shading = 0;
+            bottle_material.reflectivity = 0;
+            bottle_material.ambient.setHex(0xffffff);
+            bottle_material.color.setHex(0xffffff);
+
+            bottle_mat = new THREE.MeshFaceMaterial( bottle_materials );
+
+            geo_caps = cap_geometry;
+
+            // CHIMEY CAPS ----------------------------------------------
+
+
+            var copychimey  = [];
+            copychimey[0] = cap_materials[0].clone();
+            copychimey[1] = cap_materials[0].clone();
+            copychimey[0].side = 2;
+            copychimey[1].side = 2;
+            copychimey[1].map = 0;
+
+            mat_caps_chimey = new THREE.MeshFaceMaterial(copychimey);
+            mat_caps_chimey.materials[1].color =  new THREE.Color(0x2f74e9);
+
+            // FOSTER CAPS ----------------------------------------------
+
+            var copyfoster  =[];
+            copyfoster[0] = cap_materials[1].clone();
+            copyfoster[1] = cap_materials[0].clone();
+            copyfoster[0].side = 2;
+            copyfoster[1].side = 2;
+            copyfoster[1].map = 0;
+
+            mat_caps_foster = new THREE.MeshFaceMaterial(copyfoster);
+            mat_caps_foster.materials[1].color =  new THREE.Color(0x0b1f6f);
+
+
+            // PTP CAPS ----------------------------------------------
+
+            var copyptp  =[];
+            copyptp[0] = cap_materials[2].clone();
+            copyptp[1] = cap_materials[2].clone();
+            copyptp[0].side = 2;
+            copyptp[1].side = 2;
+            copyptp[1].map = 0;
+
+            mat_caps_ptp = new THREE.MeshFaceMaterial(copyptp);
+            mat_caps_ptp.materials[1].color =  new THREE.Color(ptpyellow);
+
+
+            caps_material = {
+                'chimey':mat_caps_chimey,
+                'foster':mat_caps_foster,
+                'ptp':mat_caps_ptp
+            }
+            initScene();
+        });
+    });
+}
+
+
+
+
+
+
+initScene = function() {
+
+
+    scene = new Physijs.Scene();
+
+    scene.setGravity(new THREE.Vector3( 0, -80, 0 ));
+
+    scene.fog = new THREE.Fog( 0x050505, 2000, 3500 );
+
+    renderer = new THREE.WebGLRenderer({
+        antialias: true
+    });
+
+//    renderer.setSize(WIDTH, HEIGHT-100); //16:9
+    renderer.setSize(WIDTH, HEIGHT);
+    renderer.shadowMapEnabled = true;
+    renderer.shadowMapSoft = true;
+    renderer.shadowMapType = THREE.PCFShadowMap;
+    renderer.shadowMapAutoUpdate = true;
+
+    renderer.gammaInput = true;
+    renderer.gammaOutput = true;
+
+    renderer.setClearColor( scene.fog.color, 1 );
+    container.appendChild(renderer.domElement);
+
+    create_camera();
+
+    create_lights();
+
+    create_table();
+
+    Viensla.initialize();
+    Player.initialize();
+
+    lookatobj = Viensla.bottle;
+
+    scene.simulate();
+
+    initEventHandling();
+
+    _init_composer();
+
+
+    render();
+
+//    scene.addEventListener('update', function() {
+//
+//
+//
+//    });
+};
+
+
+
+function _init_composer(){
+
+//    composer = new THREE.EffectComposer( renderer );
+//    composer.addPass( new THREE.RenderPass( scene, camera ) );
+//    var hblur = new THREE.ShaderPass( THREE.HorizontalBlurShader );
+//    composer.addPass( hblur );
+//    var vblur = new THREE.ShaderPass( THREE.VerticalBlurShader );
+//// set this shader pass to render to screen so we can see the effects
+//    vblur.renderToScreen = true;
+//    composer.addPass( vblur );
+}
+
+
+
+function render() {
+
+    if(Party.isPlaying){
+        if( (Viensla.bottlecaps.position.y <= Viensla.bottle.position.y
+                || Viensla.bottlecaps.position.y > Viensla.bottle.position.y + 35
+                || Viensla.bottlecaps.position.x > Viensla.bottle.position.x + 7
+                || Viensla.bottlecaps.position.x < Viensla.bottle.position.x - 7
+                || Viensla.bottlecaps.position.z > Viensla.bottle.position.z + 7
+                || Viensla.bottlecaps.position.z < Viensla.bottle.position.z - 7)
+                && Viensla.bottlecaps.collided){
+
+            console.log(Viensla.bottlecaps.position, Viensla.bottle.position);
+            Viensla.bottlecaps.collided = false;
+            Party.plcaps();
+        }
+
+
+        if( (Player.bottlecaps.position.y <= Player.bottle.position.y
+            || Player.bottlecaps.position.y > Player.bottle.position.y + 35
+            || Player.bottlecaps.position.x > Player.bottle.position.x + 7
+            || Player.bottlecaps.position.x < Player.bottle.position.x - 7
+            || Player.bottlecaps.position.z > Player.bottle.position.z + 7
+            || Player.bottlecaps.position.z < Player.bottle.position.z - 7)
+            && Player.bottlecaps.collided){
+            console.log(Player.bottlecaps.position, Player.bottle.position);
+            Player.bottlecaps.collided = false;
+            Party.vlcaps();
+        }
+    }
+
+
+    if(playedCaps && Player.isPlaying){
+        playedCaps.position.copy(DCMP);
+    }
+
+    if(holdingDown){
+        setPower();
+    }
+
+    scene.simulate(undefined, 2);
+
+
+    camera.lookAt(lookat);
+
+    var time = Date.now() * 0.0005;
+
+    drunk_effect(time);
+
+    renderer.render(scene, camera);
+
+    if(Player.drunked > 10){
+        composer.render();
+    }
+
+    if( Math.sin( time*2 ) > 0.5){
+        pointlightbar.animeLight();
+    }
+
+    if(holdingDown){
+        calculate_traj();
+    }
+
+
+    requestAnimationFrame(render);
+
+
+
+}
+
+function anime_bar_light(){
+
+}
+
+var subdatenow = Date.now();
+function drunk_effect(time){
+
+
+    if(Player.outline.position){
+
+        Player.outline.position.x = -camera.position.x / (520 + Math.abs(camera.position.x)*5 );
+        Player.outline.position.z = Math.min(Math.abs(camera.position.x/1500) - 0.13, 0) ;
+
+//        Player.outline.position.x = -camera.position.x / ((camera.position.z - Player.bottle.position.z)*100) ;
+        Player.outline.mass = 0;
+    }
+
+    camera.initialpos.x += Math.sin( time*2 ) * Player.drunked/70;
+    camera.initialpos.y += Math.cos( time*2 ) * Player.drunked/70;
+    camera.initialpos.z += Math.sin( time*2 ) * Player.drunked/70;
+
+//    console.log(Math.sin( time*2 ) * Player.drunked/30);
+
+    if(Player.drunked > 10){
+        camera.position.x += ( Math.sin( time*10 )*2 - camera.position.x) * (0.5*3) + camera.initialpos.x;
+        camera.position.y += ( Math.cos( time*10 )*2 - camera.position.y) * (0.5*3) + camera.initialpos.y+60;
+
+        if(Math.random() > 0.99){
+            aspirinerm();
+        }
+    }else{
+        camera.position.x += (mouse.x * 20 - camera.position.x) * (0.3*3) + camera.initialpos.x;
+        camera.position.y += (mouse.y * 10 - camera.position.y) * (0.5*3) + camera.initialpos.y+80;
+    }
+
+}
+
+
+
+
+$(document).ready(function(){
+    $plpart = $('.pl-part');
+    $vlpart = $('.vl-part');
+
+
+
+    loadBottleTools();
+
+    window.addEventListener( 'resize', onWindowResize, false );
+
+    $('.beers-selector .beer').click(function(){
+        var $th = $(this);
+
+       $('.beer.selected').removeClass('selected');
+       $(this).addClass('selected');
+        $plpart.removeClass('chimey foster ptp');
+
+        if($th.hasClass('chimey')){
+            Player.capmat = caps_material.chimey.clone();
+            $plpart.addClass('chimey');
+
+        }else if($th.hasClass('foster')){
+            Player.capmat = caps_material.foster.clone();
+            $plpart.addClass('foster');
+
+
+        }else if($th.hasClass('ptp')){
+            Player.capmat = caps_material.ptp.clone();
+            $plpart.addClass('ptp');
+
+        }
+        Player.bottle.material.color = Player.capmat.materials[1].color;
+
+    });
+
+
+    $('#party').click(function(){
+        Party.create();
+    });
+
+    $('#mute').click(function(){
+        Sounds.mute = !Sounds.mute;
+    });
+
+    for(var i =0; i < Party.capsPerTurn; i++){
+        $('.capsstock').append('<span class="animated zoomIn"></span>');
+    }
+
+    $('#aspirine').click(function(){
+       Player.drunked -= 10;
+       camera.initialpos.x = 0;
+    });
+
+
+    $plpart.find('.capsstock span').click(function(){
+
+        if(!Viensla.isPlaying){
+            $(this).removeClass().addClass('animated zoomOut');
+            Party.plplay();
+        }
+    });
+
+});
+
+
+
+function onWindowResize( event ) {
+
+    renderer.setSize( window.innerWidth, window.innerHeight );
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+
+}

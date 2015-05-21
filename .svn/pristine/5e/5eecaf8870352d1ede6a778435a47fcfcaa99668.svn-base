@@ -1,0 +1,19 @@
+
+
+var darkbrown = 0xbd9442,
+    mediumbrown = 0xaf843e,
+    lightbrown = 0xf9d37f,
+    lightestbrown = 0xffd888,
+//    brown = 0xf2b554,
+    brown = 0xf3b654,
+    tablebrown = 0xf4bd61,
+tablefootbrown = 0xd2ac55,
+    tapisbrown = 0xaf843e;
+
+var cblue = 0x67AAC1;
+var cyellow = 0xF7D443;
+var cgreen = 0x78AD60;
+var cred = 0xC1676A;
+var corange = 0xFCC025;
+var ptpgrey = 0x595556;
+var ptpyellow = 0xfde772;

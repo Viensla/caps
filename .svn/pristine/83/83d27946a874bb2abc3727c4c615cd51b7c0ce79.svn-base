@@ -1,0 +1,138 @@
+var frontLight	= new THREE.DirectionalLight(0xffffff, 0.2);
+
+var backLight	= new THREE.DirectionalLight(0xffffff, 0.7);
+
+var ambientLight = new THREE.AmbientLight( 0xfefefe );
+
+var rightLight	= new THREE.DirectionalLight(0xfefefe, 0.4);
+
+var leftLight	= new THREE.DirectionalLight(0xfefefe, 0.3);
+
+var pointlightbar;
+
+function create_lights(){
+
+
+
+    // LIGHTS
+
+    var central_point = new THREE.PointLight( 0xffffff, 1, 300 );
+    central_point.position.set(0,15,0);
+
+    scene.add( central_point );
+
+    var VlspotLight = new THREE.SpotLight( 0xffffff );
+    VlspotLight.position.set( 0, 200, -110 );
+    VlspotLight.target.position.set(0,50,-110);
+    VlspotLight.target.updateMatrixWorld();
+    VlspotLight.intensity = 1;
+
+    scene.add( VlspotLight );
+
+
+    pointlightbar = new THREE.PointLight( 0xfcd625, 2, 50 );
+    pointlightbar.position.set( -8, 200, -420 );
+
+    pointlightbar.animeLight = function(){
+        if(Math.random() > 0.9){
+            this.intensity = 0.2;
+        }else{
+            this.intensity = 2;
+        }
+    };
+
+    scene.add( pointlightbar );
+
+
+
+
+    var PlspotLight = VlspotLight.clone();
+    PlspotLight.position.set( 0, 200, 120 );
+    PlspotLight.target.position.set(0,50,120);
+    PlspotLight.target.updateMatrixWorld();
+    PlspotLight.intensity = 1;
+
+
+
+    scene.add( PlspotLight );
+
+
+    var backspotLight = new THREE.SpotLight( 0xffffff );
+    backspotLight.position.set( 0, 300, -120 );
+    backspotLight.target.position.set(0,20,-400);
+    backspotLight.target.updateMatrixWorld();
+    backspotLight.intensity = 0.7;
+    scene.add( backspotLight );
+
+    backspotLight = new THREE.SpotLight( 0xffffff );
+    backspotLight.position.set( 500, 300, -120 );
+    backspotLight.target.position.set(200,20,-300);
+    backspotLight.target.updateMatrixWorld();
+    backspotLight.intensity = 0.7;
+    scene.add( backspotLight );
+
+    backspotLight = new THREE.SpotLight( 0xffffff );
+    backspotLight.position.set( -500, 300, -120 );
+    backspotLight.target.position.set(-200,20,-300);
+    backspotLight.target.updateMatrixWorld();
+    backspotLight.intensity = 0.7;
+    scene.add( backspotLight );
+
+//    var light = new THREE.DirectionalLight( 0xffffff, 0.7 ); // soft white light
+
+//    scene.add( light );
+
+//
+//
+//
+//    var directionalLight = new THREE.DirectionalLight(/*Math.random() * 0xffffff*/0xeeeeee );
+//    directionalLight.position.set( .2, -1, .2 );
+//    directionalLight.position.normalize();
+//    scene.add( directionalLight );
+
+
+
+// LIGHTS
+
+//    var whitelight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.5 );
+//    whitelight.color.setHex( 0xefefef );
+//    whitelight.groundColor.setHSL( 0.2,0.2,0.2 );
+//    whitelight.position.set( 0, 300, 0 );
+//    scene.add( whitelight );
+
+
+
+
+//    scene.add( hemiLight );
+
+
+
+
+
+//    var dirLight = new THREE.DirectionalLight( 0xffffff, 1 );
+//    dirLight.color.setHSL( 0.1, 1, 0.95 );
+//    dirLight.position.set( -1, 90, 1 );
+//    dirLight.position.multiplyScalar( 50 );
+//    scene.add( dirLight );
+//
+//    dirLight.castShadow = true;
+//
+//    dirLight.shadowMapWidth = 2048;
+//    dirLight.shadowMapHeight = 2048;
+//
+//    var d = planeHEIGHT/2;
+//
+//    dirLight.shadowCameraLeft = -d;
+//    dirLight.shadowCameraRight = d;
+//    dirLight.shadowCameraTop = d;
+//    dirLight.shadowCameraBottom = -d;
+//
+//    dirLight.shadowCameraFar = 3500;
+//    dirLight.shadowCameraNear = 1;
+//    dirLight.shadowBias = -0.0001;
+//    dirLight.shadowDarkness = 0.35;
+
+
+
+
+}

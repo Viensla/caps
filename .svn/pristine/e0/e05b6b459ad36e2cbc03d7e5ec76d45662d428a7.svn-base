@@ -1,0 +1,54 @@
+var trajCap = {
+    line : '',
+    curve : '',
+    geo : '',
+    sub : 20,
+    initial : function(){
+        this.sub = 20;
+        this.geo = new THREE.Geometry();
+        this.curve = new THREE.QuadraticBezierCurve3();
+        this.curve.v0 = new THREE.Vector3(0, 0, 0);
+        this.curve.v1 = new THREE.Vector3(10, 10, 0);
+        this.curve.v2 = new THREE.Vector3(100, 50,0);
+
+        for (var j = 0; j < trajCap.sub; j++) {
+            trajCap.geo.vertices.push( trajCap.curve.getPoint(j /  trajCap.sub) )
+        }
+
+        var material = new THREE.LineDashedMaterial( { color: 0xffffff, dashSize: 30, gapSize: 10, linewidth: 2 } );
+
+        trajCap.line = new THREE.Line(trajCap.geo, material, THREE.LinePieces);
+        trajCap.line.position.z = -50;
+        trajCap.line.position.y = 50;
+
+        trajCap.line.__dirtyPosition = true;
+
+        scene.add(trajCap.line);
+    },
+
+    calculate : function(pos1, pos2, pos3){
+
+        scene.remove(trajCap.line);
+
+        console.log(pos1, pos2, pos3);
+
+        trajCap.curve.v0 = pos1;
+        trajCap.curve.v1 = pos2;
+        trajCap.curve.v2 = pos3;
+
+        for (var j = 0; j < trajCap.sub; j++) {
+            trajCap.geo.vertices.push( trajCap.curve.getPoint(j /  trajCap.sub) )
+        }
+
+
+        var material = new THREE.LineDashedMaterial( { color: 0xffffff, dashSize: 30, gapSize: 10, linewidth: 2 } );
+        trajCap.line = new THREE.Line(trajCap.geo, material, THREE.LinePieces);
+        trajCap.line.__dirtyPosition = true;
+
+        trajCap.line.position.set(pos1);
+
+        scene.add(trajCap.line);
+
+
+    }
+}

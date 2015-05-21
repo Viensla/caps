@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" readonly="true" id="fcd7f700-fd06-48c8-92f1-a1095cddb991" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grunt-package.json" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/server/package.json" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/server/index.js" afterPath="$PROJECT_DIR$/index.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/index.html" afterPath="$PROJECT_DIR$/www/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/js/master.js" afterPath="$PROJECT_DIR$/www/js/master.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dev/js/multi.js" afterPath="$PROJECT_DIR$/dev/js/multi.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/server.js" afterPath="$PROJECT_DIR$/server/server.js" />
+    </list>
+    <ignored path="caps.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="caps" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.5">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="players.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dev/js/players.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="306" column="0" selection-start="8841" selection-end="8841" vertical-scroll-proportion="0.0" vertical-offset="4335" max-vertical-offset="7215">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="multi.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dev/js/multi.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="322" column="6" selection-start="11736" selection-end="11736" vertical-scroll-proportion="0.0" vertical-offset="4195" max-vertical-offset="4965">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/.gitignore">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="2" column="1" selection-start="34" selection-end="34" vertical-scroll-proportion="0.03984064" vertical-offset="0" max-vertical-offset="753">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Gruntfile.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/Gruntfile.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="16" column="61" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="975">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="camera.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dev/js/camera.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="0" column="20" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dev/js/app.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="92" column="21" selection-start="2583" selection-end="2583" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4200">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/index.html">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="57" column="0" selection-start="1712" selection-end="1712" vertical-scroll-proportion="-16.083334" vertical-offset="469" max-vertical-offset="4785">
+                  <folding>
+                    <marker date="1432200420000" expanded="true" signature="5445:5617" placeholder="..." />
+                    <marker date="1432200420000" expanded="true" signature="5719:6018" placeholder="..." />
+                    <marker date="1432200420000" expanded="true" signature="5731:5837" placeholder="..." />
+                    <marker date="1432200420000" expanded="false" signature="5918:5931" placeholder="..." />
+                    <marker date="1432200420000" expanded="true" signature="5932:6007" placeholder="..." />
+                    <marker date="1432200420000" expanded="true" signature="6106:6186" placeholder="..." />
+                    <marker date="1432200420000" expanded="true" signature="6210:6287" placeholder="..." />
+                    <marker date="1432200420000" expanded="true" signature="6319:6427" placeholder="..." />
+                    <marker date="1432200420000" expanded="true" signature="6525:6560" placeholder="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/server/server.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="125" column="22" selection-start="3322" selection-end="3322" vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="1995">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/index.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="10" column="56" selection-start="297" selection-end="297" vertical-scroll-proportion="0.1992032" vertical-offset="0" max-vertical-offset="753">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/package.json">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="12" column="1" selection-start="254" selection-end="254" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="300">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="players.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dev/js/players.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="150" column="23" selection-start="4597" selection-end="4597" vertical-scroll-proportion="0.0" vertical-offset="1999" max-vertical-offset="7215">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="cap.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dev/js/cap.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="28" column="0" selection-start="633" selection-end="633" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="4950">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="game.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dev/js/game.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="109" column="27" selection-start="2933" selection-end="2933" vertical-scroll-proportion="0.0" vertical-offset="1433" max-vertical-offset="3495">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/www/models/cap_model_brick.json" />
+        <option value="$PROJECT_DIR$/www/models/monster_model.json" />
+        <option value="$PROJECT_DIR$/www/models/cap_model_chimey_2.json" />
+        <option value="$PROJECT_DIR$/www/models/capscube_test.json" />
+        <option value="$PROJECT_DIR$/www/models/cap_model.json" />
+        <option value="$PROJECT_DIR$/www/models/cap_model_chimey.json" />
+        <option value="$PROJECT_DIR$/www/models/chimey_caps.json" />
+        <option value="$PROJECT_DIR$/www/models/real_caps_chimey.json" />
+        <option value="$PROJECT_DIR$/www/models/test2.json" />
+        <option value="$PROJECT_DIR$/www/models/chimeygood.json" />
+        <option value="$PROJECT_DIR$/www/models/chimeygood_2.json" />
+        <option value="$PROJECT_DIR$/www/models/chimeygood3.json" />
+        <option value="$PROJECT_DIR$/www/model/bottle/bottle_chimey_2.json" />
+        <option value="$PROJECT_DIR$/www/model/bottle/bottle_chimey.json" />
+        <option value="$PROJECT_DIR$/dev/js/sounds.js" />
+        <option value="$PROJECT_DIR$/dev/js/create_setup.js" />
+        <option value="/private/var/folders/hj/pz5262ln6v3gbktwc98_zh7w0000gn/T/fz3temp-1/wp-config.php" />
+        <option value="/private/var/folders/hj/pz5262ln6v3gbktwc98_zh7w0000gn/T/fz3temp-1/wp-config 2.php" />
+        <option value="/private/var/folders/hj/pz5262ln6v3gbktwc98_zh7w0000gn/T/fz3temp-1/wp-config 3.php" />
+        <option value="$PROJECT_DIR$/dev/js/toon.js" />
+        <option value="$PROJECT_DIR$/www/model/foster/chimey.json" />
+        <option value="$PROJECT_DIR$/www/model/chimey/chimey.json" />
+        <option value="$PROJECT_DIR$/www/js/canvasRenderer.js" />
+        <option value="$PROJECT_DIR$/www/js/master.js" />
+        <option value="$PROJECT_DIR$/dev/js/trajectoire.js" />
+        <option value="$PROJECT_DIR$/www/js/physijs/physi.js" />
+        <option value="$PROJECT_DIR$/server/package.json" />
+        <option value="$PROJECT_DIR$/server/index.js" />
+        <option value="$PROJECT_DIR$/www/app.js" />
+        <option value="$PROJECT_DIR$/dev/sass/screen.scss" />
+        <option value="$PROJECT_DIR$/dev/js/camera.js" />
+        <option value="$PROJECT_DIR$/dev/js/lights.js" />
+        <option value="$PROJECT_DIR$/dev/js/leveldesign.js" />
+        <option value="$PROJECT_DIR$/www/model/3D/bottle.json" />
+        <option value="$PROJECT_DIR$/dev/sass/templates/_start.scss" />
+        <option value="$PROJECT_DIR$/www/model/3D/cap.json" />
+        <option value="$PROJECT_DIR$/dev/js/colors.js" />
+        <option value="$PROJECT_DIR$/dev/js/loadBottle.js" />
+        <option value="$PROJECT_DIR$/dev/sass/templates/_interface.scss" />
+        <option value="$PROJECT_DIR$/dev/sass/_commons.scss" />
+        <option value="$PROJECT_DIR$/dev/js/cap.js" />
+        <option value="$PROJECT_DIR$/dev/js/app.js" />
+        <option value="$PROJECT_DIR$/dev/js/players.js" />
+        <option value="$PROJECT_DIR$/server/server.js" />
+        <option value="$PROJECT_DIR$/dev/js/game.js" />
+        <option value="$PROJECT_DIR$/Gruntfile.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/www/index.html" />
+        <option value="$PROJECT_DIR$/dev/js/multi.js" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+      </list>
+    </option>
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="1920" />
+    <option name="y" value="22" />
+    <option name="width" value="1920" />
+    <option name="height" value="1054" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="server" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="node_modules" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="options.lastSelected" value="web-ide.project.structure" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="SearchEverywhereHistory" value=".&#10;*100" />
+    <property name="FullScreen" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/www/model/3D" />
+      <recent name="$PROJECT_DIR$/www/images" />
+      <recent name="$PROJECT_DIR$/server" />
+      <recent name="$PROJECT_DIR$/www" />
+      <recent name="$PROJECT_DIR$/www/model/chimey" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/server" />
+      <recent name="$PROJECT_DIR$/www/model/3D" />
+      <recent name="$PROJECT_DIR$/www/model/bottle" />
+      <recent name="$PROJECT_DIR$/dev/js" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+      <TestRunner />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method />
+    </configuration>
+    <list size="0" />
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="true" SSL_PROTOCOLS="sslv3">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="false">$USER_HOME$/.subversion</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="SvnFileUrlMappingImpl">
+    <option name="myMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+    <option name="myMoreRealMappingRoots">
+      <list>
+        <SvnCopyRootSimple>
+          <option name="myVcsRoot" value="$PROJECT_DIR$" />
+          <option name="myCopyRoot" value="$PROJECT_DIR$" />
+        </SvnCopyRootSimple>
+      </list>
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fcd7f700-fd06-48c8-92f1-a1095cddb991" name="Default" comment="" />
+      <created>1414057485667</created>
+      <updated>1414057485667</updated>
+    </task>
+    <task id="LOCAL-00001">
+      <created>1414084089101</created>
+      <updated>1414084089101</updated>
+    </task>
+    <task id="LOCAL-00002">
+      <created>1414084713102</created>
+      <updated>1414084713102</updated>
+    </task>
+    <task id="LOCAL-00003">
+      <created>1414084805102</created>
+      <updated>1414084805102</updated>
+    </task>
+    <task id="LOCAL-00004">
+      <created>1414084888101</created>
+      <updated>1414084888101</updated>
+    </task>
+    <task id="LOCAL-00005">
+      <created>1414157922181</created>
+      <updated>1414157922181</updated>
+    </task>
+    <task id="LOCAL-00006">
+      <created>1414169001121</created>
+      <updated>1414169001121</updated>
+    </task>
+    <task id="LOCAL-00007">
+      <created>1414434707105</created>
+      <updated>1414434707105</updated>
+    </task>
+    <task id="LOCAL-00008">
+      <created>1414488296103</created>
+      <updated>1414488296103</updated>
+    </task>
+    <task id="LOCAL-00009" summary="&#10;">
+      <created>1414696592139</created>
+      <updated>1414696592139</updated>
+    </task>
+    <task id="LOCAL-00010" summary="&#10;">
+      <created>1415125414100</created>
+      <updated>1415125414100</updated>
+    </task>
+    <task id="LOCAL-00011" summary="&#10;">
+      <created>1416853663105</created>
+      <updated>1416853663105</updated>
+    </task>
+    <task id="LOCAL-00012" summary="&#10;">
+      <created>1417023574103</created>
+      <updated>1417023574103</updated>
+    </task>
+    <task id="LOCAL-00013" summary="&#10;">
+      <created>1417027799104</created>
+      <updated>1417027799104</updated>
+    </task>
+    <task id="LOCAL-00014" summary="&#10;">
+      <created>1417083675102</created>
+      <updated>1417083675102</updated>
+    </task>
+    <task id="LOCAL-00015" summary="&#10;">
+      <created>1417100430186</created>
+      <updated>1417100430186</updated>
+    </task>
+    <task id="LOCAL-00016" summary="&#10;">
+      <created>1417111457126</created>
+      <updated>1417111457126</updated>
+    </task>
+    <task id="LOCAL-00017" summary="&#10;">
+      <created>1417113715102</created>
+      <updated>1417113715102</updated>
+    </task>
+    <task id="LOCAL-00018" summary="&#10;">
+      <created>1417195873103</created>
+      <updated>1417195873103</updated>
+    </task>
+    <task id="LOCAL-00019" summary="&#10;">
+      <created>1417199294104</created>
+      <updated>1417199294104</updated>
+    </task>
+    <task id="LOCAL-00020" summary="&#10;">
+      <created>1417199496102</created>
+      <updated>1417199496102</updated>
+    </task>
+    <task id="LOCAL-00021" summary="&#10;">
+      <created>1417458327118</created>
+      <updated>1417458327118</updated>
+    </task>
+    <task id="LOCAL-00022" summary="&#10;">
+      <created>1417631710114</created>
+      <updated>1417631710114</updated>
+    </task>
+    <task id="LOCAL-00023" summary="&#10;">
+      <created>1417686128101</created>
+      <updated>1417686128101</updated>
+    </task>
+    <task id="LOCAL-00024" summary="&#10;">
+      <created>1424189914109</created>
+      <updated>1424189914109</updated>
+    </task>
+    <task id="LOCAL-00025" summary="&#10;">
+      <created>1431703324102</created>
+      <updated>1431703324102</updated>
+    </task>
+    <task id="LOCAL-00026" summary="&#10;">
+      <created>1431704781134</created>
+      <updated>1431704781134</updated>
+    </task>
+    <task id="LOCAL-00027" summary="&#10;">
+      <created>1431707013298</created>
+      <updated>1431707013298</updated>
+    </task>
+    <task id="LOCAL-00028" summary="&#10;">
+      <created>1431969788139</created>
+      <updated>1431969788139</updated>
+    </task>
+    <task id="LOCAL-00029" summary="&#10;">
+      <created>1432058722156</created>
+      <updated>1432058722156</updated>
+    </task>
+    <task id="LOCAL-00030" summary="&#10;">
+      <created>1432140916407</created>
+      <updated>1432140916407</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="1920" y="22" width="1920" height="1054" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18814969" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="SvgViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952183" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32883817" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17784877" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32952183" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+    </layout>
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.gitignore" />
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+    <MESSAGE value="&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="&#10;" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="1" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/dev/js/sounds.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="19" selection-start="462" selection-end="462" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/sticker/chimey_etiquette.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/bottle/bottle_chimey_2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="870" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/foster/foster.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="56" selection-start="648275" selection-end="648275" vertical-scroll-proportion="0.29633868" vertical-offset="281" max-vertical-offset="1155" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/sticker/sticker.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="29" selection-start="2492" selection-end="2492" vertical-scroll-proportion="0.57768923" vertical-offset="0" max-vertical-offset="753" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grunt-package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="790" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/sass/animate.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="1" selection-start="179" selection-end="319" vertical-scroll-proportion="-12.60989" vertical-offset="9315" max-vertical-offset="47460" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/canvasRenderer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1101" column="2" selection-start="31126" selection-end="31126" vertical-scroll-proportion="0.9601064" vertical-offset="15793" max-vertical-offset="16605" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/aspirine.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/master.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="156" column="0" selection-start="4127" selection-end="4127" vertical-scroll-proportion="0.0" vertical-offset="1950" max-vertical-offset="31440">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/physijs/physi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="804" column="53" selection-start="30439" selection-end="30439" vertical-scroll-proportion="0.0" vertical-offset="11867" max-vertical-offset="21090" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/three.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="24" selection-start="25924" selection-end="25924" vertical-scroll-proportion="0.46127367" vertical-offset="557" max-vertical-offset="12300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/fond.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/node_modules/.bin/express">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="730" selection-end="730" vertical-scroll-proportion="0.54347825" vertical-offset="0" max-vertical-offset="6435" />
+      </provider>
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/sass/screen.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="28" selection-start="575" selection-end="575" vertical-scroll-proportion="0.3409091" vertical-offset="0" max-vertical-offset="704" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/fond_2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/fond_2_bar.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/v2/bar_single.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/metal.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/foster_big.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/fond_people.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/phone_face.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/phone.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/images/test_etiquette2.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/3D/chimey_big.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/3D/foster_big.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/3D/chimey_texture.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/3D/ptp_big.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/3D/bottle.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="42" column="45" selection-start="683543" selection-end="683543" vertical-scroll-proportion="0.66713095" vertical-offset="151" max-vertical-offset="885">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/sass/templates/_header.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="90">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/model/3D/cap.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="41" selection-start="648724" selection-end="648724" vertical-scroll-proportion="-8.666667" vertical-offset="542" max-vertical-offset="2235">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/lights.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="60" selection-start="671" selection-end="671" vertical-scroll-proportion="0.43810847" vertical-offset="45" max-vertical-offset="2910">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/leveldesign.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="178" column="6" selection-start="4191" selection-end="4191" vertical-scroll-proportion="0.3032345" vertical-offset="2445" max-vertical-offset="7230">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/loadBottle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="35" selection-start="4109" selection-end="4109" vertical-scroll-proportion="0.17115903" vertical-offset="1313" max-vertical-offset="2055">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/colors.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="22" selection-start="436" selection-end="582" vertical-scroll-proportion="0.57615894" vertical-offset="0" max-vertical-offset="755">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/sass/templates/_start.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="20" selection-start="361" selection-end="361" vertical-scroll-proportion="0.4206799" vertical-offset="33" max-vertical-offset="975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/sass/_commons.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="174" column="14" selection-start="2591" selection-end="2591" vertical-scroll-proportion="0.38243628" vertical-offset="2340" max-vertical-offset="5280">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/sass/templates/_interface.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="10" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="240">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/camera.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="20" selection-start="20" selection-end="20" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1080">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/cap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="0" selection-start="633" selection-end="633" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="4950">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/players.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="306" column="0" selection-start="8841" selection-end="8841" vertical-scroll-proportion="0.0" vertical-offset="4335" max-vertical-offset="7215">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="109" column="27" selection-start="2933" selection-end="2933" vertical-scroll-proportion="0.0" vertical-offset="1433" max-vertical-offset="3495">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="61" selection-start="485" selection-end="485" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="975">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="1" selection-start="254" selection-end="254" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="300">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="125" column="22" selection-start="3322" selection-end="3322" vertical-scroll-proportion="0.0" vertical-offset="1238" max-vertical-offset="1995">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="56" selection-start="297" selection-end="297" vertical-scroll-proportion="0.1992032" vertical-offset="0" max-vertical-offset="753">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="0" selection-start="1712" selection-end="1712" vertical-scroll-proportion="-16.083334" vertical-offset="469" max-vertical-offset="4785">
+          <folding>
+            <marker date="1432200420000" expanded="true" signature="5445:5617" placeholder="..." />
+            <marker date="1432200420000" expanded="true" signature="5719:6018" placeholder="..." />
+            <marker date="1432200420000" expanded="true" signature="5731:5837" placeholder="..." />
+            <marker date="1432200420000" expanded="false" signature="5918:5931" placeholder="..." />
+            <marker date="1432200420000" expanded="true" signature="5932:6007" placeholder="..." />
+            <marker date="1432200420000" expanded="true" signature="6106:6186" placeholder="..." />
+            <marker date="1432200420000" expanded="true" signature="6210:6287" placeholder="..." />
+            <marker date="1432200420000" expanded="true" signature="6319:6427" placeholder="..." />
+            <marker date="1432200420000" expanded="true" signature="6525:6560" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/multi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="322" column="6" selection-start="11736" selection-end="11736" vertical-scroll-proportion="0.0" vertical-offset="4195" max-vertical-offset="4965">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="21" selection-start="2583" selection-end="2583" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4200">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="1" selection-start="34" selection-end="34" vertical-scroll-proportion="0.03984064" vertical-offset="0" max-vertical-offset="753">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+

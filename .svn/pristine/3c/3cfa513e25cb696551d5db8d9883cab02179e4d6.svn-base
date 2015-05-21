@@ -1,0 +1,243 @@
+
+
+
+var BottleViensla = {
+
+    initialize : function(){
+
+//        this.bottle = new Physijs.CylinderMesh(
+//            new THREE.CylinderGeometry(3, 5, 30, 32),
+//            Physijs.createMaterial(
+//                new THREE.MeshPhongMaterial({
+//                    color: cyellow, ambient: 0xffffff, specular: 0xffffff, shininess: 250
+//                })
+//            ),
+//            320, {friction : 0.1, restitution : 0.1}
+//        );
+
+
+        var bottle_material = Physijs.createMaterial(
+//            new THREE.MeshLambertMaterial(bottle_mat.materials)
+            new THREE.MeshPhongMaterial( {  color: cgreen, specular: 0x666666, ambient: 0x000000, shininess: 10, shading: THREE.SmoothShading, opacity: 0.8, transparent: true, side:2 } )
+        );
+//        bottle_material.side = 2;
+//        bottle_material.color.setHex( cgreen );
+
+//        bottle_material.map = THREE.ImageUtils.loadTexture( 'images/caps2.jpg' );
+        console.log(bottle_material);
+
+
+
+        this.bottle = new Physijs.CylinderMesh(
+            bottle_geo,
+            bottle_material,
+            320, {friction : 0.1, restitution : 0.1}
+        );
+        this.bottle.scale.set(10,10,10);
+
+        this.bottle.castShadow = true;
+        this.bottle.receiveShadow = true;
+
+        BottleViensla.place({x:0, z:-92});
+        BottleViensla.generateBottle();
+
+    },
+    place : function(axis){
+        this.bottle.position.y = tablefootSurfaceDim[1] +tablefootSurfaceDim[1]/2+18;
+        this.bottle.position.x = axis.x;
+        this.bottle.position.z = axis.z;
+    },
+    generateBottle : function(){
+        scene.add(BottleViensla.bottle);
+        BottleViensla.generateCaps();
+    },
+    generateCaps : function(){
+
+        var caps_material = Physijs.createMaterial(
+            new THREE.MeshLambertMaterial(mat_caps.materials)
+        );
+        caps_material.side = 2;
+
+        caps_material.color.setHex( cgreen );
+
+        this.bottlecaps = new Physijs.CylinderMesh(geo_caps, caps_material,  0.3);
+        this.bottlecaps.castShadow = true;
+        this.bottlecaps.receiveShadow = true;
+
+        this.bottlecaps.scale.set(capModelscale,capModelscale,capModelscale);
+        this.bottlecaps.rotation.x = Math.PI;
+
+        this.bottlecaps.position.y = BottleViensla.bottle.position.y + 19;
+        this.bottlecaps.position.x = BottleViensla.bottle.position.x;
+        this.bottlecaps.position.z = BottleViensla.bottle.position.z;
+
+        scene.add(BottleViensla.bottlecaps);
+
+    }
+}
+
+
+
+
+var BottlePlayer = {
+
+    initialize : function(){
+//        this.bottle = new Physijs.CylinderMesh(
+//            new THREE.CylinderGeometry(3, 5, 30, 32),
+//            Physijs.createMaterial(
+//                new THREE.MeshPhongMaterial({
+//                    color: cblue, ambient: 0xffffff, specular: 0xffffff, shininess: 0
+//                })
+//            ),
+//            320, {friction : 0.1, restitution : 0.1}
+//        );
+
+
+        var bottle_material = Physijs.createMaterial(
+//            new THREE.MeshLambertMaterial(bottle_mat.materials)
+        new THREE.MeshPhongMaterial( { color: cyellow, specular: 0x666666, ambient: 0x000000, shininess: 10, shading: THREE.SmoothShading, opacity: 0.8, transparent: true, side:2 } )
+        );
+//        bottle_material.side = 2;
+//        bottle_material.color.setHex( cyellow );
+        this.bottle = new Physijs.CylinderMesh(
+            bottle_geo,
+            bottle_material,
+            320, {friction : 0.1, restitution : 0.1}
+        );
+        this.bottle.scale.set(10,10,10);
+
+        this.bottle.castShadow = true;
+        this.bottle.receiveShadow = true;
+
+        BottlePlayer.place({x:0, z:92});
+        BottlePlayer.generateBottle();
+
+    },
+    place : function(axis){
+        this.bottle.position.y = tablefootSurfaceDim[1] +tablefootSurfaceDim[1]/2+18;
+        this.bottle.position.x = axis.x;
+        this.bottle.position.z = axis.z;
+    },
+    generateBottle : function(){
+        scene.add(BottlePlayer.bottle);
+        BottlePlayer.generateCaps();
+    },
+    generateCaps : function(){
+
+
+        var caps_material = Physijs.createMaterial(
+            new THREE.MeshLambertMaterial(mat_caps.materials)
+        );
+        caps_material.side = 2;
+
+        caps_material.color.setHex( cyellow );
+
+        this.bottlecaps = new Physijs.CylinderMesh(geo_caps, caps_material, 0.3);
+        this.bottlecaps.castShadow = true;
+        this.bottlecaps.receiveShadow = true;
+
+        this.bottlecaps.scale.set(capModelscale,capModelscale,capModelscale);
+        this.bottlecaps.rotation.x = Math.PI;
+
+        this.bottlecaps.position.y = BottlePlayer.bottle.position.y + 19;
+        this.bottlecaps.position.x = BottlePlayer.bottle.position.x;
+        this.bottlecaps.position.z = BottlePlayer.bottle.position.z;
+
+        scene.add(BottlePlayer.bottlecaps);
+
+    }
+}
+
+
+// AXIS
+function buildAxes( length ) {
+    var axes = new THREE.Object3D();
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( length, 0, 0 ), 0xFF0000, false ) ); // +X
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -length, 0, 0 ), 0xFF0000, true) ); // -X
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, length, 0 ), 0x00FF00, false ) ); // +Y
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, -length, 0 ), 0x00FF00, true ) ); // -Y
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, length ), 0x0000FF, false ) ); // +Z
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x0000FF, true ) ); // -Z
+    return axes;
+}
+
+function buildAxis( src, dst, colorHex, dashed ) {
+    var geom = new THREE.Geometry(),
+        mat;
+
+    if(dashed) {
+        mat = new THREE.LineDashedMaterial({ linewidth: 3, color: colorHex, dashSize: 3, gapSize: 3 });
+    } else {
+        mat = new THREE.LineBasicMaterial({ linewidth: 3, color: colorHex });
+    }
+
+    geom.vertices.push( src.clone() );
+    geom.vertices.push( dst.clone() );
+    geom.computeLineDistances(); // This one is SUPER important, otherwise dashed lines will appear as simple plain lines
+
+    var axis = new THREE.Line( geom, mat, THREE.LinePieces );
+
+    return axis;
+
+}
+
+
+document.addEventListener(
+    'keydown',
+    function( ev ) {
+        console.log(ev.keyCode);
+        switch( ev.keyCode ) {
+            case 37:
+                // Left
+
+
+                break;
+
+            case 39:
+                // Right
+
+                break;
+
+            case 38:
+                // Up
+
+                break;
+
+            case 40:
+                // Down
+                break;
+
+            case 32:
+                // space
+                create_caps();
+                break;
+
+            case 67:
+//                lookatobj = ball;
+                break;
+
+            case 86:
+                console.log('bottlecaps vl')
+                lookatobj = BottleViensla.bottle;
+                break;
+
+            case 66:
+                lookatobj = scene;
+                break;
+
+            case 65 :
+                if(axes.presence){
+                    axes.traverse( function ( object ) { object.visible = false; } );
+                    axes.presence = false;
+                }else{
+                    axes.traverse( function ( object ) { object.visible = true; } );
+                    axes.presence = true;
+                }
+            break;
+
+            case 13:
+                change_camera();
+                break;
+        }
+    }
+);

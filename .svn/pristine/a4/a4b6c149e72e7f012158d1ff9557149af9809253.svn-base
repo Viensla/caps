@@ -1,0 +1,291 @@
+
+planeWIDTH = 180;
+planeHEIGHT = 500;
+
+
+var tableSurfaceDim = [180, 2, 20];
+var tablefootSurfaceDim = [160, 40, 2];
+var level, _floor, _tapis, _tablefoot, _table;
+function create_table(){
+
+    //Set Level group
+    level = new Physijs.BoxMesh(
+        new THREE.BoxGeometry( 5, 1, .5 ),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: ptpgrey
+            })
+        ), 0
+    );
+    level.position.x = 0;
+    level.position.y = 0;
+    level.position.z = 0;
+    level.castShadow = true;
+    level.receiveShadow = true;
+    level.name = 'level';
+
+
+    //Add floor to level
+    _floor = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(3000, 3000, 35),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: 0x3e3c3c
+            })
+        ), 0);
+    _floor.rotation.x = Math.PI/2;
+    _floor.position.x = 0;
+    _floor.position.y = -1;
+    _floor.position.z = 0;
+    _floor.castShadow = true;
+    _floor.receiveShadow = true;
+    _floor.name = 'floor';
+
+
+
+    scene.add(_floor);
+
+    _tapis = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(planeWIDTH, planeHEIGHT, 35),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: ptpyellow
+            })
+        ), 0);
+    _tapis.rotation.x = Math.PI/2;
+    _tapis.position.x = 0;
+    _tapis.position.y = 0;
+    _tapis.position.z = 0;
+    _tapis.castShadow = true;
+    _tapis.receiveShadow = true;
+    _tapis.name = 'tapis';
+
+    scene.add(_tapis);
+
+
+
+    //Add table foots
+
+
+    var _tablefoot_geometry = new THREE.BoxGeometry(tablefootSurfaceDim[0], tablefootSurfaceDim[1], tablefootSurfaceDim[2]);
+    _tablefoot = new Physijs.BoxMesh(
+        _tablefoot_geometry,
+        new THREE.MeshLambertMaterial({
+            color: cblue
+        })
+        , 0);
+
+
+    var _tablefoot_outlines = new Physijs.BoxMesh(
+        _tablefoot_geometry,
+        new THREE.MeshLambertMaterial({
+            color: 0x000000
+        })
+        , 0);
+    _tablefoot_outlines.position.z = -0.5;
+    _tablefoot_outlines.scale.set(1.01,1.05,1.05);
+    _tablefoot.add(_tablefoot_outlines);
+
+    _tablefoot.castShadow = true;
+    _tablefoot.receiveShadow = true;
+
+
+
+
+    _tablefoot.position.x = 0;
+    _tablefoot.position.y = tablefootSurfaceDim[1]-2;
+    _tablefoot.position.z = -90;
+
+    level.add(_tablefoot);
+
+
+    _tablefoot = new Physijs.BoxMesh(
+        _tablefoot_geometry,
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: cgreen
+            })
+        ), 0);
+    _tablefoot.position.x = 0;
+    _tablefoot.position.y = tablefootSurfaceDim[1];
+    _tablefoot.position.z = 90;
+    _tablefoot.castShadow = true;
+    _tablefoot.receiveShadow = true;
+
+    level.add(_tablefoot);
+
+    //Add table
+
+    var _table_geometry = new THREE.BoxGeometry(tableSurfaceDim[0], tableSurfaceDim[1], tableSurfaceDim[2]);
+
+    _table = new Physijs.BoxMesh(
+        _table_geometry,
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff
+            })
+        ), 0);
+
+
+    var _table_outlines = new Physijs.BoxMesh(
+        _table_geometry,
+        new THREE.MeshLambertMaterial({
+            color: 0x000000
+        })
+        , 0);
+    _table_outlines.position.z = -1.2;
+    _table_outlines.position.y = -0.5;
+    _table_outlines.scale.set(1.01,1.05,1.1);
+
+    _table.add(_table_outlines);
+
+
+
+    _table.position.x = 0;
+    _table.position.y = tablefootSurfaceDim[1] +tablefootSurfaceDim[1]/2 ;
+    _table.position.z = -90;
+    _table.castShadow = true;
+    _table.receiveShadow = true;
+
+    level.add(_table);
+
+    _table = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(tableSurfaceDim[0]+100, tableSurfaceDim[1], tableSurfaceDim[2]),
+        Physijs.createMaterial(
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff
+            })
+        ), 0);
+
+    _table_outlines = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(tableSurfaceDim[0]+100, tableSurfaceDim[1], tableSurfaceDim[2]),
+        new THREE.MeshLambertMaterial({
+            color: 0x000000
+        })
+        , 0);
+
+    _table_outlines.position.z = -0.5;
+    _table_outlines.position.y = -0.2;
+    _table_outlines.scale.set(1.01, 1, 1);
+
+
+    var subock = new Physijs.BoxMesh(
+//        new THREE.BoxGeometry(15,1,15),
+        new THREE.CircleGeometry( 8, 64 ),
+        new THREE.MeshLambertMaterial({
+            color: cblue,
+            side:2
+        })
+        , 0);
+
+    var subock_center = new Physijs.BoxMesh(
+        new THREE.CircleGeometry( 5.5, 64 ),
+        new THREE.MeshLambertMaterial({
+            color: 0x000000,
+            side:2
+        })
+        , 0);
+
+    subock_center.position.z = -1;
+    subock_center.position.y = 1;
+    subock_center.position.x = 0.5;
+
+    subock.add(subock_center);
+
+    var subock_outline = new Physijs.BoxMesh(
+        new THREE.CircleGeometry( 8, 64 ),
+        new THREE.MeshLambertMaterial({
+            color: 0x000000,
+            side:2
+        })
+        , 0);
+
+
+
+    subock_outline.scale.set(1.07,1.07,1.07);
+    subock_outline.position.z = 0.1;
+    subock.add(subock_outline);
+
+
+//    subock.geometry.vertices.shift();
+    subock.rotation.x = Math.PI/2;
+    subock.position.x = -0.6;
+    subock.position.y = 2;
+    subock.position.z = 1;
+    console.log(subock.material);
+
+//    _table.add(subock);
+
+
+    _table.add(_table_outlines);
+
+
+    _table.position.x = 0;
+    _table.position.y = tablefootSurfaceDim[1] +tablefootSurfaceDim[1]/2 ;
+    _table.position.z = 90;
+    _table.castShadow = true;
+    _table.receiveShadow = true;
+    level.add(_table);
+
+
+
+    scene.add(level);
+
+
+
+
+    // SKYDOME
+
+    var vertexShader = document.getElementById( 'vertexShader' ).textContent;
+    var fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
+    var uniforms = {
+        topColor: 	 { type: "c", value: new THREE.Color( 0x4e4c4c ) },
+        bottomColor: { type: "c", value: new THREE.Color( 0x3e3c3c ) },
+        offset:		 { type: "f", value: 10 },
+        exponent:	 { type: "f", value: 0.6 }
+    }
+    uniforms.topColor.value.copy( hemiLight.color );
+
+    scene.fog.color.copy( uniforms.bottomColor.value );
+
+    var skyGeo = new THREE.SphereGeometry( 600, 64, 15 );
+    var skyMat = new THREE.ShaderMaterial( { vertexShader: vertexShader, fragmentShader: fragmentShader, uniforms: uniforms, side: THREE.BackSide } );
+
+    var sky = new THREE.Mesh( skyGeo, skyMat );
+    scene.add( sky );
+}
+
+
+
+
+// AXIS
+function buildAxes( length ) {
+    var axes = new THREE.Object3D();
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( length, 0, 0 ), 0xFF0000, false ) ); // +X
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( -length, 0, 0 ), 0xFF0000, true) ); // -X
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, length, 0 ), 0x00FF00, false ) ); // +Y
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, -length, 0 ), 0x00FF00, true ) ); // -Y
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, length ), 0x0000FF, false ) ); // +Z
+    axes.add( buildAxis( new THREE.Vector3( 0, 0, 0 ), new THREE.Vector3( 0, 0, -length ), 0x0000FF, true ) ); // -Z
+    return axes;
+}
+
+function buildAxis( src, dst, colorHex, dashed ) {
+    var geom = new THREE.Geometry(),
+        mat;
+
+    if(dashed) {
+        mat = new THREE.LineDashedMaterial({ linewidth: 3, color: colorHex, dashSize: 3, gapSize: 3 });
+    } else {
+        mat = new THREE.LineBasicMaterial({ linewidth: 3, color: colorHex });
+    }
+
+    geom.vertices.push( src.clone() );
+    geom.vertices.push( dst.clone() );
+    geom.computeLineDistances(); // This one is SUPER important, otherwise dashed lines will appear as simple plain lines
+
+    var axis = new THREE.Line( geom, mat, THREE.LinePieces );
+
+    return axis;
+
+}

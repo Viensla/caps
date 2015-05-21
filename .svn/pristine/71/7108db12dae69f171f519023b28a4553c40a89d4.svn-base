@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!--[if IE 6]>
+<html id="ie6" class="ie">
+<![endif]-->
+<!--[if IE 7]>
+<html id="ie7"  class="ie">
+<![endif]-->
+<!--[if IE 8]>
+<html id="ie8"  class="ie">
+<![endif]-->
+<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
+<html class="no-js" xmlns="http://www.w3.org/1999/html">
+<!--<![endif]-->
+<head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <meta property="og:title" content="" />
+    <meta property="og:description" content="" />
+    <meta property="og:image" content="" />
+
+    <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <title>Caps</title>
+    <link rel="stylesheet" type="text/css" media="" href="stylesheets/screen.css" />
+
+</head>
+
+<body>
+
+<div class="viewport"></div>
+<div class="powerbar"><div class="bar"></div></div>
+<div id="black_filter"></div>
+
+<div id="header">
+
+
+    <div id="mute">Mute</div>
+    <div class="pl-part chimey">
+        <!--<h3>Player</h3>-->
+        <div class="capsstock">
+        </div>
+
+        <div class="life-bloc">
+
+            <div class="life-c">
+
+                <!-- SVG begins -->
+                <svg>
+
+                    <!-- Definition of a mask begins -->
+                    <defs>
+                        <mask id="mask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+                            <image width="35px" height="140px" xlink:href="images/bottle_mask.png"></image>
+                        </mask>
+                    </defs>
+                    <!-- Definition of a mask ends -->
+
+                    <foreignObject width="35px" height="140px" style="mask: url(#mask);">
+
+                        <!-- HTML begins -->
+                        <div class="life"></div>
+                        <!-- HTML ends -->
+
+                    </foreignObject>
+                </svg>
+                <!-- SVG ends -->
+
+            </div>
+        </div>
+
+    </div>
+    <div class="vl-part">
+        <!--<h3>Viens-là</h3>-->
+        <div class="capsstock">
+        </div>
+
+        <div class="life-bloc">
+            <div class="life-c">
+                <!-- SVG begins -->
+                <svg>
+
+                    <!-- Definition of a mask begins -->
+                    <defs>
+                        <mask id="mask_2" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+                            <image width="35px" height="140px" xlink:href="images/bottle_mask.png"></image>
+                        </mask>
+                    </defs>
+                    <!-- Definition of a mask ends -->
+
+                    <foreignObject width="35px" height="140px" style="mask: url(#mask_2);">
+
+                        <!-- HTML begins -->
+                        <div class="life"></div>
+                        <!-- HTML ends -->
+
+                    </foreignObject>
+                </svg>
+                <!-- SVG ends -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="start-screen">
+
+    <div class="beers-selector">
+        <div class="beer chimey selected">
+            <img src="images/chimey_big.png" alt=""/>
+        </div>
+        <div class="beer foster">
+            <img src="images/foster_big.png" alt=""/>
+        </div>
+        <div class="beer ptp">
+            <img src="images/ptp_big.png" alt=""/>
+        </div>
+    </div>
+
+    <div id="party">Party !</div>
+
+</div>
+
+<div id="caps-m">
+    <p>CAPS !</p>
+</div>
+
+<div id="turn-m">
+   <p>You turn !</p>
+</div>
+
+<div id="winner-m">
+    <p>You turn !</p>
+</div>
+
+<div id="aspirine">
+    <img src="images/aspirine.png" alt=""/>
+</div>
+
+<footer></footer>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+<script src="js/three.min.js"></script>
+
+<script src="http://mrdoob.github.com/three.js/examples/js/shaders/CopyShader.js"></script>
+<script src="http://mrdoob.github.com/three.js/examples/js/shaders/HorizontalBlurShader.js"></script>
+<script src="http://mrdoob.github.com/three.js/examples/js/shaders/VerticalBlurShader.js"></script>
+<script src="http://mrdoob.github.io/three.js/examples/js/modifiers/SubdivisionModifier.js"></script>
+
+
+
+<script src="http://mrdoob.github.com/three.js/examples/js/postprocessing/EffectComposer.js"></script>
+<script src="http://mrdoob.github.com/three.js/examples/js/postprocessing/RenderPass.js"></script>
+<script src="http://mrdoob.github.com/three.js/examples/js/postprocessing/MaskPass.js"></script>
+<script src="http://mrdoob.github.com/three.js/examples/js/postprocessing/ShaderPass.js"></script>
+
+<script src="http://threejs.org/examples/js/curves/NURBSCurve.js"></script>
+<script src="http://threejs.org/examples/js/curves/NURBSSurface.js"></script>
+
+<script src="http://threejs.org/examples/js/curves/NURBSUtils.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/threejs/r67/three.min.js"></script>-->
+<!--<script src="js/ColladaLoader.js"></script>-->
+<script src="js/PLYLoader.js"></script>
+
+<script src="js/physijs/physi.js"></script>
+
+<script type="text/javascript" src="js/master.js"></script>
+
+<script type="x-shader/x-vertex" id="vertexShader">
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
+				vWorldPosition = worldPosition.xyz;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+
+		</script>
+
+<script type="x-shader/x-fragment" id="fragmentShader">
+
+			uniform vec3 topColor;
+			uniform vec3 bottomColor;
+			uniform float offset;
+			uniform float exponent;
+
+			varying vec3 vWorldPosition;
+
+			void main() {
+
+				float h = normalize( vWorldPosition + offset ).y;
+				gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
+
+			}
+
+		</script>
+</body>
+
+
+
+</html>
