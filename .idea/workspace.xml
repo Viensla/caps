@@ -4,6 +4,7 @@
     <list default="true" readonly="true" id="fcd7f700-fd06-48c8-92f1-a1095cddb991" name="Default" comment="">
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/grunt-package.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/js/jquery-2.1.4.min.js" />
       <change type="DELETED" beforePath="$PROJECT_DIR$/server/package.json" afterPath="" />
       <change type="MOVED" beforePath="$PROJECT_DIR$/server/index.js" afterPath="$PROJECT_DIR$/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
@@ -40,7 +41,9 @@
             <entry file="file://$PROJECT_DIR$/dev/js/players.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="306" column="0" selection-start="8841" selection-end="8841" vertical-scroll-proportion="0.0" vertical-offset="4335" max-vertical-offset="7215">
-                  <folding />
+                  <folding>
+                    <marker date="1432137296000" expanded="true" signature="4926:11753" placeholder="{&quot;score&quot;: 0...}" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -54,10 +57,19 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/.gitignore">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="2" column="1" selection-start="34" selection-end="34" vertical-scroll-proportion="0.03984064" vertical-offset="0" max-vertical-offset="753">
+                <state line="5" column="7" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="master.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/js/master.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="156" column="0" selection-start="4157" selection-end="4157" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="38070">
                   <folding />
                 </state>
               </provider>
@@ -90,20 +102,20 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/www/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="57" column="0" selection-start="1712" selection-end="1712" vertical-scroll-proportion="-16.083334" vertical-offset="469" max-vertical-offset="4785">
+                <state line="255" column="35" selection-start="6728" selection-end="6728" vertical-scroll-proportion="0.2857143" vertical-offset="3627" max-vertical-offset="4785">
                   <folding>
-                    <marker date="1432200420000" expanded="true" signature="5445:5617" placeholder="..." />
-                    <marker date="1432200420000" expanded="true" signature="5719:6018" placeholder="..." />
-                    <marker date="1432200420000" expanded="true" signature="5731:5837" placeholder="..." />
-                    <marker date="1432200420000" expanded="false" signature="5918:5931" placeholder="..." />
-                    <marker date="1432200420000" expanded="true" signature="5932:6007" placeholder="..." />
-                    <marker date="1432200420000" expanded="true" signature="6106:6186" placeholder="..." />
-                    <marker date="1432200420000" expanded="true" signature="6210:6287" placeholder="..." />
-                    <marker date="1432200420000" expanded="true" signature="6319:6427" placeholder="..." />
-                    <marker date="1432200420000" expanded="true" signature="6525:6560" placeholder="..." />
+                    <marker date="1432201427000" expanded="true" signature="5445:5617" placeholder="..." />
+                    <marker date="1432201427000" expanded="true" signature="5719:6018" placeholder="..." />
+                    <marker date="1432201427000" expanded="true" signature="5731:5837" placeholder="..." />
+                    <marker date="1432201427000" expanded="false" signature="5918:5931" placeholder="..." />
+                    <marker date="1432201427000" expanded="true" signature="5932:6007" placeholder="..." />
+                    <marker date="1432201427000" expanded="true" signature="6106:6186" placeholder="..." />
+                    <marker date="1432201427000" expanded="true" signature="6210:6287" placeholder="..." />
+                    <marker date="1432201427000" expanded="true" signature="6319:6427" placeholder="..." />
+                    <marker date="1432201427000" expanded="true" signature="6525:6560" placeholder="..." />
                   </folding>
                 </state>
               </provider>
@@ -125,7 +137,7 @@
           <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="10" column="56" selection-start="297" selection-end="297" vertical-scroll-proportion="0.1992032" vertical-offset="0" max-vertical-offset="753">
+                <state line="22" column="70" selection-start="707" selection-end="707" vertical-scroll-proportion="0.43824703" vertical-offset="0" max-vertical-offset="753">
                   <folding />
                 </state>
               </provider>
@@ -144,7 +156,9 @@
             <entry file="file://$PROJECT_DIR$/dev/js/players.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="150" column="23" selection-start="4597" selection-end="4597" vertical-scroll-proportion="0.0" vertical-offset="1999" max-vertical-offset="7215">
-                  <folding />
+                  <folding>
+                    <marker date="1432137296000" expanded="true" signature="4926:11753" placeholder="{&quot;score&quot;: 0...}" />
+                  </folding>
                 </state>
               </provider>
             </entry>
@@ -226,10 +240,10 @@
         <option value="$PROJECT_DIR$/dev/js/game.js" />
         <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/index.js" />
-        <option value="$PROJECT_DIR$/www/index.html" />
         <option value="$PROJECT_DIR$/dev/js/multi.js" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/index.js" />
+        <option value="$PROJECT_DIR$/www/index.html" />
       </list>
     </option>
   </component>
@@ -295,6 +309,42 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -383,11 +433,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/www/js" />
       <recent name="$PROJECT_DIR$/www/model/3D" />
       <recent name="$PROJECT_DIR$/www/images" />
       <recent name="$PROJECT_DIR$/server" />
       <recent name="$PROJECT_DIR$/www" />
-      <recent name="$PROJECT_DIR$/www/model/chimey" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -632,11 +682,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dev/js/sounds.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="19" selection-start="462" selection-end="462" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/model/sticker/chimey_etiquette.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -675,13 +720,6 @@
     <entry file="file://$PROJECT_DIR$/www/images/aspirine.png">
       <provider selected="true" editor-type-id="images">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/js/master.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="156" column="0" selection-start="4127" selection-end="4127" vertical-scroll-proportion="0.0" vertical-offset="1950" max-vertical-offset="31440">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/js/physijs/physi.js">
@@ -873,7 +911,9 @@
     <entry file="file://$PROJECT_DIR$/dev/js/players.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="306" column="0" selection-start="8841" selection-end="8841" vertical-scroll-proportion="0.0" vertical-offset="4335" max-vertical-offset="7215">
-          <folding />
+          <folding>
+            <marker date="1432137296000" expanded="true" signature="4926:11753" placeholder="{&quot;score&quot;: 0...}" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -905,30 +945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="56" selection-start="297" selection-end="297" vertical-scroll-proportion="0.1992032" vertical-offset="0" max-vertical-offset="753">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="1712" selection-end="1712" vertical-scroll-proportion="-16.083334" vertical-offset="469" max-vertical-offset="4785">
-          <folding>
-            <marker date="1432200420000" expanded="true" signature="5445:5617" placeholder="..." />
-            <marker date="1432200420000" expanded="true" signature="5719:6018" placeholder="..." />
-            <marker date="1432200420000" expanded="true" signature="5731:5837" placeholder="..." />
-            <marker date="1432200420000" expanded="false" signature="5918:5931" placeholder="..." />
-            <marker date="1432200420000" expanded="true" signature="5932:6007" placeholder="..." />
-            <marker date="1432200420000" expanded="true" signature="6106:6186" placeholder="..." />
-            <marker date="1432200420000" expanded="true" signature="6210:6287" placeholder="..." />
-            <marker date="1432200420000" expanded="true" signature="6319:6427" placeholder="..." />
-            <marker date="1432200420000" expanded="true" signature="6525:6560" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/js/multi.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="322" column="6" selection-start="11736" selection-end="11736" vertical-scroll-proportion="0.0" vertical-offset="4195" max-vertical-offset="4965">
@@ -943,10 +959,48 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="70" selection-start="707" selection-end="707" vertical-scroll-proportion="0.43824703" vertical-offset="0" max-vertical-offset="753">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="1" selection-start="34" selection-end="34" vertical-scroll-proportion="0.03984064" vertical-offset="0" max-vertical-offset="753">
+        <state line="5" column="7" selection-start="59" selection-end="59" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/master.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="156" column="0" selection-start="4157" selection-end="4157" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="38070">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/js/jquery-2.1.4.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="0" selection-start="84345" selection-end="84345" vertical-scroll-proportion="0.08368201" vertical-offset="0" max-vertical-offset="717">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="255" column="35" selection-start="6728" selection-end="6728" vertical-scroll-proportion="0.2857143" vertical-offset="3627" max-vertical-offset="4785">
+          <folding>
+            <marker date="1432201427000" expanded="true" signature="5445:5617" placeholder="..." />
+            <marker date="1432201427000" expanded="true" signature="5719:6018" placeholder="..." />
+            <marker date="1432201427000" expanded="true" signature="5731:5837" placeholder="..." />
+            <marker date="1432201427000" expanded="false" signature="5918:5931" placeholder="..." />
+            <marker date="1432201427000" expanded="true" signature="5932:6007" placeholder="..." />
+            <marker date="1432201427000" expanded="true" signature="6106:6186" placeholder="..." />
+            <marker date="1432201427000" expanded="true" signature="6210:6287" placeholder="..." />
+            <marker date="1432201427000" expanded="true" signature="6319:6427" placeholder="..." />
+            <marker date="1432201427000" expanded="true" signature="6525:6560" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
