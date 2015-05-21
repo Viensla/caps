@@ -859,7 +859,6 @@ var Party = {
                     Party.resetStocks();
 //                    Party.vlplay();
                 }, 2000)
-
             }
 
             setTimeout(function(){
@@ -1074,33 +1073,17 @@ function create_table(){
     _wall.receiveShadow = true;
     _wall.rotation.x = -0.06;
 
-    level.add(_wall);
 
-    wall_texture = THREE.ImageUtils.loadTexture('images/v2/bar-neon-orange.png');
-    _wall = new Physijs.BoxMesh(
-        new THREE.BoxGeometry(119, 68, 1),
-        new THREE.MeshPhongMaterial({
-            map:wall_texture,
-            transparent:true,
-            opacity:0.7
-        }),
-        0
-    );
-    _wall.position.x = 3;
-    _wall.position.y = 180;
-    _wall.position.z = -600;
-    _wall.castShadow = true;
-    _wall.receiveShadow = true;
     level.add(_wall);
 
      wall_texture = THREE.ImageUtils.loadTexture('images/v2/armoires_back.png');
     _wall = new Physijs.BoxMesh(
 //        285
-        new THREE.BoxGeometry(1712, 335, 10),
+        new THREE.BoxGeometry(1212, 335, 10),
         new THREE.MeshPhongMaterial({
             map:wall_texture,
             transparent:true,
-            opacity:0.2
+            opacity:0.4
         }),
         0
     );
@@ -1551,7 +1534,7 @@ function create_lights(){
 
 
     pointlightbar = new THREE.PointLight( brown, 2, 100 );
-    pointlightbar.position.set( 3, 180, -580 );
+    pointlightbar.position.set( 8, 180, -600 );
 //    pointlightbar.add( new THREE.Mesh( new THREE.SphereGeometry( 5, 16, 8 ), new THREE.MeshBasicMaterial( { color: 0xfcd625 } ) ) );
     pointlightbar.animeLight = function(){
         if(Math.random() > 0.9){

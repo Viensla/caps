@@ -221,7 +221,7 @@
 
 <script id="join-game-template" type="text/template">
     <div class="info">
-        <input id="inputPlayerName" type="text" placeholder="ton pseudo" />
+        <input id="inputPlayerName" type="text" placeholder="NOM" />
     </div>
 
     <div class="info">
