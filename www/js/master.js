@@ -47,18 +47,39 @@ var composer;
 
 
 
-
+var DPR = window.devicePixelRatio || 1;
 
 
 initScene = function() {
     scene = new Physijs.Scene();
     scene.setGravity(new THREE.Vector3( 0, -80, 0 ));
     scene.fog = new THREE.Fog( 0x050505, 2000, 3500 );
+
+
+
+
     renderer = new THREE.WebGLRenderer({
-        antialias: true
+        antialias: true,
+        alpha : true,
+        precision:"lowp",
+        devicePixelRatio: DPR
     });
-//    renderer.setSize(WIDTH, HEIGHT-100); //16:9
-    renderer.setSize(WIDTH, HEIGHT);
+
+//    renderer.setSize(WIDTH, HEIGHT);
+//
+//    renderer.setViewport( 0, 0, WIDTH/2, HEIGHT/2 );
+//    renderer.setSize(WIDTH, HEIGHT);
+
+
+    if(DPR > 1){
+        renderer.setViewport( 0, 0, WIDTH/DPR, HEIGHT/DPR );
+        renderer.domElement.width = WIDTH;
+        renderer.domElement.height = HEIGHT;
+    }else{
+        renderer.setSize(WIDTH, HEIGHT);
+        renderer.setViewport( 0, 0, WIDTH, HEIGHT );
+    }
+
     renderer.shadowMapEnabled = false;
     renderer.shadowMapSoft = false;
     renderer.shadowMapType = THREE.PCFShadowMap;
@@ -75,6 +96,8 @@ initScene = function() {
     lookatobj = Viensla.bottle;
     scene.simulate();
     initEventHandling();
+
+
     render();
 };
 
@@ -264,16 +287,31 @@ CAPS.launchGame = function(){
 
 
 function onWindowResize( event ) {
-    renderer.setSize( window.innerWidth, window.innerHeight );
-    camera.aspect = window.innerWidth / window.innerHeight;
+//    renderer.setSize(WIDTH, HEIGHT);
+    WIDTH = window.innerWidth;
+    HEIGHT = window.innerHeight;
+
+
+    if(DPR > 1){
+        renderer.setViewport( 0, 0, WIDTH/DPR, HEIGHT/DPR );
+        renderer.domElement.width =  WIDTH;
+        renderer.domElement.height = HEIGHT;
+        renderer.domElement.style.width =  WIDTH;
+        renderer.domElement.style.height = HEIGHT;
+    }else{
+        renderer.setSize(WIDTH, HEIGHT);
+    }
+
+    camera.aspect = WIDTH / HEIGHT;
     camera.updateProjectionMatrix();
 }
 
 $(window).load(function(){
-//    CAPS.launchGame();
-//    $('#game-area').hide();
+    CAPS.launchGame();
+    $('#game-area').hide();
 });;var playerCamera = {}, vlCamera = {}, camera;
 var lookat;
+
 
 
 var VIEW_ANGLE = 75,
