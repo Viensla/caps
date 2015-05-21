@@ -70,7 +70,6 @@ initScene = function() {
 //    renderer.setViewport( 0, 0, WIDTH/2, HEIGHT/2 );
 //    renderer.setSize(WIDTH, HEIGHT);
 
-
     if(DPR > 1){
         renderer.setViewport( 0, 0, WIDTH/DPR, HEIGHT/DPR );
         renderer.domElement.width = WIDTH;
@@ -307,8 +306,8 @@ function onWindowResize( event ) {
 }
 
 $(window).load(function(){
-    CAPS.launchGame();
-    $('#game-area').hide();
+//    CAPS.launchGame();
+//    $('#game-area').hide();
 });;var playerCamera = {}, vlCamera = {}, camera;
 var lookat;
 
