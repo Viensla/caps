@@ -1,0 +1,518 @@
+
+planeWIDTH = 170;
+planeHEIGHT = 600;
+
+
+var tableSurfaceDim = [150, 5, 30];
+var tablefootSurfaceDim = [140, 55, 2];
+var level, _floor, _tapis, _tablefoot, _table, _wall, _bar;
+
+
+var dust = [];
+function create_table(){
+
+    //Set Level group
+    level = new Physijs.BoxMesh(
+        new THREE.BoxGeometry( 1, 1, 1 ),
+        new THREE.MeshPhongMaterial({
+                color: ptpgrey
+        }),0
+    );
+    level.position.x = 0;
+    level.position.y = 0;
+    level.position.z = 0;
+    level.castShadow = false;
+    level.receiveShadow = false;
+    level.name = 'level';
+
+
+
+    //Add floor to level
+    _floor = new Physijs.BoxMesh(
+        new THREE.CylinderGeometry(800, 800, 30, 16),
+        new THREE.MeshPhongMaterial({
+            color: brown
+        }),0
+    );
+//    _floor.rotation.x = Math.PI/2;
+    _floor.position.x = 0;
+    _floor.position.y = -1;
+    _floor.position.z = 0;
+    _floor.castShadow = false;
+    _floor.receiveShadow = true;
+    _floor.name = 'floor';
+
+    level.add(_floor);
+
+
+    var CustomSinCurve = THREE.Curve.create(
+        function ( scale ) { //custom curve constructor
+            this.scale = (scale === undefined) ? 1 : scale;
+        },
+
+        function ( t ) { //getPoint: t is between 0-1
+            return new THREE.Vector3(0, t, 0).multiplyScalar(this.scale);
+        }
+    );
+
+    var path = new CustomSinCurve( 200, 100 );
+
+    var geometry = new THREE.TubeGeometry(
+        path,  //path
+        100,    //segments
+        580,     //radius
+        100,     //radiusSegments
+        true  //closed
+    );
+
+
+//    for(var i=0; i<32; i++) {
+//
+//        if(i!=10) {
+//            barGeo.faces[i].color.setHex( brown);
+//        }
+//
+//    }
+
+
+    _bar = new THREE.Mesh(
+        geometry,
+        new THREE.MeshBasicMaterial({
+            color:brown,
+            shininess:100,
+            side:THREE.BackSide
+        })
+    );
+    _bar.rotation.y = Math.PI/2;
+    _bar.position.x = 0;
+    _bar.position.y = -90;
+    _bar.position.z = 100;
+    _bar.castShadow = true;
+    _bar.receiveShadow = true;
+    _bar.name = 'bar';
+    _bar.rotation.x = -0.06;
+
+    level.add(_bar);
+
+
+    //Add Wall to level
+    var wall_texture = THREE.ImageUtils.loadTexture('images/v2/bar_single.png');
+
+    _wall = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(500, 125, 1),
+        new THREE.MeshBasicMaterial({
+            map:wall_texture,
+            transparent:true,
+            opacity:1
+        }),
+        0
+    );
+    _wall.position.x = 3;
+    _wall.position.y = 77;
+    _wall.position.z = -435;
+    _wall.castShadow = true;
+    _wall.receiveShadow = true;
+    _wall.rotation.x = -0.06;
+
+    level.add(_wall);
+
+    wall_texture = THREE.ImageUtils.loadTexture('images/v2/bar-neon-orange.png');
+    _wall = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(119, 68, 1),
+        new THREE.MeshPhongMaterial({
+            map:wall_texture,
+            transparent:true,
+            opacity:0.7
+        }),
+        0
+    );
+    _wall.position.x = 3;
+    _wall.position.y = 180;
+    _wall.position.z = -600;
+    _wall.castShadow = true;
+    _wall.receiveShadow = true;
+    level.add(_wall);
+
+     wall_texture = THREE.ImageUtils.loadTexture('images/v2/armoires_back.png');
+    _wall = new Physijs.BoxMesh(
+//        285
+        new THREE.BoxGeometry(1712, 335, 10),
+        new THREE.MeshPhongMaterial({
+            map:wall_texture,
+            transparent:true,
+            opacity:0.2
+        }),
+        0
+    );
+    _wall.rotation.x = -0.37;
+
+    _wall.position.x = 0;
+    _wall.position.y = 130;
+    _wall.position.z = -600;
+    _wall.castShadow = true;
+    _wall.receiveShadow = true;
+
+    level.add(_wall);
+
+
+
+    _tapis = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(planeWIDTH, planeHEIGHT, 35),
+        new THREE.MeshPhongMaterial({
+            color: mediumbrown
+        }), 0
+    );
+    _tapis.rotation.x = Math.PI/2;
+    _tapis.position.x = 0;
+    _tapis.position.y = 0;
+    _tapis.position.z = 0;
+    _tapis.castShadow = false;
+    _tapis.receiveShadow = false;
+    _tapis.name = 'tapis';
+
+    var tapiscircle = new Physijs.BoxMesh(
+        new THREE.CylinderGeometry(140, 140, 10, 64),
+        new THREE.MeshPhongMaterial({
+            color: 0xffffff,
+            transparent : true,
+            opacity:0.1
+        }),0
+    );
+    tapiscircle.rotation.x = Math.PI/2;
+    tapiscircle.position.y = -80;
+    tapiscircle.position.z = -10;
+    _tapis.add(tapiscircle);
+
+
+
+    var shadowcircle = new Physijs.BoxMesh(
+        new THREE.CylinderGeometry(90, 90, 2, 64),
+        new THREE.MeshPhongMaterial({
+            color: 0x040404,
+            transparent : true,
+            opacity:0.05
+        }),0
+    );
+    shadowcircle.scale.set(1,1,0.4);
+    shadowcircle.rotation.x = Math.PI/2;
+    shadowcircle.position.y = -130;
+    shadowcircle.position.z = -17;
+    _tapis.add(shadowcircle);
+
+    scene.add(_tapis);
+
+
+
+
+    //Add table foots
+
+
+    var _tablefoot_geometry = new THREE.BoxGeometry(tablefootSurfaceDim[0], tablefootSurfaceDim[1]+10, tablefootSurfaceDim[2]);
+
+    _tablefoot = new Physijs.BoxMesh(
+        _tablefoot_geometry,
+        new THREE.MeshPhongMaterial({
+            color: tablefootbrown
+        })
+    , 0);
+
+
+    var _tablefoot_outlines = new Physijs.BoxMesh(
+        _tablefoot_geometry,
+        new THREE.MeshPhongMaterial({
+            color: 0x000000
+        })
+    , 0);
+    _tablefoot_outlines.position.z = -0.5;
+    _tablefoot_outlines.scale.set(1.01,1.05,1.05);
+//    _tablefoot.add(_tablefoot_outlines);
+
+    _tablefoot.castShadow = true;
+    _tablefoot.receiveShadow = true;
+
+
+    _tablefoot.rotation.x = 0.3;
+    _tablefoot.position.x = 0;
+    _tablefoot.position.y = tablefootSurfaceDim[1]-6.3;
+    _tablefoot.position.z = -110;
+
+    level.add(_tablefoot);
+
+    //Add table
+    var _table_geometry = new THREE.BoxGeometry(tableSurfaceDim[0], tableSurfaceDim[1], tableSurfaceDim[2]);
+
+    _table = new Physijs.BoxMesh(
+        _table_geometry,
+        new THREE.MeshPhongMaterial({
+            color: tablebrown
+        }), 0
+    );
+
+
+    var _table_outlines = new Physijs.BoxMesh(
+        _table_geometry,
+        new THREE.MeshLambertMaterial({
+            color: 0x000000
+        })
+        , 0);
+    _table_outlines.position.z = -2;
+    _table_outlines.position.y = -0.5;
+    _table_outlines.scale.set(1.01,1.05,1.1);
+
+//    _table.add(_table_outlines);
+
+    _table.position.x = 0;
+    _table.position.y = tablefootSurfaceDim[1] +tablefootSurfaceDim[1]/2 ;
+    _table.position.z = -110;
+    _table.castShadow = true;
+    _table.receiveShadow = true;
+
+    level.add(_table);
+
+    _table = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(tableSurfaceDim[0]+100, tableSurfaceDim[1], tableSurfaceDim[2]),
+        new THREE.MeshBasicMaterial({
+            color: 0xf6c267
+        }),
+    0);
+
+    _table_outlines = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(tableSurfaceDim[0]+100, tableSurfaceDim[1], tableSurfaceDim[2]),
+        new THREE.MeshPhongMaterial({
+            color: 0x000000
+        }),
+    0);
+
+    _table_outlines.position.z = -0.5;
+    _table_outlines.position.y = -0.2;
+    _table_outlines.scale.set(1.01, 1, 1);
+
+//    _table.add(_table_outlines);
+
+    _table.position.x = 0;
+    _table.position.y = tablefootSurfaceDim[1]+tablefootSurfaceDim[1]/2 ;
+    _table.position.z =  110;
+    _table.castShadow = true;
+    _table.receiveShadow = true;
+
+    level.add(_table);
+
+    //Add Wall to level
+    var phone_t = new THREE.MeshPhongMaterial({
+        map: THREE.ImageUtils.loadTexture('images/phone_face.png')
+    });
+    var transparent_side =  new THREE.MeshPhongMaterial({
+        color:0xfcd625
+    });
+    var phone_materials = [
+        transparent_side,
+        transparent_side,
+        phone_t,
+        transparent_side,
+        transparent_side,
+        transparent_side
+    ];
+    var _phone = new Physijs.BoxMesh(
+        new THREE.BoxGeometry(10, 1, 14),
+        new THREE.MeshFaceMaterial(phone_materials),
+        0
+    );
+    _phone.position.x = 50;
+    _phone.position.y = 3;
+    _phone.position.z = -5;
+    _phone.rotation.y = 0.3;
+    _table.add(_phone);
+
+
+    scene.add(level);
+
+
+
+    // material texture
+    var texture = new THREE.Texture( generateTexture() );
+    texture.needsUpdate = true; // important!
+
+    // material
+    var material = new THREE.MeshBasicMaterial( {
+        color: 0xffffff,
+//        shininess: 100,
+        transparent:true,
+        opacity:0.02,
+//        map: texture,
+        side : 2
+    } );
+
+
+    var _spot_fake = new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            10, 164, 400, 32
+        ),
+        material
+        );
+    _spot_fake.scale.set(1,1,1);
+    _spot_fake.rotation.y = Math.PI/2;
+//    _spot_fake.receiveShadow = false;
+//    _spot_fake.position.x = 0;
+//    _spot_fake.position.y = 150;
+//    _spot_fake.position.z = -100;
+
+
+    var spotlightbar = new THREE.PointLight( 0xffffff, 0.1, 100 );
+    spotlightbar.position.set( 0, 150, -80 );
+
+    spotlightbar.add(_spot_fake);
+
+
+     _spot_fake = new THREE.Mesh(new THREE.CylinderGeometry(10, 164, 400, 32),material);
+    _spot_fake.scale.set(0.9,0.9,0.9);
+    spotlightbar.add(_spot_fake);
+     _spot_fake = new THREE.Mesh(new THREE.CylinderGeometry(10, 164, 400, 32),material);
+    _spot_fake.scale.set(0.8,0.8,0.8);
+    spotlightbar.add(_spot_fake);
+     _spot_fake = new THREE.Mesh(new THREE.CylinderGeometry(10, 164, 400, 32),material);
+    _spot_fake.scale.set(0.7,0.7,0.7);
+    spotlightbar.add(_spot_fake);
+     _spot_fake = new THREE.Mesh(new THREE.CylinderGeometry(10, 164, 400, 32),material);
+    _spot_fake.scale.set(0.6,0.6,0.6);
+    spotlightbar.add(_spot_fake);
+     _spot_fake = new THREE.Mesh(new THREE.CylinderGeometry(10, 164, 400, 32),material);
+    _spot_fake.scale.set(0.5,0.5,0.5);
+    spotlightbar.add(_spot_fake);
+     _spot_fake = new THREE.Mesh(new THREE.CylinderGeometry(10, 164, 400, 32),material);
+    _spot_fake.scale.set(0.4,0.4,0.4);
+    spotlightbar.add(_spot_fake);
+     _spot_fake = new THREE.Mesh(new THREE.CylinderGeometry(10, 164, 400, 32),material);
+    _spot_fake.scale.set(0.3,0.3,0.3);
+    spotlightbar.add(_spot_fake);
+
+
+    scene.add(spotlightbar);
+
+
+
+    // SKYDOME
+    var hemiLight = new THREE.HemisphereLight( lightbrown, lightbrown, 0.5 );
+    hemiLight.color.setHex( lightbrown );
+    hemiLight.groundColor.setHSL( 0.5,0.5,0.5 );
+    hemiLight.position.set( 0, 600, 0 );
+
+
+    var vertexShader = document.getElementById( 'vertexShader' ).textContent;
+    var fragmentShader = document.getElementById( 'fragmentShader' ).textContent;
+    var uniforms = {
+        topColor: 	 { type: "c", value: new THREE.Color( darkbrown ) },
+        bottomColor: { type: "c", value: new THREE.Color( lightbrown ) },
+        offset:		 { type: "f", value: 10 },
+        exponent:	 { type: "f", value: 0.7 }
+    }
+    uniforms.topColor.value.copy( hemiLight.color );
+
+    scene.fog.color.copy( uniforms.bottomColor.value );
+
+    var skyGeo = new THREE.SphereGeometry( 1600, 4, 15 );
+    var skyMat = new THREE.ShaderMaterial( { vertexShader: vertexShader, fragmentShader: fragmentShader, uniforms: uniforms, side: THREE.BackSide } );
+    var sky = new THREE.Mesh( skyGeo, skyMat );
+    scene.add( sky );
+
+
+
+//    var skyGeo = new THREE.SphereGeometry( 1500, 4, 15 );
+//    var skyMat = new THREE.MeshPhongMaterial({color:lightestbrown,side: THREE.BackSide, shininess:500});
+//    var sky = new THREE.Mesh( skyGeo, skyMat );
+//    scene.add( sky );
+//    sphere_traj = new THREE.Mesh(
+//        new THREE.BoxGeometry(1, 1, 1),
+//        new THREE.MeshBasicMaterial({
+//            color:0xffffff
+//        })
+//    );
+
+
+
+
+    var dustTexture = new THREE.ImageUtils.loadTexture('images/dust.png');
+    var particle;
+    var dustGeometry = new THREE.Geometry();
+    var sizes = [5, 4, 3, 2, 1];
+
+
+    for (var i = 0; i < 200; i++) {
+        var vertex = new THREE.Vector3();
+        vertex.x = Math.random() * 120 - 60;
+        vertex.y = Math.random() * 120 - 60;
+        vertex.z = Math.random() * 120 - 60;
+
+        dustGeometry.vertices.push( vertex );
+    }
+    for(var i = 0; i < sizes.length; i++){
+        var mat = new THREE.PointCloudMaterial( {
+            size: sizes[i],
+            map: THREE.ImageUtils.loadTexture("images/dust.png"),
+            blending: THREE.AdditiveBlending,
+            transparent: true,
+            opacity:0.04
+        });
+        particle = new THREE.PointCloud( dustGeometry, mat );
+        particle.rotation.x = Math.random() * 6;
+        particle.rotation.y = Math.random() * 6;
+        particle.rotation.z = Math.random() * 6;
+        particle.position.y = 120;
+        particle.position.z = -50;
+
+        dust.push(particle);
+        scene.add(particle);
+    }
+
+
+
+}
+var caps_group = [];
+
+function create_caps_group(){
+    var caps_pos = [
+        [-40, 85, 110],
+        [-35,88, 110],
+        [-37, 89, 112],
+        [-34, 85, 111],
+        [40, 85, -110],
+        [35,88, -110],
+        [34, 85, -111],
+
+    ];
+    for(var i = 0; i < 7; i++){
+        caps_group.push(new Physijs.CylinderMesh(geo_caps, caps_material.ptp, 0.4, {friction : 1, restitution : 0.5}));
+        caps_group[i].scale.set(capModelscale,capModelscale,capModelscale);
+        caps_group[i].position.x = caps_pos[i][0];
+        caps_group[i].position.y = caps_pos[i][1];
+        caps_group[i].position.z = caps_pos[i][2];
+        caps_group[i].rotation.y = Math.PI/(i+1);
+        scene.add(caps_group[i]);
+    }
+}
+
+
+function generateTexture() {
+
+    var size = 150;
+    // create canvas
+   var canvas = document.createElement( 'canvas' );
+    canvas.width = size;
+    canvas.height = size;
+
+    // get context
+    var context = canvas.getContext( '2d' );
+
+    // draw gradient
+
+    context.rect( 0, 0, size, size );
+
+    var gradient = context.createLinearGradient( 0, 0, size-50, size );
+
+    gradient.addColorStop(0, '#ffffff'); // light blue
+    gradient.addColorStop(1, 'transparent'); // dark blue
+    context.fillStyle = gradient;
+    context.fill();
+
+    return canvas;
+
+}

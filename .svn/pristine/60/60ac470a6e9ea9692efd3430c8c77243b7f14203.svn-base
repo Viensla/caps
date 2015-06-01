@@ -1,0 +1,107 @@
+#multiplayer{
+
+  .sc-content {
+    width: 80%;
+    margin: 0 10%;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .rt-pt, .lf-pt {
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+    padding-top: 14px;
+    margin-top: 5%;
+
+    h3 {
+      text-align: center;
+    }
+
+    p.aleo {
+      margin-top: 40px;
+      font-size: 18px;
+      text-align: center;
+
+    }
+
+    .codes-box {
+      display: table;
+      margin: auto;
+      margin-top: 30px;
+    }
+
+
+    .box {
+      padding: 15px 19px;
+      background: #dab269;
+      font-size: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 4px;
+
+
+      p {
+
+        color:#fac366;
+
+        span {
+          color: #FFF;
+        }
+      }
+
+      span {
+
+      }
+
+    }
+  }
+
+  .separator {
+    display: inline-block;
+    vertical-align: top;
+    width: 1px;
+    height: 400px;
+    margin: 0 4%;
+    background: #FFF;
+    margin-top: 5%;
+  }
+
+  .share-pt {
+    display: table;
+    margin: auto;
+    margin-top: 30px;
+
+    p, a {
+      margin-top: 0px;
+      display: inline-block;
+      vertical-align: center;
+      color: #000;
+    }
+
+  }
+
+  .bt.wh {
+    display: table;
+    margin: 30px auto 0 auto;
+
+    p {
+
+      &:before {
+        width: 22px;
+        height: 21px;
+        background: url('../images/play.png');
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        margin-top: -6px;
+        margin-right: 12px;
+      }
+
+    }
+  }
+
+
+}

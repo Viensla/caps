@@ -1,0 +1,37 @@
+$(function(){
+    var $loader = $('#loader'),
+        $wrapper = $('#wrapper');
+    var parts = ['welcome', 'multi', 'wait', 'pickname', 'pickcaps', 'gamearea'];
+    var i = 0,
+        step = 0,
+        loadFinish = false,
+        delay = 450;
+
+    var loaderInterval = setInterval(function(){
+        $loader.attr('class', 'loadIn'+step);
+        step = step < 5 ? step+1 : 1;
+
+        if(loadFinish && step == 1){
+            $('#loading').fadeOut();
+            clearInterval(loaderInterval);
+        }
+    }, delay);
+    loadPart();
+    function loadPart(){
+        $.ajax({
+            url:location.href+ parts[i] +'.html',
+            success : function(data){
+                $wrapper.append(data);
+                i++;
+                if(i == parts.length){
+                    Interface.init();
+                    setTimeout(function(){
+                        loadFinish = true;
+                    }, 5000)
+                }else{
+                    loadPart();
+                }
+            }
+        });
+    }
+});

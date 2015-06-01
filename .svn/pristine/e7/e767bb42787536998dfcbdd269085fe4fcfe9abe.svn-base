@@ -1,0 +1,177 @@
+var Interface = {
+    $currentPart : null,
+    curIndex: 0,
+    init : function(){
+
+        $(window).on('resize', Interface.resize);
+        $plpart = $('.pl-part');
+        $vlpart = $('.vl-part');
+
+        this.resize();
+        this.initWelcome();
+
+
+    },
+    resize : function(){
+        $('section.sc').css({height:HEIGHT, lineHeight:HEIGHT+"px"});
+    },
+    navigate : function(to){
+        if(to == 3){
+            this.initPickName();
+        }else if(to == 4){
+            this.initCapsSelect();
+        }else if(to == 6){
+            CAPS.launchGame();
+
+        }
+        TweenLite.to($('#site-content'), 0.3, {y : -to*HEIGHT});
+        this.curIndex = to;
+
+    },
+    initWelcome : function(){
+        var $welcome = $('#welcome'),
+            $pelle = $welcome.find('.cp-pelle'),
+            $foster = $welcome.find('.cp-foster'),
+            $logo = $welcome.find('.logo'),
+            $water = $welcome.find('.water'),
+            $soloBtn = $welcome.find('#bt-play-solo'),
+            $multiBtn = $welcome.find('#bt-play-online');
+
+        this.$currentPart = $welcome;
+
+        $('#wrapper').css({width:WIDTH, height:HEIGHT});
+        var tms = [
+            new TimelineMax({paused:true, repeat:-1, yoyo:true}),
+            new TimelineMax({paused:true, repeat:-1, yoyo:true}),
+            new TimelineMax({paused:true, repeat:-1, yoyo:true}),
+            new TimelineMax({paused:true, repeat:-1, yoyo:true})
+        ];
+
+        var time = 8;
+
+        tms[0].add(TweenMax.fromTo( $pelle,time,
+            {x:-5, y:0, rotation:0, scale:0.85}, {x:-15, y:-10, rotation:6, scale:1}
+        ));
+
+        tms[1].add(TweenMax.fromTo( $foster,time,
+            {x:0, y:0, rotation:0, scale:0.85}, {x:8, y:-4, rotation:-6, scale:1}
+        ));
+
+        tms[2].add(TweenMax.fromTo($logo ,time,
+            {x:0, y:0, rotation:0, scale:0.9}, {x:8, y:3, rotation:4, scale:1}
+        ));
+
+        tms[3].add(TweenMax.fromTo( $water,time,
+            {x:0, y:0, rotation:0, scale:0.8}, {x:0, y:0, rotation:-4, scale:1}
+        ));
+        tms[0].play();
+        tms[1].play();
+        tms[2].play();
+        tms[3].play();
+
+
+        $soloBtn.click(function(){
+            Interface.navigate(3);
+        });
+        $multiBtn.click(function(){
+            Interface.navigate(1);
+            Interface.initMulti();
+        });
+    },
+
+    initCapsSelect: function(){
+        var $slideShow = $('#beer-slide-c'),
+            $capSlides = $slideShow.find('.cap-list li'),
+            $bgSlides = $slideShow.find('#beer-bg-slider li'),
+            $navBtm = $slideShow.find('.nav-bottle li'),
+            $arr = $slideShow.find('.arw'),
+            curSlide = 0,
+            $sendCaps = $('#bt-send-caps');
+
+        $navBtm.click(function(){
+            var i = $(this).index();
+            changeSlide(i);
+        });
+
+        $arr.click(function(){
+            var i = 0;
+            if($(this).hasClass('lf-arw')){
+                i = curSlide == 0 ? 5 : curSlide-1;
+            }else{
+                i = curSlide == 5 ? 0 : curSlide+1;
+            }
+            changeSlide(i);
+        });
+
+
+        function changeSlide(i){
+            var lf = i > curSlide;
+
+            $capSlides.eq(curSlide).addClass(lf ? 'lf' : 'rg');
+            $capSlides.eq(i).removeClass('lf rg');
+            $capSlides.slice(i+1).addClass('na').removeClass('lf').addClass('rg').removeClass('na');
+            $capSlides.slice(0,i).addClass('na').removeClass('rg').addClass('lf').removeClass('na');
+
+            if(i==5){
+                $capSlides.eq(0).addClass('na').removeClass('lf').addClass('rg').removeClass('na');
+            }else if(i==0){
+                $capSlides.eq(5).addClass('na').removeClass('rg').addClass('lf').removeClass('na');
+            }
+
+            Game.Player.caps = $capSlides.eq(i).attr('id');
+            console.log(Game.Player.caps);
+
+            refreshNav(i);
+
+            curSlide = i;
+        }
+
+        function refreshNav(i){
+            $navBtm.removeClass();
+            $navBtm.eq(i).addClass('act');
+            $bgSlides.removeClass('act');
+            $bgSlides.eq(i).addClass('act');
+
+        }
+
+        $sendCaps.on('click', Game[Game.role].sendPlayerInfo);
+
+
+    },
+
+    initMulti : function(hash){
+
+        CreateMutliplayerParty();
+
+        if(hash){
+            $('#join-code').val(hash);
+            Game.Player.onPlayerStartClick();
+        }else{
+            var $multi = $('#multiplayer'),
+                $generateCode = $multi.find('#host-party'),
+                $startParty = $multi.find('#start-party'),
+                $joinParty = $multi.find('#join-party');
+
+            $generateCode.on('click', Game.Host.onCreateClick);
+            $joinParty.on('click', Game.Player.onPlayerStartClick);
+            $startParty.on('click', Game.Player.onPlayerStartClick);
+        }
+
+
+    },
+
+    initPickName : function(){
+        var $pickname = $('#pickname'),
+            $generateName = $pickname.find('#bt-generate-name'),
+            $sendName = $pickname.find('#bt-send-name');
+
+        $sendName.on('click', function(){
+            Game.Player.name = $('#input-player-name').val() || 'Anonymous';
+            Interface.navigate(4);
+        });
+
+        //TODO GENERATOR
+
+    }
+
+};

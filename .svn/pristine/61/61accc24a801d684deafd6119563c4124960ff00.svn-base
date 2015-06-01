@@ -1,0 +1,111 @@
+
+@font-face {
+  font-family: 'aleobolditalic';
+  src: url('../fonts/aleo-bolditalic-webfont.eot');
+  src: url('../fonts/aleo-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/aleo-bolditalic-webfont.woff2') format('woff2'),
+  url('../fonts/aleo-bolditalic-webfont.woff') format('woff'),
+  url('../fonts/aleo-bolditalic-webfont.ttf') format('truetype'),
+  url('../fonts/aleo-bolditalic-webfont.svg#aleobolditalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
+
+
+@font-face {
+  font-family: 'aleoregular';
+  src: url('../fonts/aleo-regular-webfont.eot');
+  src: url('../fonts/aleo-regular-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/aleo-regular-webfont.woff2') format('woff2'),
+  url('../fonts/aleo-regular-webfont.woff') format('woff'),
+  url('../fonts/aleo-regular-webfont.ttf') format('truetype'),
+  url('../fonts/aleo-regular-webfont.svg#aleoregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
+
+
+@font-face {
+  font-family: 'aleobold';
+  src: url('../fonts/aleo-bold-webfont.eot');
+  src: url('../fonts/aleo-bold-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/aleo-bold-webfont.woff2') format('woff2'),
+  url('../fonts/aleo-bold-webfont.woff') format('woff'),
+  url('../fonts/aleo-bold-webfont.ttf') format('truetype'),
+  url('../fonts/aleo-bold-webfont.svg#aleobold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+
+
+
+@font-face {
+  font-family: 'aleolightitalic';
+  src: url('../fonts/aleo-lightitalic-webfont.eot');
+  src: url('../fonts/aleo-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/aleo-lightitalic-webfont.woff2') format('woff2'),
+  url('../fonts/aleo-lightitalic-webfont.woff') format('woff'),
+  url('../fonts/aleo-lightitalic-webfont.ttf') format('truetype'),
+  url('../fonts/aleo-lightitalic-webfont.svg#aleolightitalic') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: 'pacificoregular';
+  src: url('../fonts/pacifico-webfont.eot');
+  src: url('../fonts/pacifico-webfont.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/pacifico-webfont.woff2') format('woff2'),
+  url('../fonts/pacifico-webfont.woff') format('woff'),
+  url('../fonts/pacifico-webfont.ttf') format('truetype'),
+  url('../fonts/pacifico-webfont.svg#pacificoregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'neutra';
+  src: url('../fonts/NeutraDispTitling.eot');
+  src: url('../fonts/NeutraDispTitling.eot?#iefix') format('embedded-opentype'),
+  url('../fonts/NeutraDispTitling.woff') format('woff'),
+  url('../fonts/NeutraDispTitling.ttf') format('truetype'),
+  url('../fonts/NeutraDispTitling.svg#neutra') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// NEUTRA
+$neutra : 'neutra';
+@mixin neutraUp {font-family:$neutra; text-transform: uppercase }
+.neutra {
+  font-family:$neutra;
+}
+
+
+// PACIFICO
+$pacifico : 'pacificoregular';
+.pcfc {
+  font-family:$pacifico ;
+}
+
+// ALEO
+$aleoReg : 'aleoregular';
+$aleoBoldIt : 'aleobolditalic';
+$aleoBold : 'aleobold';
+$aleoLightIt : 'aleolightitalic';
+.aleo {
+  font-family:$aleoReg;
+}
+
+.aleoB{
+  font-family:$aleoBold;
+}

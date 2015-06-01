@@ -1,0 +1,68 @@
+var Interface = {
+    init : function(){
+
+        $(window).on('resize', Interface.resize);
+
+        this.resize();
+
+        this.initWelcome();
+
+
+
+        $plpart = $('.pl-part');
+        $vlpart = $('.vl-part');
+
+
+
+
+    },
+    resize : function(){
+        $('section.sc').css({height:HEIGHT, lineHeight:HEIGHT+"px"});
+    },
+    initWelcome : function(){
+        var $welcome = $('#welcome'),
+            $pelle = $welcome.find('.cp-pelle'),
+            $foster = $welcome.find('.cp-foster'),
+            $logo = $welcome.find('.logo'),
+            $water = $welcome.find('.water'),
+            $soloBtn = $welcome.find('#bt-play-solo'),
+            $multiBtn = $welcome.find('#bt-play-online');
+
+        var tms = [
+            new TimelineMax({paused:true, repeat:-1, yoyo:true}),
+            new TimelineMax({paused:true, repeat:-1, yoyo:true}),
+            new TimelineMax({paused:true, repeat:-1, yoyo:true}),
+            new TimelineMax({paused:true, repeat:-1, yoyo:true})
+        ];
+
+        var time = 8;
+
+        tms[0].add(TweenMax.fromTo( $pelle,time,
+            {x:-5, y:0, rotation:0, scale:0.85}, {x:-15, y:-10, rotation:6, scale:1}
+        ));
+
+        tms[1].add(TweenMax.fromTo( $foster,time,
+            {x:0, y:0, rotation:0, scale:0.85}, {x:8, y:-4, rotation:-6, scale:1}
+        ));
+
+        tms[2].add(TweenMax.fromTo($logo ,time,
+            {x:0, y:0, rotation:0, scale:0.9}, {x:8, y:3, rotation:4, scale:1}
+        ));
+
+        tms[3].add(TweenMax.fromTo( $water,time,
+            {x:0, y:0, rotation:0, scale:0.8}, {x:0, y:0, rotation:-4, scale:1}
+        ));
+        tms[0].play();
+        tms[1].play();
+        tms[2].play();
+        tms[3].play();
+
+
+        $soloBtn.click(function(){
+            CreateMutliplayerParty();
+            CAPS.launchGame();
+
+            $welcome.fadeOut();
+        });
+    }
+};

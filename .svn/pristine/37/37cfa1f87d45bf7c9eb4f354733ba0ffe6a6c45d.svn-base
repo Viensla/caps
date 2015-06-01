@@ -1,0 +1,57 @@
+<section class="sc" id="multiplayer">
+    
+    <div class="sc-content">
+        <h2>Mode Multijoueur</h2>
+
+        <div class="rt-pt" id="host-part">
+            <h3 class="pcfc blck">Je crée ma partie</h3>
+            <p class="aleo">Il vous suffit de générer un code<br>
+                puis de le transmettre à votre adversaire</p>
+
+            <div class="bt bt-cap green" id="host-party">
+                <p>Générer un code</p>
+            </div>
+
+            <div class="codes-box" id="host-codes">
+                <div class="box">
+                    <p>Code <span id="room-code">.....</span></p>
+                </div>
+                <div class="box lk">
+                    <p>Lien <span id="room-code-lk">http://payetoncaps.fr/#.....</span></p>
+                </div>
+
+                <div class="share-pt">
+                    <p class="aleo">
+                        Partager le lien :
+                        <a href="http://facebook.com" class="bt-social bt-fb"></a>
+                        <a href="http://twitter.com" class="bt-social bt-tw"></a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="bt wh" id="start-party">
+                <p>Démarrer la partie</p>
+            </div>
+
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="lf-pt">
+            <h3 class="pcfc blck">Je rejoins une partie</h3>
+
+            <p class="aleo">Entrez le code et démarrer la partie !</p>
+
+            <div class="codes-box">
+                <div class="box">
+                    <p>Code <input id="join-code" placeholder="xxxxx"/></p>
+                </div>
+            </div>
+
+            <div class="bt wh" id="join-party">
+                <p>Démarrer la partie</p>
+            </div>
+    </div>
+
+
+</section>
