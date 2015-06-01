@@ -41,10 +41,70 @@
     <section class="sc" id="loading">
         <div id="loader"></div>
     </section>
-    <div id="site-content"></div>
 </div>
 
 
+
+
+
+
+<!---->
+<!---->
+<!--<script id="intro-screen-template" type="text/template">-->
+<!--    <div class="buttons">-->
+<!--        <div id="btnCreateGame" class="btn left"><p>Créer une partie</p></div>-->
+<!--        <div id="btnJoinGame" class="btn right"><p>Rejoindre une partie</p></div>-->
+<!--    </div>-->
+<!--</script>-->
+<!---->
+<!--<script id="new-game-screen-template" type="text/template">-->
+<!---->
+<!--    <div class="explanation">-->
+<!--        <p>Lien : <span id="url-connect"></span>-->
+<!--            <br/>CODE : <span id="code-connect"></span>-->
+<!--        </p>-->
+<!---->
+<!--        <p id="playersWaiting"></p>-->
+<!---->
+<!--        <div id="cacheStartParty" style="display:none;">-->
+<!--            <button id="btnStartParty">Commencer !</button>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</script>-->
+<!---->
+<!--<script id="join-game-template" type="text/template">-->
+<!--    <div class="info">-->
+<!--        <input id="inputPlayerName" type="text" placeholder="NOM" />-->
+<!--    </div>-->
+<!---->
+<!--    <div class="info">-->
+<!--        <input id="inputGameId" type="tel"  placeholder="CODE" />-->
+<!--    </div>-->
+<!---->
+<!--    <div class="info buttons">-->
+<!--        <div id="btnStart" class="btn">Start</div>-->
+<!--        <div id="playerWaitingMessage"></div>-->
+<!--    </div>-->
+<!--</script>-->
+<!---->
+<!---->
+<!--<script id="gamer-screen-template" type="text/template">-->
+<!--    <div id="player-screen">-->
+<!--        <h3>CAPS !</h3>-->
+<!--    </div>-->
+<!--</script>-->
+<!---->
+<!--<script id="party-screen-template" type="text/template">-->
+<!---->
+<!--</script>-->
+<!---->
+<!--<div id="game-area">-->
+<!---->
+<!--</div>-->
+<!---->
+<!---->
+<!---->
+<!--<footer></footer>-->
 
 <script src="js/three.min.js"></script>
 <script src="js/PLYLoader.js"></script>

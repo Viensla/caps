@@ -26,10 +26,12 @@
 
     <title>Paye ton caps</title>
     <link rel="stylesheet" type="text/css" media="" href="stylesheets/screen.css" />
+
+
+
 </head>
 
 <body>
-
 <header>
     <h1><img class="logo" src="images/logo/logo@2x.png" alt="Paye ton Caps!"/></h1>
     <div class="back-bt">
@@ -38,13 +40,13 @@
 </header>
 
 <div id="wrapper">
+
     <section class="sc" id="loading">
         <div id="loader"></div>
     </section>
+
     <div id="site-content"></div>
 </div>
-
-
 
 <script src="js/three.min.js"></script>
 <script src="js/PLYLoader.js"></script>
