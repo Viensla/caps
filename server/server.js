@@ -118,6 +118,7 @@ function playerShoot(data){
 }
 
 function hostSendInfo(data){
+    console.log(data);
     io.sockets.in(data.gameId).emit('getHostInfo', data);
 }
 

@@ -1,5 +1,6 @@
 var CAPS = {
-    camera : null
+    camera : null,
+    solo : false
 };
 
 var container, scene, renderer, light, ball, plane, bottle, bottlecaps, axes, initEventHandling, initScene;
@@ -55,13 +56,9 @@ var DPR = window.devicePixelRatio || 1;
 initScene = function() {
     container = document.getElementById('viewport');
 
-
     scene = new Physijs.Scene();
     scene.setGravity(new THREE.Vector3( 0, -80, 0 ));
     scene.fog = new THREE.Fog( 0x050505, 2000, 3500 );
-
-
-
 
     renderer = new THREE.WebGLRenderer({
         antialias: true,
@@ -144,6 +141,7 @@ function render() {
             Player.bottlecaps.capsed = true;
             Player.bottlecaps.collided = false;
 
+            if(CAPS.solo) Party.vlcaps();
         }
     }
 
@@ -318,11 +316,13 @@ function onWindowResize( event ) {
 
     camera.aspect = WIDTH / HEIGHT;
     camera.updateProjectionMatrix();
+
+
+    Interface.resize();
 }
 
 $(window).load(function(){
-    $capsTypo = $('#caps-m');
-    $startTypo = $('#start-m');
+
 //    CAPS.launchGame();
 //    $('#game-area').hide();
 });;var playerCamera = {}, vlCamera = {}, camera;
@@ -422,10 +422,10 @@ capCollision = function ( collided, linearVelocity, angularVelocity, other ){
                 console.log('You caps it');
 
                 collided.collided = true;
-                collided.__dirty_postion = true;
-                collided.setAngularFactor(new THREE.Vector3(1,3,-3));
-                collided.setAngularVelocity( new THREE.Vector3(1,1,1) );
-                collided.setLinearVelocity( new THREE.Vector3(1,1,-3) );
+//                collided.__dirty_postion = true;
+//                collided.setAngularFactor(new THREE.Vector3(1,3,-3));
+//                collided.setAngularVelocity( new THREE.Vector3(1,1,1) );
+//                collided.setLinearVelocity( new THREE.Vector3(1,1,-3) );
 
             }
             if(!Sounds.mute) Sounds.capcap.play();
@@ -434,10 +434,10 @@ capCollision = function ( collided, linearVelocity, angularVelocity, other ){
             if(capPlayed.name == 'viensla'){
                 console.log('Viens la caps it');
                 collided.collided = true;
-                collided.__dirty_postion = true;
-                collided.setAngularFactor(new THREE.Vector3(1,-3,3));
-                collided.setAngularVelocity( new THREE.Vector3(1,1,1) );
-                collided.setLinearVelocity( new THREE.Vector3(1,1,3) );
+//                collided.__dirty_postion = true;
+//                collided.setAngularFactor(new THREE.Vector3(1,-3,3));
+//                collided.setAngularVelocity( new THREE.Vector3(1,1,1) );
+//                collided.setLinearVelocity( new THREE.Vector3(1,1,3) );
 
             }
             if(!Sounds.mute) Sounds.pschit1.play();
@@ -650,8 +650,14 @@ initEventHandling = (function() {
 
         playedCaps = null;
 
-        Game.Player.playerLaunch({x : DCMP.x, y : DCMP.y, z :-DCMP.z, pwr:power, rdms:rdms});
-
+        if(!CAPS.solo){
+            Game.Player.playerLaunch({x : DCMP.x, y : DCMP.y, z :-DCMP.z, pwr:power, rdms:rdms});
+        }else{
+            setTimeout(function(){
+                Party.resetStocks();
+                Party.vlplay();
+            }, 3000);
+        }
         power = 0;
 
         $('.powerbar').fadeOut();
@@ -778,34 +784,29 @@ var Party = {
         Player.generateCaps();
     },
     vlplay : function(){
-//        if(this.isPlaying){
-//            if(Viensla.launched < Party.capsPerTurn && !Player.isPlaying){
 
-//                $vlpart.find('.capsstock span').eq(Viensla.launched).removeClass().addClass('animated zoomOut');
+        if(this.isPlaying && CAPS.solo){
+            if(Viensla.launched < Party.capsPerTurn && !Player.isPlaying){
 
-//                Viensla.isPlaying = true;
-//                Player.isPlaying = false;
-//                Viensla.shootCaps(data);
-//                Viensla.launched++;
-//                Viensla.totalLaunched++;
+                $vlpart.find('.capsstock span').eq(Viensla.launched).removeClass().addClass('animated zoomOut');
 
-//                if(Viensla.launched < Party.capsPerTurn){
-//                    timeoutRobot = setTimeout(function(){
-//                        Party.vlplay();
-//                    }, 3000);
-//                }else{
-//                    Player.isPlaying = true;
-//                    Player.launched = 0;
-//                    Viensla.isPlaying = false;
-//                    console.log('Viens la no more caps !');
-//                    this.resetStocks();
-//                    $('#turn-m p').text('Your turn!');
-//                    turnm();
-//                }
-//            }else{
-//                console.log('Viens la no more caps !');
-//            }
-//        }
+                Viensla.isPlaying = true;
+                Player.isPlaying = false;
+                Viensla.launchCaps();
+                Viensla.launched++;
+                Viensla.totalLaunched++;
+
+                Player.isPlaying = true;
+                Player.launched = 0;
+                Viensla.isPlaying = false;
+                this.resetStocks();
+                $('#turn-m p').text('Your turn!');
+                turnm();
+
+            }else{
+                console.log('Viens la no more caps !');
+            }
+        }
 
 
 
@@ -824,22 +825,20 @@ var Party = {
     },
 
     vlcaps : function(){
-        console.log('vlcaps')
         if(this.isPlaying){
             Viensla.isPlaying = false;
             Player.isPlaying = true;
             Viensla.score++;
             Player.drunked += 2;
             Player.lives -= 10;
-            capsm();
-            console.log('vlcaps')
+
+            this.animCaps();
 
             if(Viensla.launched < Party.capsPerTurn-1){
                 setTimeout(function(){
                     $('#turn-m p').text('Your turn!');
                     turnm();
                 },1000);
-
 
                 setTimeout(function(){
                     Party.resetStocks();
@@ -864,21 +863,14 @@ var Party = {
 
             Game.Player.playerCaps();
 
-            capsm();
+            this.animCaps();
 
-            if(Player.launched < Party.capsPerTurn){
-                setTimeout(function(){
-                    $('#turn-m p').text('Vienslà\'s turn!');
-                    turnm();
-                },1000);
-
-                setTimeout(function(){
-                    Party.resetStocks();
-//                    Party.vlplay();
-                }, 2000)
-
-            }
-
+//            if(Player.launched < Party.capsPerTurn){
+//                setTimeout(function(){
+//                    $('#turn-m p').text('Vienslà\'s turn!');
+//                    turnm();
+//                },1000);
+//            }
             setTimeout(function(){
                 Viensla.generateCaps();
             }, 2000);
@@ -930,6 +922,11 @@ var Party = {
                 $('#start-screen').fadeIn();
             }
         }
+    },
+    animCaps : function(){
+        animTypo($capsTypo);
+        console.log('anim caps')
+        if(!Sounds.mute) Sounds.pschit2.play();
     }
 }
 
@@ -937,15 +934,8 @@ var Party = {
 
 var animend ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
 
-function capsm(){
-    animTypo($capsTypo);
-
-    if(!Sounds.mute) Sounds.pschit2.play();
-}
 function startm(){
     animTypo($startTypo);
-
-    if(!Sounds.mute) Sounds.pschit2.play();
 }
 function animTypo($el){
     var delay = 400;
@@ -980,33 +970,25 @@ function winnerm(){
     });
     if(!Sounds.mute) Sounds.pschit2.play();
 }
-
-
-function aspirinerm(){
-    if($('#aspirine').hasClass('bounceOutRight') || $('#aspirine').hasClass('bounceInLeft') ) return;
-
-    $('#aspirine').removeClass().addClass('animated bounceInLeft').show().one(animend, function(){
-        $(this).removeClass().addClass('animated bounceOutRight').one(animend, function(){
-            $(this).removeClass().hide();
-        });
-    });
-    if(!Sounds.mute) Sounds.pschit2.play();
-};var Interface = {
+;var Interface = {
     $currentPart : null,
     curIndex: 0,
     init : function(){
 
-        $(window).on('resize', Interface.resize);
         $plpart = $('.pl-part');
         $vlpart = $('.vl-part');
+        $capsTypo = $('#caps-m');
+        $startTypo = $('#start-m');
 
         this.resize();
         this.initWelcome();
 
-
+        window.addEventListener( 'resize', Interface.resize, false );
     },
     resize : function(){
-        $('section.sc').css({height:HEIGHT, lineHeight:HEIGHT+"px"});
+        $('section.sc').css({height: window.innerHeight, lineHeight: window.innerHeight+"px"});
+        $('#wrapper').css({width: window.innerWidth, height: window.innerHeight});
+        TweenLite.set($('#site-content'),{y : -Interface.curIndex*window.innerHeight});
     },
     navigate : function(to){
         if(to == 3){
@@ -1015,9 +997,8 @@ function aspirinerm(){
             this.initCapsSelect();
         }else if(to == 6){
             CAPS.launchGame();
-
         }
-        TweenLite.to($('#site-content'), 0.3, {y : -to*HEIGHT});
+        TweenLite.to($('#site-content'), 0.3, {y : -to*window.innerHeight});
         this.curIndex = to;
 
     },
@@ -1032,7 +1013,6 @@ function aspirinerm(){
 
         this.$currentPart = $welcome;
 
-        $('#wrapper').css({width:WIDTH, height:HEIGHT});
         var tms = [
             new TimelineMax({paused:true, repeat:-1, yoyo:true}),
             new TimelineMax({paused:true, repeat:-1, yoyo:true}),
@@ -1062,14 +1042,54 @@ function aspirinerm(){
         tms[2].play();
         tms[3].play();
 
+        initializeParty();
 
         $soloBtn.click(function(){
             Interface.navigate(3);
+            CAPS.solo = true;
         });
         $multiBtn.click(function(){
             Interface.navigate(1);
             Interface.initMulti();
         });
+
+
+    },
+
+
+
+    initMulti : function(hash){
+
+
+        if(hash){
+            $('#join-code').val(hash);
+            Game.Player.onPlayerStartClick();
+        }else{
+            var $multi = $('#multiplayer'),
+                $generateCode = $multi.find('#host-party'),
+                $startParty = $multi.find('#start-party'),
+                $joinParty = $multi.find('#join-party');
+
+            $generateCode.on('click', Game.Host.onCreateClick);
+            $joinParty.on('click', Game.Player.onPlayerStartClick);
+            $startParty.on('click', Game.Player.onPlayerStartClick);
+        }
+
+
+    },
+
+    initPickName : function(){
+        var $pickname = $('#pickname'),
+            $generateName = $pickname.find('#bt-generate-name'),
+            $sendName = $pickname.find('#bt-send-name');
+
+        $sendName.on('click', function(){
+            Game.Player.name = $('#input-player-name').val() || 'Anonymous';
+            Interface.navigate(4);
+        });
+
+        //TODO GENERATOR
+
     },
 
     initCapsSelect: function(){
@@ -1113,9 +1133,7 @@ function aspirinerm(){
 
             Game.Player.caps = $capSlides.eq(i).attr('id');
             console.log(Game.Player.caps);
-
             refreshNav(i);
-
             curSlide = i;
         }
 
@@ -1124,46 +1142,12 @@ function aspirinerm(){
             $navBtm.eq(i).addClass('act');
             $bgSlides.removeClass('act');
             $bgSlides.eq(i).addClass('act');
-
         }
 
-        $sendCaps.on('click', Game[Game.role].sendPlayerInfo);
-
-
-    },
-
-    initMulti : function(hash){
-
-        CreateMutliplayerParty();
-
-        if(hash){
-            $('#join-code').val(hash);
-            Game.Player.onPlayerStartClick();
-        }else{
-            var $multi = $('#multiplayer'),
-                $generateCode = $multi.find('#host-party'),
-                $startParty = $multi.find('#start-party'),
-                $joinParty = $multi.find('#join-party');
-
-            $generateCode.on('click', Game.Host.onCreateClick);
-            $joinParty.on('click', Game.Player.onPlayerStartClick);
-            $startParty.on('click', Game.Player.onPlayerStartClick);
-        }
-
-
-    },
-
-    initPickName : function(){
-        var $pickname = $('#pickname'),
-            $generateName = $pickname.find('#bt-generate-name'),
-            $sendName = $pickname.find('#bt-send-name');
-
-        $sendName.on('click', function(){
-            Game.Player.name = $('#input-player-name').val() || 'Anonymous';
-            Interface.navigate(4);
-        });
-
-        //TODO GENERATOR
+        if(CAPS.solo)
+            $sendCaps.on('click', function(){Interface.navigate(6)});
+        else
+            $sendCaps.on('click', Game[Game.role].sendPlayerInfo);
 
     }
 
@@ -2030,7 +2014,8 @@ var canvas, ctx;
 var Game;
 var $plpart, $vlpart;
 var CreateMutliplayerParty;
-CreateMutliplayerParty = function(){
+
+initializeParty = function(){
 
     var IO = {
 
@@ -2046,7 +2031,6 @@ CreateMutliplayerParty = function(){
             IO.socket.on('createNewPlayer', IO.createNewPlayer);
             IO.socket.on('startParty', IO.onStartParty);
             IO.socket.on('hostReady', Game.Player.hostReady);
-
 
             IO.socket.on('playerUpdateMove', Game.Host.playerUpdateMove);
             IO.socket.on('playerUpdateLaunch', Game.Host.playerUpdateLaunch);
@@ -2196,10 +2180,10 @@ CreateMutliplayerParty = function(){
                 IO.socket.emit('hostStartParty', {gameId : Game.gameId, socketId: Game.Player.socketId,  hostPlayer : Game.Host.players});
             },
             showPartyScreen: function(){
-                var i = 0;
+//                var i = 0;
 
-                Game.partyOn = true;
-                CAPS.launchGame();
+//                Game.partyOn = true;
+//                CAPS.launchGame();
 
 //                IO.socket.emit('hostSendInfo', {gameId : Game.gameId, name : Game.Player.name, playerID:Game.socketId});
             },
@@ -2275,7 +2259,7 @@ CreateMutliplayerParty = function(){
             hostSocketId: '',
             name: '',
             socketId : '',
-            caps : '',
+            caps : 'ptp',
             ready:false,
             onJoinClick: function () {
                 // Display the Join Game HTML on the player's screen.
@@ -2327,23 +2311,21 @@ CreateMutliplayerParty = function(){
 
             },
             hostReady : function(data){
-                console.log(data);
-                console.log('putaaaaaaaain');
                 if(IO.socket.socket.sessionid != data.socketId){
                     Game.Player.updateWaitingScreen({hostReady: true, socketId : null});
                 }
             },
             showPartyScreen: function(data){
 
-                console.log(data);
-
-                var i = 0;
-                Game.$area.html(Game.$tplPartyScreen);
-                Game.partyOn = true;
-                Game.Host.players = data.hostPlayer;
-                Game.$area.html($('#caps-game'));
-
-                CAPS.launchGame();
+//                console.log(data);
+//
+//                var i = 0;
+//                Game.$area.html(Game.$tplPartyScreen);
+//                Game.partyOn = true;
+//                Game.Host.players = data.hostPlayer;
+//                Game.$area.html($('#caps-game'));
+//
+//                CAPS.launchGame();
 
             },
             getHostInfo:function(data){
@@ -2354,6 +2336,7 @@ CreateMutliplayerParty = function(){
 
                     Game.Enemy.ready = true;
 
+                    console.log('get host info !');
                     console.log('player : '+Game.Player.name);
                     console.log('enemy : '+Game.Enemy.name);
                     console.log('caps enemy: '+Game.Enemy.caps);
@@ -2419,12 +2402,10 @@ CreateMutliplayerParty = function(){
                 });
             }
         },
-
-
         Enemy : {
             id:null,
             name :null,
-            caps :null,
+            caps :'ptp',
             ready : false
         }
     };
@@ -2812,9 +2793,9 @@ var Viensla = {
         randomY += 25;
 
 
-//        _posVector.set(randomX,randomY, playerDistance*globalDirection + 25);
+        _posVector.set(randomX,randomY, playerDistance*globalDirection + 25);
 
-        _posVector.set(Viensla.livePos.x,Viensla.livePos.y, Viensla.livePos.z);
+//        _posVector.set(Viensla.livePos.x,Viensla.livePos.y, Viensla.livePos.z);
 
         create_caps('vl');
 
@@ -2822,19 +2803,19 @@ var Viensla = {
         playedCaps.__dirtyPosition = true;
 
 
-//        playedCaps.__dirtyPosition = true;
-//        playedCaps.floating = false;
-//
-//        _vector.set( 1, 1, 1 );
-//        _angVector.set( Math.random()*10, Math.random()*10, Math.random()*20);
-//        playedCaps.setAngularFactor( _vector );
-//
-//        playedCaps.setLinearFactor( _vector );
-//        launchVector.set(1,-3, - power * strengh * globalDirection);
-//        playedCaps.setLinearVelocity( launchVector );
-//        playedCaps.setAngularVelocity( _angVector );
-//
-//        playedCaps = null;
+        playedCaps.__dirtyPosition = true;
+        playedCaps.floating = false;
+
+        _vector.set( 1, 1, 1 );
+        _angVector.set( Math.random()*10, Math.random()*10, Math.random()*20);
+        playedCaps.setAngularFactor( _vector );
+
+        playedCaps.setLinearFactor( _vector );
+        launchVector.set(1,-3, - power * strengh * globalDirection);
+        playedCaps.setLinearVelocity( launchVector );
+        playedCaps.setAngularVelocity( _angVector );
+
+        playedCaps = null;
 
     },
 
