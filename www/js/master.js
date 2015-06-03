@@ -24,7 +24,7 @@ var clock = new THREE.Clock(), dir, distance;
 
 var holdingDown = false;
 
-var $capsTypo,$startTypo;
+var $capsTypo,$startTypo, $winTypo, $loseTypo, $perfectTypo;
 
 
 Physijs.scripts.worker = '/js/physijs/physijs_worker.js';
@@ -808,6 +808,19 @@ var Party = {
         $('#black_filter').fadeOut();
 
         Player.generateCaps();
+
+        setTimeout(function(){
+            $('#game-loader .tiny-loader').addClass('fade');
+
+            setTimeout(function(){
+                $('#game-loader').addClass('fade');
+                setTimeout(function(){
+                    $('#game-loader').remove();
+                    animTypo($startTypo);
+
+                }, 500);
+            }, 1000);
+        }, 2000);
     },
     vlplay : function(){
 
@@ -1005,6 +1018,9 @@ function winnerm(){
         $vlpart = $('.vl-part');
         $capsTypo = $('#caps-m');
         $startTypo = $('#start-m');
+        $winTypo = $('#win-m');
+        $loseTypo = $('#lose-m');
+        $perfectTypo = $('#perfect-m');
 
         this.resize();
         this.initWelcome();
@@ -1023,6 +1039,7 @@ function winnerm(){
             this.initCapsSelect();
         }else if(to == 6){
             CAPS.launchGame();
+            this.textoBox.init();
         }
         TweenLite.to($('#site-content'), 0.3, {y : -to*window.innerHeight});
         this.curIndex = to;
@@ -1175,6 +1192,87 @@ function winnerm(){
         else
             $sendCaps.on('click', Game[Game.role].sendPlayerInfo);
 
+    },
+
+    textoBox : {
+        $sdBox : null,
+        $rdBox :null,
+        tm : null,
+        init : function(){
+            this.$sdBox = $('#sd-messages-box');
+            this.$rcBox = $('#rc-messages-box');
+
+            var $rcb = this.$rcBox;
+
+            var sendDelay = 1000;
+
+            this.$sdBox.on('click', 'li', function(){
+                var i = $(this).index();
+                Game.Player.playerMessage(i);
+                Interface.textoBox.$sdBox.addClass('disabled');
+
+                setTimeout(function(){
+                    Interface.textoBox.$sdBox.removeClass('disabled');
+                }, sendDelay);
+            });
+
+            this.tm = new TimelineMax({paused:true});
+
+            this.tm.to($rcb, 0, {width:0, height:0, opacity:0})
+                .to($rcb, 0.5, {width:200, height:3, opacity:1, ease: Elastic.easeOut.config(1, 0.4)}, 0.1)
+                .to($rcb, 0.5, {height:60, ease: Elastic.easeOut.config(1, 0.4)});
+
+            TweenLite.set($rcb,{width:0, height:0, opacity:0})
+
+
+        },
+        showTexto : function(i){
+            var shownTime = 5500;
+            var $rcb = this.$rcBox;
+            var texto = this.$sdBox.find('li').eq(i).html();
+            $rcb.empty().append(texto);
+            $rcb.find('p').lettering();
+            $rcb.find('span').css({opacity:0});
+
+            if(phone) phone.receiveMessage();
+
+            setTimeout(function(){
+                Interface.textoBox.tm.play();
+
+                setTimeout(function(){
+                    var n = 0;
+                    var spanInt = setInterval(function(){
+                        $rcb.find('span').eq(n).css({opacity:1});
+                        n++;
+                        if(n == $rcb.find('span').length){
+                            clearInterval(spanInt);
+                        }
+                    }, 0.4);
+                }, 1000);
+
+
+                setTimeout(function(){
+                    var nbSpan = $rcb.find('span').length-1;
+                    var n = nbSpan;
+
+                    var spanInt = setInterval(function(){
+                        $rcb.find('span').eq(n).css({opacity:0});
+                        n--;
+                        if(n == -1){
+                            clearInterval(spanInt);
+                        }
+                    }, 0.2);
+                    setTimeout(function(){
+                        Interface.textoBox.tm.reverse();
+                        setTimeout(function(){
+                            phone.closeMessage();
+                        }, 800);
+                    }, (nbSpan-1)*20);
+
+                }, shownTime);
+            }, 1000);
+
+        }
     }
 
 };;
@@ -1477,7 +1575,7 @@ function create_table(){
 
     //Add Wall to level
     var phone_t = new THREE.MeshPhongMaterial({
-        map: THREE.ImageUtils.loadTexture('images/phone_face.png')
+        map: THREE.ImageUtils.loadTexture('images/phone/phone_veille.png')
     });
     var transparent_side =  new THREE.MeshPhongMaterial({
         color:0xfcd625
@@ -1502,24 +1600,40 @@ function create_table(){
     phone.castShadow = true;
     phone.receiveShadow = true;
 
-    phoneLight = new THREE.PointLight( 0xffffff, 0, 100 );
-    phoneLight.position.set(0,1,0);
-    lightScreen = new THREE.Mesh(new THREE.BoxGeometry(10,0.1,14), new THREE.MeshBasicMaterial({color: 0xffffff, opacity:0, transparent:true}));
-    phoneLight.add(lightScreen);
+//    phoneLight = new THREE.PointLight( 0xffffff, 0, 100 );
+//    phoneLight.position.set(0,0.5,0);
+//    phoneLight.add(lightScreen);
+
+//    var messageScreen = new THREE.Mesh(new THREE.BoxGeometry(10,0.1,14), new THREE.MeshBasicMaterial({opacity:0, transparent:true}));
+
+    var pictoScreen = new THREE.Mesh(new THREE.BoxGeometry(10,0.1,14), new THREE.MeshBasicMaterial({opacity:0, transparent:true, map: THREE.ImageUtils.loadTexture('images/phone/phone_message.png')}));
+    var whiteScreen = new THREE.Mesh(new THREE.BoxGeometry(10,0.1,14), new THREE.MeshBasicMaterial({opacity:0, transparent:true, map: THREE.ImageUtils.loadTexture('images/phone/phone_white.png')}));
+
+//    messageScreen.add(pictoScreen);
+//    messageScreen.add(whiteScreen);
+    pictoScreen.position.set(0,0.5,0);
+    whiteScreen.position.set(0,0.5,0);
+    phone.add(pictoScreen);
+    phone.add(whiteScreen);
 
     phone.receiveMessage = function(){
         var i = 0;
-        var interval = setInterval(function(){
-            phoneLight.intensity = i%2==0 ? 2 : 0;
-            lightScreen.material.opacity = i%2==0 ? 1 : 0;
+        pictoScreen.material.opacity = 1;
+        phone.interval = setInterval(function(){
+            pictoScreen.material.opacity = i%2 == 0 ? 0 : 1;
+            whiteScreen.material.opacity = i%2 == 0 ? 1 : 0;
             i++;
-            if(i > 6){
-                clearInterval(interval);
+            if(i > 5){
+                clearInterval(phone.interval);
             }
-        }, 1000);
+        }, 800);
     };
 
-    phone.add(phoneLight);
+    phone.closeMessage = function(){
+        clearInterval(phone.interval);
+        pictoScreen.material.opacity = 0;
+        whiteScreen.material.opacity = 0;
+    };
 
     _table.add(phone);
 
@@ -2272,7 +2386,7 @@ initializeParty = function(){
             },
             enemyMessage : function(data){
                 if(data.playerID == Game.Enemy.id){
-                    showTexto(data.im);
+                    Interface.textoBox.showTexto(data.im);
                 }
             }
 
@@ -2928,38 +3042,7 @@ var Viensla = {
 //        }
 //    }
 //);
-;var showTexto;
-
-$(function(){
-    var $sdBox = $('#sd-messages-box');
-    var $rcBox = $('#rc-messages-box');
-    var sendDelay = 1000;
-    var shownTime = 1500;
-
-
-    $sdBox.on('click', 'li', function(){
-       var i = $(this).index();
-       console.log(i);
-       Game.Player.playerMessage(i);
-        $sdBox.addClass('disabled');
-
-        setTimeout(function(){
-            $sdBox.removeClass('disabled');
-        }, sendDelay);
-    });
-
-
-    showTexto = function(i){
-        $rcBox.fadeIn();
-        $rcBox.find('li').eq(i).addClass('sd');
-
-        setTimeout(function(){
-            $rcBox.find('li').eq(i).removeClass('sd');
-            $rcBox.fadeOut();
-        },shownTime);
-
-    }
-});;var Sounds;
+;;var Sounds;
 
 (function ($){
     var path = 'assets/sounds/';
@@ -3013,4 +3096,75 @@ this._target=t,this._tween=o,this._vars=e,_=e.autoRound,i=!1,s=e.suffixMap||a.su
  *
  * @author: Jack Doyle, jack@greensock.com
  **/
-var _gsScope="undefined"!=typeof module&&module.exports&&"undefined"!=typeof global?global:this||window;(_gsScope._gsQueue||(_gsScope._gsQueue=[])).push(function(){"use strict";var t=document.documentElement,e=window,i=function(i,r){var s="x"===r?"Width":"Height",n="scroll"+s,a="client"+s,o=document.body;return i===e||i===t||i===o?Math.max(t[n],o[n])-(e["inner"+s]||t[a]||o[a]):i[n]-i["offset"+s]},r=_gsScope._gsDefine.plugin({propName:"scrollTo",API:2,version:"1.7.5",init:function(t,r,s){return this._wdw=t===e,this._target=t,this._tween=s,"object"!=typeof r&&(r={y:r}),this.vars=r,this._autoKill=r.autoKill!==!1,this.x=this.xPrev=this.getX(),this.y=this.yPrev=this.getY(),null!=r.x?(this._addTween(this,"x",this.x,"max"===r.x?i(t,"x"):r.x,"scrollTo_x",!0),this._overwriteProps.push("scrollTo_x")):this.skipX=!0,null!=r.y?(this._addTween(this,"y",this.y,"max"===r.y?i(t,"y"):r.y,"scrollTo_y",!0),this._overwriteProps.push("scrollTo_y")):this.skipY=!0,!0},set:function(t){this._super.setRatio.call(this,t);var r=this._wdw||!this.skipX?this.getX():this.xPrev,s=this._wdw||!this.skipY?this.getY():this.yPrev,n=s-this.yPrev,a=r-this.xPrev;this._autoKill&&(!this.skipX&&(a>7||-7>a)&&i(this._target,"x")>r&&(this.skipX=!0),!this.skipY&&(n>7||-7>n)&&i(this._target,"y")>s&&(this.skipY=!0),this.skipX&&this.skipY&&(this._tween.kill(),this.vars.onAutoKill&&this.vars.onAutoKill.apply(this.vars.onAutoKillScope||this._tween,this.vars.onAutoKillParams||[]))),this._wdw?e.scrollTo(this.skipX?r:this.x,this.skipY?s:this.y):(this.skipY||(this._target.scrollTop=this.y),this.skipX||(this._target.scrollLeft=this.x)),this.xPrev=this.x,this.yPrev=this.y}}),s=r.prototype;r.max=i,s.getX=function(){return this._wdw?null!=e.pageXOffset?e.pageXOffset:null!=t.scrollLeft?t.scrollLeft:document.body.scrollLeft:this._target.scrollLeft},s.getY=function(){return this._wdw?null!=e.pageYOffset?e.pageYOffset:null!=t.scrollTop?t.scrollTop:document.body.scrollTop:this._target.scrollTop},s._kill=function(t){return t.scrollTo_x&&(this.skipX=!0),t.scrollTo_y&&(this.skipY=!0),this._super._kill.call(this,t)}}),_gsScope._gsDefine&&_gsScope._gsQueue.pop()();
+var _gsScope="undefined"!=typeof module&&module.exports&&"undefined"!=typeof global?global:this||window;(_gsScope._gsQueue||(_gsScope._gsQueue=[])).push(function(){"use strict";var t=document.documentElement,e=window,i=function(i,r){var s="x"===r?"Width":"Height",n="scroll"+s,a="client"+s,o=document.body;return i===e||i===t||i===o?Math.max(t[n],o[n])-(e["inner"+s]||t[a]||o[a]):i[n]-i["offset"+s]},r=_gsScope._gsDefine.plugin({propName:"scrollTo",API:2,version:"1.7.5",init:function(t,r,s){return this._wdw=t===e,this._target=t,this._tween=s,"object"!=typeof r&&(r={y:r}),this.vars=r,this._autoKill=r.autoKill!==!1,this.x=this.xPrev=this.getX(),this.y=this.yPrev=this.getY(),null!=r.x?(this._addTween(this,"x",this.x,"max"===r.x?i(t,"x"):r.x,"scrollTo_x",!0),this._overwriteProps.push("scrollTo_x")):this.skipX=!0,null!=r.y?(this._addTween(this,"y",this.y,"max"===r.y?i(t,"y"):r.y,"scrollTo_y",!0),this._overwriteProps.push("scrollTo_y")):this.skipY=!0,!0},set:function(t){this._super.setRatio.call(this,t);var r=this._wdw||!this.skipX?this.getX():this.xPrev,s=this._wdw||!this.skipY?this.getY():this.yPrev,n=s-this.yPrev,a=r-this.xPrev;this._autoKill&&(!this.skipX&&(a>7||-7>a)&&i(this._target,"x")>r&&(this.skipX=!0),!this.skipY&&(n>7||-7>n)&&i(this._target,"y")>s&&(this.skipY=!0),this.skipX&&this.skipY&&(this._tween.kill(),this.vars.onAutoKill&&this.vars.onAutoKill.apply(this.vars.onAutoKillScope||this._tween,this.vars.onAutoKillParams||[]))),this._wdw?e.scrollTo(this.skipX?r:this.x,this.skipY?s:this.y):(this.skipY||(this._target.scrollTop=this.y),this.skipX||(this._target.scrollLeft=this.x)),this.xPrev=this.x,this.yPrev=this.y}}),s=r.prototype;r.max=i,s.getX=function(){return this._wdw?null!=e.pageXOffset?e.pageXOffset:null!=t.scrollLeft?t.scrollLeft:document.body.scrollLeft:this._target.scrollLeft},s.getY=function(){return this._wdw?null!=e.pageYOffset?e.pageYOffset:null!=t.scrollTop?t.scrollTop:document.body.scrollTop:this._target.scrollTop},s._kill=function(t){return t.scrollTo_x&&(this.skipX=!0),t.scrollTo_y&&(this.skipY=!0),this._super._kill.call(this,t)}}),_gsScope._gsDefine&&_gsScope._gsQueue.pop()();;/*global jQuery */
+/*!
+ * Lettering.JS 0.7.0
+ *
+ * Copyright 2010, Dave Rupert http://daverupert.com
+ * Released under the WTFPL license
+ * http://sam.zoy.org/wtfpl/
+ *
+ * Thanks to Paul Irish - http://paulirish.com - for the feedback.
+ *
+ * Date: Mon Sep 20 17:14:00 2010 -0600
+ */
+(function($){
+    function injector(t, splitter, klass, after) {
+        var text = t.text()
+            , a = text.split(splitter)
+            , inject = '';
+        if (a.length) {
+            $(a).each(function(i, item) {
+                inject += '<span class="'+klass+(i+1)+'" aria-hidden="true">'+item+'</span>'+after;
+            });
+            t.attr('aria-label',text)
+                .empty()
+                .append(inject)
+
+        }
+    }
+
+
+    var methods = {
+        init : function() {
+
+            return this.each(function() {
+                injector($(this), '', 'char', '');
+            });
+
+        },
+
+        words : function() {
+
+            return this.each(function() {
+                injector($(this), ' ', 'word', ' ');
+            });
+
+        },
+
+        lines : function() {
+
+            return this.each(function() {
+                var r = "eefec303079ad17405c889e092e105b0";
+                // Because it's hard to split a <br/> tag consistently across browsers,
+                // (*ahem* IE *ahem*), we replace all <br/> instances with an md5 hash
+                // (of the word "split").  If you're trying to use this plugin on that
+                // md5 hash string, it will fail because you're being ridiculous.
+                injector($(this).children("br").replaceWith(r).end(), r, 'line', '');
+            });
+
+        }
+    };
+
+    $.fn.lettering = function( method ) {
+        // Method calling logic
+        if ( method && methods[method] ) {
+            return methods[ method ].apply( this, [].slice.call( arguments, 1 ));
+        } else if ( method === 'letters' || ! method ) {
+            return methods.init.apply( this, [].slice.call( arguments, 0 ) ); // always pass an array
+        }
+        $.error( 'Method ' +  method + ' does not exist on jQuery.lettering' );
+        return this;
+    };
+
+})(jQuery);
