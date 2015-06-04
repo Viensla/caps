@@ -1,0 +1,183 @@
+#multiplayer{
+  //display: none;
+
+  .sc-content {
+    width: 90%;
+    margin: 0 5%;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .rt-pt, .lf-pt {
+    display: inline-block;
+    vertical-align: top;
+    width: 45%;
+    padding-top: 14px;
+    margin-top: 5%;
+    @include transition(1s);
+
+    .bt-cap{
+      margin: 30px auto;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    p.aleo {
+      margin-top: 40px;
+      font-size: 18px;
+      text-align: center;
+
+    }
+
+    .codes-box {
+      display: table;
+      margin: auto;
+      margin-top: 30px;
+    }
+
+    .box {
+      padding: 15px 19px;
+      background: #dab269;
+      font-size: 16px;
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 4px;
+
+      p {
+        color:#fac366;
+        span {
+          margin-left: 5px;
+          @include neutraUp;
+          color: #FFF;
+        }
+      }
+      input{
+        border:none;
+        outline: none;
+        @include neutraUp;
+        background: none;
+        font-size: 16px;
+        text-transform: uppercase;
+        width: 65px;
+        color: #fff;
+        margin-left: 5px;
+        &::-webkit-input-placeholder {
+          color: #fff;
+        }
+        &:-moz-placeholder {
+          color: #fff;
+        }
+        &::-moz-placeholder {
+          color: #fff;
+        }
+        &:-ms-input-placeholder {
+          color: #fff;
+        }
+        color: #fff;
+      }
+    }
+  }
+
+  #host-codes{
+    .box{
+      @include transition(.3s);
+      @include transform(translateY(10px));
+      @include opacity(0);
+      &.lk{
+        @include transition-delay(.07s);
+      }
+    }
+  }
+
+  .separator {
+    display: inline-block;
+    vertical-align: top;
+    width: 1px;
+    height: 400px;
+    margin: 0 4%;
+    background: #FFF;
+    margin-top: 5%;
+    @include transition(.3s);
+
+  }
+  .share-pt {
+    display: table;
+    margin: auto;
+    margin-top: 30px;
+    @include transition(.3s);
+    @include transition-delay(.14s);
+    @include transform(translateY(10px));
+    @include opacity(0);
+
+    p, a {
+      margin-top: 0px;
+      display: inline-block;
+      vertical-align: center;
+      color: #000;
+    }
+  }
+
+  #start-party{
+    @include transition(.3s);
+    @include transition-delay(.14s);
+    @include transform(translateY(10px));
+    @include opacity(0);
+  }
+  .bt.wh {
+    display: table;
+    margin: 30px auto 0 auto;
+    p {
+      &:before {
+        width: 22px;
+        height: 22px;
+        background: url('../images/pictos/icon_play.png');
+        -webkit-background-size: 22px;
+        background-size: 22px;
+        content: '';
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 12px;
+      }
+    }
+  }
+
+  #host-part.rdy{
+    #host-party{
+      @include transform(scale(0));
+      @include opacity(0);
+      @include transition(.3s);
+    }
+    #host-codes{
+      .box{
+        @include transform(translateY(-80px));
+        @include opacity(1);
+      }
+      .share-pt{
+        @include transform(translateY(-80px));
+        @include opacity(1);
+      }
+    }
+    .bt.wh{
+      @include transform(translateY(-80px));
+      @include opacity(1);
+    }
+  }
+
+
+  &.hosting{
+    .lf-pt{
+      @include transform(translateX(100%));
+      @include opacity(0);
+    }
+    .rt-pt{
+      @include transform(translateX(60%));
+    }
+    .separator{
+      height: 0;
+    }
+  }
+}
