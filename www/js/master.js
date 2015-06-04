@@ -580,8 +580,7 @@ function setPower(){
 
             $('.powerbar .bar').height(power+'%');
         }
-    }, 20);
-
+    }, 10 + Viensla.lives/10 );
 }
 
 
@@ -785,7 +784,7 @@ var shadowColors = {
 var Party = {
     isPlaying : false,
     capsPerTurn : 1,
-    lives : 60,
+    lives : 10,
     create : function(){
         Viensla.generateCaps();
 
@@ -842,8 +841,12 @@ var Party = {
             Player.isPlaying = true;
         }
 
-        animTypo($startTypo);
         Party.setTurn();
+
+        TweenMax.to($('#reset-party-c'), 1, {opacity:0, onComplete:function(){
+            TweenMax.set($('#reset-party-c'),{display:'none'});
+            animTypo($startTypo);
+        }});
 
     },
     setTurn:function(){
@@ -936,7 +939,11 @@ var Party = {
 
             Game.Player.playerCaps();
 
-            this.animCaps();
+            if(Viensla.lives==0 && Player.lives==Party.lives){
+                animTypo($perfectTypo);
+            }else{
+                this.animCaps();
+            }
 
             setTimeout(function(){
                 Viensla.generateCaps();
@@ -971,14 +978,19 @@ var Party = {
             if(pctPlLife <= 0 || pctVlLife <= 0){
                 Party.isPlaying = false;
 
+
                 setTimeout(function(){
+
                     if(pctPlLife <= 0){
                         animTypo($loseTypo, 800);
-                        $('#reset-party-c h3').text('Une petite revanche ?');
+                        $('#reset-party-c').removeClass().addClass('looser').find('h3').text('Une petite revanche ?');
                     }else if(pctVlLife <= 0){
                         animTypo($winTypo, 800);
-                        $('#reset-party-c h3').text("On va pas s'arrêter en si bon chemin !");
+                        $('#reset-party-c').removeClass().addClass('winner').find('h3').text("On va pas s'arrêter en si bon chemin !");
                     }
+
+                    TweenMax.to($('#reset-party-c'), 1, {opacity:1, display:'block', delay:3});
+
                 }, 1200);
             }
         }
@@ -1050,8 +1062,11 @@ function winnerm(){
 
         this.resize();
         this.initWelcome();
+        this.initResetParty();
 
         window.addEventListener( 'resize', Interface.resize, false );
+
+
     },
     resize : function(){
         $('section.sc').css({height: window.innerHeight, lineHeight: window.innerHeight+"px"});
@@ -1219,7 +1234,6 @@ function winnerm(){
             $sendCaps.on('click', Game[Game.role].sendPlayerInfo);
 
     },
-
     textoBox : {
         $sdBox : null,
         $rdBox :null,
@@ -1297,8 +1311,18 @@ function winnerm(){
 
                 }, shownTime);
             }, 1000);
-
         }
+    },
+    initResetParty : function(){
+        $('#bt-reset-party').click(function(){
+            if(CAPS.solo){
+                Party.resetParty();
+
+
+            }else{
+
+            }
+        });
     }
 
 };;
