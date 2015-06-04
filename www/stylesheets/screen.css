@@ -5353,6 +5353,10 @@ header .back-bt p:before {
   right: 0;
   bottom: 0;
   background: #000;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
   -webkit-mask: url("../images/mask/blc_mask.png") no-repeat center center;
   -moz-mask: url("../images/mask/blc_mask.png") no-repeat center center;
   -ms-mask: url("../images/mask/blc_mask.png") no-repeat center center;
@@ -5364,7 +5368,31 @@ header .back-bt p:before {
   -o-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
-/* line 198, ../../dev/sass/templates/_players_options.scss */
+/* line 193, ../../dev/sass/templates/_players_options.scss */
+#pickcaps #beer-bg-slider .blc-msk.ptp {
+  background: #291909;
+}
+/* line 196, ../../dev/sass/templates/_players_options.scss */
+#pickcaps #beer-bg-slider .blc-msk.lef {
+  background: #1a1606;
+}
+/* line 199, ../../dev/sass/templates/_players_options.scss */
+#pickcaps #beer-bg-slider .blc-msk.chouffe {
+  background: #0f1d0d;
+}
+/* line 202, ../../dev/sass/templates/_players_options.scss */
+#pickcaps #beer-bg-slider .blc-msk.pelle {
+  background: #2b0f0f;
+}
+/* line 205, ../../dev/sass/templates/_players_options.scss */
+#pickcaps #beer-bg-slider .blc-msk.chimey {
+  background: #0a1425;
+}
+/* line 208, ../../dev/sass/templates/_players_options.scss */
+#pickcaps #beer-bg-slider .blc-msk.foster {
+  background: #131825;
+}
+/* line 219, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li {
   position: absolute;
   top: 0;
@@ -5384,7 +5412,7 @@ header .back-bt p:before {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 211, ../../dev/sass/templates/_players_options.scss */
+/* line 232, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li .motifs {
   width: 100%;
   height: 100%;
@@ -5394,67 +5422,67 @@ header .back-bt p:before {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
-/* line 219, ../../dev/sass/templates/_players_options.scss */
+/* line 240, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.act {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 232, ../../dev/sass/templates/_players_options.scss */
+/* line 253, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.na {
   -moz-transition: 0s;
   -o-transition: 0s;
   -webkit-transition: 0s;
   transition: 0s;
 }
-/* line 235, ../../dev/sass/templates/_players_options.scss */
+/* line 256, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.ptp {
   background: #40270f;
 }
-/* line 237, ../../dev/sass/templates/_players_options.scss */
+/* line 258, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.ptp .motifs {
   background-image: url("../images/motifs/ptp-motifs.png");
 }
-/* line 241, ../../dev/sass/templates/_players_options.scss */
+/* line 262, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.lef {
   background: #2d2508;
 }
-/* line 243, ../../dev/sass/templates/_players_options.scss */
+/* line 264, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.lef .motifs {
   background-image: url("../images/motifs/lef-motifs.png");
 }
-/* line 247, ../../dev/sass/templates/_players_options.scss */
+/* line 268, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.chouffe {
   background: #173212;
 }
-/* line 249, ../../dev/sass/templates/_players_options.scss */
+/* line 270, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.chouffe .motifs {
   background-image: url("../images/motifs/shouffe-motifs.png");
 }
-/* line 253, ../../dev/sass/templates/_players_options.scss */
+/* line 274, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.pelle {
   background: #3a1515;
 }
-/* line 255, ../../dev/sass/templates/_players_options.scss */
+/* line 276, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.pelle .motifs {
   background-image: url("../images/motifs/pelle-motifs.png");
 }
-/* line 259, ../../dev/sass/templates/_players_options.scss */
+/* line 280, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.chimey {
   background: #10264d;
 }
-/* line 261, ../../dev/sass/templates/_players_options.scss */
+/* line 282, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.chimey .motifs {
   background-image: url("../images/motifs/chimais-motifs.png");
 }
-/* line 265, ../../dev/sass/templates/_players_options.scss */
+/* line 286, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.foster {
   background: #172754;
 }
-/* line 267, ../../dev/sass/templates/_players_options.scss */
+/* line 288, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.foster .motifs {
   background-image: url("../images/motifs/faustaire-motifs.png");
 }
-/* line 274, ../../dev/sass/templates/_players_options.scss */
+/* line 295, ../../dev/sass/templates/_players_options.scss */
 #pickcaps .bt.wh {
   display: table;
   margin: 0 auto;
@@ -5463,25 +5491,25 @@ header .back-bt p:before {
   z-index: 50;
 }
 
-/* line 288, ../../dev/sass/templates/_players_options.scss */
+/* line 309, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content {
   width: 100%;
 }
-/* line 290, ../../dev/sass/templates/_players_options.scss */
+/* line 311, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content h3, #pickname .sc-content h4, #pickname .sc-content h5 {
   text-align: center;
 }
-/* line 295, ../../dev/sass/templates/_players_options.scss */
+/* line 316, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .title-c h3 {
   font-size: 25px;
   margin-bottom: 5px;
 }
-/* line 299, ../../dev/sass/templates/_players_options.scss */
+/* line 320, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .title-c h4 {
   color: #000;
   font-size: 25px;
 }
-/* line 303, ../../dev/sass/templates/_players_options.scss */
+/* line 324, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .title-c hr {
   width: 106px;
   height: 4px;
@@ -5489,7 +5517,7 @@ header .back-bt p:before {
   border: 0px;
   margin: 20px auto 74px;
 }
-/* line 314, ../../dev/sass/templates/_players_options.scss */
+/* line 335, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name {
   background: #dab269;
   color: #fff;
@@ -5502,34 +5530,34 @@ header .back-bt p:before {
   margin: 0 auto;
   font-family: "aleobold";
 }
-/* line 325, ../../dev/sass/templates/_players_options.scss */
+/* line 346, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name::-webkit-input-placeholder {
   color: #fff;
 }
-/* line 328, ../../dev/sass/templates/_players_options.scss */
+/* line 349, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name:-moz-placeholder {
   color: #fff;
 }
-/* line 331, ../../dev/sass/templates/_players_options.scss */
+/* line 352, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name::-moz-placeholder {
   color: #fff;
 }
-/* line 334, ../../dev/sass/templates/_players_options.scss */
+/* line 355, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name:-ms-input-placeholder {
   color: #fff;
 }
-/* line 338, ../../dev/sass/templates/_players_options.scss */
+/* line 359, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator {
   margin: 75px auto 50px;
   width: 380px;
   height: 120px;
   position: relative;
 }
-/* line 343, ../../dev/sass/templates/_players_options.scss */
+/* line 364, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator h5 {
   margin-bottom: 43px;
 }
-/* line 346, ../../dev/sass/templates/_players_options.scss */
+/* line 367, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator .mention {
   color: #000;
   font-size: 14px;
@@ -5540,7 +5568,7 @@ header .back-bt p:before {
   position: absolute;
   float: left;
 }
-/* line 355, ../../dev/sass/templates/_players_options.scss */
+/* line 376, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator .mention:after {
   content: " ";
   display: block;
@@ -5552,13 +5580,13 @@ header .back-bt p:before {
   -webkit-background-size: 100%;
   background-size: 100%;
 }
-/* line 368, ../../dev/sass/templates/_players_options.scss */
+/* line 389, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator .bt-cap {
   position: absolute;
   right: 5px;
   top: 20px;
 }
-/* line 375, ../../dev/sass/templates/_players_options.scss */
+/* line 396, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc .bt.wh {
   display: table;
   margin: 0 auto;

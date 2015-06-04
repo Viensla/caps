@@ -792,7 +792,7 @@ var shadowColors = {
 var Party = {
     isPlaying : false,
     capsPerTurn : 1,
-    lives : 10,
+    lives : 60,
     create : function(){
         Viensla.generateCaps();
 
@@ -1199,7 +1199,9 @@ var Interface = {
             $navBtm = $slideShow.find('.nav-bottle li'),
             $arr = $slideShow.find('.arw'),
             curSlide = 0,
-            $sendCaps = $('#bt-send-caps');
+            $sendCaps = $('#bt-send-caps'),
+            $bgMask = $('#beer-bg-slider .blc-msk'),
+            colorName = ['ptp', 'chouffe', 'pelle', 'foster', 'lef', 'chimey'];
 
         $navBtm.click(function(){
             var i = $(this).index();
@@ -1242,6 +1244,8 @@ var Interface = {
             $navBtm.eq(i).addClass('act');
             $bgSlides.removeClass('act');
             $bgSlides.eq(i).addClass('act');
+
+            $bgMask.removeClass('ptp chouffe pelle foster lef chimey').addClass(colorName[i]);
         }
 
         if(CAPS.solo)
