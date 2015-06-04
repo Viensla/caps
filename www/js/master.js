@@ -784,7 +784,7 @@ var shadowColors = {
 var Party = {
     isPlaying : false,
     capsPerTurn : 1,
-    lives : 10,
+    lives : 60,
     create : function(){
         Viensla.generateCaps();
 
@@ -2589,6 +2589,12 @@ initializeParty = function(){
                     gameId: Game.gameId,
                     playerID:Game.Player.socketId,
                     im:i
+                });
+            },
+            playerReset : function(){
+                IO.socket.emit('playerReset', {
+                    gameId: Game.gameId,
+                    playerID:Game.Player.socketId
                 });
             }
         },

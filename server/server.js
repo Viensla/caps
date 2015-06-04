@@ -21,6 +21,7 @@ exports.initGame = function(sio, s){
     socket.on('playerShoot', playerShoot);
     socket.on('playerCaps', playerCaps);
     socket.on('playerMessage', playerMessage);
+    socket.on('playerReset', playerReset);
 
     socket.on('playerChooseBottle', playerChooseBottle);
 };
@@ -133,6 +134,11 @@ function playerCaps(data){
 }
 
 function playerMessage(data){
+    console.log(data.im);
+    io.sockets.in(data.gameId).emit('enemyMessage', data);
+}
+
+function playerReset(data){
     console.log(data.im);
     io.sockets.in(data.gameId).emit('enemyMessage', data);
 }
