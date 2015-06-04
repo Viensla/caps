@@ -684,7 +684,6 @@ initEventHandling = (function() {
 
         Player.isPlaying = false;
         Viensla.isPlaying = true;
-        Party.setTurn();
 
         Party.resetStocks();
 
@@ -796,13 +795,8 @@ var Party = {
 
         this.resetStocks();
 
-        if(!CAPS.solo){
-            Viensla.isPlaying = Game.role == 'Player';
-            Player.isPlaying = Game.role == 'Host';
-        }else{
-            Viensla.isPlaying = false;
-            Player.isPlaying = true;
-        }
+        Viensla.isPlaying = false;
+        Player.isPlaying = true;
 
         $vlpart.fadeIn(function(){
             Party.setLife();
@@ -810,57 +804,28 @@ var Party = {
 
         $plpart.fadeIn();
 
+        $('#start-screen').fadeOut();
+        $('#black_filter').fadeOut();
+
         Player.generateCaps();
 
         setTimeout(function(){
             $('#game-loader .tiny-loader').addClass('fade');
+
             setTimeout(function(){
                 $('#game-loader').addClass('fade');
                 setTimeout(function(){
                     $('#game-loader').remove();
                     animTypo($startTypo);
-                    Party.setTurn();
+
                 }, 500);
             }, 1000);
         }, 2000);
     },
-
-    resetParty: function(){
-        Viensla.score = Player.score = Viensla.launched = Player.launched = 0;
-        Viensla.lives = Player.lives = Party.lives;
-        Player.drunked = 1;
-
-        Party.isPlaying = true;
-
-        Party.setLife();
-
-        if(!CAPS.solo){
-            Viensla.isPlaying = Game.role == 'Player';
-            Player.isPlaying = Game.role == 'Host';
-        }else{
-            Viensla.isPlaying = false;
-            Player.isPlaying = true;
-        }
-
-        animTypo($startTypo);
-        Party.setTurn();
-
-    },
-    setTurn:function(){
-        if(Player.isPlaying){
-            $('#versus-bar #cursor').removeClass().addClass('lf');
-            TweenMax.to($('#you-turn'), 1.5, {x:40, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:1.8});
-            TweenMax.to($('#you-turn'), 1, {x:-170, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:4.5});
-        }else {
-            $('#versus-bar #cursor').removeClass().addClass('rg');
-        }
-    },
-
     vlplay : function(){
 
         if(this.isPlaying && CAPS.solo){
             if(Viensla.launched < Party.capsPerTurn && !Player.isPlaying){
-
 
                 $vlpart.find('.capsstock span').eq(Viensla.launched).removeClass().addClass('animated zoomOut');
 
@@ -873,18 +838,19 @@ var Party = {
                 Player.isPlaying = true;
                 Player.launched = 0;
                 Viensla.isPlaying = false;
-
-
-                Party.setTurn();
                 this.resetStocks();
+                $('#turn-m p').text('Your turn!');
                 turnm();
 
             }else{
                 console.log('Viens la no more caps !');
             }
         }
-    },
 
+
+
+
+    },
     plplay : function(){
         if(this.isPlaying){
 
@@ -938,6 +904,12 @@ var Party = {
 
             this.animCaps();
 
+//            if(Player.launched < Party.capsPerTurn){
+//                setTimeout(function(){
+//                    $('#turn-m p').text('Vienslà\'s turn!');
+//                    turnm();
+//                },1000);
+//            }
             setTimeout(function(){
                 Viensla.generateCaps();
             }, 2000);
@@ -950,9 +922,14 @@ var Party = {
     resetStocks : function(){
         if(this.isPlaying){
             console.log('stock reseted');
+
             $('.capsstock span.zoomOut').removeClass('zoomOut').addClass('zoomIn');
+
             Viensla.launched = 0;
+
             Player.launched = 0;
+
+
         }
 
         if(Player.drunked > 11){
@@ -970,22 +947,24 @@ var Party = {
 
             if(pctPlLife <= 0 || pctVlLife <= 0){
                 Party.isPlaying = false;
+                console.log('PARTY OVER');
 
-                setTimeout(function(){
-                    if(pctPlLife <= 0){
-                        animTypo($loseTypo, 800);
-                        $('#reset-party-c h3').text('Une petite revanche ?');
-                    }else if(pctVlLife <= 0){
-                        animTypo($winTypo, 800);
-                        $('#reset-party-c h3').text("On va pas s'arrêter en si bon chemin !");
-                    }
-                }, 1200);
+                if(pctPlLife <= 0){
+                    $('#winner-m p').text('Vienslà wins !')
+                }else if(pctVlLife <= 0){
+                    $('#winner-m p').text('You win !')
+                }
+
+                winnerm();
+
+                $('#black_filter').fadeIn();
+                $('#start-screen').fadeIn();
             }
         }
     },
     animCaps : function(){
         animTypo($capsTypo);
-        console.log('anim caps');
+        console.log('anim caps')
         if(!Sounds.mute) Sounds.pschit2.play();
     }
 }
@@ -997,13 +976,8 @@ var animend ='webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend an
 function startm(){
     animTypo($startTypo);
 }
-function animTypo($el, pauseDelay){
-    if(typeof pauseDelay == 'undefined')
-        pauseDelay = 300;
-
+function animTypo($el){
     var delay = 400;
-
-
 
     $el.attr('class', 'capsIn1');
     setTimeout(function(){
@@ -1013,7 +987,7 @@ function animTypo($el, pauseDelay){
             setTimeout(function(){
                 $el.attr('class', '');
             },delay);
-        },delay+pauseDelay);
+        },delay+300);
     },delay);
 }
 function turnm(){
@@ -2923,7 +2897,6 @@ var Viensla = {
         setTimeout(function(){
             Viensla.isPlaying = false;
             Player.isPlaying = true;
-            Party.setTurn();
         }, 500);
 
 

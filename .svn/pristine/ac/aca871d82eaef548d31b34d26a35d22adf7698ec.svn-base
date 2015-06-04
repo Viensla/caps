@@ -24,12 +24,12 @@
     <div class="sc-content">
     <div id="caps-game">
 
+        <div class="powerbar"><div class="bar"></div></div>
 
         <div id="header">
 
             <div id="versus-bar">
                 <div class="line"></div>
-                <div id="cursor" class="lf"></div>
                 <img src="images/pictos/versus.png" alt=""/>
                 <div class="los pl"></div>
                 <div class="los vl"></div>
@@ -77,27 +77,19 @@
             </div>
         </div>
 
+
+        <div id="caps-m"></div>
+        <div id="start-m"></div>
+        <div id="win-m"></div>
+        <div id="lose-m"></div>
+        <div id="perfect-m"></div>
+
+
         <div id="viewport"></div>
 
-        <div class="powerbar"><div class="bar"></div></div>
 
-        <div class="hand-typo">
-            <div id="caps-m"></div>
-            <div id="start-m"></div>
-            <div id="win-m"></div>
-            <div id="lose-m"></div>
-            <div id="perfect-m"></div>
 
-            <div id="you-turn"></div>
-        </div>
 
-        <div id="reset-party-c">
-            <h3>Une petite revanche ?</h3>
-
-            <div class="bt bt-cap green" id="bt-generate-name">
-                <p>C'est reparti!</p>
-            </div>
-        </div>
 
         <div id="txto-sd">
             <div class="bt wh" id="bt-texto">
