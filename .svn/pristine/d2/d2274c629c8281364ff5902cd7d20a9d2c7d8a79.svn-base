@@ -3428,13 +3428,6 @@ section.sc .sc-content h2 {
   height: 104px;
 }
 /* line 159, ../../dev/sass/_commons.scss */
-.bt-cap:hover:after {
-  -moz-transform: rotate(380deg);
-  -ms-transform: rotate(380deg);
-  -webkit-transform: rotate(380deg);
-  transform: rotate(380deg);
-}
-/* line 163, ../../dev/sass/_commons.scss */
 .bt-cap p {
   color: #fff;
   font-size: 12px;
@@ -3443,22 +3436,11 @@ section.sc .sc-content h2 {
   font-family: "neutra";
   text-transform: uppercase;
 }
-/* line 170, ../../dev/sass/_commons.scss */
-.bt-cap:after {
-  content: " ";
-  position: absolute;
-  width: 104px;
-  height: 104px;
+/* line 167, ../../dev/sass/_commons.scss */
+.bt-cap.green {
   background-image: url("../images/pictos/cap_bt_green.png");
   -webkit-background-size: 104px;
   background-size: 104px;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  -moz-transition: 0.3s;
-  -o-transition: 0.3s;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
 }
 
 /* line 1, ../../dev/sass/templates/_header.scss */
@@ -5609,7 +5591,7 @@ header .bt {
 }
 /* line 370, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator .mention {
-  color: #89744E;
+  color: #a98e5e;
   font-size: 14px;
   font-family: "neutra";
   text-transform: uppercase;

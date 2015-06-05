@@ -1,0 +1,429 @@
+var socket = io.connect();
+var canvas, ctx;
+var Game;
+var $plpart, $vlpart;
+var CreateMutliplayerParty;
+
+initializeParty = function(){
+
+    var IO = {
+
+        init: function() {
+            IO.socket = socket;
+            IO.bindEvents();
+        },
+
+        bindEvents : function() {
+            IO.socket.on('connected', IO.onConnection);
+            IO.socket.on('newGameCreated', IO.onNewGameCreated );
+            IO.socket.on('playerJoinedRoom', IO.playerJoinedRoom );
+            IO.socket.on('createNewPlayer', IO.createNewPlayer);
+            IO.socket.on('startParty', IO.onStartParty);
+            IO.socket.on('hostReady', Game.Player.hostReady);
+
+            IO.socket.on('playerUpdateMove', Game.Host.playerUpdateMove);
+            IO.socket.on('playerUpdateLaunch', Game.Host.playerUpdateLaunch);
+            IO.socket.on('getEnemyInfo', Game.Host.showEnemy);
+            IO.socket.on('enemyChooseBottle', Game.Host.enemyChooseBottle);
+
+            IO.socket.on('enemyCaps', Game.Host.enemyCaps);
+            IO.socket.on('enemyMessage', Game.Host.enemyMessage);
+
+            IO.socket.on('playerAskReset', Game.Host.playerAskReset);
+
+            IO.socket.on('getHostInfo', Game.Player.getHostInfo);
+            //Display errors
+            IO.socket.on('error', IO.error );
+        },
+
+
+        onConnection : function(data) {
+            Game.socketId = IO.socket.socket.sessionid;
+            console.log(data.message);
+        },
+
+        onNewGameCreated : function(data){
+            Game.Host.gameInit(data);
+        },
+
+        playerJoinedRoom : function(data) {
+            Game[Game.role].updateWaitingScreen(data);
+        },
+
+        createNewPlayer : function(data){
+//            console.log(data);
+        },
+
+        onStartParty: function(data){
+            Game[Game.role].showPartyScreen(data);
+        },
+
+        error : function(data) {
+            alert(data.message);
+        }
+    };
+
+    Game = {
+        gameId : 0,
+        role : '',
+        socketId : '',
+        partyOn: false,
+        nbPlayers: 0,
+        hostReady: false,
+        init : function(){
+            Game.cacheScreens();
+            Game.bindEvents();
+            Game.showIntroTpl();
+        },
+
+        bindEvents: function () {
+            // Host
+//            Game.$doc.on('click', '#btnCreateGame', Game.Host.onCreateClick);
+//            Game.$doc.on('click', '#btnStartParty',Game.Host.onStartPartyClick);
+
+            // Player
+//            Game.$doc.on('click', '#btnJoinGame', Game.Player.onJoinClick);
+//            Game.$doc.on('click', '#btnStart',Game.Player.onPlayerStartClick);
+
+        },
+
+        cacheScreens : function(){
+            Game.$doc = $(document);
+
+            // Templates
+            Game.$area = $('#game-area');
+            Game.$tplIntroScreen = $('#intro-screen-template').html();
+            Game.$tplNewGame = $('#new-game-screen-template').html();
+            Game.$tplJoinGame = $('#join-game-template').html();
+            Game.$tplGamerScreen = $('#gamer-screen-template').html();
+            Game.$tplPartyScreen = $('#party-screen-template').html();
+        },
+        showIntroTpl : function(){
+//            Game.$area.html(Game.$tplIntroScreen);
+//            console.log('Intro screen displayed');
+        },
+
+
+
+
+        // HOST -------------------------------------------------------------------------------------------------------------------
+
+        Host : {
+            players : [],
+            numPlayersInRoom : 0,
+            resetPlayer : 0,
+            onCreateClick: function () {
+                console.log('Clicked "Create A Game"');
+                IO.socket.emit('hostCreateNewGame');
+            },
+
+            gameInit: function (data) {
+                Game.gameId = data.gameId;
+                Game.socketId = data.socketId;
+                Game.Player.socketId = data.socketId;
+
+                Game.role = 'Host';
+                Game.Host.numPlayersInRoom = 0;
+                Game.Host.displayNewGameScreen();
+                console.log("Game started with ID: " + Game.gameId + ' by host: ' + Game.socketId);
+            },
+
+            displayNewGameScreen : function() {
+                // Fill the game screen
+//                Game.$area.html(Game.$tplNewGame);
+
+                // Show the gameId on screen
+                $('#room-code').text(Game.gameId);
+
+                // Display the URL on screen
+                $('#room-code-lk').text(window.location.href+'#'+Game.gameId);
+                $('.wait-section .wt-party-code').addClass('act').find('span').text(Game.gameId);
+
+                $('#host-part').addClass('rdy');
+
+                $('#multiplayer').addClass('hosting');
+//                Game.$area.append(Game.$tplJoinGame);
+//                $('#inputGameId').attr('value',Game.gameId).prop('type', 'hidden');
+            },
+
+            updateWaitingScreen: function(data) {
+                // Update host screen
+                $('#playersWaiting').append('<p>Player ' + data.playerName + ' joined the game.</p>');
+                // Store the new player's data on the Host.
+                Game.Host.players.push(data);
+
+                // Increment the number of players in the room
+                Game.Host.numPlayersInRoom += 1;
+
+                Game.hostReady = true;
+
+                if (Game.Host.numPlayersInRoom > 1) {
+
+                    if(Interface.curIndex < 3){
+                        Interface.navigate(3);
+                    }
+                    console.log('hostReady');
+                    IO.socket.emit('hostRoomReady', {gameId : Game.gameId, hostReady: Game.hostReady});
+//                    IO.socket.emit('playerJoinGame', {gameId : Game.gameId, hostReady: Game.hostReady, socketId:null});
+
+                }
+            },
+
+            onStartPartyClick: function(){
+                IO.socket.emit('hostStartParty', {gameId : Game.gameId, socketId: Game.Player.socketId,  hostPlayer : Game.Host.players});
+            },
+            showPartyScreen: function(){
+//                var i = 0;
+
+//                Game.partyOn = true;
+//                CAPS.launchGame();
+
+//                IO.socket.emit('hostSendInfo', {gameId : Game.gameId, name : Game.Player.name, playerID:Game.socketId});
+            },
+            sendPlayerInfo : function(){
+                Game.Player.name = $('#input-player-name').val() || 'Anonymous';
+                var data = {
+                    gameId : Game.gameId,
+                    name : Game.Player.name,
+                    caps : Game.Player.caps,
+                    playerID:Game.socketId
+                };
+                IO.socket.emit('hostSendInfo', data);
+
+                Game.Player.ready = true;
+
+                $('.wait-section .wt-party-code').removeClass('act');
+
+                if(Game.Enemy.ready)
+                    Interface.navigate(6);
+                else
+                    Interface.navigate(5);
+            },
+            showEnemy:function(data){
+                if(Game.role == 'Host' && Game.Player.socketId != data.playerID){
+                    Game.Enemy.name = data.name;
+                    Game.Enemy.id = data.playerID;
+//                    $plpart.find('h3').text(Game.Player.name);
+//                    $vlpart.find('h3').text(Game.Enemy.name);
+
+                }
+            },
+
+            //GAMING
+
+            playerUpdateMove:function(data){
+                if(data.playerID == Game.Enemy.id){
+                    Viensla.livePos.x = -data.pos.x;
+                    Viensla.livePos.y = data.pos.y;
+                    Viensla.livePos.z = data.pos.z;
+                    Viensla.liveVector = new THREE.Vector3(Viensla.livePos.x,Viensla.livePos.y, Viensla.livePos.z);
+                }
+            },
+
+            playerUpdateLaunch:function(data){
+                if(data.playerID == Game.Enemy.id){
+                    console.log(data.shot);
+                    Viensla.livePos.x = -data.shot.x;
+                    Viensla.livePos.y = data.shot.y;
+                    Viensla.livePos.z = data.shot.z;
+                    Viensla.liveVector = new THREE.Vector3(Viensla.livePos.x,Viensla.livePos.y, Viensla.livePos.z);
+                    Viensla.shootCaps(data.shot);
+                }
+            },
+            enemyChooseBottle : function(data){
+                if(data.playerID == Game.Enemy.id){
+                    Viensla.changeBottle(data.bottle);
+                }
+            },
+            enemyCaps : function(data){
+                if(data.playerID == Game.Enemy.id){
+                    Player.drink();
+                }
+            },
+            enemyMessage : function(data){
+                if(data.playerID == Game.Enemy.id){
+                    Interface.textoBox.showTexto(data.im);
+                }
+            },
+            playerAskReset: function(data){
+                Game.Host.resetPlayer++;
+
+
+                if(Game.Host.resetPlayer > 1){
+                    Game.Host.resetPlayer = 0;
+                    Party.resetParty();
+                }else{
+                    if(data.playerID == Game.Enemy.id)
+                        TweenMax.to($('#reset-party-c h4'), 0.4, {scale:1, opacity:1, height:30, lineHeight:'30px'});
+                }
+            }
+        },
+        // PlAYERS -------------------------------------------------------------------------------------------------------------------
+
+        Player : {
+            hostSocketId: '',
+            name: '',
+            socketId : '',
+            caps : 'ptp',
+            ready:false,
+            onJoinClick: function () {
+                // Display the Join Game HTML on the player's screen.
+                Game.$area.html(Game.$tplJoinGame);
+            },
+            onPlayerStartClick: function() {
+                // collect data to send to the server
+                var data = {
+                    gameId : Game.role == 'Host' ? Game.gameId : ($('#join-code').val()),
+                    playerName : Game.role == 'Host' ? 'Host' : 'Player',
+                    x: 0,
+                    y: 0
+                };
+
+                Interface.hdr.hideBt();
+                CAPS.solo = false;
+
+                // Set the appropriate properties for the current player.
+                if(Game.role == 'Host'){
+                    if(Game.Host.numPlayersInRoom == 1) {
+                        Interface.navigate(3);
+                    }else{
+                        Interface.navigate(2);
+                    }
+                }else{
+                    Game.role = 'Player';
+                }
+
+                IO.socket.emit('playerJoinGame', data);
+
+//                Game.Player.name = data.playerName;
+
+            },
+
+            updateWaitingScreen : function(data) {
+                console.log(data);
+
+                if(IO.socket.socket.sessionid === data.socketId){
+                    Game.role = 'Player';
+                    Game.gameId = data.gameId;
+                    Game.Player.socketId = data.socketId;
+                    $('#playerWaitingMessage').text('Joined Game ' + data.gameId + '. Please wait for game to begin.');
+
+                    if(data.hostReady && Interface.curIndex < 3){
+                        Interface.navigate(3);
+                    }else{
+                        Interface.navigate(2);
+                    }
+                }else if(data.hostReady && Interface.curIndex < 3){
+                    Interface.navigate(3);
+                }
+
+            },
+            hostReady : function(data){
+                if(IO.socket.socket.sessionid != data.socketId){
+                    Game.Player.updateWaitingScreen({hostReady: true, socketId : null});
+                }
+            },
+            showPartyScreen: function(data){
+
+//                console.log(data);
+//
+//                var i = 0;
+//                Game.$area.html(Game.$tplPartyScreen);
+//                Game.partyOn = true;
+//                Game.Host.players = data.hostPlayer;
+//                Game.$area.html($('#caps-game'));
+//
+//                CAPS.launchGame();
+
+            },
+            getHostInfo:function(data){
+                if(Game.Player.socketId != data.playerID){
+                    Game.Enemy.name = data.name;
+                    Game.Enemy.id = data.playerID;
+                    Game.Enemy.caps = data.caps;
+
+                    Game.Enemy.ready = true;
+
+                    console.log('get host info !');
+                    console.log('player : '+Game.Player.name);
+                    console.log('enemy : '+Game.Enemy.name);
+                    console.log('caps enemy: '+Game.Enemy.caps);
+
+                    if(Game.Player.ready)
+                        Interface.navigate(6);
+
+                }
+            },
+
+            sendPlayerInfo : function(){
+                var data = {
+                    gameId : Game.gameId,
+                    name : Game.Player.name,
+                    caps : Game.Player.caps,
+                    playerID:Game.Player.socketId
+                };
+
+                IO.socket.emit('hostSendInfo', data);
+
+                Game.Player.ready = true;
+                
+                if(Game.Enemy.ready)
+                    Interface.navigate(6);
+                else
+                    Interface.navigate(5);
+            },
+
+            playerMoving : function(data){
+                IO.socket.emit('playerMove', {
+                    playerName: Game.Player.name,
+                    playerID:Game.Player.socketId,
+                    gameId: Game.gameId,
+                    pos:data
+                });
+            },
+            playerLaunch : function(data){
+                IO.socket.emit('playerShoot', {
+                    playerName: Game.Player.name,
+                    playerID:Game.Player.socketId,
+                    gameId: Game.gameId,
+                    shot:data
+                });
+            },
+            playerChooseBottle : function(bottle){
+                IO.socket.emit('playerChooseBottle', {
+                    gameId: Game.gameId,
+                    playerID:Game.Player.socketId,
+                    bottle: bottle
+                });
+            },
+            playerCaps : function(){
+                IO.socket.emit('playerCaps', {
+                    gameId: Game.gameId,
+                    playerID:Game.Player.socketId
+                });
+            },
+            playerMessage : function(i){
+                IO.socket.emit('playerMessage', {
+                    gameId: Game.gameId,
+                    playerID:Game.Player.socketId,
+                    im:i
+                });
+            },
+            playerReset : function(){
+                IO.socket.emit('playerReset', {
+                    gameId: Game.gameId,
+                    playerID:Game.Player.socketId
+                });
+            }
+        },
+        Enemy : {
+            id:null,
+            name :'PayeTaPinte',
+            caps :'ptp',
+            ready : false
+        }
+    };
+
+    IO.init();
+    Game.init();
+};
