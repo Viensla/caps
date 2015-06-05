@@ -474,10 +474,10 @@ capCollision = function ( collided, linearVelocity, angularVelocity, other ){
                 console.log('You caps it');
 
                 collided.collided = true;
-//                collided.__dirty_postion = true;
-//                collided.setAngularFactor(new THREE.Vector3(1,3,-3));
-//                collided.setAngularVelocity( new THREE.Vector3(1,1,1) );
-//                collided.setLinearVelocity( new THREE.Vector3(1,1,-3) );
+                collided.__dirty_postion = true;
+//                collided.setAngularFactor(new THREE.Vector3(1,1,1));
+//                collided.setAngularVelocity( new THREE.Vector3(1,1,2) );
+//                collided.setLinearVelocity( new THREE.Vector3(1,1,2) );
 
             }
             if(!Sounds.mute) Sounds.capcap.play();
@@ -486,10 +486,10 @@ capCollision = function ( collided, linearVelocity, angularVelocity, other ){
             if(capPlayed.name == 'viensla'){
                 console.log('Viens la caps it');
                 collided.collided = true;
-//                collided.__dirty_postion = true;
-//                collided.setAngularFactor(new THREE.Vector3(1,-3,3));
-//                collided.setAngularVelocity( new THREE.Vector3(1,1,1) );
-//                collided.setLinearVelocity( new THREE.Vector3(1,1,3) );
+                collided.__dirty_postion = true;
+//                collided.setAngularFactor(new THREE.Vector3(1,1,-1));
+//                collided.setAngularVelocity( new THREE.Vector3(1,1,2) );
+//                collided.setLinearVelocity( new THREE.Vector3(1,1,2) );
 
             }
             if(!Sounds.mute) Sounds.pschit1.play();
@@ -817,11 +817,11 @@ var beerColors = {
 
 var shadowColors = {
     chimey : 0x317ad3,
-    foster : 0x0d254c,
+    foster : 0x122d54,
     lef : 0xedc418,
-    pelle : 0xdd3a3a,
-    chouffe : 0x598947,
-    ptp : 0xe27f3b
+    pelle : 0xd84848,
+    chouffe : 0x558e44,
+    ptp : 0xea813b
 };
 ;var timeoutRobot;
 
@@ -1422,7 +1422,7 @@ var Interface = {
 
             this.tm.to($rcb, 0, {width:0, height:0, opacity:0})
                 .to($rcb, 0.5, {width:200, height:3, opacity:1, ease: Elastic.easeOut.config(1, 0.4)}, 0.1)
-                .to($rcb, 0.5, {height:70, ease: Elastic.easeOut.config(1, 0.4)});
+                .to($rcb, 0.5, {height:80, ease: Elastic.easeOut.config(1, 0.4)});
 
             TweenLite.set($rcb,{width:0, height:0, opacity:0})
 
