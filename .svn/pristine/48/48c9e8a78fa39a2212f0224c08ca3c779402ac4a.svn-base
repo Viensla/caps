@@ -1,0 +1,24 @@
+footer{
+  position: fixed;
+  bottom: 0;
+  height: 46px;
+  line-height: 46px;
+  width: 100%;
+  p.copy{
+    @include neutraUp;
+    color: #fff;
+    font-size: 10px;
+    letter-spacing:1px;
+    text-align: center;
+    a{
+      text-decoration: none;
+      margin: 0 3px;
+    }
+    img{
+      display: inline-block;
+      vertical-align: middle;
+      height: 15px;
+      width: auto;
+    }
+  }
+}

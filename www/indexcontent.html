@@ -26,21 +26,26 @@
 
     <title>Paye ton caps</title>
     <link rel="stylesheet" type="text/css" media="" href="stylesheets/screen.css" />
+
+    <script type="text/javascript">
+        (function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();stats.domElement.style.cssText='position:fixed;right:0;top:0;z-index:10000';document.body.appendChild(stats.domElement);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='js/stats.min.js';document.head.appendChild(script);})();
+    </script>
 </head>
 
 <body>
-
 <header>
     <h1><img class="logo" src="images/logo/logo@2x.png" alt="Paye ton Caps!"/></h1>
-    <div class="back-bt">
+    <div class="bt back">
         <p>Retour</p>
     </div>
 </header>
 
 <div id="wrapper">
+
     <section class="sc" id="loading">
         <div id="loader"></div>
     </section>
+
     <div id="site-content"></div>
 </div>
 
@@ -70,8 +75,6 @@
     gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
     }
 </script>
-
-
 
 </body>
 </html>

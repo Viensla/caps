@@ -1,0 +1,133 @@
+@media screen and (max-height: 710px) {
+  //GLOBAL
+  header{
+    height: 115px;
+    h1{
+      width: 110px;
+      margin-left: -55px;
+    }
+    .bt{
+      margin-top: 40px;
+    }
+  }
+
+  //WELCOME
+
+  //MULTI
+  #multiplayer{
+
+    .sc-content{
+      margin-top: 50px;
+      .separator{
+        height: 300px;
+      }
+      .lf-pt, .rt-pt{
+        margin-top: 10px;
+        p.aleo{
+          margin-top: 20px;
+        }
+      }
+      .rt-pt{
+        .codes-box{
+          margin: 0 auto;
+        }
+        .bt-cap{
+          margin-bottom: 0;
+        }
+
+      }
+    }
+
+    &.hosting{
+      .separator{
+        height: 0;
+      }
+    }
+  }
+
+  //PICKNAME
+  #pickname{
+    .sc-content{
+      margin-top: 50px;
+
+      .title-c {
+        h3, h4{
+          font-size: 23px;
+        }
+        hr{
+          margin-bottom: 20px;
+        }
+      }
+      .input-blc #nm-generator{
+        margin: 30px auto 30px;
+      }
+    }
+  }
+  //PICKCAPS
+  #pickcaps{
+    .sc-content{
+      margin-top: 50px;
+
+      .title-c{
+        h3, h4{
+          font-size: 23px;
+        }
+        hr{
+          margin: 20px auto;
+        }
+      }
+      #beer-slide-c {
+        height: 335px;
+        .nav-bottle{
+          margin: 0 auto;
+        }
+        ul.cap-list{
+          height: 270px;
+
+          li .blason{
+            margin: 0 auto 0px;
+          }
+        }
+      }
+    }
+  }
+  //INTERFACE
+  #gamearea{
+    #header{
+      #versus-bar{
+        top: 13px;
+      }
+      .pl-part, .vl-part{
+        top: 20px;
+      }
+    }
+    #you-turn{
+      top: 420px;
+    }
+  }
+  #pause-menu{
+    .help-1{
+      top: 370px;
+    }
+  }
+
+
+}
+
+@media screen and (max-width: 1330px) {
+//GLOBAL
+  header .bt{
+    margin-left: 0;
+    left: 80px;
+  }
+
+//WELCOME
+
+//MULTI
+
+//PICKNAME
+
+//PICKCAPS
+
+//INTERFACE
+}

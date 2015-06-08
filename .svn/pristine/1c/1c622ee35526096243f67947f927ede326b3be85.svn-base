@@ -3762,36 +3762,6 @@ header .bt {
   margin-top: 60px;
 }
 
-/* line 1, ../../dev/sass/templates/_footer.scss */
-footer {
-  position: fixed;
-  bottom: 0;
-  height: 46px;
-  line-height: 46px;
-  width: 100%;
-}
-/* line 7, ../../dev/sass/templates/_footer.scss */
-footer p.copy {
-  font-family: "neutra";
-  text-transform: uppercase;
-  color: #fff;
-  font-size: 10px;
-  letter-spacing: 1px;
-  text-align: center;
-}
-/* line 13, ../../dev/sass/templates/_footer.scss */
-footer p.copy a {
-  text-decoration: none;
-  margin: 0 3px;
-}
-/* line 17, ../../dev/sass/templates/_footer.scss */
-footer p.copy img {
-  display: inline-block;
-  vertical-align: middle;
-  height: 15px;
-  width: auto;
-}
-
 /* line 7, ../../dev/sass/templates/_welcome.scss */
 #welcome #main-logo {
   width: 650px;
@@ -4305,15 +4275,15 @@ footer p.copy img {
   -ms-animation: cursor 1.5s both infinite alternate linear;
   animation: cursor 1.5s both infinite alternate linear;
 }
-/* line 308, ../../dev/sass/templates/_interface.scss */
+/* line 309, ../../dev/sass/templates/_interface.scss */
 #versus-bar #cursor.lf {
   left: 0;
 }
-/* line 311, ../../dev/sass/templates/_interface.scss */
+/* line 312, ../../dev/sass/templates/_interface.scss */
 #versus-bar #cursor.rg {
   left: 415px;
 }
-/* line 315, ../../dev/sass/templates/_interface.scss */
+/* line 317, ../../dev/sass/templates/_interface.scss */
 #versus-bar .line {
   height: 3px;
   width: 100%;
@@ -4323,7 +4293,7 @@ footer p.copy img {
   right: 0;
   top: 40px;
 }
-/* line 324, ../../dev/sass/templates/_interface.scss */
+/* line 326, ../../dev/sass/templates/_interface.scss */
 #versus-bar img {
   width: 60px;
   height: 60px;
@@ -4332,7 +4302,7 @@ footer p.copy img {
   top: 13px;
   margin-left: -30px;
 }
-/* line 332, ../../dev/sass/templates/_interface.scss */
+/* line 334, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los {
   position: absolute;
   width: 15px;
@@ -4344,15 +4314,15 @@ footer p.copy img {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-/* line 339, ../../dev/sass/templates/_interface.scss */
+/* line 341, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.pl {
   left: 0;
 }
-/* line 342, ../../dev/sass/templates/_interface.scss */
+/* line 344, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.vl {
   right: 0;
 }
-/* line 345, ../../dev/sass/templates/_interface.scss */
+/* line 347, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los:after {
   content: " ";
   background: blue;
@@ -4361,32 +4331,32 @@ footer p.copy img {
   height: 9px;
   margin: 3px;
 }
-/* line 354, ../../dev/sass/templates/_interface.scss */
+/* line 356, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.chimey:after {
   background: #2e7cff;
 }
-/* line 359, ../../dev/sass/templates/_interface.scss */
+/* line 361, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.foster:after {
   background: #163282;
 }
-/* line 364, ../../dev/sass/templates/_interface.scss */
+/* line 366, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.lef:after {
   background: #facc14;
 }
-/* line 369, ../../dev/sass/templates/_interface.scss */
+/* line 371, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.pelle:after {
   background: #f24141;
 }
-/* line 374, ../../dev/sass/templates/_interface.scss */
+/* line 376, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.chouffe:after {
   background: #4d9c40;
 }
-/* line 379, ../../dev/sass/templates/_interface.scss */
+/* line 381, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.ptp:after {
   background: #f58b31;
 }
 
-/* line 387, ../../dev/sass/templates/_interface.scss */
+/* line 389, ../../dev/sass/templates/_interface.scss */
 .powerbar {
   width: 20px;
   height: 200px;
@@ -4410,7 +4380,7 @@ footer p.copy img {
   -o-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
-/* line 399, ../../dev/sass/templates/_interface.scss */
+/* line 401, ../../dev/sass/templates/_interface.scss */
 .powerbar .bar {
   position: absolute;
   bottom: 0;
@@ -4436,7 +4406,7 @@ footer p.copy img {
   /* IE6-9 */
 }
 
-/* line 417, ../../dev/sass/templates/_interface.scss */
+/* line 419, ../../dev/sass/templates/_interface.scss */
 #header {
   position: absolute;
   top: 0;
@@ -4445,7 +4415,7 @@ footer p.copy img {
   width: 100%;
   z-index: 50;
 }
-/* line 424, ../../dev/sass/templates/_interface.scss */
+/* line 426, ../../dev/sass/templates/_interface.scss */
 #header h3 {
   text-transform: uppercase;
   text-align: center;
@@ -4454,38 +4424,29 @@ footer p.copy img {
   text-transform: uppercase;
   color: #000;
   font-size: 20px;
-  top: 16px;
-  height: 40px;
-  line-height: 40px;
+  top: 25px;
 }
-/* line 434, ../../dev/sass/templates/_interface.scss */
-#header h3 span {
-  vertical-align: middle;
-  line-height: 20px;
-  display: inline-block;
-}
-/* line 440, ../../dev/sass/templates/_interface.scss */
+/* line 435, ../../dev/sass/templates/_interface.scss */
 #header .pl-part {
   left: 50px;
 }
-/* line 443, ../../dev/sass/templates/_interface.scss */
+/* line 438, ../../dev/sass/templates/_interface.scss */
 #header .pl-part h3 {
-  text-align: left;
   left: 80px;
 }
-/* line 447, ../../dev/sass/templates/_interface.scss */
+/* line 441, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .capsstock {
   left: 8px;
 }
-/* line 450, ../../dev/sass/templates/_interface.scss */
+/* line 444, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .life-bloc {
   left: 16px;
 }
-/* line 453, ../../dev/sass/templates/_interface.scss */
+/* line 447, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .blason {
   left: 0px;
 }
-/* line 457, ../../dev/sass/templates/_interface.scss */
+/* line 451, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .cap-tuto {
   position: absolute;
   left: 1px;
@@ -4495,7 +4456,7 @@ footer p.copy img {
   -webkit-transform: scale(0);
   transform: scale(0);
 }
-/* line 462, ../../dev/sass/templates/_interface.scss */
+/* line 456, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .cap-tuto .arr {
   height: 32px;
   width: 13px;
@@ -4505,7 +4466,7 @@ footer p.copy img {
   margin-left: 24px;
   margin-bottom: 10px;
 }
-/* line 471, ../../dev/sass/templates/_interface.scss */
+/* line 465, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .cap-tuto p {
   font-family: "neutra";
   text-transform: uppercase;
@@ -4513,35 +4474,34 @@ footer p.copy img {
   width: 67px;
   text-align: center;
 }
-/* line 480, ../../dev/sass/templates/_interface.scss */
+/* line 474, ../../dev/sass/templates/_interface.scss */
 #header .vl-part {
   right: 50px;
 }
-/* line 482, ../../dev/sass/templates/_interface.scss */
+/* line 476, ../../dev/sass/templates/_interface.scss */
 #header .vl-part h3 {
   right: 80px;
-  text-align: right;
 }
-/* line 486, ../../dev/sass/templates/_interface.scss */
+/* line 479, ../../dev/sass/templates/_interface.scss */
 #header .vl-part .capsstock {
   right: 8px;
 }
-/* line 489, ../../dev/sass/templates/_interface.scss */
+/* line 482, ../../dev/sass/templates/_interface.scss */
 #header .vl-part .life-bloc {
   right: 16px;
 }
-/* line 492, ../../dev/sass/templates/_interface.scss */
+/* line 485, ../../dev/sass/templates/_interface.scss */
 #header .vl-part .blason {
   right: 0px;
 }
-/* line 497, ../../dev/sass/templates/_interface.scss */
+/* line 490, ../../dev/sass/templates/_interface.scss */
 #header .pl-part, #header .vl-part {
   position: absolute;
   width: 200px;
   display: none;
   top: 80px;
 }
-/* line 502, ../../dev/sass/templates/_interface.scss */
+/* line 496, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .blason, #header .vl-part .blason {
   width: 66px;
   height: 66px;
@@ -4553,85 +4513,85 @@ footer p.copy img {
   background-size: 70px 70px;
   background-position: -2px -2px;
 }
-/* line 512, ../../dev/sass/templates/_interface.scss */
+/* line 506, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chimey .life, #header .vl-part.chimey .life {
   background: #2e7cff;
 }
-/* line 515, ../../dev/sass/templates/_interface.scss */
+/* line 509, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chimey .blason, #header .vl-part.chimey .blason {
   background-image: url("../images/beers/stickers/rounds/rd-chimais.png");
 }
-/* line 518, ../../dev/sass/templates/_interface.scss */
+/* line 512, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chimey .capsstock span, #header .vl-part.chimey .capsstock span {
   background-image: url("../model/3D/caps_material/chimais.png");
 }
-/* line 523, ../../dev/sass/templates/_interface.scss */
+/* line 517, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.foster .life, #header .vl-part.foster .life {
   background: #163282;
 }
-/* line 526, ../../dev/sass/templates/_interface.scss */
+/* line 520, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.foster .blason, #header .vl-part.foster .blason {
   background-image: url("../images/beers/stickers/rounds/rd-faustaire.png");
 }
-/* line 529, ../../dev/sass/templates/_interface.scss */
+/* line 523, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.foster .capsstock span, #header .vl-part.foster .capsstock span {
   background-image: url("../model/3D/caps_material/faustaire.png");
 }
-/* line 534, ../../dev/sass/templates/_interface.scss */
+/* line 528, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.lef .life, #header .vl-part.lef .life {
   background: #facc14;
 }
-/* line 537, ../../dev/sass/templates/_interface.scss */
+/* line 531, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.lef .blason, #header .vl-part.lef .blason {
   background-image: url("../images/beers/stickers/rounds/rd-lef.png");
 }
-/* line 540, ../../dev/sass/templates/_interface.scss */
+/* line 534, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.lef .capsstock span, #header .vl-part.lef .capsstock span {
   background-image: url("../model/3D/caps_material/lef.png");
 }
-/* line 545, ../../dev/sass/templates/_interface.scss */
+/* line 539, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.pelle .life, #header .vl-part.pelle .life {
   background: #f24141;
 }
-/* line 548, ../../dev/sass/templates/_interface.scss */
+/* line 542, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.pelle .blason, #header .vl-part.pelle .blason {
   background-image: url("../images/beers/stickers/rounds/rd-pelle.png");
 }
-/* line 551, ../../dev/sass/templates/_interface.scss */
+/* line 545, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.pelle .capsstock span, #header .vl-part.pelle .capsstock span {
   background-image: url("../model/3D/caps_material/pelle.png");
 }
-/* line 556, ../../dev/sass/templates/_interface.scss */
+/* line 550, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chouffe .life, #header .vl-part.chouffe .life {
   background: #4d9c40;
 }
-/* line 559, ../../dev/sass/templates/_interface.scss */
+/* line 553, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chouffe .blason, #header .vl-part.chouffe .blason {
   background-image: url("../images/beers/stickers/rounds/rd-shouffe.png");
 }
-/* line 562, ../../dev/sass/templates/_interface.scss */
+/* line 556, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chouffe .capsstock span, #header .vl-part.chouffe .capsstock span {
   background-image: url("../model/3D/caps_material/shouffe.png");
 }
-/* line 567, ../../dev/sass/templates/_interface.scss */
+/* line 561, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.ptp .life, #header .vl-part.ptp .life {
   background: #f58b31;
 }
-/* line 570, ../../dev/sass/templates/_interface.scss */
+/* line 564, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.ptp .blason, #header .vl-part.ptp .blason {
   background-image: url("../images/beers/stickers/rounds/rd-ptp.png");
 }
-/* line 573, ../../dev/sass/templates/_interface.scss */
+/* line 567, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.ptp .capsstock span, #header .vl-part.ptp .capsstock span {
   background-image: url("../model/3D/caps_material/ptp.png");
 }
-/* line 582, ../../dev/sass/templates/_interface.scss */
+/* line 576, ../../dev/sass/templates/_interface.scss */
 #header .capsstock {
   width: 50px;
   position: absolute;
   top: 250px;
 }
-/* line 587, ../../dev/sass/templates/_interface.scss */
+/* line 581, ../../dev/sass/templates/_interface.scss */
 #header .capsstock span {
   border-radius: 50%;
   height: 50px;
@@ -4641,7 +4601,7 @@ footer p.copy img {
   cursor: pointer;
   background-size: 100% 100%;
 }
-/* line 599, ../../dev/sass/templates/_interface.scss */
+/* line 593, ../../dev/sass/templates/_interface.scss */
 #header .life-bloc {
   position: absolute;
   top: 90px;
@@ -4649,7 +4609,7 @@ footer p.copy img {
   width: 35px;
   background: url(../images/mask/bottle-mask-blc.png);
 }
-/* line 607, ../../dev/sass/templates/_interface.scss */
+/* line 601, ../../dev/sass/templates/_interface.scss */
 #header .life-bloc .life-c {
   height: 137px;
   width: 33px;
@@ -4663,13 +4623,13 @@ footer p.copy img {
   -o-mask: url(../images/mask/bottle-mask.png);
   mask: url(../images/mask/bottle-mask.png);
 }
-/* line 615, ../../dev/sass/templates/_interface.scss */
+/* line 609, ../../dev/sass/templates/_interface.scss */
 #header .life-bloc .life-c svg {
   height: 138px;
   width: 33px;
   overflow: hidden;
 }
-/* line 620, ../../dev/sass/templates/_interface.scss */
+/* line 614, ../../dev/sass/templates/_interface.scss */
 #header .life-bloc .life-c .life {
   position: absolute;
   bottom: 0;
@@ -4691,12 +4651,12 @@ footer p.copy img {
   animation: wave 2s both infinite alternate linear;
 }
 
-/* line 637, ../../dev/sass/templates/_interface.scss */
+/* line 631, ../../dev/sass/templates/_interface.scss */
 .viewport {
   position: relative;
 }
 
-/* line 641, ../../dev/sass/templates/_interface.scss */
+/* line 635, ../../dev/sass/templates/_interface.scss */
 #you-turn {
   position: absolute;
   z-index: 100;
@@ -4710,7 +4670,7 @@ footer p.copy img {
   background-size: 100% 100%;
 }
 
-/* line 654, ../../dev/sass/templates/_interface.scss */
+/* line 648, ../../dev/sass/templates/_interface.scss */
 #txto-sd {
   position: absolute;
   right: 80px;
@@ -4718,17 +4678,17 @@ footer p.copy img {
   z-index: 200;
   width: 220px;
 }
-/* line 661, ../../dev/sass/templates/_interface.scss */
+/* line 655, ../../dev/sass/templates/_interface.scss */
 #txto-sd:hover #bt-texto {
   background: #5AE0D4;
 }
-/* line 664, ../../dev/sass/templates/_interface.scss */
+/* line 658, ../../dev/sass/templates/_interface.scss */
 #txto-sd:hover #sd-messages-box {
   height: 430px;
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 669, ../../dev/sass/templates/_interface.scss */
+/* line 663, ../../dev/sass/templates/_interface.scss */
 #txto-sd #bt-texto {
   width: 188px;
   -moz-transition: 0.3s;
@@ -4736,7 +4696,7 @@ footer p.copy img {
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
-/* line 673, ../../dev/sass/templates/_interface.scss */
+/* line 667, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box {
   -moz-transition: 0.3s;
   -o-transition: 0.3s;
@@ -4752,17 +4712,17 @@ footer p.copy img {
   overflow: hidden;
   background: #5AE0D4;
 }
-/* line 684, ../../dev/sass/templates/_interface.scss */
+/* line 678, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box.disabled:hover {
   height: 0 !important;
   opacity: 0 !important;
 }
-/* line 688, ../../dev/sass/templates/_interface.scss */
+/* line 682, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box ul {
   width: 220px;
   background: #5AE0D4;
 }
-/* line 692, ../../dev/sass/templates/_interface.scss */
+/* line 686, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box li {
   background: #5AE0D4;
   cursor: pointer;
@@ -4771,15 +4731,15 @@ footer p.copy img {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-/* line 696, ../../dev/sass/templates/_interface.scss */
+/* line 690, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box li:hover {
   background: #54CEC2;
 }
-/* line 699, ../../dev/sass/templates/_interface.scss */
+/* line 693, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box li:last-child p {
   border-bottom: 0px;
 }
-/* line 702, ../../dev/sass/templates/_interface.scss */
+/* line 696, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box li p {
   color: #fff;
   font-size: 13px;
@@ -4790,7 +4750,7 @@ footer p.copy img {
   margin: auto;
 }
 
-/* line 715, ../../dev/sass/templates/_interface.scss */
+/* line 709, ../../dev/sass/templates/_interface.scss */
 #rc-messages-box {
   position: absolute;
   z-index: 200;
@@ -4805,7 +4765,7 @@ footer p.copy img {
   line-height: 80px;
   text-align: left;
 }
-/* line 729, ../../dev/sass/templates/_interface.scss */
+/* line 723, ../../dev/sass/templates/_interface.scss */
 #rc-messages-box:after {
   content: " ";
   width: 0px;
@@ -4819,25 +4779,25 @@ footer p.copy img {
   left: 50%;
   margin-left: -10px;
 }
-/* line 743, ../../dev/sass/templates/_interface.scss */
+/* line 737, ../../dev/sass/templates/_interface.scss */
 #rc-messages-box .center {
   line-height: 16px;
   display: inline-block;
   vertical-align: middle;
 }
-/* line 748, ../../dev/sass/templates/_interface.scss */
+/* line 742, ../../dev/sass/templates/_interface.scss */
 #rc-messages-box p {
   font-size: 13px;
   color: #54CEC2;
   padding: 0;
 }
-/* line 752, ../../dev/sass/templates/_interface.scss */
+/* line 746, ../../dev/sass/templates/_interface.scss */
 #rc-messages-box p:first-child {
   text-align: left;
   font-weight: bold;
 }
 
-/* line 762, ../../dev/sass/templates/_interface.scss */
+/* line 756, ../../dev/sass/templates/_interface.scss */
 #caps-m, #start-m, #win-m, #lose-m, #perfect-m {
   width: 750px;
   height: 600px;
@@ -4851,23 +4811,23 @@ footer p.copy img {
   background-position: 0% 0%;
   pointer-events: none;
 }
-/* line 775, ../../dev/sass/templates/_interface.scss */
+/* line 769, ../../dev/sass/templates/_interface.scss */
 #caps-m.capsIn1, #caps-m.capsIn2, #caps-m.capsIn3, #start-m.capsIn1, #start-m.capsIn2, #start-m.capsIn3, #win-m.capsIn1, #win-m.capsIn2, #win-m.capsIn3, #lose-m.capsIn1, #lose-m.capsIn2, #lose-m.capsIn3, #perfect-m.capsIn1, #perfect-m.capsIn2, #perfect-m.capsIn3 {
   display: block;
 }
 
-/* line 779, ../../dev/sass/templates/_interface.scss */
+/* line 773, ../../dev/sass/templates/_interface.scss */
 #caps-m, #start-m {
   -webkit-background-size: 1000% 300%;
   background-size: 1000% 300%;
 }
 
-/* line 783, ../../dev/sass/templates/_interface.scss */
+/* line 777, ../../dev/sass/templates/_interface.scss */
 #win-m, #lose-m, #perfect-m {
   -webkit-background-size: 900% 300%;
   background-size: 900% 300%;
 }
-/* line 786, ../../dev/sass/templates/_interface.scss */
+/* line 780, ../../dev/sass/templates/_interface.scss */
 #win-m.capsIn1, #lose-m.capsIn1, #perfect-m.capsIn1 {
   -webkit-animation: capsStep1 0.4s steps(8) 0s forwards;
   -moz-animation: capsStep1 0.4s steps(8) 0s forwards;
@@ -4875,7 +4835,7 @@ footer p.copy img {
   -ms-animation: capsStep1 0.4s steps(8) 0s forwards;
   animation: capsStep1 0.4s steps(8) 0s forwards;
 }
-/* line 789, ../../dev/sass/templates/_interface.scss */
+/* line 783, ../../dev/sass/templates/_interface.scss */
 #win-m.capsIn2, #lose-m.capsIn2, #perfect-m.capsIn2 {
   -webkit-animation: capsStep2 0.4s steps(8) 0s forwards;
   -moz-animation: capsStep2 0.4s steps(8) 0s forwards;
@@ -4883,7 +4843,7 @@ footer p.copy img {
   -ms-animation: capsStep2 0.4s steps(8) 0s forwards;
   animation: capsStep2 0.4s steps(8) 0s forwards;
 }
-/* line 792, ../../dev/sass/templates/_interface.scss */
+/* line 786, ../../dev/sass/templates/_interface.scss */
 #win-m.capsIn3, #lose-m.capsIn3, #perfect-m.capsIn3 {
   -webkit-animation: capsStep3 0.4s steps(8) 0s forwards;
   -moz-animation: capsStep3 0.4s steps(8) 0s forwards;
@@ -4892,32 +4852,32 @@ footer p.copy img {
   animation: capsStep3 0.4s steps(8) 0s forwards;
 }
 
-/* line 797, ../../dev/sass/templates/_interface.scss */
+/* line 791, ../../dev/sass/templates/_interface.scss */
 #caps-m {
   background-image: url("../images/sprites/sprite_caps.png");
 }
 
-/* line 800, ../../dev/sass/templates/_interface.scss */
+/* line 794, ../../dev/sass/templates/_interface.scss */
 #start-m {
   background-image: url("../images/sprites/sprite_start.png");
 }
 
-/* line 803, ../../dev/sass/templates/_interface.scss */
+/* line 797, ../../dev/sass/templates/_interface.scss */
 #win-m {
   background-image: url("../images/sprites/sprite_win.png");
 }
 
-/* line 806, ../../dev/sass/templates/_interface.scss */
+/* line 800, ../../dev/sass/templates/_interface.scss */
 #lose-m {
   background-image: url("../images/sprites/sprite_lose.png");
 }
 
-/* line 809, ../../dev/sass/templates/_interface.scss */
+/* line 803, ../../dev/sass/templates/_interface.scss */
 #perfect-m {
   background-image: url("../images/sprites/sprite_perfect.png");
 }
 
-/* line 813, ../../dev/sass/templates/_interface.scss */
+/* line 807, ../../dev/sass/templates/_interface.scss */
 .capsIn1 {
   -webkit-animation: capsStep1 0.4s steps(9) 0s forwards;
   -moz-animation: capsStep1 0.4s steps(9) 0s forwards;
@@ -4926,7 +4886,7 @@ footer p.copy img {
   animation: capsStep1 0.4s steps(9) 0s forwards;
 }
 
-/* line 816, ../../dev/sass/templates/_interface.scss */
+/* line 810, ../../dev/sass/templates/_interface.scss */
 .capsIn2 {
   -webkit-animation: capsStep2 0.4s steps(9) 0s forwards;
   -moz-animation: capsStep2 0.4s steps(9) 0s forwards;
@@ -4935,7 +4895,7 @@ footer p.copy img {
   animation: capsStep2 0.4s steps(9) 0s forwards;
 }
 
-/* line 819, ../../dev/sass/templates/_interface.scss */
+/* line 813, ../../dev/sass/templates/_interface.scss */
 .capsIn3 {
   -webkit-animation: capsStep3 0.4s steps(9) 0s forwards;
   -moz-animation: capsStep3 0.4s steps(9) 0s forwards;
@@ -5224,28 +5184,6 @@ footer p.copy img {
     transform: translateY(0);
   }
 }
-/* line 888, ../../dev/sass/templates/_interface.scss */
-#quality {
-  position: absolute;
-  top: 0;
-  left: 50px;
-  width: 100px;
-  height: 20px;
-  overflow: hidden;
-  cursor: pointer;
-}
-/* line 896, ../../dev/sass/templates/_interface.scss */
-#quality span {
-  position: absolute;
-  right: 0px;
-  line-height: 18px;
-  top: -1px;
-}
-/* line 903, ../../dev/sass/templates/_interface.scss */
-#quality.low span {
-  top: -19px;
-}
-
 /* line 4, ../../dev/sass/templates/_multi.scss */
 #multiplayer .sc-content {
   width: 90%;
@@ -5507,22 +5445,22 @@ footer p.copy img {
 #pickcaps .sc-content h3, #pickcaps .sc-content h4, #pickcaps .sc-content h5 {
   text-align: center;
 }
-/* line 14, ../../dev/sass/templates/_players_options.scss */
+/* line 12, ../../dev/sass/templates/_players_options.scss */
 #pickcaps .title-c {
   position: relative;
   z-index: 20;
 }
-/* line 17, ../../dev/sass/templates/_players_options.scss */
+/* line 15, ../../dev/sass/templates/_players_options.scss */
 #pickcaps .title-c h3 {
   font-size: 25px;
   color: #54e1d5;
   margin-bottom: 7px;
 }
-/* line 22, ../../dev/sass/templates/_players_options.scss */
+/* line 20, ../../dev/sass/templates/_players_options.scss */
 #pickcaps .title-c h4 {
   font-size: 25px;
 }
-/* line 25, ../../dev/sass/templates/_players_options.scss */
+/* line 23, ../../dev/sass/templates/_players_options.scss */
 #pickcaps .title-c hr {
   width: 106px;
   height: 4px;
@@ -5530,7 +5468,7 @@ footer p.copy img {
   border: 0px;
   margin: 20px auto 74px;
 }
-/* line 33, ../../dev/sass/templates/_players_options.scss */
+/* line 31, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c {
   width: 880px;
   height: 400px;
@@ -5538,14 +5476,14 @@ footer p.copy img {
   position: relative;
   z-index: 10;
 }
-/* line 40, ../../dev/sass/templates/_players_options.scss */
+/* line 38, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c .nav-bottle {
   position: relative;
   z-index: 20;
   margin: 40px auto;
   display: table;
 }
-/* line 45, ../../dev/sass/templates/_players_options.scss */
+/* line 43, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c .nav-bottle li {
   cursor: pointer;
   display: inline-block;
@@ -5558,7 +5496,7 @@ footer p.copy img {
   background-size: 10px 28px;
   z-index: 2;
 }
-/* line 56, ../../dev/sass/templates/_players_options.scss */
+/* line 54, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c .nav-bottle li:after {
   content: " ";
   z-index: 3;
@@ -5582,7 +5520,7 @@ footer p.copy img {
   -webkit-transform: scale(0);
   transform: scale(0);
 }
-/* line 73, ../../dev/sass/templates/_players_options.scss */
+/* line 71, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c .nav-bottle li.act:after {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
@@ -5591,7 +5529,7 @@ footer p.copy img {
   -webkit-transform: scale(1);
   transform: scale(1);
 }
-/* line 81, ../../dev/sass/templates/_players_options.scss */
+/* line 79, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c .arw {
   position: absolute;
   top: 110px;
@@ -5606,7 +5544,7 @@ footer p.copy img {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-/* line 91, ../../dev/sass/templates/_players_options.scss */
+/* line 89, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c .arw.lf-arw {
   -moz-transform: rotate(-45deg) scale(0.8);
   -ms-transform: rotate(-45deg) scale(0.8);
@@ -5614,14 +5552,14 @@ footer p.copy img {
   transform: rotate(-45deg) scale(0.8);
   left: 0px;
 }
-/* line 94, ../../dev/sass/templates/_players_options.scss */
+/* line 92, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c .arw.lf-arw:hover {
   -moz-transform: rotate(-45deg) scale(1);
   -ms-transform: rotate(-45deg) scale(1);
   -webkit-transform: rotate(-45deg) scale(1);
   transform: rotate(-45deg) scale(1);
 }
-/* line 98, ../../dev/sass/templates/_players_options.scss */
+/* line 96, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c .arw.rg-arw {
   -moz-transform: rotate(135deg) scale(0.8);
   -ms-transform: rotate(135deg) scale(0.8);
@@ -5629,20 +5567,20 @@ footer p.copy img {
   transform: rotate(135deg) scale(0.8);
   right: 0px;
 }
-/* line 101, ../../dev/sass/templates/_players_options.scss */
+/* line 99, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c .arw.rg-arw:hover {
   -moz-transform: rotate(135deg) scale(1);
   -ms-transform: rotate(135deg) scale(1);
   -webkit-transform: rotate(135deg) scale(1);
   transform: rotate(135deg) scale(1);
 }
-/* line 106, ../../dev/sass/templates/_players_options.scss */
+/* line 104, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list {
   height: 280px;
   position: relative;
   z-index: 10;
 }
-/* line 110, ../../dev/sass/templates/_players_options.scss */
+/* line 108, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li {
   width: 100%;
   height: 100%;
@@ -5654,7 +5592,7 @@ footer p.copy img {
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
-/* line 117, ../../dev/sass/templates/_players_options.scss */
+/* line 115, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li.lf {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
@@ -5663,7 +5601,7 @@ footer p.copy img {
   -webkit-transform: translate3D(-100%, 0, 0);
   transform: translate3D(-100%, 0, 0);
 }
-/* line 121, ../../dev/sass/templates/_players_options.scss */
+/* line 119, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li.lf .mention {
   -moz-transform: translate3D(-100%, 0, 0);
   -ms-transform: translate3D(-100%, 0, 0);
@@ -5672,7 +5610,7 @@ footer p.copy img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 127, ../../dev/sass/templates/_players_options.scss */
+/* line 125, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li.rg {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
@@ -5681,7 +5619,7 @@ footer p.copy img {
   -webkit-transform: translate3D(100%, 0, 0);
   transform: translate3D(100%, 0, 0);
 }
-/* line 131, ../../dev/sass/templates/_players_options.scss */
+/* line 129, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li.rg .mention {
   -moz-transform: translate3D(100%, 0, 0);
   -ms-transform: translate3D(100%, 0, 0);
@@ -5690,25 +5628,25 @@ footer p.copy img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 137, ../../dev/sass/templates/_players_options.scss */
+/* line 135, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li.na {
   -moz-transition: 0s;
   -o-transition: 0s;
   -webkit-transition: 0s;
   transition: 0s;
 }
-/* line 141, ../../dev/sass/templates/_players_options.scss */
+/* line 139, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li .blason {
   width: 222px;
   display: block;
   margin: 0 auto 20px;
 }
-/* line 145, ../../dev/sass/templates/_players_options.scss */
+/* line 143, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li .blason img {
   width: 100%;
   height: auto;
 }
-/* line 150, ../../dev/sass/templates/_players_options.scss */
+/* line 148, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li .mention {
   -moz-transition-duration: 0.5s;
   -o-transition-duration: 0.5s;
@@ -5719,20 +5657,20 @@ footer p.copy img {
   -webkit-transition-delay: 0.1s;
   transition-delay: 0.1s;
 }
-/* line 154, ../../dev/sass/templates/_players_options.scss */
+/* line 152, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li .mention p {
   font-size: 14px;
   font-family: "neutra";
   text-transform: uppercase;
   text-align: center;
 }
-/* line 159, ../../dev/sass/templates/_players_options.scss */
+/* line 157, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-slide-c ul.cap-list li .mention p span {
   font-family: "aleoregular";
   font-size: 40px;
   vertical-align: middle;
 }
-/* line 170, ../../dev/sass/templates/_players_options.scss */
+/* line 168, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider {
   position: absolute;
   top: 0;
@@ -5744,7 +5682,7 @@ footer p.copy img {
   height: 100%;
   overflow: hidden;
 }
-/* line 180, ../../dev/sass/templates/_players_options.scss */
+/* line 178, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider .blc-msk {
   position: absolute;
   z-index: 10;
@@ -5768,31 +5706,31 @@ footer p.copy img {
   -o-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
-/* line 196, ../../dev/sass/templates/_players_options.scss */
+/* line 194, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider .blc-msk.ptp {
   background: #291909;
 }
-/* line 199, ../../dev/sass/templates/_players_options.scss */
+/* line 197, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider .blc-msk.lef {
   background: #1a1606;
 }
-/* line 202, ../../dev/sass/templates/_players_options.scss */
+/* line 200, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider .blc-msk.chouffe {
   background: #0f1d0d;
 }
-/* line 205, ../../dev/sass/templates/_players_options.scss */
+/* line 203, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider .blc-msk.pelle {
   background: #2b0f0f;
 }
-/* line 208, ../../dev/sass/templates/_players_options.scss */
+/* line 206, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider .blc-msk.chimey {
   background: #0a1425;
 }
-/* line 211, ../../dev/sass/templates/_players_options.scss */
+/* line 209, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider .blc-msk.foster {
   background: #131825;
 }
-/* line 222, ../../dev/sass/templates/_players_options.scss */
+/* line 220, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li {
   position: absolute;
   top: 0;
@@ -5812,7 +5750,7 @@ footer p.copy img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 235, ../../dev/sass/templates/_players_options.scss */
+/* line 233, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li .motifs {
   width: 100%;
   height: 100%;
@@ -5822,67 +5760,67 @@ footer p.copy img {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
-/* line 243, ../../dev/sass/templates/_players_options.scss */
+/* line 241, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.act {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 256, ../../dev/sass/templates/_players_options.scss */
+/* line 254, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.na {
   -moz-transition: 0s;
   -o-transition: 0s;
   -webkit-transition: 0s;
   transition: 0s;
 }
-/* line 259, ../../dev/sass/templates/_players_options.scss */
+/* line 257, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.ptp {
   background: #40270f;
 }
-/* line 261, ../../dev/sass/templates/_players_options.scss */
+/* line 259, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.ptp .motifs {
   background-image: url("../images/motifs/ptp-motifs.png");
 }
-/* line 265, ../../dev/sass/templates/_players_options.scss */
+/* line 263, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.lef {
   background: #2d2508;
 }
-/* line 267, ../../dev/sass/templates/_players_options.scss */
+/* line 265, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.lef .motifs {
   background-image: url("../images/motifs/lef-motifs.png");
 }
-/* line 271, ../../dev/sass/templates/_players_options.scss */
+/* line 269, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.chouffe {
   background: #173212;
 }
-/* line 273, ../../dev/sass/templates/_players_options.scss */
+/* line 271, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.chouffe .motifs {
   background-image: url("../images/motifs/shouffe-motifs.png");
 }
-/* line 277, ../../dev/sass/templates/_players_options.scss */
+/* line 275, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.pelle {
   background: #3a1515;
 }
-/* line 279, ../../dev/sass/templates/_players_options.scss */
+/* line 277, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.pelle .motifs {
   background-image: url("../images/motifs/pelle-motifs.png");
 }
-/* line 283, ../../dev/sass/templates/_players_options.scss */
+/* line 281, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.chimey {
   background: #10264d;
 }
-/* line 285, ../../dev/sass/templates/_players_options.scss */
+/* line 283, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.chimey .motifs {
   background-image: url("../images/motifs/chimais-motifs.png");
 }
-/* line 289, ../../dev/sass/templates/_players_options.scss */
+/* line 287, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.foster {
   background: #172754;
 }
-/* line 291, ../../dev/sass/templates/_players_options.scss */
+/* line 289, ../../dev/sass/templates/_players_options.scss */
 #pickcaps #beer-bg-slider li.foster .motifs {
   background-image: url("../images/motifs/faustaire-motifs.png");
 }
-/* line 298, ../../dev/sass/templates/_players_options.scss */
+/* line 296, ../../dev/sass/templates/_players_options.scss */
 #pickcaps .bt.wh {
   display: table;
   margin: 0 auto;
@@ -5891,26 +5829,26 @@ footer p.copy img {
   z-index: 50;
 }
 
-/* line 312, ../../dev/sass/templates/_players_options.scss */
+/* line 310, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content {
   width: 100%;
 }
-/* line 314, ../../dev/sass/templates/_players_options.scss */
+/* line 312, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content h3, #pickname .sc-content h4, #pickname .sc-content h5 {
   text-align: center;
 }
-/* line 319, ../../dev/sass/templates/_players_options.scss */
+/* line 317, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .title-c h3 {
   font-size: 25px;
   margin-bottom: 5px;
   color: #202020;
 }
-/* line 325, ../../dev/sass/templates/_players_options.scss */
+/* line 323, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .title-c h4 {
   color: #202020;
   font-size: 25px;
 }
-/* line 329, ../../dev/sass/templates/_players_options.scss */
+/* line 327, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .title-c hr {
   width: 106px;
   height: 4px;
@@ -5918,7 +5856,7 @@ footer p.copy img {
   border: 0px;
   margin: 20px auto 74px;
 }
-/* line 340, ../../dev/sass/templates/_players_options.scss */
+/* line 338, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name {
   background: #dab269;
   color: #fff;
@@ -5931,34 +5869,34 @@ footer p.copy img {
   margin: 0 auto;
   font-family: "aleobold";
 }
-/* line 351, ../../dev/sass/templates/_players_options.scss */
+/* line 349, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name::-webkit-input-placeholder {
   color: #fff;
 }
-/* line 354, ../../dev/sass/templates/_players_options.scss */
+/* line 352, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name:-moz-placeholder {
   color: #fff;
 }
-/* line 357, ../../dev/sass/templates/_players_options.scss */
+/* line 355, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name::-moz-placeholder {
   color: #fff;
 }
-/* line 360, ../../dev/sass/templates/_players_options.scss */
+/* line 358, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #input-player-name:-ms-input-placeholder {
   color: #fff;
 }
-/* line 364, ../../dev/sass/templates/_players_options.scss */
+/* line 362, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator {
   margin: 75px auto 50px;
   width: 380px;
   height: 120px;
   position: relative;
 }
-/* line 369, ../../dev/sass/templates/_players_options.scss */
+/* line 367, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator h5 {
   margin-bottom: 43px;
 }
-/* line 372, ../../dev/sass/templates/_players_options.scss */
+/* line 370, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator .mention {
   color: #89744E;
   font-size: 14px;
@@ -5970,7 +5908,7 @@ footer p.copy img {
   float: left;
   line-height: 16px;
 }
-/* line 382, ../../dev/sass/templates/_players_options.scss */
+/* line 380, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator .mention:after {
   content: " ";
   display: block;
@@ -5982,131 +5920,15 @@ footer p.copy img {
   -webkit-background-size: 100%;
   background-size: 100%;
 }
-/* line 395, ../../dev/sass/templates/_players_options.scss */
+/* line 393, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc #nm-generator .bt-cap {
   position: absolute;
   right: 5px;
   top: 20px;
 }
-/* line 402, ../../dev/sass/templates/_players_options.scss */
+/* line 400, ../../dev/sass/templates/_players_options.scss */
 #pickname .sc-content .input-blc .bt.wh {
   display: table;
   margin: 0 auto;
   padding: 16px 40px 13px;
-}
-
-@media screen and (max-height: 710px) {
-  /* line 3, ../../dev/sass/_responsive.scss */
-  header {
-    height: 115px;
-  }
-  /* line 5, ../../dev/sass/_responsive.scss */
-  header h1 {
-    width: 110px;
-    margin-left: -55px;
-  }
-  /* line 9, ../../dev/sass/_responsive.scss */
-  header .bt {
-    margin-top: 40px;
-  }
-
-  /* line 19, ../../dev/sass/_responsive.scss */
-  #multiplayer .sc-content {
-    margin-top: 50px;
-  }
-  /* line 21, ../../dev/sass/_responsive.scss */
-  #multiplayer .sc-content .separator {
-    height: 300px;
-  }
-  /* line 24, ../../dev/sass/_responsive.scss */
-  #multiplayer .sc-content .lf-pt, #multiplayer .sc-content .rt-pt {
-    margin-top: 10px;
-  }
-  /* line 26, ../../dev/sass/_responsive.scss */
-  #multiplayer .sc-content .lf-pt p.aleo, #multiplayer .sc-content .rt-pt p.aleo {
-    margin-top: 20px;
-  }
-  /* line 31, ../../dev/sass/_responsive.scss */
-  #multiplayer .sc-content .rt-pt .codes-box {
-    margin: 0 auto;
-  }
-  /* line 34, ../../dev/sass/_responsive.scss */
-  #multiplayer .sc-content .rt-pt .bt-cap {
-    margin-bottom: 0;
-  }
-  /* line 42, ../../dev/sass/_responsive.scss */
-  #multiplayer.hosting .separator {
-    height: 0;
-  }
-
-  /* line 50, ../../dev/sass/_responsive.scss */
-  #pickname .sc-content {
-    margin-top: 50px;
-  }
-  /* line 54, ../../dev/sass/_responsive.scss */
-  #pickname .sc-content .title-c h3, #pickname .sc-content .title-c h4 {
-    font-size: 23px;
-  }
-  /* line 57, ../../dev/sass/_responsive.scss */
-  #pickname .sc-content .title-c hr {
-    margin-bottom: 20px;
-  }
-  /* line 61, ../../dev/sass/_responsive.scss */
-  #pickname .sc-content .input-blc #nm-generator {
-    margin: 30px auto 30px;
-  }
-
-  /* line 68, ../../dev/sass/_responsive.scss */
-  #pickcaps .sc-content {
-    margin-top: 50px;
-  }
-  /* line 72, ../../dev/sass/_responsive.scss */
-  #pickcaps .sc-content .title-c h3, #pickcaps .sc-content .title-c h4 {
-    font-size: 23px;
-  }
-  /* line 75, ../../dev/sass/_responsive.scss */
-  #pickcaps .sc-content .title-c hr {
-    margin: 20px auto;
-  }
-  /* line 79, ../../dev/sass/_responsive.scss */
-  #pickcaps .sc-content #beer-slide-c {
-    height: 335px;
-  }
-  /* line 81, ../../dev/sass/_responsive.scss */
-  #pickcaps .sc-content #beer-slide-c .nav-bottle {
-    margin: 0 auto;
-  }
-  /* line 84, ../../dev/sass/_responsive.scss */
-  #pickcaps .sc-content #beer-slide-c ul.cap-list {
-    height: 270px;
-  }
-  /* line 87, ../../dev/sass/_responsive.scss */
-  #pickcaps .sc-content #beer-slide-c ul.cap-list li .blason {
-    margin: 0 auto 0px;
-  }
-
-  /* line 97, ../../dev/sass/_responsive.scss */
-  #gamearea #header #versus-bar {
-    top: 13px;
-  }
-  /* line 100, ../../dev/sass/_responsive.scss */
-  #gamearea #header .pl-part, #gamearea #header .vl-part {
-    top: 20px;
-  }
-  /* line 104, ../../dev/sass/_responsive.scss */
-  #gamearea #you-turn {
-    top: 420px;
-  }
-
-  /* line 109, ../../dev/sass/_responsive.scss */
-  #pause-menu .help-1 {
-    top: 370px;
-  }
-}
-@media screen and (max-width: 1330px) {
-  /* line 117, ../../dev/sass/_responsive.scss */
-  header .bt {
-    margin-left: 0;
-    left: 80px;
-  }
 }

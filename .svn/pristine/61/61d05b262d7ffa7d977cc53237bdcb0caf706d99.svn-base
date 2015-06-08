@@ -4,11 +4,9 @@ var CAPS = {
     quality:'high'
 };
 
-var quality = 1, lastQuality = 1;
-
 var container, scene, renderer, light, ball, plane, bottle, bottlecaps, axes, initEventHandling, initScene;
 var WIDTH, HEIGHT, planeWIDTH, planeHEIGHT;
-var fps, fpsStat;
+
 var elements = [], playedCaps = null, mouse_position = new THREE.Vector3, block_offset = new THREE.Vector3, _i, _v3 = new THREE.Vector3, intersect_plane, lookatobj, pilone, mouse,
     mouse3D = new THREE.Vector3, vlPlayedCaps = null;
 
@@ -32,7 +30,6 @@ var $capsTypo,$startTypo, $winTypo, $loseTypo, $perfectTypo;
 
 Physijs.scripts.worker = '/js/physijs/physijs_worker.js';
 Physijs.scripts.ammo = 'ammo.js';
-//Physijs.scripts.ammo = 'cannon.js';
 
 
 WIDTH = window.innerWidth;
@@ -111,7 +108,8 @@ initScene = function() {
     Player.changeSticker();
     Viensla.changeBottle(Game.Enemy.caps);
 
-    fpsStat = new FPS();
+
+
 
     Party.create();
     render();
@@ -184,15 +182,6 @@ function render() {
 
     renderer.render(scene, camera);
 
-    fps = fpsStat.update();
-
-    quality = fps.med/60;
-
-    if(Math.abs(quality-lastQuality) > 0.1){
-        lastQuality = quality;
-        onWindowResize();
-    }
-
 //    setTimeout( function() {
         requestAnimationFrame(render);
 //    }, 1000 / 30 );
@@ -260,6 +249,69 @@ CAPS.launchGame = function(){
 
         }
     });
+    /*$('.beers-selector .beer').click(function(){
+        var $th = $(this);
+        var bottleName = 'ptp';
+
+       $('.beer.selected').removeClass('selected');
+       $(this).addClass('selected');
+        $plpart.removeClass('chimey foster ptp lef pelle chouffe');
+
+        if($th.hasClass('chimey')){
+            Player.capmat = caps_material.chimey.clone();
+            Player.stickermat = sticker_materials.chimey.clone();
+            $plpart.addClass('chimey');
+            bottleName = 'chimey';
+
+        }else if($th.hasClass('foster')){
+            Player.capmat = caps_material.foster.clone();
+            Player.stickermat = sticker_materials.foster.clone();
+            bottleName = 'foster';
+
+            $plpart.addClass('foster');
+
+        }else if($th.hasClass('lef')){
+            Player.capmat = caps_material.lef.clone();
+            Player.stickermat = sticker_materials.lef.clone();
+            bottleName = 'lef';
+
+            $plpart.addClass('lef');
+
+        }else if($th.hasClass('pelle')){
+            Player.capmat = caps_material.pelle.clone();
+            Player.stickermat = sticker_materials.pelle.clone();
+            bottleName = 'pelle';
+
+            $plpart.addClass('pelle');
+
+        }else if($th.hasClass('chouffe')){
+            Player.capmat = caps_material.chouffe.clone();
+            Player.stickermat = sticker_materials.chouffe.clone();
+            bottleName = 'chouffe';
+
+            $plpart.addClass('chouffe');
+
+        }else if($th.hasClass('ptp')){
+            Player.capmat = caps_material.ptp.clone();
+            Player.stickermat = sticker_materials.ptp.clone();
+            bottleName = 'ptp';
+
+            $plpart.addClass('ptp');
+        }
+        Player.bottle.material.color = Player.capmat.materials[1].color;
+
+        Player.changeSticker();
+
+        Game.Player.playerChooseBottle(bottleName);
+    }); */
+
+    /*
+    $('#party').click(function(){
+        Party.create();
+    });
+    */
+
+
 };
 
 
@@ -267,15 +319,13 @@ function onWindowResize( event ) {
     WIDTH = window.innerWidth;
     HEIGHT = window.innerHeight;
 
-    console.log(quality);
     if(CAPS.quality == 'low'){
         renderer.setViewport( 0, 0, WIDTH/2, HEIGHT/2 );
-        renderer.setSize(WIDTH*quality, HEIGHT*quality);
+        renderer.setSize(WIDTH/DPR, HEIGHT/DPR);
         $(renderer.domElement).css({width:WIDTH, height:HEIGHT});
     }else{
+        renderer.setSize(WIDTH, HEIGHT);
         renderer.setViewport( 0, 0, WIDTH, HEIGHT);
-        renderer.setSize(WIDTH*quality, HEIGHT*quality);
-        $(renderer.domElement).css({width:WIDTH, height:HEIGHT});
     }
     camera.aspect = WIDTH / HEIGHT;
     camera.updateProjectionMatrix();
@@ -386,7 +436,7 @@ capCollision = function ( collided, linearVelocity, angularVelocity, other ){
 
     if(capPlayed.floating) return;
 
-    console.log('collision')
+
     var collision = collided.name;
 
 
@@ -471,31 +521,11 @@ function create_caps(who){
 
     ball = new Physijs.CylinderMesh(geo_caps, cap_mat, mass, {friction : 1, restitution : 0.5});
 
-    ball.stopGravity = function(){
-        var cap = this;
-        var intv;
-        var i=0;
-        setTimeout(function(){
-            cap.material.materials[0].transparent = true;
-            cap.material.materials[1].transparent = true;
-            intv = setInterval(function(){
-                cap.material.materials[0].opacity = i%2 == 0 ? 0 : 1;
-                cap.material.materials[1].opacity = i%2 == 0 ? 0 : 1;
-                i++;
-                if(i == 10){
-                    clearInterval(intv);
-                    cap.material.materials[0].opacity = 1;
-                    cap.material.materials[1].opacity = 1;
-                    scene.remove(cap);
-                }
-            }, 200-i);
-      }, 4000);
-    };
     ball.scale.set(capModelscale,capModelscale,capModelscale);
 
 
     ball.collisions = 0;
-    ball.addEventListener('collision', capCollision);
+    ball.addEventListener( 'collision', capCollision );
 
     var sub = new Physijs.CylinderMesh(
         new THREE.CylinderGeometry(1.5, 1.5, 0, 32, 32 ),
@@ -538,9 +568,9 @@ function create_caps(who){
     playedCaps.name = who == 'vl' ?  'viensla' : 'player';
 
 
-    if(elements.length > 5){
+    if(elements.length > 10){
         var last = elements[0];
-        last.stopGravity();
+        scene.remove(last);
         elements.splice(0, 1);
     }
 
@@ -775,42 +805,7 @@ var shadowColors = {
     chouffe : 0x558e44,
     ptp : 0xea813b
 };
-;var FPS = function(){
-    var now = ( performance && performance.now ) ? performance.now.bind( performance ) : Date.now;
-    var startTime = now(),
-        prevTime = startTime;
-    var frames = 0;
-    var fps= 0;
-    var globalFps = 0;
-    var med=0;
-    var tot = 0;
-
-    return {
-        begin : function(){
-            startTime = now();
-        },
-        end : function(){
-            var time = now();
-
-            frames++;
-
-            if ( time > prevTime + 1000 ) {
-
-                fps = Math.round( ( frames * 1000 ) / ( time - prevTime ) );
-                prevTime = time;
-                tot++;
-                globalFps = globalFps+fps;
-                med = globalFps/tot;
-                frames = 0;
-            }
-            return time;
-        },
-        update: function(){
-            startTime = this.end();
-            return {fps:fps, med:med};
-        }
-    }
-};;var timeoutRobot;
+;var timeoutRobot;
 
 var Party = {
     isPlaying : false,
@@ -1011,6 +1006,8 @@ var Party = {
 
             if(pctPlLife <= 0 || pctVlLife <= 0){
                 Party.isPlaying = false;
+
+
                 setTimeout(function(){
 
                     if(pctPlLife <= 0){
@@ -1346,7 +1343,6 @@ var Interface = {
         $sdBox : null,
         $rdBox :null,
         tm : null,
-        tmo:null,
         init : function(){
 
             Interface.txtoRdy = true;
@@ -1381,8 +1377,7 @@ var Interface = {
                     }else{
                         clearInterval(txtoItv);
                     }
-//                }, 30000+Math.random()*10000);
-                }, 10000+Math.random()*5000);
+                }, 30000+Math.random()*10000);
             }
 
 
@@ -1403,13 +1398,10 @@ var Interface = {
             });
 
             this.tm = new TimelineMax({paused:true});
-//            this.tmo = new TimelineMax({paused:true});
 
             this.tm.to($rcb, 0, {width:0, height:0, opacity:0})
-                .to($rcb, 0.3, {width:200, height:3, opacity:1, ease: Elastic.easeOut.config(1, 0.4)}, 0.1)
-                .to($rcb, 0.3, {height:80, ease: Elastic.easeOut.config(1, 0.4)});
-
-//            this.tmo.to($rcb, 0.6, {width:0, height:0, opacity:0, ease: Elastic.easeOut.config(1, 0.4)});
+                .to($rcb, 0.5, {width:200, height:3, opacity:1, ease: Elastic.easeOut.config(1, 0.4)}, 0.1)
+                .to($rcb, 0.5, {height:80, ease: Elastic.easeOut.config(1, 0.4)});
 
             TweenLite.set($rcb,{width:0, height:0, opacity:0})
 
@@ -1447,7 +1439,7 @@ var Interface = {
                 setTimeout(function(){
                     var n = 0;
                     var spanInt = setInterval(function(){
-                        TweenLite.set($rcb.find('span').eq(n), {opacity:1});
+                        $rcb.find('span').eq(n).css({opacity:1});
                         n++;
                         if(n == $rcb.find('span').length){
                             clearInterval(spanInt);
@@ -1461,7 +1453,7 @@ var Interface = {
                     var n = nbSpan;
 
                     var spanInt = setInterval(function(){
-                        TweenLite.set($rcb.find('span').eq(n), {opacity:0});
+                        $rcb.find('span').eq(n).css({opacity:0});
                         n--;
                         if(n == -1){
                             clearInterval(spanInt);
@@ -1469,13 +1461,10 @@ var Interface = {
                     }, 0.2);
                     setTimeout(function(){
                         Interface.textoBox.tm.reverse();
-//                        Interface.textoBox.tmo.play();
-
                         setTimeout(function(){
                             phone.closeMessage();
                         }, 800);
-
-                    }, (nbSpan-1)*10);
+                    }, (nbSpan-1)*20);
 
                 }, shownTime);
             }, 1000);
@@ -2407,8 +2396,6 @@ function loadBottleTools(){
             copychimey[0].side = 2;
             copychimey[1].side = 2;
             copychimey[1].map = 0;
-
-
 
             mat_caps_chimey = new THREE.MeshFaceMaterial(copychimey);
             mat_caps_chimey.materials[1].color =  new THREE.Color(beerColors.chimey);

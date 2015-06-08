@@ -1,0 +1,559 @@
+var generatedNames = [
+    "Merlin l'Emmancheur",
+    "Sac à bière",
+    "Maître Brasseur",
+    "Chuck Boris",
+    "Vomito",
+    "Fredo Mercure",
+    "The Undertaker",
+    "Capsulator",
+];
+var autoMessages,poteRelou;
+
+var Interface = {
+    $currentPart : null,
+    curIndex: 0,
+    multiRdy : false,
+    pickNameRdy : false,
+    pickCapsRdy : false,
+    gameRdy : false,
+    txtoRdy : false,
+
+    init : function(){
+
+        $plpart = $('.pl-part');
+        $vlpart = $('.vl-part');
+        $capsTypo = $('#caps-m');
+        $startTypo = $('#start-m');
+        $winTypo = $('#win-m');
+        $loseTypo = $('#lose-m');
+        $perfectTypo = $('#perfect-m');
+
+        this.resize();
+        this.initWelcome();
+        this.initResetParty();
+        this.initMenu();
+        this.hdr.init();
+
+        window.addEventListener( 'resize', Interface.resize, false );
+    },
+    resize : function(){
+        $('section.sc').css({height: window.innerHeight, lineHeight: window.innerHeight+"px"});
+        $('#wrapper').css({width: window.innerWidth, height: window.innerHeight});
+        TweenLite.set($('#site-content'),{y : -Interface.curIndex*window.innerHeight});
+    },
+    navigate : function(to){
+
+        if(to == 3){
+            if(!this.pickNameRdy)
+                this.initPickName();
+
+            if(!CAPS.solo){
+                this.hdr.multiPartyLaunched = true;
+                console.log(CAPS.solo);
+            }
+
+        }else if(to == 4){
+            if(!this.pickCapsRdy)
+                this.initCapsSelect();
+        }else if(to == 6){
+            if(!this.txtoRdy)
+                this.textoBox.init();
+            if(!this.gameRdy){
+                setTimeout(CAPS.launchGame, 400);
+            }
+        }
+
+        if(to==1 || to==3 || to==4){
+            this.hdr.show();
+
+            if(this.hdr.multiPartyLaunched && to==3){
+                this.hdr.hideBt();
+                console.log('hide btttt');
+            }else{
+                this.hdr.showBt();
+            }
+        }else{
+            this.hdr.hide();
+        }
+
+
+        TweenLite.to($('#site-content'), 0.3, {y : -to*window.innerHeight});
+        this.curIndex = to;
+    },
+    navigateBack : function(){
+        var nextIndex = 0,
+            ci = Interface.curIndex;
+
+        if((ci == 3 && CAPS.solo) || ci == 1)
+            nextIndex = 0;
+        else if(ci == 4)
+            nextIndex = 3;
+
+        this.navigate(nextIndex);
+    },
+    initWelcome : function(){
+        var $welcome = $('#welcome'),
+            $pelle = $welcome.find('.cp-pelle'),
+            $foster = $welcome.find('.cp-foster'),
+            $logo = $welcome.find('.logo'),
+            $water = $welcome.find('.water'),
+            $soloBtn = $welcome.find('#bt-play-solo'),
+            $multiBtn = $welcome.find('#bt-play-online'),
+            $btBackGlobal = $('#bt-back-global');
+
+        this.$currentPart = $welcome;
+
+        var tms = [
+            new TimelineMax({paused:true, repeat:-1, yoyo:true}),
+            new TimelineMax({paused:true, repeat:-1, yoyo:true}),
+            new TimelineMax({paused:true, repeat:-1, yoyo:true}),
+            new TimelineMax({paused:true, repeat:-1, yoyo:true})
+        ];
+
+        var time = 8;
+
+        tms[0].add(TweenMax.fromTo( $pelle,time,
+            {x:-5, y:0, rotation:0, scale:0.85}, {x:-15, y:-10, rotation:6, scale:1}
+        ));
+
+        tms[1].add(TweenMax.fromTo( $foster,time,
+            {x:0, y:0, rotation:0, scale:0.85}, {x:8, y:-4, rotation:-6, scale:1}
+        ));
+
+        tms[2].add(TweenMax.fromTo($logo ,time,
+            {x:0, y:0, rotation:0, scale:0.9}, {x:8, y:3, rotation:4, scale:1}
+        ));
+
+        tms[3].add(TweenMax.fromTo( $water,time,
+            {x:0, y:0, rotation:0, scale:0.8}, {x:0, y:0, rotation:-4, scale:1}
+        ));
+
+        setTimeout(function(){
+            tms[0].play();
+            tms[1].play();
+            tms[2].play();
+            tms[3].play();
+        },1000);
+
+
+        initializeParty();
+
+        $soloBtn.click(function(){
+            CAPS.solo = true;
+            $('#wrapper').addClass('solo');
+            Interface.navigate(3);
+        });
+        $multiBtn.click(function(){
+            CAPS.solo = false;
+            $('#wrapper').removeClass('solo');
+
+            Interface.navigate(1);
+            if(!Interface.multiRdy) Interface.initMulti();
+        });
+        $btBackGlobal.click(function(){
+            Interface.navigateBack();
+        });
+
+
+    },
+
+
+
+    initMulti : function(hash){
+        this.multiRdy = true;
+
+        if(hash){
+            $('#join-code').val(hash);
+            Game.Player.onPlayerStartClick();
+        }else{
+            var $multi = $('#multiplayer'),
+                $generateCode = $multi.find('#host-party'),
+                $startParty = $multi.find('#start-party'),
+                $joinParty = $multi.find('#join-party');
+
+            $generateCode.on('click', Game.Host.onCreateClick);
+            $joinParty.on('click', Game.Player.onPlayerStartClick);
+            $startParty.on('click', Game.Player.onPlayerStartClick);
+        }
+
+
+    },
+
+    initPickName : function(){
+        this.pickNameRdy = true;
+
+
+        var $pickname = $('#pickname'),
+            $generateName = $pickname.find('#bt-generate-name'),
+            $sendName = $pickname.find('#bt-send-name'),
+            namesCopy = generatedNames.slice(),
+            nameItv;
+
+        $sendName.on('click', function(){
+            Game.Player.name = $('#input-player-name').val() || generatedNames[Math.round(Math.random()*(generatedNames.length-1))];
+            Interface.navigate(4);
+        });
+
+        $generateName.on('click', function(){
+            clearInterval(nameItv);
+
+
+            var rd = Math.round(Math.random()*(namesCopy.length-1));
+            var name = (namesCopy.splice(rd, 1)).toString();
+            var full = '';
+            var i = 0;
+            var $input =  $('#input-player-name');
+
+            nameItv = setInterval(function(){
+                full += name.charAt(i);
+                $input.val(full);
+                i++;
+                if(i == name.length){
+                    clearInterval(nameItv);
+                }
+            }, 30);
+            if(namesCopy.length == 0){
+                namesCopy = generatedNames.slice();
+            }
+        });
+
+    },
+
+    initCapsSelect: function(){
+        this.pickCapsRdy = true;
+
+        var $slideShow = $('#beer-slide-c'),
+            $capSlides = $slideShow.find('.cap-list li'),
+            $bgSlides = $('#beer-bg-slider li'),
+            $navBtm = $slideShow.find('.nav-bottle li'),
+            $arr = $slideShow.find('.arw'),
+            curSlide = 0,
+            $sendCaps = $('#bt-send-caps'),
+            $bgMask = $('#beer-bg-slider .blc-msk'),
+            colorName = ['ptp', 'chouffe', 'pelle', 'foster', 'lef', 'chimey'];
+
+        $navBtm.click(function(){
+            var i = $(this).index();
+            changeSlide(i);
+        });
+
+        $arr.click(function(){
+            var i = 0;
+            if($(this).hasClass('lf-arw')){
+                i = curSlide == 0 ? 5 : curSlide-1;
+            }else{
+                i = curSlide == 5 ? 0 : curSlide+1;
+            }
+            changeSlide(i);
+        });
+
+
+        function changeSlide(i){
+            var lf = i > curSlide;
+
+            $capSlides.eq(curSlide).addClass(lf ? 'lf' : 'rg');
+            $capSlides.eq(i).removeClass('lf rg');
+            $capSlides.slice(i+1).addClass('na').removeClass('lf').addClass('rg').removeClass('na');
+            $capSlides.slice(0,i).addClass('na').removeClass('rg').addClass('lf').removeClass('na');
+
+            if(i==5){
+                $capSlides.eq(0).addClass('na').removeClass('lf').addClass('rg').removeClass('na');
+            }else if(i==0){
+                $capSlides.eq(5).addClass('na').removeClass('rg').addClass('lf').removeClass('na');
+            }
+
+            Game.Player.caps = $capSlides.eq(i).attr('id');
+            console.log(Game.Player.caps);
+            refreshNav(i);
+            curSlide = i;
+        }
+
+        function refreshNav(i){
+            $navBtm.removeClass();
+            $navBtm.eq(i).addClass('act');
+            $bgSlides.removeClass('act');
+            $bgSlides.eq(i).addClass('act');
+
+            $bgMask.removeClass('ptp chouffe pelle foster lef chimey').addClass(colorName[i]);
+        }
+
+        if(CAPS.solo)
+            $sendCaps.on('click', function(){Interface.navigate(6)});
+        else
+            $sendCaps.on('click', Game[Game.role].sendPlayerInfo);
+
+    },
+    textoBox : {
+        $sdBox : null,
+        $rdBox :null,
+        tm : null,
+        tmo:null,
+        init : function(){
+
+            Interface.txtoRdy = true;
+
+            autoMessages = [
+                "<p>Maman :</p><p>encore.au.bar?bisou.maman</p>",
+                "<p>Chaton <3 :</p><p>"+Game.Player.name+", c'est fini nous deux, je pars avec Fredo.</p>",
+                "<p>Soeurette :</p><p>Qu'est-ce que tu fous "+Game.Player.name+" ?! Tout le monde t'attend au mariage de Tata Jacqueline !</p>",
+                "<p>Boss :</p><p>Bonsoir, j'attends votre rendu sur le cas ROUME demain matin à 6h sur mon bureau.</p>",
+                "<p>PizzaPingui :</p><p>Dépechez vous ! Pour deux pizzas thon patate mayo achetées, la troisième offerte !</p>",
+                "<p>Tony CAZANASS :</p><p>Crois pas que tu va t'en tirer comme ça "+Game.Player.name+ ", on va venir te couper les pieds !</p>",
+                "<p>Ben :</p><p>Yo gro bien ? dsl mai ta pas 100 balle à m'depanne ?</p>",
+
+            ];
+
+            poteRelou = [
+                "<p>Alex:</p><p>Beerpong ce soir ?</p>",
+                "<p>Alex:</p><p>Petite pétanque tout à l'heure ?</p>",
+                "<p>Alex:</p><p>Alors, ça sort ce soir ?</p>",
+                "<p>Alex:</p><p>Allooooooooo</p>",
+                "<p>Alex:</p><p>???????</p>"
+            ];
+
+            this.$sdBox = $('#sd-messages-box');
+            this.$rcBox = $('#rc-messages-box');
+
+            if(CAPS.solo){
+                $('#txto-sd').remove();
+                var txtoItv = setInterval(function(){
+                    if(autoMessages.length > 0 || poteRelou.length > 0){
+                        Interface.textoBox.showTexto(0);
+                    }else{
+                        clearInterval(txtoItv);
+                    }
+//                }, 30000+Math.random()*10000);
+                }, 10000+Math.random()*5000);
+            }
+
+
+
+
+            var $rcb = this.$rcBox;
+
+            var sendDelay = 1000;
+
+            this.$sdBox.on('click', 'li', function(){
+                var i = $(this).index();
+                Game.Player.playerMessage(i);
+                Interface.textoBox.$sdBox.addClass('disabled');
+
+                setTimeout(function(){
+                    Interface.textoBox.$sdBox.removeClass('disabled');
+                }, sendDelay);
+            });
+
+            this.tm = new TimelineMax({paused:true});
+//            this.tmo = new TimelineMax({paused:true});
+
+            this.tm.to($rcb, 0, {width:0, height:0, opacity:0})
+                .to($rcb, 0.3, {width:200, height:3, opacity:1, ease: Elastic.easeOut.config(1, 0.4)}, 0.1)
+                .to($rcb, 0.3, {height:80, ease: Elastic.easeOut.config(1, 0.4)});
+
+//            this.tmo.to($rcb, 0.6, {width:0, height:0, opacity:0, ease: Elastic.easeOut.config(1, 0.4)});
+
+            TweenLite.set($rcb,{width:0, height:0, opacity:0})
+
+
+        },
+        showTexto : function(i){
+
+
+            var shownTime = 7500;
+            var $rcb = this.$rcBox;
+            var texto;
+            if(CAPS.solo){
+
+                if((Math.random() > 0.3 || poteRelou.length == 0) && autoMessages.length > 0){
+                    var rdt = Math.round(Math.random()* (autoMessages.length-1));
+                    texto = autoMessages[rdt];
+                    autoMessages.splice(rdt, 1);
+                }else if(poteRelou.length > 0){
+                    texto = poteRelou[0];
+                    poteRelou.splice(0, 1);
+                }
+            }else{
+               texto = this.$sdBox.find('li div').eq(i).html();
+            }
+
+            $rcb.find('.center').empty().append(texto);
+            $rcb.find('p').lettering();
+            $rcb.find('span').css({opacity:0});
+
+            if(phone) phone.receiveMessage();
+
+            setTimeout(function(){
+                Interface.textoBox.tm.play();
+
+                setTimeout(function(){
+                    var n = 0;
+                    var spanInt = setInterval(function(){
+                        TweenLite.set($rcb.find('span').eq(n), {opacity:1});
+                        n++;
+                        if(n == $rcb.find('span').length){
+                            clearInterval(spanInt);
+                        }
+                    }, 0.4);
+                }, 1000);
+
+
+                setTimeout(function(){
+                    var nbSpan = $rcb.find('span').length-1;
+                    var n = nbSpan;
+
+                    var spanInt = setInterval(function(){
+                        TweenLite.set($rcb.find('span').eq(n), {opacity:0});
+                        n--;
+                        if(n == -1){
+                            clearInterval(spanInt);
+                        }
+                    }, 0.2);
+                    setTimeout(function(){
+                        Interface.textoBox.tm.reverse();
+//                        Interface.textoBox.tmo.play();
+
+                        setTimeout(function(){
+                            phone.closeMessage();
+                        }, 800);
+
+                    }, (nbSpan-1)*10);
+
+                }, shownTime);
+            }, 1000);
+        }
+    },
+    initResetParty : function(){
+        var $resetC = $('#reset-party-c'),
+            $h3 = $resetC.find('h3'),
+            $h4 = $resetC.find('h4');
+
+        TweenMax.set($h4,{scale:0.5, opacity:0, height:0});
+
+
+        $resetC.find('#bt-reset-party').click(function(){
+
+            if(CAPS.solo){
+                Party.resetParty();
+            }else{
+                Game.Player.playerReset();
+                $resetC.addClass('loading');
+                TweenMax.to($h3, 0.4, {scale:0.5, opacity:0, onComplete: function(){
+                    $h3.text('En attente de ton adversaire...');
+                    TweenMax.to($h3, 0.4, {scale:1, opacity:1, delay:0.5,  ease:Elastic.easeOut.config(1, 0.4)});
+                }});
+            }
+        });
+
+        $resetC.find('#bt-quit-reset').click(function(){
+            window.location = location.href.replace(location.hash,'');
+        });
+    },
+    initMenu : function(){
+        var $btMenu = $('#bt-menu'),
+            $btClose = $('#bt-close-menu'),
+            $btCloseTuto = $('#bt-close-tuto'),
+            $btQuit = $('#lk-quit'),
+            $menu = $('#pause-menu'),
+            $volets = $menu.find('.volet'),
+            $quit = $menu.find('#quit-pause'),
+            $btsQuit = $quit.find('.bt');
+
+
+        $btMenu.click(function(){
+            TweenMax.to($menu, 0.7, {opacity:1, display:"block"});
+            TweenMax.to($btMenu, 0.3, {opacity:0});
+        });
+
+
+        $menu.find('#lk-about').click(function(){
+            $volets.addClass('hidden');
+            $volets.filter('#about-pause').removeClass('hidden');
+        });
+
+        $menu.find('#lk-tuto').click(function(){
+            $volets.addClass('hidden');
+            $volets.filter('#tuto-pause').removeClass('hidden');
+            TweenMax.to($btClose, 0.5, {opacity:0});
+            TweenMax.to($menu.find('.pause-logo'), 0.5, {scale:0, opacity:0, ease:Elastic.easeOut.config(1, 0.4)});
+            if(Player.totalLaunched == 0)
+                TweenMax.to($plpart.find('.cap-tuto'), 0.5, {scale:0, opacity:0, ease:Elastic.easeOut.config(1, 0.4)});
+
+        });
+
+        $menu.find('.back').click(function(){
+            $volets.addClass('hidden');
+            TweenMax.to($menu.find('.pause-logo'), 0.5, {scale:1, opacity:1});
+            $volets.filter('#home-pause').removeClass('hidden');
+        });
+
+
+        $($btClose).click(closeMenu);
+        $($btCloseTuto).click(closeMenu);
+
+        function closeMenu(){
+            TweenMax.to($menu, 0.7, {opacity:0, onComplete: function(){
+                TweenMax.to($btMenu, 0.3, {opacity:1});
+
+                TweenMax.set($menu, {display:"none"});
+
+                $volets.addClass('hidden');
+
+                TweenMax.set($btClose, {scale:1, opacity:1});
+
+                TweenMax.set($menu.find('.pause-logo'), {scale:1, opacity:1});
+                $volets.filter('#home-pause').removeClass('hidden');
+            }});
+        }
+
+        $btQuit.click(function(){
+            $volets.addClass('hidden');
+            $quit.removeClass('hidden');
+        });
+        $btsQuit.click(function(){
+          if($(this).hasClass('no')){
+              $volets.addClass('hidden');
+              TweenMax.to($menu.find('.pause-logo'), 0.5, {scale:1, opacity:1});
+              $volets.filter('#home-pause').removeClass('hidden');
+          }else{
+              window.location = location.href.replace(location.hash,'');
+          }
+        });
+
+    },
+    hdr : {
+        $logo : null,
+        $bt : null,
+        active:true,
+        multiPartyLaunched: false,
+        init:function(){
+            this.$logo = $('header h1');
+            this.$bt = $('header .bt');
+            $('header').hide();
+            this.hide();
+        },
+        show : function(){
+            $('header').show();
+            TweenMax.to(Interface.hdr.$logo,0.5,{scale:1, opacity:1, ease:Elastic.easeOut.config(1, 0.4)});
+        },
+        hide : function(){
+            TweenMax.to(Interface.hdr.$logo,0.3,{scale:0, opacity:0, onComplete:function(){
+                $('header').hide();
+            }});
+            this.hideBt();
+        },
+        hideBt : function(){
+            TweenMax.to(Interface.hdr.$bt,0.3,{x:-50, opacity:0, onComplete:function(){
+                Interface.hdr.$bt.hide();
+            }});
+            this.active = false;
+        },
+        showBt : function(){
+            Interface.hdr.$bt.show();
+            TweenMax.to(Interface.hdr.$bt,0.5,{x:0, opacity:1, ease:Elastic.easeOut.config(1, 0.4)});
+            this.active = false;
+
+        }
+    }
+
+};
