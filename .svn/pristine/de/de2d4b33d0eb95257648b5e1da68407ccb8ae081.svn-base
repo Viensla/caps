@@ -177,7 +177,7 @@ function render() {
 
     if(phone){
         var phonePos = toScreenPosition(phone, camera);
-        TweenLite.set($('#txto-rc'),{y:phonePos.y, x:phonePos.x});
+        TweenLite.set(Interface.textoBox.$rcBox,{top:phonePos.y, left:phonePos.x});
     }
 
     animateDust(time/10);
@@ -231,7 +231,9 @@ CAPS.launchGame = function(){
     $('#reset-party-c h4').find('span').text(Game.Enemy.name);
 
 
-
+    $('#mute').click(function(){
+        Sounds.mute = !Sounds.mute;
+    });
     $('#quality').click(function(){
         $(this).toggleClass('low');
         if($(this).hasClass('low'))
@@ -246,9 +248,13 @@ CAPS.launchGame = function(){
     }
 
     $plpart.find('.capsstock span').click(function(){
+
+
+
         if(!Viensla.isPlaying){
             $(this).removeClass().addClass('animated zoomOut');
             Party.plplay();
+
             if(Player.totalLaunched == 0)
                 TweenMax.to($plpart.find('.cap-tuto'), 0.5, {scale:0, opacity:0, ease:Elastic.easeOut.config(1, 0.4)});
 
@@ -263,13 +269,11 @@ function onWindowResize( event ) {
 
     console.log(quality);
 
-    var qual = Math.min(1, quality+0.4);
+    var qual = Math.max(1, quality+0.4);
     var w = Math.round(WIDTH*qual);
     var h = Math.round(HEIGHT*qual);
 
     $('#quality span').text(Math.round(qual*10)/10);
-    TweenLite.to($('#quality'), 0.3, {opacity:1});
-    TweenLite.to($('#quality'), 1, {opacity:0}, 1);
 
 
     if(CAPS.quality == 'low'){
@@ -358,10 +362,8 @@ function create_camera(){
         mouse.y	= (event.clientY / window.innerHeight) - 0.5;
 
 //        if(Player.drunked < 11){
-//            camera.position.x += (mouse.x * 20 - camera.position.x) * (0.5*3) + camera.initialpos.x;
-//            camera.position.y += (mouse.y * 10 - camera.position.y) * (0.5*3) + camera.initialpos.y-10;
-        camera.position.x += (mouse.x * 20 - camera.position.x) * (0.3*3) + camera.initialpos.x;
-        camera.position.y += (mouse.y * 10 - camera.position.y) * (0.5*3) + camera.initialpos.y+80;
+////            camera.position.x += (mouse.x * 20 - camera.position.x) * (0.5*3) + camera.initialpos.x;
+////            camera.position.y += (mouse.y * 10 - camera.position.y) * (0.5*3) + camera.initialpos.y-10;
 //        }
 //        camera.lookAt(lookatobj);
     }, false);
@@ -392,52 +394,65 @@ capCollision = function ( collided, linearVelocity, angularVelocity, other ){
 
     if(capPlayed.floating) return;
 
+    console.log('collision')
     var collision = collided.name;
 
 
-    var velocity = Math.abs(linearVelocity.x) + Math.abs(linearVelocity.y) + Math.abs(linearVelocity.z);
-
     switch(collision){
         case 'level':
-            if(capPlayed.name == 'player'){
-                if(velocity > 60)
-                    Snds.playSd('simpletap2');
-            }
+            if(!Sounds.mute) Sounds.simpletap2.play();
             break;
         case 'tapis':
-            if(velocity > 60)
-                Snds.playSd('simpletap1');
+            if(!Sounds.mute) Sounds.simpletap1.play();
             break;
         case 'floor':
-            if(velocity > 60)
-                Snds.playSd('simpletap3');
+            if(!Sounds.mute) Sounds.simpletap3.play();
             break;
         case 'vlCap':
+
             if(capPlayed.name == 'player'){
+                console.log('You caps it');
+
                 collided.collided = true;
                 collided.__dirty_postion = true;
-                Snds.playSd('capcap');
+//                collided.setAngularFactor(new THREE.Vector3(1,1,1));
+//                collided.setAngularVelocity( new THREE.Vector3(1,1,2) );
+//                collided.setLinearVelocity( new THREE.Vector3(1,1,2) );
+
             }
+            if(!Sounds.mute) Sounds.capcap.play();
             break;
         case 'plCap':
             if(capPlayed.name == 'viensla'){
+                console.log('Viens la caps it');
                 collided.collided = true;
                 collided.__dirty_postion = true;
-                Snds.playSd('capcap');
+//                collided.setAngularFactor(new THREE.Vector3(1,1,-1));
+//                collided.setAngularVelocity( new THREE.Vector3(1,1,2) );
+//                collided.setLinearVelocity( new THREE.Vector3(1,1,2) );
+
             }
+            if(!Sounds.mute) Sounds.pschit1.play();
             break;
         case 'vlBottle':
-            if(velocity > 60)
-                Snds.playSd('clink');
+            if(!Sounds.mute) Sounds.clink.play();
             break;
         case 'plBottle':
-            if(velocity > 60)
-                Snds.playSd('clink');
+            if(!Sounds.mute) Sounds.pschit1.play();
             break;
         case '':
             console.log('Unamed hit !');
             break;
     }
+
+
+
+//    if(collision == 'vlCap'){
+//        collided.__dirtyPosition = true;
+//    }
+
+
+
 };
 
 
@@ -531,12 +546,13 @@ function create_caps(who){
     playedCaps.name = who == 'vl' ?  'viensla' : 'player';
 
 
-    if(elements.length > 4){
+    if(elements.length > 5){
         var last = elements[0];
         last.stopGravity();
         elements.splice(0, 1);
     }
 
+    if(!Sounds.mute) Sounds.pschit1.play();
 }
 
 
@@ -807,7 +823,7 @@ var shadowColors = {
 var Party = {
     isPlaying : false,
     capsPerTurn : 1,
-    lives : 10,
+    lives : 60,
     create : function(){
         Viensla.generateCaps();
 
@@ -843,8 +859,6 @@ var Party = {
                     animTypo($startTypo);
                     Party.setTurn();
                     TweenMax.fromTo($plpart.find('.cap-tuto'),0.5,{scale:0, opacity:0}, {scale:1, opacity:1, ease:Elastic.easeOut.config(1, 0.4), delay:0.5});
-                    Snds.fadInSd('ambiance');
-                    Snds.playSd('open');
                 }, 500);
             }, 1000);
         }, 2000);
@@ -874,7 +888,6 @@ var Party = {
         TweenMax.to($resetC, 1, {opacity:0, onComplete:function(){
             TweenMax.set($resetC,{display:'none'});
             animTypo($startTypo);
-            Snds.playSd('open');
             TweenMax.set($resetC.find('h4'),{scale:0.5, opacity:0, height:0});
         }});
 
@@ -1010,14 +1023,10 @@ var Party = {
 
                     if(pctPlLife <= 0){
                         animTypo($loseTypo, 800);
-                        Snds.playSd('lose');
-                        setTimeout(Snds.playSd('clairon'), 3000);
                         $('#reset-party-c').removeClass().addClass('looser').find('h3').text('Une petite revanche ?');
                     }else if(pctVlLife <= 0){
                         animTypo($winTypo, 800);
-                        Snds.playSd('win');
                         $('#reset-party-c').removeClass().addClass('winner').find('h3').text("On va pas s'arrêter en si bon chemin !");
-                        setTimeout(Snds.playSd('applause'), 3000);
                     }
 
                     TweenMax.to($('#reset-party-c'), 1, {opacity:1, display:'block', delay:3});
@@ -1028,15 +1037,22 @@ var Party = {
     },
     animCaps : function(){
         animTypo($capsTypo);
+        if(!Sounds.mute) Sounds.pschit2.play();
     }
 }
 
 
+function startm(){
+    animTypo($startTypo);
+}
 function animTypo($el, pauseDelay){
     if(typeof pauseDelay == 'undefined')
         pauseDelay = 300;
 
     var delay = 400;
+
+
+
     $el.attr('class', 'capsIn1');
     setTimeout(function(){
         $el.attr('class', 'capsIn2');
@@ -1086,9 +1102,6 @@ var Interface = {
         this.hdr.init();
 
         window.addEventListener( 'resize', Interface.resize, false );
-
-        Snds.init();
-
     },
     resize : function(){
         $('section.sc').css({height: window.innerHeight, lineHeight: window.innerHeight+"px"});
@@ -1225,12 +1238,6 @@ var Interface = {
                 $startParty = $multi.find('#start-party'),
                 $joinParty = $multi.find('#join-party');
 
-            $('#room-code').click(function(){
-                SelectText('room-code');
-            });
-            $('#room-code-lk').click(function(){
-                SelectText('room-code-lk');
-            });
             $generateCode.on('click', Game.Host.onCreateClick);
             $joinParty.on('click', Game.Player.onPlayerStartClick);
             $startParty.on('click', Game.Player.onPlayerStartClick);
@@ -1382,8 +1389,8 @@ var Interface = {
                     }else{
                         clearInterval(txtoItv);
                     }
-                }, 30000+Math.random()*10000);
-//                }, 10000+Math.random()*5000);
+//                }, 30000+Math.random()*10000);
+                }, 10000+Math.random()*5000);
             }
 
 
@@ -1407,8 +1414,8 @@ var Interface = {
 //            this.tmo = new TimelineMax({paused:true});
 
             this.tm.to($rcb, 0, {width:0, height:0, opacity:0})
-                .to($rcb, 0.3, {width:250, height:3, opacity:1, ease: Elastic.easeOut.config(1, 0.4)}, 0.1)
-                .to($rcb, 0.3, {height:90, ease: Elastic.easeOut.config(1, 0.4)});
+                .to($rcb, 0.3, {width:200, height:3, opacity:1, ease: Elastic.easeOut.config(1, 0.4)}, 0.1)
+                .to($rcb, 0.3, {height:80, ease: Elastic.easeOut.config(1, 0.4)});
 
 //            this.tmo.to($rcb, 0.6, {width:0, height:0, opacity:0, ease: Elastic.easeOut.config(1, 0.4)});
 
@@ -1615,27 +1622,7 @@ var Interface = {
         }
     }
 
-};
-
-
-
-function SelectText(element) {
-    var doc = document,
-        text = doc.getElementById(element),
-        range, selection;
-
-    if (doc.body.createTextRange) {
-        range = document.body.createTextRange();
-        range.moveToElementText(text);
-        range.select();
-    } else if (window.getSelection) {
-        selection = window.getSelection();
-        range = document.createRange();
-        range.selectNodeContents(text);
-        selection.removeAllRanges();
-        selection.addRange(range);
-    }
-};
+};;
 planeWIDTH = 170;
 planeHEIGHT = 600;
 
@@ -1977,7 +1964,6 @@ function create_table(){
     phone.add(whiteScreen);
 
     phone.receiveMessage = function(){
-        Snds.playSd('vibreur');
         var i = 0;
         pictoScreen.material.opacity = 1;
         phone.interval = setInterval(function(){
@@ -1987,7 +1973,7 @@ function create_table(){
             if(i > 5){
                 clearInterval(phone.interval);
             }
-        }, 250);
+        }, 800);
     };
 
     phone.closeMessage = function(){
@@ -2814,6 +2800,7 @@ initializeParty = function(){
 
             updateWaitingScreen : function(data) {
                 console.log(data);
+
                 if(IO.socket.socket.sessionid === data.socketId){
                     Game.role = 'Player';
                     Game.gameId = data.gameId;
@@ -2828,6 +2815,7 @@ initializeParty = function(){
                 }else if(data.hostReady && Interface.curIndex < 3){
                     Interface.navigate(3);
                 }
+
             },
             hostReady : function(data){
                 if(IO.socket.socket.sessionid != data.socketId){
@@ -3428,106 +3416,22 @@ var Viensla = {
 //        }
 //    }
 //);
-;;var extSnd = '.mp3';
-var path = 'assets/sounds/';
-var Snds = {
-    ambiance : new Audio(path+'ambiance'+extSnd),
-    simpletap1 : new Audio(path+"choc_simple_1"+extSnd),
-    simpletap2 : new Audio(path+"choc_simple_2"+extSnd),
-    simpletap3 : new Audio(path+"choc_simple_3"+extSnd),
-    clink : new Audio(path+"clink"+extSnd),
-    capcap : new Audio(path+"caps"+extSnd),
-    open : new Audio(path+"open"+extSnd),
-    pschit2 : new Audio(path+"pschit_2"+extSnd),
-    win : new Audio(path+"you-win"+extSnd),
-    lose: new Audio(path+"you-lose"+extSnd),
-    vibreur: new Audio(path+"vibreur"+extSnd),
-    clairon: new Audio(path+"fail"+extSnd),
-    applause: new Audio(path+"applause"+extSnd),
+;;var Sounds;
 
-    mute : false,
-    init : function(){
-        var $mtbt = $('#mute');
+(function ($){
+    var path = 'assets/sounds/';
+    Sounds = {
+        simpletap1 : new Audio(path+"choc_simple_1.mp3"),
+        simpletap2 : new Audio(path+"choc_simple_2.mp3"),
+        simpletap3 : new Audio(path+"choc_simple_3.mp3"),
+        clink : new Audio(path+"clink.mp3"),
+        capcap : new Audio(path+"capcap.mp3"),
+        pschit1 : new Audio(path+"pschit_1.mp3"),
+        pschit2 : new Audio(path+"pschit_2.mp3"),
 
-        $mtbt.on('click', function(){
-            $(this).toggleClass('off');
-            Snds.mute = !Snds.mute;
-            Snds.ambiance.muted = Snds.mute;
-        });
-
-        Snds.simpletap1.volume=0.4;
-        Snds.simpletap2.volume=0.4;
-        Snds.simpletap3.volume=0.4;
-        Snds.clink.volume=0.4;
-        Snds.vibreur.volume=0.5;
-
-        Snds.ambiance.addEventListener('ended', function() {
-            this.currentTime = 0;
-            this.play();
-        }, false);
-
-        Snds.ambiance.load();
-
-
-        Snds.playSd = function(sd){
-            Snds[sd].currentTime = 0;
-            Snds[sd].play();
-            Snds[sd].isPlaying = true;
-        };
-
-        Snds.fadeSd = function(sd, to){
-            var interval;
-
-            if(typeof to == 'undefined')
-                to = 0;
-
-            if(!Snds[sd].isFading){
-                Snds[sd].isFading = true;
-
-                if(!Snds.mute){
-                    interval = setInterval(function(){
-                        if(Snds[sd].volume > to+0.05){
-                            Snds[sd].volume -= 0.05;
-                        }else{
-                            Snds[sd].volume = to;
-                            clearInterval(interval);
-                            Snds[sd].isFading = false;
-                        }
-                    }, 200);
-                }
-            }
-        };
-
-        Snds.fadInSd = function(sd){
-            var interval;
-
-            if(!Snds[sd].isFading){
-                Snds[sd].isFading = true;
-                Snds[sd].volume = 0;
-                Snds[sd].play();
-
-                if(!Snds.mute){
-                    interval = setInterval(function(){
-                        if(Snds[sd].volume < 0.3){
-                            Snds[sd].volume += 0.05;
-                        }else{
-                            clearInterval(interval);
-                            Snds[sd].isFading = false;
-                        }
-                    }, 300);
-                }
-            }
-        };
-
+        mute : true
     }
-};
-
-
-
-
-function setup_sounds(){
-
-};/*!
+})(jQuery);;/*!
  * VERSION: beta 0.2.1
  * DATE: 2014-07-17
  * UPDATES AND DOCS AT: http://www.greensock.com

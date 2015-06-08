@@ -110,7 +110,7 @@
     <div class="sc-content">
         <div id="caps-game">
             <div id="header">
-                <div id="mute"><span class="on"></span><span class="off"></span></div>
+                <div id="mute">Mute</div>
                 <div id="quality">Quality : <span>1</span></div>
                 <div id="versus-bar">
                     <div class="line"></div>
@@ -229,17 +229,13 @@
                 </div>
             </div>
 
+            <div id="rc-messages-box">
 
-            <div id="txto-rc">
-                <div id="rc-messages-box">
-
-                    <div class="center">
-                        <p>Chanton :</p>
-                        <p>Je suis trop saoul là, c'est chaud !</p>
-                    </div>
+                <div class="center">
+                    <p>Chanton :</p>
+                    <p>Je suis trop saoul là, c'est chaud !</p>
                 </div>
             </div>
-
 
             <div class="bt wh" id="bt-menu">
                 <p>Menu</p>
