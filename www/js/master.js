@@ -818,32 +818,8 @@ var shadowColors = {
             return {fps:fps, med:med};
         }
     }
-};;var timeoutRobot;
-var perfectPlayer;
-function playerReady(event){
-    perfectPlayer.mute();
-}
-
-function onytplayerStateChange(newState) {
-    if ( newState.data == 0 ) {
-//        player.playVideo();
-    }
-}
-
-function onYouTubeIframeAPIReady() {
-    console.log('youtubeload');
-
-
-
-}
-function perfectGift(){
-    TweenMax.fromTo($('#perfect-player'), 0.6, {scale:0, opacity:0},{scale:1, display:'block', opacity:1, ease:Elastic.easeOut.config(1, 0.4)});
-    perfectPlayer.playVideo();
-
-
-    TweenMax.to($('#perfect-player'), 0.5, {scale:0, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:5});
-
-}
+};
+var timeoutRobot;
 
 var Party = {
     isPlaying : false,
@@ -1011,18 +987,14 @@ var Party = {
 
             if(Viensla.lives==0 && Player.lives==Party.lives){
                 animTypo($perfectTypo);
-                perfectGift();
-                setTimeout(function(){
-                    Party.setLife();
-                },3000);
             }else{
                 this.animCaps();
-                Party.setLife();
             }
 
             setTimeout(function(){
                 Viensla.generateCaps();
             }, 2000);
+            Party.setLife();
 
         }
 
