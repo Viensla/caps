@@ -4181,47 +4181,52 @@ footer p.copy img.vl {
   transform: translateX(-100%);
 }
 /* line 119, ../../dev/sass/templates/_interface.scss */
-#pause-menu #about-pause h3 {
-  margin: 30px 0;
+#pause-menu #about-pause .back {
+  display: none;
 }
 /* line 122, ../../dev/sass/templates/_interface.scss */
+#pause-menu #about-pause h3 {
+  margin: 0px 0 30px;
+}
+/* line 125, ../../dev/sass/templates/_interface.scss */
 #pause-menu #about-pause .txt-c {
   line-height: 25px;
 }
-/* line 124, ../../dev/sass/templates/_interface.scss */
+/* line 127, ../../dev/sass/templates/_interface.scss */
 #pause-menu #about-pause .txt-c span {
   color: #5AE0D4;
   font-size: 18px;
 }
-/* line 129, ../../dev/sass/templates/_interface.scss */
+/* line 132, ../../dev/sass/templates/_interface.scss */
 #pause-menu #about-pause .stores {
   height: 80px;
   line-height: 80px;
-  margin-top: -10px;
+  margin-top: 10px;
 }
-/* line 133, ../../dev/sass/templates/_interface.scss */
+/* line 136, ../../dev/sass/templates/_interface.scss */
 #pause-menu #about-pause .stores a {
   text-decoration: none;
   vertical-align: middle;
   margin-left: 5px;
 }
-/* line 138, ../../dev/sass/templates/_interface.scss */
+/* line 141, ../../dev/sass/templates/_interface.scss */
 #pause-menu #about-pause .stores img {
   vertical-align: middle;
 }
-/* line 141, ../../dev/sass/templates/_interface.scss */
-#pause-menu #about-pause .stores .ptp img {
-  width: 118px;
-}
 /* line 144, ../../dev/sass/templates/_interface.scss */
+#pause-menu #about-pause .stores .ptp img {
+  width: 98px;
+  margin-top: -13px;
+}
+/* line 148, ../../dev/sass/templates/_interface.scss */
 #pause-menu #about-pause .stores .apple img {
   width: 103px;
 }
-/* line 147, ../../dev/sass/templates/_interface.scss */
+/* line 151, ../../dev/sass/templates/_interface.scss */
 #pause-menu #about-pause .stores .gl img {
   width: 103px;
 }
-/* line 154, ../../dev/sass/templates/_interface.scss */
+/* line 158, ../../dev/sass/templates/_interface.scss */
 #pause-menu #tuto-pause .back {
   line-height: 1;
   position: absolute;
@@ -4229,7 +4234,7 @@ footer p.copy img.vl {
   left: 50%;
   margin-left: -50px;
 }
-/* line 161, ../../dev/sass/templates/_interface.scss */
+/* line 165, ../../dev/sass/templates/_interface.scss */
 #pause-menu #tuto-pause .bt {
   position: absolute;
   width: 220px;
@@ -4238,7 +4243,7 @@ footer p.copy img.vl {
   bottom: 40px;
   line-height: 1;
 }
-/* line 168, ../../dev/sass/templates/_interface.scss */
+/* line 172, ../../dev/sass/templates/_interface.scss */
 #pause-menu #tuto-pause .bt:after {
   width: 28px;
   height: 28px;
@@ -4247,12 +4252,12 @@ footer p.copy img.vl {
   -webkit-background-size: 28px 28px;
   background-size: 28px 28px;
 }
-/* line 178, ../../dev/sass/templates/_interface.scss */
+/* line 182, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-c {
   position: absolute;
   line-height: 1;
 }
-/* line 181, ../../dev/sass/templates/_interface.scss */
+/* line 185, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-c .arr {
   width: 44px;
   height: 42px;
@@ -4263,78 +4268,78 @@ footer p.copy img.vl {
   top: 0;
   left: 0;
 }
-/* line 191, ../../dev/sass/templates/_interface.scss */
+/* line 195, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-c .pcfc {
   font-size: 21px;
   text-align: left;
 }
-/* line 194, ../../dev/sass/templates/_interface.scss */
+/* line 198, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-c .pcfc span {
   font-size: 36px;
 }
-/* line 198, ../../dev/sass/templates/_interface.scss */
+/* line 202, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-c .st {
   font-size: 16px;
   padding-left: 25px;
   text-align: left;
   line-height: 26px;
 }
-/* line 206, ../../dev/sass/templates/_interface.scss */
+/* line 210, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-1 {
   left: 140px;
   top: 450px;
 }
-/* line 209, ../../dev/sass/templates/_interface.scss */
+/* line 213, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-1 .rd {
   top: -128px;
   left: -98px;
 }
-/* line 213, ../../dev/sass/templates/_interface.scss */
+/* line 217, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-1 .arr {
   top: -30px;
   left: -47px;
 }
-/* line 218, ../../dev/sass/templates/_interface.scss */
+/* line 222, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-2 {
   left: 50%;
   top: 22%;
   margin-left: 50px;
 }
-/* line 222, ../../dev/sass/templates/_interface.scss */
+/* line 226, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-2 .arr {
   background-image: url("../images/pictos/tuto-arr-lf.png");
   top: 24px;
   left: -50px;
 }
-/* line 229, ../../dev/sass/templates/_interface.scss */
+/* line 233, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-3 {
   left: 50%;
   margin-left: 70px;
   top: 68%;
 }
-/* line 233, ../../dev/sass/templates/_interface.scss */
+/* line 237, ../../dev/sass/templates/_interface.scss */
 #pause-menu .help-3 .arr {
   top: -20px;
   left: -60px;
 }
-/* line 241, ../../dev/sass/templates/_interface.scss */
+/* line 245, ../../dev/sass/templates/_interface.scss */
 #pause-menu #quit-pause .st {
   font-family: "neutra";
   text-transform: uppercase;
   color: #fff;
   padding: 25px 0;
 }
-/* line 246, ../../dev/sass/templates/_interface.scss */
+/* line 250, ../../dev/sass/templates/_interface.scss */
 #pause-menu #quit-pause .bts {
   display: table;
   margin: 0 auto;
 }
-/* line 250, ../../dev/sass/templates/_interface.scss */
+/* line 254, ../../dev/sass/templates/_interface.scss */
 #pause-menu #quit-pause .bt {
   float: left;
   margin: 10px;
 }
-/* line 253, ../../dev/sass/templates/_interface.scss */
+/* line 257, ../../dev/sass/templates/_interface.scss */
 #pause-menu #quit-pause .bt.yes:after {
   width: 28px;
   height: 28px;
@@ -4343,7 +4348,7 @@ footer p.copy img.vl {
   -webkit-background-size: 28px 28px;
   background-size: 28px 28px;
 }
-/* line 261, ../../dev/sass/templates/_interface.scss */
+/* line 265, ../../dev/sass/templates/_interface.scss */
 #pause-menu #quit-pause .bt.no:after {
   width: 28px;
   height: 28px;
@@ -4353,7 +4358,7 @@ footer p.copy img.vl {
   background-size: 28px 28px;
 }
 
-/* line 273, ../../dev/sass/templates/_interface.scss */
+/* line 277, ../../dev/sass/templates/_interface.scss */
 #reset-party-c {
   position: absolute;
   top: 0;
@@ -4367,19 +4372,19 @@ footer p.copy img.vl {
   opacity: 0;
   display: none;
 }
-/* line 284, ../../dev/sass/templates/_interface.scss */
+/* line 288, ../../dev/sass/templates/_interface.scss */
 #reset-party-c .sc-content {
   position: relative;
 }
-/* line 288, ../../dev/sass/templates/_interface.scss */
+/* line 292, ../../dev/sass/templates/_interface.scss */
 #reset-party-c.winner .typohand.win {
   display: inline-block;
 }
-/* line 293, ../../dev/sass/templates/_interface.scss */
+/* line 297, ../../dev/sass/templates/_interface.scss */
 #reset-party-c.looser .typohand.lose {
   display: inline-block;
 }
-/* line 297, ../../dev/sass/templates/_interface.scss */
+/* line 301, ../../dev/sass/templates/_interface.scss */
 #reset-party-c .typohand {
   margin-bottom: 25px;
   width: 302px;
@@ -4390,7 +4395,7 @@ footer p.copy img.vl {
   transition: 0.3s;
   display: none;
 }
-/* line 304, ../../dev/sass/templates/_interface.scss */
+/* line 308, ../../dev/sass/templates/_interface.scss */
 #reset-party-c .tiny-loader {
   width: 288px;
   height: 240px;
@@ -4405,11 +4410,11 @@ footer p.copy img.vl {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 314, ../../dev/sass/templates/_interface.scss */
+/* line 318, ../../dev/sass/templates/_interface.scss */
 #reset-party-c h3 {
   margin-bottom: 25px;
 }
-/* line 317, ../../dev/sass/templates/_interface.scss */
+/* line 321, ../../dev/sass/templates/_interface.scss */
 #reset-party-c h4 {
   font-family: "neutra";
   text-transform: uppercase;
@@ -4417,7 +4422,7 @@ footer p.copy img.vl {
   height: 0;
   font-size: 20px;
 }
-/* line 323, ../../dev/sass/templates/_interface.scss */
+/* line 327, ../../dev/sass/templates/_interface.scss */
 #reset-party-c .bt {
   margin: 25px auto 35px;
   -moz-transition: 0.3s;
@@ -4425,17 +4430,17 @@ footer p.copy img.vl {
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
-/* line 329, ../../dev/sass/templates/_interface.scss */
+/* line 333, ../../dev/sass/templates/_interface.scss */
 #reset-party-c.loading .typohand {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 332, ../../dev/sass/templates/_interface.scss */
+/* line 336, ../../dev/sass/templates/_interface.scss */
 #reset-party-c.loading .tiny-loader {
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 335, ../../dev/sass/templates/_interface.scss */
+/* line 339, ../../dev/sass/templates/_interface.scss */
 #reset-party-c.loading .bt {
   -moz-transform: scale(0);
   -ms-transform: scale(0);
@@ -4443,7 +4448,7 @@ footer p.copy img.vl {
   transform: scale(0);
 }
 
-/* line 344, ../../dev/sass/templates/_interface.scss */
+/* line 348, ../../dev/sass/templates/_interface.scss */
 #versus-bar {
   position: absolute;
   left: 50%;
@@ -4452,7 +4457,7 @@ footer p.copy img.vl {
   z-index: 100;
   width: 430px;
 }
-/* line 351, ../../dev/sass/templates/_interface.scss */
+/* line 355, ../../dev/sass/templates/_interface.scss */
 #versus-bar #cursor {
   width: 0;
   height: 0;
@@ -4472,15 +4477,15 @@ footer p.copy img.vl {
   -ms-animation: cursor 1.5s both infinite alternate linear;
   animation: cursor 1.5s both infinite alternate linear;
 }
-/* line 362, ../../dev/sass/templates/_interface.scss */
+/* line 366, ../../dev/sass/templates/_interface.scss */
 #versus-bar #cursor.lf {
   left: 0;
 }
-/* line 365, ../../dev/sass/templates/_interface.scss */
+/* line 369, ../../dev/sass/templates/_interface.scss */
 #versus-bar #cursor.rg {
   left: 415px;
 }
-/* line 369, ../../dev/sass/templates/_interface.scss */
+/* line 373, ../../dev/sass/templates/_interface.scss */
 #versus-bar .line {
   height: 3px;
   width: 100%;
@@ -4490,7 +4495,7 @@ footer p.copy img.vl {
   right: 0;
   top: 40px;
 }
-/* line 378, ../../dev/sass/templates/_interface.scss */
+/* line 382, ../../dev/sass/templates/_interface.scss */
 #versus-bar img {
   width: 60px;
   height: 60px;
@@ -4499,7 +4504,7 @@ footer p.copy img.vl {
   top: 13px;
   margin-left: -30px;
 }
-/* line 386, ../../dev/sass/templates/_interface.scss */
+/* line 390, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los {
   position: absolute;
   width: 15px;
@@ -4511,15 +4516,15 @@ footer p.copy img.vl {
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-/* line 393, ../../dev/sass/templates/_interface.scss */
+/* line 397, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.pl {
   left: 0;
 }
-/* line 396, ../../dev/sass/templates/_interface.scss */
+/* line 400, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.vl {
   right: 0;
 }
-/* line 399, ../../dev/sass/templates/_interface.scss */
+/* line 403, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los:after {
   content: " ";
   background: blue;
@@ -4528,32 +4533,32 @@ footer p.copy img.vl {
   height: 9px;
   margin: 3px;
 }
-/* line 408, ../../dev/sass/templates/_interface.scss */
+/* line 412, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.chimey:after {
   background: #2e7cff;
 }
-/* line 413, ../../dev/sass/templates/_interface.scss */
+/* line 417, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.foster:after {
   background: #163282;
 }
-/* line 418, ../../dev/sass/templates/_interface.scss */
+/* line 422, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.lef:after {
   background: #facc14;
 }
-/* line 423, ../../dev/sass/templates/_interface.scss */
+/* line 427, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.pelle:after {
   background: #f24141;
 }
-/* line 428, ../../dev/sass/templates/_interface.scss */
+/* line 432, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.chouffe:after {
   background: #4d9c40;
 }
-/* line 433, ../../dev/sass/templates/_interface.scss */
+/* line 437, ../../dev/sass/templates/_interface.scss */
 #versus-bar .los.ptp:after {
   background: #f58b31;
 }
 
-/* line 441, ../../dev/sass/templates/_interface.scss */
+/* line 445, ../../dev/sass/templates/_interface.scss */
 .powerbar {
   width: 20px;
   height: 200px;
@@ -4577,7 +4582,7 @@ footer p.copy img.vl {
   -o-mask-size: 100% 100%;
   mask-size: 100% 100%;
 }
-/* line 453, ../../dev/sass/templates/_interface.scss */
+/* line 457, ../../dev/sass/templates/_interface.scss */
 .powerbar .bar {
   position: absolute;
   bottom: 0;
@@ -4603,7 +4608,7 @@ footer p.copy img.vl {
   /* IE6-9 */
 }
 
-/* line 471, ../../dev/sass/templates/_interface.scss */
+/* line 475, ../../dev/sass/templates/_interface.scss */
 #header {
   position: absolute;
   top: 0;
@@ -4612,7 +4617,7 @@ footer p.copy img.vl {
   width: 100%;
   z-index: 50;
 }
-/* line 478, ../../dev/sass/templates/_interface.scss */
+/* line 482, ../../dev/sass/templates/_interface.scss */
 #header h3 {
   text-transform: uppercase;
   text-align: center;
@@ -4625,13 +4630,13 @@ footer p.copy img.vl {
   height: 40px;
   line-height: 40px;
 }
-/* line 488, ../../dev/sass/templates/_interface.scss */
+/* line 492, ../../dev/sass/templates/_interface.scss */
 #header h3 span {
   vertical-align: middle;
   line-height: 20px;
   display: inline-block;
 }
-/* line 495, ../../dev/sass/templates/_interface.scss */
+/* line 499, ../../dev/sass/templates/_interface.scss */
 #header #mute {
   position: absolute;
   top: 10px;
@@ -4641,7 +4646,7 @@ footer p.copy img.vl {
   overflow: hidden;
   cursor: pointer;
 }
-/* line 503, ../../dev/sass/templates/_interface.scss */
+/* line 507, ../../dev/sass/templates/_interface.scss */
 #header #mute span {
   position: absolute;
   width: 20px;
@@ -4655,11 +4660,11 @@ footer p.copy img.vl {
   -webkit-background-size: 20px 20px;
   background-size: 20px 20px;
 }
-/* line 512, ../../dev/sass/templates/_interface.scss */
+/* line 516, ../../dev/sass/templates/_interface.scss */
 #header #mute span.on {
   background-image: url("../images/pictos/btn-sound-on.png");
 }
-/* line 515, ../../dev/sass/templates/_interface.scss */
+/* line 519, ../../dev/sass/templates/_interface.scss */
 #header #mute span.off {
   background-image: url("../images/pictos/btn-sound-off.png");
   -moz-transform: translateY(20px);
@@ -4667,21 +4672,21 @@ footer p.copy img.vl {
   -webkit-transform: translateY(20px);
   transform: translateY(20px);
 }
-/* line 521, ../../dev/sass/templates/_interface.scss */
+/* line 525, ../../dev/sass/templates/_interface.scss */
 #header #mute.off .off {
   -moz-transform: translateY(0px);
   -ms-transform: translateY(0px);
   -webkit-transform: translateY(0px);
   transform: translateY(0px);
 }
-/* line 524, ../../dev/sass/templates/_interface.scss */
+/* line 528, ../../dev/sass/templates/_interface.scss */
 #header #mute.off .on {
   -moz-transform: translateY(-20px);
   -ms-transform: translateY(-20px);
   -webkit-transform: translateY(-20px);
   transform: translateY(-20px);
 }
-/* line 529, ../../dev/sass/templates/_interface.scss */
+/* line 533, ../../dev/sass/templates/_interface.scss */
 #header #quality {
   position: absolute;
   top: 21px;
@@ -4690,28 +4695,28 @@ footer p.copy img.vl {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 536, ../../dev/sass/templates/_interface.scss */
+/* line 540, ../../dev/sass/templates/_interface.scss */
 #header .pl-part {
   left: 50px;
 }
-/* line 538, ../../dev/sass/templates/_interface.scss */
+/* line 542, ../../dev/sass/templates/_interface.scss */
 #header .pl-part h3 {
   text-align: left;
   left: 80px;
 }
-/* line 542, ../../dev/sass/templates/_interface.scss */
+/* line 546, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .capsstock {
   left: 8px;
 }
-/* line 545, ../../dev/sass/templates/_interface.scss */
+/* line 549, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .life-bloc {
   left: 16px;
 }
-/* line 548, ../../dev/sass/templates/_interface.scss */
+/* line 552, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .blason {
   left: 0px;
 }
-/* line 552, ../../dev/sass/templates/_interface.scss */
+/* line 556, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .cap-tuto {
   position: absolute;
   left: 1px;
@@ -4721,7 +4726,7 @@ footer p.copy img.vl {
   -webkit-transform: scale(0);
   transform: scale(0);
 }
-/* line 557, ../../dev/sass/templates/_interface.scss */
+/* line 561, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .cap-tuto .arr {
   height: 32px;
   width: 13px;
@@ -4731,7 +4736,7 @@ footer p.copy img.vl {
   margin-left: 24px;
   margin-bottom: 10px;
 }
-/* line 566, ../../dev/sass/templates/_interface.scss */
+/* line 570, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .cap-tuto p {
   font-family: "neutra";
   text-transform: uppercase;
@@ -4739,35 +4744,35 @@ footer p.copy img.vl {
   width: 67px;
   text-align: center;
 }
-/* line 575, ../../dev/sass/templates/_interface.scss */
+/* line 579, ../../dev/sass/templates/_interface.scss */
 #header .vl-part {
   right: 50px;
 }
-/* line 577, ../../dev/sass/templates/_interface.scss */
+/* line 581, ../../dev/sass/templates/_interface.scss */
 #header .vl-part h3 {
   right: 80px;
   text-align: right;
 }
-/* line 581, ../../dev/sass/templates/_interface.scss */
+/* line 585, ../../dev/sass/templates/_interface.scss */
 #header .vl-part .capsstock {
   right: 8px;
 }
-/* line 584, ../../dev/sass/templates/_interface.scss */
+/* line 588, ../../dev/sass/templates/_interface.scss */
 #header .vl-part .life-bloc {
   right: 16px;
 }
-/* line 587, ../../dev/sass/templates/_interface.scss */
+/* line 591, ../../dev/sass/templates/_interface.scss */
 #header .vl-part .blason {
   right: 0px;
 }
-/* line 592, ../../dev/sass/templates/_interface.scss */
+/* line 596, ../../dev/sass/templates/_interface.scss */
 #header .pl-part, #header .vl-part {
   position: absolute;
   width: 200px;
   display: none;
   top: 80px;
 }
-/* line 597, ../../dev/sass/templates/_interface.scss */
+/* line 601, ../../dev/sass/templates/_interface.scss */
 #header .pl-part .blason, #header .vl-part .blason {
   width: 66px;
   height: 66px;
@@ -4779,85 +4784,85 @@ footer p.copy img.vl {
   background-size: 70px 70px;
   background-position: -2px -2px;
 }
-/* line 607, ../../dev/sass/templates/_interface.scss */
+/* line 611, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chimey .life, #header .vl-part.chimey .life {
   background: #2e7cff;
 }
-/* line 610, ../../dev/sass/templates/_interface.scss */
+/* line 614, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chimey .blason, #header .vl-part.chimey .blason {
   background-image: url("../images/beers/stickers/rounds/rd-chimais.png");
 }
-/* line 613, ../../dev/sass/templates/_interface.scss */
+/* line 617, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chimey .capsstock span, #header .vl-part.chimey .capsstock span {
   background-image: url("../model/3D/caps_material/chimais.png");
 }
-/* line 618, ../../dev/sass/templates/_interface.scss */
+/* line 622, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.foster .life, #header .vl-part.foster .life {
   background: #163282;
 }
-/* line 621, ../../dev/sass/templates/_interface.scss */
+/* line 625, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.foster .blason, #header .vl-part.foster .blason {
   background-image: url("../images/beers/stickers/rounds/rd-faustaire.png");
 }
-/* line 624, ../../dev/sass/templates/_interface.scss */
+/* line 628, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.foster .capsstock span, #header .vl-part.foster .capsstock span {
   background-image: url("../model/3D/caps_material/faustaire.png");
 }
-/* line 629, ../../dev/sass/templates/_interface.scss */
+/* line 633, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.lef .life, #header .vl-part.lef .life {
   background: #facc14;
 }
-/* line 632, ../../dev/sass/templates/_interface.scss */
+/* line 636, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.lef .blason, #header .vl-part.lef .blason {
   background-image: url("../images/beers/stickers/rounds/rd-lef.png");
 }
-/* line 635, ../../dev/sass/templates/_interface.scss */
+/* line 639, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.lef .capsstock span, #header .vl-part.lef .capsstock span {
   background-image: url("../model/3D/caps_material/lef.png");
 }
-/* line 640, ../../dev/sass/templates/_interface.scss */
+/* line 644, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.pelle .life, #header .vl-part.pelle .life {
   background: #f24141;
 }
-/* line 643, ../../dev/sass/templates/_interface.scss */
+/* line 647, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.pelle .blason, #header .vl-part.pelle .blason {
   background-image: url("../images/beers/stickers/rounds/rd-pelle.png");
 }
-/* line 646, ../../dev/sass/templates/_interface.scss */
+/* line 650, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.pelle .capsstock span, #header .vl-part.pelle .capsstock span {
   background-image: url("../model/3D/caps_material/pelle.png");
 }
-/* line 651, ../../dev/sass/templates/_interface.scss */
+/* line 655, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chouffe .life, #header .vl-part.chouffe .life {
   background: #4d9c40;
 }
-/* line 654, ../../dev/sass/templates/_interface.scss */
+/* line 658, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chouffe .blason, #header .vl-part.chouffe .blason {
   background-image: url("../images/beers/stickers/rounds/rd-shouffe.png");
 }
-/* line 657, ../../dev/sass/templates/_interface.scss */
+/* line 661, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.chouffe .capsstock span, #header .vl-part.chouffe .capsstock span {
   background-image: url("../model/3D/caps_material/shouffe.png");
 }
-/* line 662, ../../dev/sass/templates/_interface.scss */
+/* line 666, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.ptp .life, #header .vl-part.ptp .life {
   background: #f58b31;
 }
-/* line 665, ../../dev/sass/templates/_interface.scss */
+/* line 669, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.ptp .blason, #header .vl-part.ptp .blason {
   background-image: url("../images/beers/stickers/rounds/rd-ptp.png");
 }
-/* line 668, ../../dev/sass/templates/_interface.scss */
+/* line 672, ../../dev/sass/templates/_interface.scss */
 #header .pl-part.ptp .capsstock span, #header .vl-part.ptp .capsstock span {
   background-image: url("../model/3D/caps_material/ptp.png");
 }
-/* line 677, ../../dev/sass/templates/_interface.scss */
+/* line 681, ../../dev/sass/templates/_interface.scss */
 #header .capsstock {
   width: 50px;
   position: absolute;
   top: 250px;
 }
-/* line 682, ../../dev/sass/templates/_interface.scss */
+/* line 686, ../../dev/sass/templates/_interface.scss */
 #header .capsstock span {
   border-radius: 50%;
   height: 50px;
@@ -4867,7 +4872,7 @@ footer p.copy img.vl {
   cursor: pointer;
   background-size: 100% 100%;
 }
-/* line 694, ../../dev/sass/templates/_interface.scss */
+/* line 698, ../../dev/sass/templates/_interface.scss */
 #header .life-bloc {
   position: absolute;
   top: 90px;
@@ -4875,7 +4880,7 @@ footer p.copy img.vl {
   width: 35px;
   background: url(../images/mask/bottle-mask-blc.png);
 }
-/* line 702, ../../dev/sass/templates/_interface.scss */
+/* line 706, ../../dev/sass/templates/_interface.scss */
 #header .life-bloc .life-c {
   height: 137px;
   width: 33px;
@@ -4889,13 +4894,13 @@ footer p.copy img.vl {
   -o-mask: url(../images/mask/bottle-mask.png);
   mask: url(../images/mask/bottle-mask.png);
 }
-/* line 710, ../../dev/sass/templates/_interface.scss */
+/* line 714, ../../dev/sass/templates/_interface.scss */
 #header .life-bloc .life-c svg {
   height: 138px;
   width: 33px;
   overflow: hidden;
 }
-/* line 715, ../../dev/sass/templates/_interface.scss */
+/* line 719, ../../dev/sass/templates/_interface.scss */
 #header .life-bloc .life-c .life {
   position: absolute;
   bottom: 0;
@@ -4917,12 +4922,12 @@ footer p.copy img.vl {
   animation: wave 2s both infinite alternate linear;
 }
 
-/* line 732, ../../dev/sass/templates/_interface.scss */
+/* line 736, ../../dev/sass/templates/_interface.scss */
 .viewport {
   position: relative;
 }
 
-/* line 736, ../../dev/sass/templates/_interface.scss */
+/* line 740, ../../dev/sass/templates/_interface.scss */
 #you-turn {
   position: absolute;
   z-index: 100;
@@ -4936,7 +4941,7 @@ footer p.copy img.vl {
   background-size: 100% 100%;
 }
 
-/* line 749, ../../dev/sass/templates/_interface.scss */
+/* line 753, ../../dev/sass/templates/_interface.scss */
 #txto-sd {
   position: absolute;
   right: 80px;
@@ -4944,35 +4949,35 @@ footer p.copy img.vl {
   z-index: 230;
   width: 220px;
 }
-/* line 755, ../../dev/sass/templates/_interface.scss */
+/* line 759, ../../dev/sass/templates/_interface.scss */
 #txto-sd.disabled {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
-/* line 758, ../../dev/sass/templates/_interface.scss */
+/* line 762, ../../dev/sass/templates/_interface.scss */
 #txto-sd.disabled:hover #bt-texto {
   background: rgba(255, 255, 255, 0);
   cursor: none;
   pointer-events: none;
 }
-/* line 764, ../../dev/sass/templates/_interface.scss */
+/* line 768, ../../dev/sass/templates/_interface.scss */
 #txto-sd.disabled:hover #sd-messages-box {
   height: 0px;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
   pointer-events: none;
 }
-/* line 772, ../../dev/sass/templates/_interface.scss */
+/* line 776, ../../dev/sass/templates/_interface.scss */
 #txto-sd:hover #bt-texto {
   background: #5AE0D4;
 }
-/* line 775, ../../dev/sass/templates/_interface.scss */
+/* line 779, ../../dev/sass/templates/_interface.scss */
 #txto-sd:hover #sd-messages-box {
   height: 430px;
   filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
   opacity: 1;
 }
-/* line 780, ../../dev/sass/templates/_interface.scss */
+/* line 784, ../../dev/sass/templates/_interface.scss */
 #txto-sd #bt-texto {
   width: 188px;
   -moz-transition: 0.3s;
@@ -4980,7 +4985,7 @@ footer p.copy img.vl {
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
-/* line 784, ../../dev/sass/templates/_interface.scss */
+/* line 788, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box {
   -moz-transition: 0.3s;
   -o-transition: 0.3s;
@@ -4996,17 +5001,17 @@ footer p.copy img.vl {
   overflow: hidden;
   background: #5AE0D4;
 }
-/* line 795, ../../dev/sass/templates/_interface.scss */
+/* line 799, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box.disabled:hover {
   height: 0 !important;
   opacity: 0 !important;
 }
-/* line 799, ../../dev/sass/templates/_interface.scss */
+/* line 803, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box ul {
   width: 220px;
   background: #5AE0D4;
 }
-/* line 803, ../../dev/sass/templates/_interface.scss */
+/* line 807, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box li {
   background: #5AE0D4;
   cursor: pointer;
@@ -5015,15 +5020,15 @@ footer p.copy img.vl {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-/* line 807, ../../dev/sass/templates/_interface.scss */
+/* line 811, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box li:hover {
   background: #54CEC2;
 }
-/* line 810, ../../dev/sass/templates/_interface.scss */
+/* line 814, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box li:last-child p {
   border-bottom: 0px;
 }
-/* line 813, ../../dev/sass/templates/_interface.scss */
+/* line 817, ../../dev/sass/templates/_interface.scss */
 #txto-sd #sd-messages-box li p {
   color: #fff;
   font-size: 13px;
@@ -5034,7 +5039,7 @@ footer p.copy img.vl {
   margin: auto;
 }
 
-/* line 826, ../../dev/sass/templates/_interface.scss */
+/* line 830, ../../dev/sass/templates/_interface.scss */
 #txto-rc {
   z-index: 200;
   position: absolute;
@@ -5047,7 +5052,7 @@ footer p.copy img.vl {
   line-height: 90px;
   text-align: center;
 }
-/* line 837, ../../dev/sass/templates/_interface.scss */
+/* line 841, ../../dev/sass/templates/_interface.scss */
 #txto-rc #rc-messages-box {
   position: relative;
   z-index: 200;
@@ -5062,7 +5067,7 @@ footer p.copy img.vl {
   line-height: 90px;
   text-align: left;
 }
-/* line 851, ../../dev/sass/templates/_interface.scss */
+/* line 855, ../../dev/sass/templates/_interface.scss */
 #txto-rc #rc-messages-box:after {
   content: " ";
   width: 0px;
@@ -5076,26 +5081,26 @@ footer p.copy img.vl {
   left: 50%;
   margin-left: -10px;
 }
-/* line 865, ../../dev/sass/templates/_interface.scss */
+/* line 869, ../../dev/sass/templates/_interface.scss */
 #txto-rc #rc-messages-box .center {
   line-height: 16px;
   display: inline-block;
   vertical-align: middle;
   padding: 10px;
 }
-/* line 872, ../../dev/sass/templates/_interface.scss */
+/* line 876, ../../dev/sass/templates/_interface.scss */
 #txto-rc #rc-messages-box p {
   font-size: 13px;
   color: #54CEC2;
   padding: 0;
 }
-/* line 876, ../../dev/sass/templates/_interface.scss */
+/* line 880, ../../dev/sass/templates/_interface.scss */
 #txto-rc #rc-messages-box p:first-child {
   text-align: left;
   font-weight: bold;
 }
 
-/* line 888, ../../dev/sass/templates/_interface.scss */
+/* line 893, ../../dev/sass/templates/_interface.scss */
 #caps-m, #start-m, #win-m, #lose-m, #perfect-m {
   width: 750px;
   height: 600px;
@@ -5109,23 +5114,24 @@ footer p.copy img.vl {
   background-position: 0% 0%;
   pointer-events: none;
 }
-/* line 901, ../../dev/sass/templates/_interface.scss */
+/* line 906, ../../dev/sass/templates/_interface.scss */
 #caps-m.capsIn1, #caps-m.capsIn2, #caps-m.capsIn3, #start-m.capsIn1, #start-m.capsIn2, #start-m.capsIn3, #win-m.capsIn1, #win-m.capsIn2, #win-m.capsIn3, #lose-m.capsIn1, #lose-m.capsIn2, #lose-m.capsIn3, #perfect-m.capsIn1, #perfect-m.capsIn2, #perfect-m.capsIn3 {
   display: block;
+  z-index: 20;
 }
 
-/* line 905, ../../dev/sass/templates/_interface.scss */
+/* line 911, ../../dev/sass/templates/_interface.scss */
 #caps-m, #start-m {
   -webkit-background-size: 1000% 300%;
   background-size: 1000% 300%;
 }
 
-/* line 909, ../../dev/sass/templates/_interface.scss */
+/* line 915, ../../dev/sass/templates/_interface.scss */
 #win-m, #lose-m, #perfect-m {
   -webkit-background-size: 900% 300%;
   background-size: 900% 300%;
 }
-/* line 912, ../../dev/sass/templates/_interface.scss */
+/* line 918, ../../dev/sass/templates/_interface.scss */
 #win-m.capsIn1, #lose-m.capsIn1, #perfect-m.capsIn1 {
   -webkit-animation: capsStep1 0.4s steps(8) 0s forwards;
   -moz-animation: capsStep1 0.4s steps(8) 0s forwards;
@@ -5133,7 +5139,7 @@ footer p.copy img.vl {
   -ms-animation: capsStep1 0.4s steps(8) 0s forwards;
   animation: capsStep1 0.4s steps(8) 0s forwards;
 }
-/* line 915, ../../dev/sass/templates/_interface.scss */
+/* line 921, ../../dev/sass/templates/_interface.scss */
 #win-m.capsIn2, #lose-m.capsIn2, #perfect-m.capsIn2 {
   -webkit-animation: capsStep2 0.4s steps(8) 0s forwards;
   -moz-animation: capsStep2 0.4s steps(8) 0s forwards;
@@ -5141,7 +5147,7 @@ footer p.copy img.vl {
   -ms-animation: capsStep2 0.4s steps(8) 0s forwards;
   animation: capsStep2 0.4s steps(8) 0s forwards;
 }
-/* line 918, ../../dev/sass/templates/_interface.scss */
+/* line 924, ../../dev/sass/templates/_interface.scss */
 #win-m.capsIn3, #lose-m.capsIn3, #perfect-m.capsIn3 {
   -webkit-animation: capsStep3 0.4s steps(8) 0s forwards;
   -moz-animation: capsStep3 0.4s steps(8) 0s forwards;
@@ -5150,32 +5156,32 @@ footer p.copy img.vl {
   animation: capsStep3 0.4s steps(8) 0s forwards;
 }
 
-/* line 923, ../../dev/sass/templates/_interface.scss */
+/* line 929, ../../dev/sass/templates/_interface.scss */
 #caps-m {
   background-image: url("../images/sprites/sprite_caps.png");
 }
 
-/* line 926, ../../dev/sass/templates/_interface.scss */
+/* line 932, ../../dev/sass/templates/_interface.scss */
 #start-m {
   background-image: url("../images/sprites/sprite_start.png");
 }
 
-/* line 929, ../../dev/sass/templates/_interface.scss */
+/* line 935, ../../dev/sass/templates/_interface.scss */
 #win-m {
   background-image: url("../images/sprites/sprite_win.png");
 }
 
-/* line 932, ../../dev/sass/templates/_interface.scss */
+/* line 938, ../../dev/sass/templates/_interface.scss */
 #lose-m {
   background-image: url("../images/sprites/sprite_lose.png");
 }
 
-/* line 935, ../../dev/sass/templates/_interface.scss */
+/* line 941, ../../dev/sass/templates/_interface.scss */
 #perfect-m {
   background-image: url("../images/sprites/sprite_perfect.png");
 }
 
-/* line 939, ../../dev/sass/templates/_interface.scss */
+/* line 945, ../../dev/sass/templates/_interface.scss */
 .capsIn1 {
   -webkit-animation: capsStep1 0.4s steps(9) 0s forwards;
   -moz-animation: capsStep1 0.4s steps(9) 0s forwards;
@@ -5184,7 +5190,7 @@ footer p.copy img.vl {
   animation: capsStep1 0.4s steps(9) 0s forwards;
 }
 
-/* line 942, ../../dev/sass/templates/_interface.scss */
+/* line 948, ../../dev/sass/templates/_interface.scss */
 .capsIn2 {
   -webkit-animation: capsStep2 0.4s steps(9) 0s forwards;
   -moz-animation: capsStep2 0.4s steps(9) 0s forwards;
@@ -5193,7 +5199,7 @@ footer p.copy img.vl {
   animation: capsStep2 0.4s steps(9) 0s forwards;
 }
 
-/* line 945, ../../dev/sass/templates/_interface.scss */
+/* line 951, ../../dev/sass/templates/_interface.scss */
 .capsIn3 {
   -webkit-animation: capsStep3 0.4s steps(9) 0s forwards;
   -moz-animation: capsStep3 0.4s steps(9) 0s forwards;
@@ -5482,6 +5488,33 @@ footer p.copy img.vl {
     transform: translateY(0);
   }
 }
+/* line 1014, ../../dev/sass/templates/_interface.scss */
+#perfect-player {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 400px;
+  margin-left: -200px;
+  margin-top: -200px;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  overflow: hidden;
+  background: #000;
+  z-index: 10;
+}
+/* line 1028, ../../dev/sass/templates/_interface.scss */
+#perfect-player iframe {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -280px;
+  margin-top: -157px;
+}
+
 /* line 4, ../../dev/sass/templates/_multi.scss */
 #multiplayer .sc-content {
   width: 90%;

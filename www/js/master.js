@@ -580,7 +580,8 @@ function setPower(){
                 powerDir = +speedbar;
             }
 
-            $('.powerbar .bar').height(power+'%');
+            TweenMax.set($('.powerbar .bar'), {height:power+'%'});
+//            $('.powerbar .bar').height(power+'%');
         }
     }, 10 + Viensla.lives/10 );
 }
@@ -775,13 +776,14 @@ var beerColors = {
 
 var shadowColors = {
     chimey : 0x317ad3,
-    foster : 0x122d54,
+    foster : 0x142e66,
     lef : 0xedc418,
     pelle : 0xd84848,
-    chouffe : 0x558e44,
-    ptp : 0xea813b
+    chouffe : 0x5e9147,
+    ptp : 0xea843f
 };
 ;var FPS = function(){
+    var performance = performance || false;
     var now = ( performance && performance.now ) ? performance.now.bind( performance ) : Date.now;
     var startTime = now(),
         prevTime = startTime;
@@ -817,6 +819,31 @@ var shadowColors = {
         }
     }
 };;var timeoutRobot;
+var perfectPlayer;
+function playerReady(event){
+    perfectPlayer.mute();
+}
+
+function onytplayerStateChange(newState) {
+    if ( newState.data == 0 ) {
+//        player.playVideo();
+    }
+}
+
+function onYouTubeIframeAPIReady() {
+    console.log('youtubeload');
+
+
+
+}
+function perfectGift(){
+    TweenMax.fromTo($('#perfect-player'), 0.6, {scale:0, opacity:0},{scale:1, display:'block', opacity:1, ease:Elastic.easeOut.config(1, 0.4)});
+    perfectPlayer.playVideo();
+
+
+    TweenMax.to($('#perfect-player'), 0.5, {scale:0, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:5});
+
+}
 
 var Party = {
     isPlaying : false,
@@ -848,6 +875,9 @@ var Party = {
 
         Player.generateCaps();
 
+        if(!Interface.txtoRdy)
+            Interface.textoBox.init();
+
         setTimeout(function(){
             $('#game-loader .tiny-loader').addClass('fade');
             setTimeout(function(){
@@ -859,10 +889,6 @@ var Party = {
                     TweenMax.fromTo($plpart.find('.cap-tuto'),0.5,{scale:0, opacity:0}, {scale:1, opacity:1, ease:Elastic.easeOut.config(1, 0.4), delay:0.5});
                     Snds.fadInSd('ambiance');
                     Snds.playSd('open');
-
-                    if(!Interface.txtoRdy)
-                        Interface.textoBox.init();
-
                 }, 500);
             }, 1000);
         }, 2000);
@@ -968,9 +994,6 @@ var Party = {
 
             Party.setLife();
 
-
-
-
         }
     },
 
@@ -988,15 +1011,19 @@ var Party = {
 
             if(Viensla.lives==0 && Player.lives==Party.lives){
                 animTypo($perfectTypo);
+                perfectGift();
+                setTimeout(function(){
+                    Party.setLife();
+                },3000);
             }else{
                 this.animCaps();
+                Party.setLife();
             }
 
             setTimeout(function(){
                 Viensla.generateCaps();
             }, 2000);
 
-            Party.setLife();
         }
 
     },
@@ -1057,6 +1084,10 @@ var Party = {
 };
 
 
+
+
+
+
 function animTypo($el, pauseDelay){
     if(typeof pauseDelay == 'undefined')
         pauseDelay = 300;
@@ -1113,6 +1144,14 @@ var Interface = {
         window.addEventListener( 'resize', Interface.resize, false );
 
         Snds.init();
+
+
+        perfectPlayer = new YT.Player('drunked-yt', {
+            events: {
+                'onReady': playerReady,
+                'onStateChange' : onytplayerStateChange
+            }
+        });
 
     },
     resize : function(){
