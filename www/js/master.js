@@ -67,7 +67,7 @@ initScene = function() {
     renderer = new THREE.WebGLRenderer({
         antialias: true,
         alpha : true,
-//        precision:"lowp",
+        precision:"lowp",
         devicePixelRatio: 1
     });
 
@@ -264,6 +264,8 @@ function onWindowResize( event ) {
     console.log(quality);
 
     var qual = Math.min(1, quality+0.4);
+
+    qual = 1;
     var w = Math.round(WIDTH*qual);
     var h = Math.round(HEIGHT*qual);
 
@@ -845,6 +847,10 @@ var Party = {
                     TweenMax.fromTo($plpart.find('.cap-tuto'),0.5,{scale:0, opacity:0}, {scale:1, opacity:1, ease:Elastic.easeOut.config(1, 0.4), delay:0.5});
                     Snds.fadInSd('ambiance');
                     Snds.playSd('open');
+
+                    if(!Interface.txtoRdy)
+                        Interface.textoBox.init();
+
                 }, 500);
             }, 1000);
         }, 2000);
@@ -1036,7 +1042,7 @@ var Party = {
     animCaps : function(){
         animTypo($capsTypo);
     }
-}
+};
 
 
 function animTypo($el, pauseDelay){
@@ -1117,8 +1123,7 @@ var Interface = {
             if(!this.pickCapsRdy)
                 this.initCapsSelect();
         }else if(to == 6){
-            if(!this.txtoRdy)
-                this.textoBox.init();
+
             if(!this.gameRdy){
                 setTimeout(CAPS.launchGame, 400);
             }
@@ -1232,12 +1237,13 @@ var Interface = {
                 $startParty = $multi.find('#start-party'),
                 $joinParty = $multi.find('#join-party');
 
-            $('#room-code').click(function(){
-                SelectText('room-code');
+            $('#room-code, #room-code-lk').click(function(){
+                $(this).select();
             });
-            $('#room-code-lk').click(function(){
-                SelectText('room-code-lk');
+            $('#room-code, #room-code-lk').on('keydown', function(e){
+//                e.preventDefault();
             });
+
             $generateCode.on('click', Game.Host.onCreateClick);
             $joinParty.on('click', Game.Player.onPlayerStartClick);
             $startParty.on('click', Game.Player.onPlayerStartClick);
@@ -1528,6 +1534,8 @@ var Interface = {
         $btMenu.click(function(){
             TweenMax.to($menu, 0.7, {opacity:1, display:"block"});
             TweenMax.to($btMenu, 0.3, {opacity:0});
+            TweenMax.to($('footer'),0.5,{display:'block', opacity:1});
+
         });
 
 
@@ -1557,6 +1565,7 @@ var Interface = {
         $($btCloseTuto).click(closeMenu);
 
         function closeMenu(){
+            TweenMax.to($('footer'),0.5,{opacity:0});
             TweenMax.to($menu, 0.7, {opacity:0, onComplete: function(){
                 TweenMax.to($btMenu, 0.3, {opacity:1});
 
@@ -1568,6 +1577,9 @@ var Interface = {
 
                 TweenMax.set($menu.find('.pause-logo'), {scale:1, opacity:1});
                 $volets.filter('#home-pause').removeClass('hidden');
+
+                $('footer').hide();
+
             }});
         }
 
@@ -1596,14 +1608,19 @@ var Interface = {
             this.$bt = $('header .bt');
             $('header').hide();
             this.hide();
+
+//            $('footer').hide();
         },
         show : function(){
             $('header').show();
             TweenMax.to(Interface.hdr.$logo,0.5,{scale:1, opacity:1, ease:Elastic.easeOut.config(1, 0.4)});
+            TweenMax.to($('footer'),0.5,{display:'block', opacity:1});
         },
         hide : function(){
+            TweenMax.to($('footer'),0.5,{opacity:0});
             TweenMax.to(Interface.hdr.$logo,0.3,{scale:0, opacity:0, onComplete:function(){
                 $('header').hide();
+                $('footer').hide();
             }});
             this.hideBt();
         },
@@ -1744,7 +1761,7 @@ function create_table(){
     _wall = new Physijs.BoxMesh(
         new THREE.BoxGeometry(500, 125, 1),
         new THREE.MeshBasicMaterial({
-            map:wall_texture,
+            map:THREE.ImageUtils.loadTexture('images/v2/bar_single.png'),
             transparent:true,
             opacity:1
         }),
@@ -1763,7 +1780,7 @@ function create_table(){
     _wall = new Physijs.BoxMesh(
         new THREE.BoxGeometry(119, 68, 1),
         new THREE.MeshPhongMaterial({
-            map:wall_texture,
+            map:THREE.ImageUtils.loadTexture('images/v2/bar-neon-orange.png'),
             transparent:true,
             opacity:0.7
         }),
@@ -1781,7 +1798,7 @@ function create_table(){
 //        285
         new THREE.BoxGeometry(1712, 335, 10),
         new THREE.MeshPhongMaterial({
-            map:wall_texture,
+            map:THREE.ImageUtils.loadTexture('images/v2/armoires_back.png'),
             transparent:true,
             opacity:0.2
         }),
@@ -2012,8 +2029,8 @@ function create_table(){
 
 
     // material texture
-    var texture = new THREE.Texture( generateTexture() );
-    texture.needsUpdate = true; // important!
+//    var texture = new THREE.Texture( generateTexture() );
+//    texture.needsUpdate = true; // important!
 
     // material
     var material = new THREE.MeshBasicMaterial( {
@@ -2094,6 +2111,7 @@ function create_table(){
 
     var skyGeo = new THREE.SphereGeometry( 1600, 4, 5 );
     var skyMat = new THREE.ShaderMaterial( { vertexShader: vertexShader, fragmentShader: fragmentShader, uniforms: uniforms, side: THREE.BackSide } );
+//    var skyMat = new THREE.MeshPhongMaterial({color:lightestbrown,side: THREE.BackSide, shininess:500});
     var sky = new THREE.Mesh( skyGeo, skyMat );
     scene.add( sky );
 
@@ -2407,115 +2425,116 @@ function loadBottleTools(){
         'ptp':new THREE.MeshBasicMaterial({map:THREE.ImageUtils.loadTexture('images/beers/stickers/small/ptp.png'),side:2, transparent:true,opacity:1})
     };
 
+//    loader.load( 'model/3D/cap.json', function ( cap_geometry2, cap_materials ) {
+        loader.load( 'model/3D/cap_light.json', function ( cap_geometry, cap_materials ) {
+            loader.load( 'model/3D/bottle_light.json', function ( bottle_geometry, bottle_materials ) {
 
-    loader.load( 'model/3D/cap.json', function ( cap_geometry, cap_materials ) {
-
-        loader.load( 'model/3D/bottle.json', function ( bottle_geometry, bottle_materials ) {
-
-            bottle_geo = bottle_geometry;
-
-
-            var bottle_material = bottle_materials[ 0 ];
-            bottle_material.side = 2;
-            bottle_material.map.anisotropy=0;
-            bottle_material.shininess = 0;
-            bottle_material.shading = 0;
-            bottle_material.reflectivity = 0;
-//            bottle_material.ambient.setHex(0xffffff);
-            bottle_material.color.setHex(0xffffff);
-
-            bottle_mat = new THREE.MeshFaceMaterial( bottle_materials );
-
-            geo_caps = cap_geometry;
-
-            // CHIMEY CAPS ----------------------------------------------
-            var copychimey  = [];
-            copychimey[0] = cap_materials[0].clone();
-            copychimey[1] = cap_materials[0].clone();
-            copychimey[0].side = 2;
-            copychimey[1].side = 2;
-            copychimey[1].map = 0;
+                bottle_geo = bottle_geometry;
 
 
+                var bottle_material = bottle_materials[ 0 ];
+                bottle_material.side = 2;
+//                bottle_material.map.anisotropy=0;
+                bottle_material.shininess = 0;
+                bottle_material.shading = 0;
+                bottle_material.reflectivity = 0;
+    //            bottle_material.ambient.setHex(0xffffff);
+                bottle_material.color.setHex(0xffffff);
 
-            mat_caps_chimey = new THREE.MeshFaceMaterial(copychimey);
-            mat_caps_chimey.materials[1].color =  new THREE.Color(beerColors.chimey);
+                bottle_mat = new THREE.MeshFaceMaterial( bottle_materials );
 
-            // FOSTER CAPS ----------------------------------------------
-            var copyfoster  =[];
-            copyfoster[0] = cap_materials[1].clone();
-            copyfoster[1] = cap_materials[0].clone();
-            copyfoster[0].side = 2;
-            copyfoster[1].side = 2;
-            copyfoster[1].map = 0;
+                geo_caps = cap_geometry;
+//                geo_caps = new THREE.SphereGeometry(2, 32);
 
-            mat_caps_foster = new THREE.MeshFaceMaterial(copyfoster);
-            mat_caps_foster.materials[1].color =  new THREE.Color(beerColors.foster);
-
-            // Leff CAPS ----------------------------------------------
-            var copylef  =[];
-            copylef[0] = cap_materials[2].clone();
-            copylef[1] = cap_materials[0].clone();
-            copylef[0].side = 2;
-            copylef[1].side = 2;
-            copylef[1].map = 0;
-
-            mat_caps_lef = new THREE.MeshFaceMaterial(copylef);
-            mat_caps_lef.materials[1].color =  new THREE.Color(beerColors.lef);
+                // CHIMEY CAPS ----------------------------------------------
+                var copychimey  = [];
+                copychimey[0] = cap_materials[0].clone();
+                copychimey[1] = cap_materials[0].clone();
+                copychimey[0].side = 2;
+                copychimey[1].side = 2;
+                copychimey[1].map = 0;
 
 
-            // Leff CAPS ----------------------------------------------
-            var copypelle  =[];
-            copypelle[0] = cap_materials[3].clone();
-            copypelle[1] = cap_materials[0].clone();
-            copypelle[0].side = 2;
-            copypelle[1].side = 2;
-            copypelle[1].map = 0;
 
-            mat_caps_pelle = new THREE.MeshFaceMaterial(copypelle);
-            mat_caps_pelle.materials[1].color =  new THREE.Color(beerColors.pelle);
+                mat_caps_chimey = new THREE.MeshFaceMaterial(copychimey);
+                mat_caps_chimey.materials[1].color =  new THREE.Color(beerColors.chimey);
 
+                // FOSTER CAPS ----------------------------------------------
+                var copyfoster  =[];
+                copyfoster[0] = cap_materials[1].clone();
+                copyfoster[1] = cap_materials[0].clone();
+                copyfoster[0].side = 2;
+                copyfoster[1].side = 2;
+                copyfoster[1].map = 0;
 
-            // Leff CAPS ----------------------------------------------
-            var copychouffe  =[];
-            copychouffe[0] = cap_materials[4].clone();
-            copychouffe[1] = cap_materials[0].clone();
-            copychouffe[0].side = 2;
-            copychouffe[1].side = 2;
-            copychouffe[1].map = 0;
+                mat_caps_foster = new THREE.MeshFaceMaterial(copyfoster);
+                mat_caps_foster.materials[1].color =  new THREE.Color(beerColors.foster);
 
-            mat_caps_chouffe = new THREE.MeshFaceMaterial(copychouffe);
-            mat_caps_chouffe.materials[1].color =  new THREE.Color(beerColors.chouffe);
+                // Leff CAPS ----------------------------------------------
+                var copylef  =[];
+                copylef[0] = cap_materials[2].clone();
+                copylef[1] = cap_materials[0].clone();
+                copylef[0].side = 2;
+                copylef[1].side = 2;
+                copylef[1].map = 0;
 
-            // PTP CAPS ----------------------------------------------
-            var copyptp  =[];
-            copyptp[0] = cap_materials[5].clone();
-            copyptp[1] = cap_materials[2].clone();
-            copyptp[0].side = 2;
-            copyptp[1].side = 2;
-            copyptp[1].map = 0;
-
-            mat_caps_ptp = new THREE.MeshFaceMaterial(copyptp);
-            mat_caps_ptp.materials[1].color =  new THREE.Color(beerColors.ptp);
+                mat_caps_lef = new THREE.MeshFaceMaterial(copylef);
+                mat_caps_lef.materials[1].color =  new THREE.Color(beerColors.lef);
 
 
-            caps_material = {
-                'chimey':mat_caps_chimey,
-                'foster':mat_caps_foster,
-                'lef':mat_caps_lef,
-                'pelle':mat_caps_pelle,
-                'chouffe':mat_caps_chouffe,
-                'ptp':mat_caps_ptp
-            };
+                // Leff CAPS ----------------------------------------------
+                var copypelle  =[];
+                copypelle[0] = cap_materials[3].clone();
+                copypelle[1] = cap_materials[0].clone();
+                copypelle[0].side = 2;
+                copypelle[1].side = 2;
+                copypelle[1].map = 0;
+
+                mat_caps_pelle = new THREE.MeshFaceMaterial(copypelle);
+                mat_caps_pelle.materials[1].color =  new THREE.Color(beerColors.pelle);
 
 
+                // Leff CAPS ----------------------------------------------
+                var copychouffe  =[];
+                copychouffe[0] = cap_materials[4].clone();
+                copychouffe[1] = cap_materials[0].clone();
+                copychouffe[0].side = 2;
+                copychouffe[1].side = 2;
+                copychouffe[1].map = 0;
+
+                mat_caps_chouffe = new THREE.MeshFaceMaterial(copychouffe);
+                mat_caps_chouffe.materials[1].color =  new THREE.Color(beerColors.chouffe);
+
+                // PTP CAPS ----------------------------------------------
+                var copyptp  =[];
+                copyptp[0] = cap_materials[5].clone();
+                copyptp[1] = cap_materials[2].clone();
+                copyptp[0].side = 2;
+                copyptp[1].side = 2;
+                copyptp[1].map = 0;
+
+                mat_caps_ptp = new THREE.MeshFaceMaterial(copyptp);
+                mat_caps_ptp.materials[1].color =  new THREE.Color(beerColors.ptp);
+
+
+                caps_material = {
+                    'chimey':mat_caps_chimey,
+                    'foster':mat_caps_foster,
+                    'lef':mat_caps_lef,
+                    'pelle':mat_caps_pelle,
+                    'chouffe':mat_caps_chouffe,
+                    'ptp':mat_caps_ptp
+                };
 
 
 
 
-            initScene();
+
+
+                initScene();
+            });
         });
-    });
+//    });
 }
 ;var socket = io.connect();
 var canvas, ctx;
@@ -2652,10 +2671,10 @@ initializeParty = function(){
 //                Game.$area.html(Game.$tplNewGame);
 
                 // Show the gameId on screen
-                $('#room-code').text(Game.gameId);
+                $('#room-code').val(Game.gameId);
 
                 // Display the URL on screen
-                $('#room-code-lk').text(window.location.href+'#'+Game.gameId);
+                $('#room-code-lk').val(window.location.href+'#'+Game.gameId);
                 $('.wait-section .wt-party-code').addClass('act').find('span').text(Game.gameId);
 
                 $('#host-part').addClass('rdy');
@@ -3013,13 +3032,24 @@ var Player = {
 //        sh_bottle.position.y = -0.05;
         sh_bottle.position.z = 0.01;
 
+
+        var neck = new Physijs.CylinderMesh(
+            new THREE.CylinderGeometry(2, 2, 1, 6, 6 ),
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff,
+                transparent : true,
+                opacity:0
+            })
+        ,0);
+
+        neck.position.x = 0;
+        neck.position.y = tablefootSurfaceDim[1] +tablefootSurfaceDim[1]/2+45;
+        neck.position.z = 110;
+
+        scene.add(neck);
+
         Player.bottle.add(sh_bottle);
-
-
         Player.bottle.add(Player.sticker);
-
-
-
 
         Player.place({x:0, z:110});
         Player.generateBottle();
@@ -3056,32 +3086,21 @@ var Player = {
         this.bottlecaps.scale.set(capModelscale,capModelscale,capModelscale);
         this.bottlecaps.rotation.x = Math.PI;
 
-        this.bottlecaps.position.y = Player.bottle.position.y + 22;
+        this.bottlecaps.position.y = Player.bottle.position.y + 23;
         this.bottlecaps.position.x = Player.bottle.position.x;
-        this.bottlecaps.position.z = Player.bottle.position.z - 2;
+        this.bottlecaps.position.z = Player.bottle.position.z;
 
 
-        var neck = new Physijs.CylinderMesh(
-            new THREE.CylinderGeometry(2, 2, 0.4, 10, 10 ),
-            Physijs.createMaterial(
-                new THREE.MeshLambertMaterial({
-                    color: 0xffffff,
-                    transparent : true,
-                    opacity:0
-                }))
-            ,0);
-        neck.position.x = 0;
-        neck.position.y = 1;
-        neck.position.z = 0;
+
 
         var sub = new Physijs.CylinderMesh(
             new THREE.CylinderGeometry(1.5, 1.5, 0, 32, 32 ),
-                new THREE.MeshLambertMaterial({
-                    color: Player.capmat.materials[1].color,
-                    transparent : true,
-                    opacity:1
-                })
-            ,0);
+            new THREE.MeshLambertMaterial({
+                color: Player.capmat.materials[1].color,
+                transparent : true,
+                opacity:1
+            })
+        ,0);
 
         sub.position.x = 0;
         sub.position.y = 0.3;
@@ -3168,6 +3187,21 @@ var Viensla = {
         this.bottle.receiveShadow = true;
         this.bottle.name = 'vlBottle';
 
+        var neck = new Physijs.CylinderMesh(
+            new THREE.CylinderGeometry(2, 2, 1, 6, 6 ),
+            new THREE.MeshLambertMaterial({
+                color: 0xffffff,
+                transparent : true,
+                opacity:0
+            })
+            ,0);
+
+        neck.position.x = 0;
+        neck.position.y = tablefootSurfaceDim[1] +tablefootSurfaceDim[1]/2+45;
+        neck.position.z = -110;
+
+        scene.add(neck);
+
 
         Viensla.place({x:0, z:-110});
         Viensla.generateBottle();
@@ -3204,9 +3238,9 @@ var Viensla = {
         this.bottlecaps.scale.set(capModelscale,capModelscale,capModelscale);
         this.bottlecaps.rotation.x = Math.PI;
 
-        this.bottlecaps.position.y = Viensla.bottle.position.y + 22;
+        this.bottlecaps.position.y = Viensla.bottle.position.y + 23;
         this.bottlecaps.position.x = Viensla.bottle.position.x;
-        this.bottlecaps.position.z = Viensla.bottle.position.z +2;
+        this.bottlecaps.position.z = Viensla.bottle.position.z;
 
 
         var neck = new Physijs.CylinderMesh(
@@ -3644,4 +3678,32 @@ var _gsScope="undefined"!=typeof module&&module.exports&&"undefined"!=typeof glo
         return this;
     };
 
-})(jQuery);
+})(jQuery);;/**
+ * Micro Cache
+ * - a micro library to handle a inmemory cache
+ * - works in node and browser.
+ *
+ * @tags inmemory, keyvalue, cache, node, browser
+ */
+var MicroCache	= function(){
+    var _values	= {};
+    return {
+        get	: function(key){ return _values[key];	},
+        contains: function(key){ return key in _values;	},
+        remove	: function(key){ delete _values[key];	},
+        set	: function(key, value){	_values[key] = value;},
+        values	: function(){ return _values;	},
+        getSet	: function(key, value){
+            if( !this.contains(key) ){
+                this.set(key, typeof value == 'function' ? value() : value )
+            }
+            return this.get(key);
+        }
+    }
+}
+
+
+// export in common js
+if( typeof module !== "undefined" && ('exports' in module)){
+    module.exports	= MicroCache;
+}
