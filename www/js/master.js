@@ -71,9 +71,9 @@ initScene = function() {
         devicePixelRatio: 1
     });
 
-    if(CAPS.quality == 'low'){
+    if(DPR > 1){
         renderer.setViewport( 0, 0, WIDTH/2, HEIGHT/2 );
-        renderer.setSize(WIDTH/DPR, HEIGHT/DPR);
+        renderer.setSize(WIDTH/1.5, HEIGHT/1.5);
         $(renderer.domElement).css({width:WIDTH, height:HEIGHT});
     }else{
         renderer.setSize(WIDTH, HEIGHT);
@@ -261,28 +261,40 @@ function onWindowResize( event ) {
     WIDTH = window.innerWidth;
     HEIGHT = window.innerHeight;
 
-    console.log(quality);
+//    console.log(quality);
+//
+//    var qual = Math.min(1, quality+0.4);
+//
+//    qual = 1;
+//    var w = Math.round(WIDTH*qual);
+//    var h = Math.round(HEIGHT*qual);
+//
+//    $('#quality span').text(Math.round(qual*10)/10);
+//    TweenLite.to($('#quality'), 0.3, {opacity:1});
+//    TweenLite.to($('#quality'), 1, {opacity:0}, 1);
+//
+//
+//    if(CAPS.quality == 'low'){
+//        renderer.setViewport( 0, 0, WIDTH/2, HEIGHT/2 );
+//        renderer.setSize(w, h);
+//        $(renderer.domElement).css({width:WIDTH, height:HEIGHT});
+//    }else{
+//        renderer.setViewport( 0, 0, WIDTH, HEIGHT);
+//        renderer.setSize(w, h);
+//        $(renderer.domElement).css({width:WIDTH, height:HEIGHT});
+//    }
 
-    var qual = Math.min(1, quality+0.4);
 
-    qual = 1;
-    var w = Math.round(WIDTH*qual);
-    var h = Math.round(HEIGHT*qual);
-
-    $('#quality span').text(Math.round(qual*10)/10);
-    TweenLite.to($('#quality'), 0.3, {opacity:1});
-    TweenLite.to($('#quality'), 1, {opacity:0}, 1);
-
-
-    if(CAPS.quality == 'low'){
+    if(DPR > 1){
         renderer.setViewport( 0, 0, WIDTH/2, HEIGHT/2 );
-        renderer.setSize(w, h);
+        renderer.setSize(WIDTH/1.5, HEIGHT/1.5);
         $(renderer.domElement).css({width:WIDTH, height:HEIGHT});
     }else{
+        renderer.setSize(WIDTH, HEIGHT);
         renderer.setViewport( 0, 0, WIDTH, HEIGHT);
-        renderer.setSize(w, h);
-        $(renderer.domElement).css({width:WIDTH, height:HEIGHT});
     }
+
+
     camera.aspect = WIDTH / HEIGHT;
     camera.updateProjectionMatrix();
     Interface.resize();
