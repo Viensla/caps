@@ -1118,12 +1118,6 @@ var Interface = {
         Snds.init();
 
 
-        perfectPlayer = new YT.Player('drunked-yt', {
-            events: {
-                'onReady': playerReady,
-                'onStateChange' : onytplayerStateChange
-            }
-        });
 
     },
     resize : function(){
