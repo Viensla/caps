@@ -2874,7 +2874,7 @@ initializeParty = function(){
                 if(data.playerID == Game.Enemy.id){
                     TweenMax.to($('#reset-party-c h4.quit'), 0.4, {scale:1, opacity:1, height:30, lineHeight:'30px'});
                     TweenMax.to($('#reset-party-c #bt-reset-party'), 0.4, {scale:0, opacity:0});
-                    TweenMax.to($('#reset-party-c #bt-quit-reset'), 0.4, {y: -90});
+                    TweenMax.to($('#reset-party-c #bt-quit-reset'), 0.4, {y: -120});
                 }
 
             }
