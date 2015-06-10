@@ -58,6 +58,7 @@ var DPR = window.devicePixelRatio || 1;
 
 
 initScene = function() {
+
     container = document.getElementById('viewport');
 
     scene = new Physijs.Scene();
@@ -249,9 +250,9 @@ CAPS.launchGame = function(){
         if(!Viensla.isPlaying){
             $(this).removeClass().addClass('animated zoomOut');
             Party.plplay();
-            if(Player.totalLaunched == 0)
-                TweenMax.to($plpart.find('.cap-tuto'), 0.5, {scale:0, opacity:0, ease:Elastic.easeOut.config(1, 0.4)});
 
+            if(Player.totalLaunched < 4)
+                Interface.capTuto.hide();
         }
     });
 };
@@ -449,7 +450,6 @@ capCollision = function ( collided, linearVelocity, angularVelocity, other ){
                 Snds.playSd('clink');
             break;
         case '':
-            console.log('Unamed hit !');
             break;
     }
 };
@@ -819,7 +819,9 @@ var shadowColors = {
         }
     }
 };;var timeoutRobot;
-var perfectPlayer;
+
+
+/*var perfectPlayer;
 function playerReady(event){
     perfectPlayer.mute();
 }
@@ -832,23 +834,17 @@ function onytplayerStateChange(newState) {
 
 function onYouTubeIframeAPIReady() {
     console.log('youtubeload');
-
-
-
 }
 function perfectGift(){
     TweenMax.fromTo($('#perfect-player'), 0.6, {scale:0, opacity:0},{scale:1, display:'block', opacity:1, ease:Elastic.easeOut.config(1, 0.4)});
     perfectPlayer.playVideo();
-
-
     TweenMax.to($('#perfect-player'), 0.5, {scale:0, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:5});
-
-}
+}*/
 
 var Party = {
     isPlaying : false,
     capsPerTurn : 1,
-    lives : 60,
+    lives : 10,
     create : function(){
         Viensla.generateCaps();
 
@@ -886,7 +882,6 @@ var Party = {
                     $('#game-loader').remove();
                     animTypo($startTypo);
                     Party.setTurn();
-                    TweenMax.fromTo($plpart.find('.cap-tuto'),0.5,{scale:0, opacity:0}, {scale:1, opacity:1, ease:Elastic.easeOut.config(1, 0.4), delay:0.5});
                     Snds.fadInSd('ambiance');
                     Snds.playSd('open');
                 }, 500);
@@ -928,6 +923,10 @@ var Party = {
             $('#versus-bar #cursor').removeClass().addClass('lf');
             TweenMax.to($('#you-turn'), 1.5, {x:40, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:1.8});
             TweenMax.to($('#you-turn'), 1, {x:-170, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:4.5});
+
+            if(Player.totalLaunched < 3)
+                Interface.capTuto.show();
+
         }else {
             $('#versus-bar #cursor').removeClass().addClass('rg');
         }
@@ -954,8 +953,6 @@ var Party = {
                 Party.setTurn();
                 this.resetStocks();
 
-            }else{
-                console.log('Viens la no more caps !');
             }
         }
     },
@@ -993,7 +990,6 @@ var Party = {
             }, 2000);
 
             Party.setLife();
-
         }
     },
 
@@ -1011,18 +1007,16 @@ var Party = {
 
             if(Viensla.lives==0 && Player.lives==Party.lives){
                 animTypo($perfectTypo);
-                perfectGift();
-                setTimeout(function(){
-                    Party.setLife();
-                },3000);
+//                perfectGift();
             }else{
                 this.animCaps();
-                Party.setLife();
             }
 
             setTimeout(function(){
                 Viensla.generateCaps();
             }, 2000);
+
+            Party.setLife();
 
         }
 
@@ -1030,7 +1024,6 @@ var Party = {
 
     resetStocks : function(){
         if(this.isPlaying){
-            console.log('stock reseted');
             $('.capsstock span.zoomOut').removeClass('zoomOut').addClass('zoomIn');
             Viensla.launched = 0;
             Player.launched = 0;
@@ -1125,6 +1118,8 @@ var Interface = {
     gameRdy : false,
     txtoRdy : false,
 
+    capTuto : null,
+
     init : function(){
 
         $plpart = $('.pl-part');
@@ -1145,13 +1140,22 @@ var Interface = {
 
         Snds.init();
 
+        this.capTuto = $plpart.find('.cap-tuto');
+        this.capTuto.show = function(){
+            TweenMax.fromTo(Interface.capTuto,0.5,{scale:0, opacity:0}, {scale:1, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:1.8});
+        };
+        this.capTuto.hide = function(){
+            TweenMax.to(Interface.capTuto, 0.5, {scale:0, opacity:0, ease:Elastic.easeOut.config(1, 0.4)});
+        };
 
-        perfectPlayer = new YT.Player('drunked-yt', {
-            events: {
-                'onReady': playerReady,
-                'onStateChange' : onytplayerStateChange
-            }
-        });
+//
+//
+//        perfectPlayer = new YT.Player('drunked-yt', {
+//            events: {
+//                'onReady': playerReady,
+//                'onStateChange' : onytplayerStateChange
+//            }
+//        });
 
     },
     resize : function(){
@@ -1411,7 +1415,6 @@ var Interface = {
         $sdBox : null,
         $rdBox :null,
         tm : null,
-        tmo:null,
         init : function(){
 
             Interface.txtoRdy = true;
@@ -1468,14 +1471,10 @@ var Interface = {
             });
 
             this.tm = new TimelineMax({paused:true});
-//            this.tmo = new TimelineMax({paused:true});
 
             this.tm.to($rcb, 0, {width:0, height:0, opacity:0})
                 .to($rcb, 0.3, {width:250, height:3, opacity:1, ease: Elastic.easeOut.config(1, 0.4)}, 0.1)
                 .to($rcb, 0.3, {height:90, ease: Elastic.easeOut.config(1, 0.4)});
-
-//            this.tmo.to($rcb, 0.6, {width:0, height:0, opacity:0, ease: Elastic.easeOut.config(1, 0.4)});
-
             TweenLite.set($rcb,{width:0, height:0, opacity:0})
 
 
@@ -1533,7 +1532,6 @@ var Interface = {
                     }, 0.2);
                     setTimeout(function(){
                         Interface.textoBox.tm.reverse();
-//                        Interface.textoBox.tmo.play();
 
                         setTimeout(function(){
                             phone.closeMessage();
@@ -1568,6 +1566,7 @@ var Interface = {
         });
 
         $resetC.find('#bt-quit-reset').click(function(){
+            Game.Player.playerQuit();
             window.location = location.href.replace(location.hash,'');
         });
     },
@@ -1807,12 +1806,13 @@ function create_table(){
 
 
     //Add Wall to level
-    var wall_texture = THREE.ImageUtils.loadTexture('images/v2/bar_single.png');
+    var texture = THREE.ImageUtils.loadTexture('images/v2/bar_single.png');
+    texture.minFilter = THREE.LinearFilter;
 
     _wall = new Physijs.BoxMesh(
         new THREE.BoxGeometry(500, 125, 1),
         new THREE.MeshBasicMaterial({
-            map:THREE.ImageUtils.loadTexture('images/v2/bar_single.png'),
+            map:texture,
             transparent:true,
             opacity:1
         }),
@@ -1827,11 +1827,13 @@ function create_table(){
 
     level.add(_wall);
 
-    wall_texture = THREE.ImageUtils.loadTexture('images/v2/bar-neon-orange.png');
+    texture = THREE.ImageUtils.loadTexture('images/v2/bar-neon-orange.png');
+    texture.minFilter = THREE.LinearFilter;
+
     _wall = new Physijs.BoxMesh(
         new THREE.BoxGeometry(119, 68, 1),
         new THREE.MeshPhongMaterial({
-            map:THREE.ImageUtils.loadTexture('images/v2/bar-neon-orange.png'),
+            map:texture,
             transparent:true,
             opacity:0.7
         }),
@@ -1844,12 +1846,14 @@ function create_table(){
     _wall.receiveShadow = true;
     level.add(_wall);
 
-     wall_texture = THREE.ImageUtils.loadTexture('images/v2/armoires_back.png');
+    texture = THREE.ImageUtils.loadTexture('images/v2/armoires_back.png');
+    texture.minFilter = THREE.LinearFilter;
+
     _wall = new Physijs.BoxMesh(
 //        285
         new THREE.BoxGeometry(1712, 335, 10),
         new THREE.MeshPhongMaterial({
-            map:THREE.ImageUtils.loadTexture('images/v2/armoires_back.png'),
+            map:texture,
             transparent:true,
             opacity:0.2
         }),
@@ -2008,8 +2012,11 @@ function create_table(){
     level.add(_table);
 
     //Add Wall to level
+    texture = THREE.ImageUtils.loadTexture('images/phone/phone_veille.png');
+    texture.minFilter = THREE.LinearFilter;
+
     var phone_t = new THREE.MeshPhongMaterial({
-        map: THREE.ImageUtils.loadTexture('images/phone/phone_veille.png')
+        map: texture
     });
     var transparent_side =  new THREE.MeshPhongMaterial({
         color:0xfcd625
@@ -2040,8 +2047,15 @@ function create_table(){
 
 //    var messageScreen = new THREE.Mesh(new THREE.BoxGeometry(10,0.1,14), new THREE.MeshBasicMaterial({opacity:0, transparent:true}));
 
-    var pictoScreen = new THREE.Mesh(new THREE.BoxGeometry(10,0.1,14), new THREE.MeshBasicMaterial({opacity:0, transparent:true, map: THREE.ImageUtils.loadTexture('images/phone/phone_message.png')}));
-    var whiteScreen = new THREE.Mesh(new THREE.BoxGeometry(10,0.1,14), new THREE.MeshBasicMaterial({opacity:0, transparent:true, map: THREE.ImageUtils.loadTexture('images/phone/phone_white.png')}));
+    texture = THREE.ImageUtils.loadTexture('images/phone/phone_message.png');
+    texture.minFilter = THREE.LinearFilter;
+
+    var pictoScreen = new THREE.Mesh(new THREE.BoxGeometry(10,0.1,14), new THREE.MeshBasicMaterial({opacity:0, transparent:true, map: texture}));
+
+    texture = THREE.ImageUtils.loadTexture('images/phone/phone_white.png');
+    texture.minFilter = THREE.LinearFilter;
+
+    var whiteScreen = new THREE.Mesh(new THREE.BoxGeometry(10,0.1,14), new THREE.MeshBasicMaterial({opacity:0, transparent:true, map: texture}));
 
 //    messageScreen.add(pictoScreen);
 //    messageScreen.add(whiteScreen);
@@ -2183,6 +2197,7 @@ function create_table(){
 
 
     var dustTexture = new THREE.ImageUtils.loadTexture('images/dust.png');
+    dustTexture.minFilter = THREE.LinearFilter;
     var particle;
     var dustGeometry = new THREE.Geometry();
     var sizes = [5, 4, 3, 2, 1];
@@ -2199,7 +2214,7 @@ function create_table(){
     for(var i = 0; i < sizes.length; i++){
         var mat = new THREE.PointCloudMaterial( {
             size: sizes[i],
-            map: THREE.ImageUtils.loadTexture("images/dust.png"),
+            map: dustTexture,
             blending: THREE.AdditiveBlending,
             transparent: true,
             opacity:0.04
@@ -2475,6 +2490,13 @@ function loadBottleTools(){
         'chouffe':new THREE.MeshBasicMaterial({map:THREE.ImageUtils.loadTexture('images/beers/stickers/small/shouffe.png'),side:2, transparent:true,opacity:1}),
         'ptp':new THREE.MeshBasicMaterial({map:THREE.ImageUtils.loadTexture('images/beers/stickers/small/ptp.png'),side:2, transparent:true,opacity:1})
     };
+    sticker_materials.chimey.map.minFilter = THREE.LinearFilter;
+    sticker_materials.foster.map.minFilter = THREE.LinearFilter;
+    sticker_materials.lef.map.minFilter = THREE.LinearFilter;
+    sticker_materials.pelle.map.minFilter = THREE.LinearFilter;
+    sticker_materials.chouffe.map.minFilter = THREE.LinearFilter;
+    sticker_materials.ptp.map.minFilter = THREE.LinearFilter;
+
 
 //    loader.load( 'model/3D/cap.json', function ( cap_geometry2, cap_materials ) {
         loader.load( 'model/3D/cap_light.json', function ( cap_geometry, cap_materials ) {
@@ -2619,6 +2641,7 @@ initializeParty = function(){
             IO.socket.on('enemyMessage', Game.Host.enemyMessage);
 
             IO.socket.on('playerAskReset', Game.Host.playerAskReset);
+            IO.socket.on('playerAskQuit', Game.Host.playerAskQuit);
 
             IO.socket.on('getHostInfo', Game.Player.getHostInfo);
             //Display errors
@@ -2843,8 +2866,17 @@ initializeParty = function(){
                     Party.resetParty();
                 }else{
                     if(data.playerID == Game.Enemy.id)
-                        TweenMax.to($('#reset-party-c h4'), 0.4, {scale:1, opacity:1, height:30, lineHeight:'30px'});
+                        TweenMax.to($('#reset-party-c h4.again'), 0.4, {scale:1, opacity:1, height:30, lineHeight:'30px'});
                 }
+            },
+            playerAskQuit: function(data){
+                console.log('askquit');
+                if(data.playerID == Game.Enemy.id){
+                    TweenMax.to($('#reset-party-c h4.quit'), 0.4, {scale:1, opacity:1, height:30, lineHeight:'30px'});
+                    TweenMax.to($('#reset-party-c #bt-reset-party'), 0.4, {scale:0, opacity:0});
+                    TweenMax.to($('#reset-party-c #bt-quit-reset'), 0.4, {y: -90});
+                }
+
             }
         },
         // PlAYERS -------------------------------------------------------------------------------------------------------------------
@@ -3001,6 +3033,12 @@ initializeParty = function(){
                     gameId: Game.gameId,
                     playerID:Game.Player.socketId
                 });
+            },
+            playerQuit : function(){
+                IO.socket.emit('playerQuit', {
+                    gameId: Game.gameId,
+                    playerID:Game.Player.socketId
+                });
             }
         },
         Enemy : {
@@ -3056,6 +3094,8 @@ var Player = {
             transparent:true,
             opacity:0
         });
+
+
         var sticker_materials = [
             transparent_side,
             transparent_side,

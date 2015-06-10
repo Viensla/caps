@@ -3282,33 +3282,37 @@ body {
   font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: #eebc66;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
-/* line 34, ../../dev/sass/_commons.scss */
+/* line 37, ../../dev/sass/_commons.scss */
 h3 {
   font-size: 25px;
 }
-/* line 36, ../../dev/sass/_commons.scss */
+/* line 39, ../../dev/sass/_commons.scss */
 h3.blck {
   color: #202020;
 }
-/* line 39, ../../dev/sass/_commons.scss */
+/* line 42, ../../dev/sass/_commons.scss */
 h3.wh {
   color: #fff;
 }
 
-/* line 45, ../../dev/sass/_commons.scss */
+/* line 48, ../../dev/sass/_commons.scss */
 section.sc {
   position: relative;
   width: 100%;
 }
-/* line 48, ../../dev/sass/_commons.scss */
+/* line 51, ../../dev/sass/_commons.scss */
 section.sc .sc-content {
   line-height: 1;
   display: inline-block;
   vertical-align: middle;
 }
-/* line 52, ../../dev/sass/_commons.scss */
+/* line 55, ../../dev/sass/_commons.scss */
 section.sc .sc-content h2 {
   font-size: 25px;
   color: #fff;
@@ -3318,7 +3322,7 @@ section.sc .sc-content h2 {
   text-transform: uppercase;
 }
 
-/* line 63, ../../dev/sass/_commons.scss */
+/* line 66, ../../dev/sass/_commons.scss */
 #wrapper {
   position: fixed;
   top: 0;
@@ -3331,33 +3335,33 @@ section.sc .sc-content h2 {
   background-size: cover;
   background-position: 50% 50%;
 }
-/* line 75, ../../dev/sass/_commons.scss */
+/* line 78, ../../dev/sass/_commons.scss */
 #wrapper #site-content {
   position: relative;
 }
-/* line 81, ../../dev/sass/_commons.scss */
+/* line 84, ../../dev/sass/_commons.scss */
 #wrapper.solo section.wait-section .sc-content, #wrapper.solo #multiplayer .sc-content {
   display: none;
 }
 
-/* line 88, ../../dev/sass/_commons.scss */
+/* line 91, ../../dev/sass/_commons.scss */
 .bt {
   cursor: pointer;
 }
-/* line 91, ../../dev/sass/_commons.scss */
+/* line 94, ../../dev/sass/_commons.scss */
 .bt p {
   text-align: center;
 }
-/* line 95, ../../dev/sass/_commons.scss */
+/* line 98, ../../dev/sass/_commons.scss */
 .bt.back:hover p:before {
   margin-left: -22px;
 }
-/* line 98, ../../dev/sass/_commons.scss */
+/* line 101, ../../dev/sass/_commons.scss */
 .bt.back p {
   font-style: italic;
   font-size: 16px;
 }
-/* line 101, ../../dev/sass/_commons.scss */
+/* line 104, ../../dev/sass/_commons.scss */
 .bt.back p:before {
   margin-left: -18px;
   margin-top: 3px;
@@ -3380,14 +3384,14 @@ section.sc .sc-content h2 {
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
-/* line 119, ../../dev/sass/_commons.scss */
+/* line 122, ../../dev/sass/_commons.scss */
 .bt.wh {
   padding: 11px 15px;
   border: 1px solid #fbf4e9;
   position: relative;
   overflow: hidden;
 }
-/* line 124, ../../dev/sass/_commons.scss */
+/* line 127, ../../dev/sass/_commons.scss */
 .bt.wh p {
   height: 22px;
   line-height: 22px;
@@ -3408,21 +3412,21 @@ section.sc .sc-content h2 {
   -webkit-transform: translateY(0%);
   transform: translateY(0%);
 }
-/* line 139, ../../dev/sass/_commons.scss */
+/* line 142, ../../dev/sass/_commons.scss */
 .bt.wh:hover p {
   -moz-transform: translateY(200%);
   -ms-transform: translateY(200%);
   -webkit-transform: translateY(200%);
   transform: translateY(200%);
 }
-/* line 142, ../../dev/sass/_commons.scss */
+/* line 145, ../../dev/sass/_commons.scss */
 .bt.wh:hover:after {
   -moz-transform: translateY(0%);
   -ms-transform: translateY(0%);
   -webkit-transform: translateY(0%);
   transform: translateY(0%);
 }
-/* line 146, ../../dev/sass/_commons.scss */
+/* line 149, ../../dev/sass/_commons.scss */
 .bt.wh:after {
   content: " ";
   display: table;
@@ -3449,18 +3453,18 @@ section.sc .sc-content h2 {
   -webkit-background-size: 36px 36px;
   background-size: 36px 36px;
 }
-/* line 170, ../../dev/sass/_commons.scss */
+/* line 173, ../../dev/sass/_commons.scss */
 .bt.lgt-close:hover .cl {
   -moz-transform: rotate(360deg);
   -ms-transform: rotate(360deg);
   -webkit-transform: rotate(360deg);
   transform: rotate(360deg);
 }
-/* line 174, ../../dev/sass/_commons.scss */
+/* line 177, ../../dev/sass/_commons.scss */
 .bt.lgt-close p {
   font-style: italic;
 }
-/* line 177, ../../dev/sass/_commons.scss */
+/* line 180, ../../dev/sass/_commons.scss */
 .bt.lgt-close .cl {
   width: 14px;
   height: 14px;
@@ -3471,7 +3475,7 @@ section.sc .sc-content h2 {
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
-/* line 183, ../../dev/sass/_commons.scss */
+/* line 186, ../../dev/sass/_commons.scss */
 .bt.lgt-close .cl:after, .bt.lgt-close .cl:before {
   content: " ";
   width: 1px;
@@ -3479,14 +3483,14 @@ section.sc .sc-content h2 {
   position: absolute;
   background: #fff;
 }
-/* line 191, ../../dev/sass/_commons.scss */
+/* line 194, ../../dev/sass/_commons.scss */
 .bt.lgt-close .cl:after {
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
 }
-/* line 194, ../../dev/sass/_commons.scss */
+/* line 197, ../../dev/sass/_commons.scss */
 .bt.lgt-close .cl:before {
   -moz-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
@@ -3494,24 +3498,24 @@ section.sc .sc-content h2 {
   transform: rotate(-45deg);
 }
 
-/* line 201, ../../dev/sass/_commons.scss */
+/* line 204, ../../dev/sass/_commons.scss */
 .bt-cap {
   width: 104px;
   height: 104px;
   position: relative;
 }
-/* line 206, ../../dev/sass/_commons.scss */
+/* line 209, ../../dev/sass/_commons.scss */
 .bt-cap:hover:after {
   -moz-transform: rotate(380deg);
   -ms-transform: rotate(380deg);
   -webkit-transform: rotate(380deg);
   transform: rotate(380deg);
 }
-/* line 211, ../../dev/sass/_commons.scss */
+/* line 214, ../../dev/sass/_commons.scss */
 .bt-cap:active:after {
   background-image: url("../images/pictos/cap_bt_green_onclick.png");
 }
-/* line 215, ../../dev/sass/_commons.scss */
+/* line 218, ../../dev/sass/_commons.scss */
 .bt-cap p {
   color: #fff;
   font-size: 12px;
@@ -3520,7 +3524,7 @@ section.sc .sc-content h2 {
   font-family: "neutra";
   text-transform: uppercase;
 }
-/* line 222, ../../dev/sass/_commons.scss */
+/* line 225, ../../dev/sass/_commons.scss */
 .bt-cap:after {
   content: " ";
   position: absolute;
