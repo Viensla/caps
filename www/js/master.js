@@ -69,8 +69,9 @@ initScene = function() {
         antialias: true,
         alpha : true,
         precision:"lowp",
-        devicePixelRatio: 1
+        devicePixelRatio: DPR
     });
+    renderer.setPixelRatio( DPR );
 
     if(DPR > 1){
         renderer.setViewport( 0, 0, WIDTH/2, HEIGHT/2 );
@@ -844,7 +845,7 @@ function perfectGift(){
 var Party = {
     isPlaying : false,
     capsPerTurn : 1,
-    lives : 10,
+    lives : 60,
     create : function(){
         Viensla.generateCaps();
 
@@ -1007,15 +1008,15 @@ var Party = {
 
             if(Viensla.lives==0 && Player.lives==Party.lives){
                 animTypo($perfectTypo);
+//                this.doPerfectBalls();
 //                perfectGift();
             }else{
                 this.animCaps();
-            }
 
+            }
             setTimeout(function(){
                 Viensla.generateCaps();
             }, 2000);
-
             Party.setLife();
 
         }
@@ -1060,9 +1061,7 @@ var Party = {
                         Snds.playSd('win');
                         $('#reset-party-c').removeClass().addClass('winner').find('h3').text("On va pas s'arrêter en si bon chemin !");
                         setTimeout(Snds.playSd('applause'), 3000);
-
                         Viensla.imprecision = Math.max(0, Viensla.imprecision - 2);
-
                     }
 
                     TweenMax.to($('#reset-party-c'), 1, {opacity:1, display:'block', delay:3});
@@ -1073,6 +1072,66 @@ var Party = {
     },
     animCaps : function(){
         animTypo($capsTypo);
+    },
+    doPerfectBalls: function(){
+        var i = 0;
+        var launchVector = new THREE.Vector3,
+            _vector = new THREE.Vector3,
+            _angVector = new THREE.Vector3;
+
+        _vector.set( 1, 2, 1 );
+
+        var intv = setInterval(function(){
+            i++;
+            createBall();
+            if(i> 50){
+                clearInterval(intv);
+                setTimeout(function(){
+                    Viensla.generateCaps();
+                }, 3000)
+            }
+        }, 20);
+        var ballMat = new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent : true,
+                opacity:0.5
+            });
+        function createBall(){
+            var rdms = [
+                Math.random()*20-10,
+                Math.random()*20-10,
+                Math.random()*20-10
+            ];
+            var ballGeo = new THREE.SphereGeometry( Math.random()*2, 8, 8 );
+
+            _angVector.set( rdms[0], rdms[1], rdms[2]);
+            launchVector.set(rdms[0],120,rdms[2]);
+
+            var newBall = new Physijs.CylinderMesh(ballGeo, ballMat);
+
+            newBall.die = function(){
+                var b = this;
+                setTimeout(function(){
+                    scene.remove(b);
+                }, 3000);
+            };
+
+            scene.add(newBall);
+
+            newBall.__dirtyPosition = true;
+            newBall.position.y = Player.bottle.position.y + 26;
+            newBall.position.x = Player.bottle.position.x;
+            newBall.position.z = Viensla.bottle.position.z;
+            newBall.setAngularFactor( _vector );
+            newBall.setLinearFactor( _vector );
+            newBall.setLinearVelocity( launchVector );
+            newBall.setAngularVelocity( _angVector );
+
+            newBall.die();
+        }
+    },
+    doPerfect : function(){
+
     }
 };
 
@@ -1292,8 +1351,8 @@ var Interface = {
                 $startParty = $multi.find('#start-party'),
                 $joinParty = $multi.find('#join-party');
 
-            $('#room-code, #room-code-lk').click(function(){
-                $(this).select();
+            $('#host-code .box').click(function(){
+                $(this).find('input').select();
             });
             $('#room-code, #room-code-lk').on('keydown', function(e){
 //                e.preventDefault();
