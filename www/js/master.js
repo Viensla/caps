@@ -1351,11 +1351,8 @@ var Interface = {
                 $startParty = $multi.find('#start-party'),
                 $joinParty = $multi.find('#join-party');
 
-            $('#host-code .box').click(function(){
+            $('#host-codes .box').click(function(){
                 $(this).find('input').select();
-            });
-            $('#room-code, #room-code-lk').on('keydown', function(e){
-//                e.preventDefault();
             });
 
             $generateCode.on('click', Game.Host.onCreateClick);

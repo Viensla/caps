@@ -99,6 +99,10 @@ $(function(){
             catch (x) { gl = null; }
         }
 
+        $('body').addClass(b.browser.toLowerCase());
+
+        $(canvas).remove();
+
         if (gl) {
             console.log("WebGL presents !");
             loadPart();
