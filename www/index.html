@@ -22,16 +22,13 @@
     <meta property="og:image" content="" />
 
     <script src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/modernizr.custom.js"></script>
-    <script type="text/javascript" src="js/browser.js"></script>
-    <script type="text/javascript" src="js/loader.js"></script>
+    <!--<script type="text/javascript" src="js/modernizr.custom.js"></script>-->
+    <!--<script type="text/javascript" src="js/browser.js"></script>-->
+    <script type="text/javascript" src="js/ld.min.js"></script>
 
     <title>Paye ton caps</title>
     <link rel="stylesheet" type="text/css" media="" href="stylesheets/screen.css" />
 
-    <script type="text/javascript">
-        (function(){var script=document.createElement('script');script.onload=function(){var stats=new Stats();stats.domElement.style.cssText='position:fixed;right:0;top:0;z-index:10000';document.body.appendChild(stats.domElement);requestAnimationFrame(function loop(){stats.update();requestAnimationFrame(loop)});};script.src='js/stats.min.js';document.head.appendChild(script);})();
-    </script>
 </head>
 
 <body>
@@ -74,7 +71,8 @@
 <script src="js/PLYLoader.js"></script>
 <script src="js/physijs/physi.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="js/master.js"></script>
+<!--<script type="text/javascript" src="js/caps.min.js"></script>-->
+<script type="text/javascript" src="js/master.min.js"></script>
 <script type="x-shader/x-vertex" id="vertexShader">
     varying vec3 vWorldPosition;
     void main() {

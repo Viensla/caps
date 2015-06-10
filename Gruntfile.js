@@ -8,7 +8,7 @@ module.exports = function(grunt) {
                 separator: ';'
             },
             dist: {
-                src: ['dev/js/*.js', 'dev/js/*/*.js'],
+                src: ['dev/js/lib/*.js','dev/js/*.js'],
                 dest: '<%= pkg.jsDist %>master.js'
             }
         },
@@ -54,6 +54,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.registerTask('default', ['concat', 'compass']);
+    grunt.registerTask('default', ['concat', 'uglify']);
 
 };
