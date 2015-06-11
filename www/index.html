@@ -15,18 +15,21 @@
     <meta charset="UTF-8" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-
-    <meta property="og:title" content="" />
-    <meta property="og:description" content="" />
-    <meta property="og:image" content="" />
 
     <script src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/ld.min.js"></script>
+
 
     <title>Paye ton caps</title>
-    <link rel="stylesheet" type="text/css" media="" href="stylesheets/screen.css" />
 
+    <link rel="stylesheet" type="text/css" media="" href="stylesheets/screen.css" />
+    <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
+
+    <meta property="og:title" content="Paye ton Caps"/>
+    <meta property="og:type" content="game"/>
+    <meta property="og:url" content="http://www.payetoncaps.com/"/>
+    <meta property="og:image" content="http://www.payetoncaps.com/images/logo/fb-logo.png"/>
+    <meta property="og:site_name" content="Paye ton Caps"/>
+    <meta property="og:description" content="Paye ton Caps est un jeu en ligne multijoueur où tu peux affronter des potes !"/>
 </head>
 
 <body>
@@ -64,7 +67,7 @@
 
 
 <canvas id="iswebgl"></canvas>
-
+<script type="text/javascript" src="js/ld.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script type="text/javascript" src="js/game.min.js"></script>
 <script type="x-shader/x-vertex" id="vertexShader">
@@ -86,7 +89,7 @@
     gl_FragColor = vec4( mix( bottomColor, topColor, max( pow( max( h , 0.0), exponent ), 0.0 ) ), 1.0 );
     }
 </script>
-<script src="http://www.youtube.com/iframe_api"></script>
+<script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
 
 </body>
 </html>

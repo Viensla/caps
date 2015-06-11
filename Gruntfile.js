@@ -9,7 +9,7 @@ module.exports = function(grunt) {
             },
 //            dist: {
 //                src: ['dev/js/lib/*.js','dev/js/*.js'],
-//                dest: '<%= pkg.jsDist %>master.js'
+//                dest: '<%= pkg.jsDist %>game.js'
 //            }
 //            dist: {
 //                src: ['dev/js/*.js'],
