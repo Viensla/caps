@@ -1537,10 +1537,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
     return Physijs;
 })();
-;var Interface;
-$(function(){
-
-
+;$(function(){
 var CAPS = {
     camera : null,
     solo : false,
@@ -2708,6 +2705,7 @@ function animTypo($el, pauseDelay){
     "L'incapssable"
 ];
 var autoMessages,poteRelou;
+
 Interface = {
     $currentPart : null,
     curIndex: 0,
@@ -3017,16 +3015,16 @@ Interface = {
                 "<p>Chaton <3 :</p><p>"+Game.Player.name+", c'est fini nous deux, je pars avec Clem.</p>",
                 "<p>Soeurette :</p><p>Qu'est-ce que tu fous "+Game.Player.name+" ?! Tout le monde t'attend au mariage de Tata Jacqueline !</p>",
                 "<p>Boss :</p><p>Bonsoir, j'attends votre présentation demain matin à 6h pétante sur mon bureau.</p>",
-                "<p>PizzaPingui :</p><p>Dépechez vous ! Pour deux pizzas thon patate mayo achetées, la troisième offerte !</p>",
+                "<p>PizzaPingui :</p><p>Dépêchez vous ! Pour deux pizzas Sushiburger achetées, la troisième offerte !</p>",
                 "<p>Banque Populass :</p><p>Alerte auto - Vous avez dépassé les 5000€ de découvert autorisé.</p>",
                 "<p>Tony CAZANASS :</p><p>Crois pas que tu vas t'en tirer comme ça "+Game.Player.name+ ", on tient ta mère !</p>",
-                "<p>Ben :</p><p>Yo gro bien ? dsl mai ta pas 100 balle à m'depanne ?</p>",
+                "<p>Ben :</p><p>Yo gro bien ? dsl mai ta pas 100 balles à m'depanne ?</p>",
                 "<p>6917 :</p><p>Envoie VIENSLA au 6917 et rencontre les personnes HOT de ton quartier !</p>",
 
             ];
 
             poteRelou = [
-                "<p>Alex:</p><p>Alors tu viens plus au soirée ?</p>",
+                "<p>Alex:</p><p>Alors tu viens plus aux soirées ?</p>",
                 "<p>Alex:</p><p>Apéro ce soir ?</p>",
                 "<p>Alex:</p><p>Alors, ça sort ce soir ?</p>",
                 "<p>Alex:</p><p>Allooooooooo</p>",
@@ -5100,7 +5098,4 @@ var Snds = {
 
     }
 };
-
-
-
 });

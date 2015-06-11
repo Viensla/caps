@@ -13,16 +13,16 @@ module.exports = function(grunt) {
 //            }
 //            dist: {
 //                src: ['dev/js/*.js'],
-//                dest: '<%= pkg.jsDist %>game.js'
+//                dest: 'dev/js_prod/game.js'
+//            }
+//            dist: {
+//                src: ['dev/js_prod/loader.js','dev/js_prod/three.min.js'],
+//                dest: '<%= pkg.jsDist %>ld.js'
 //            }
             dist: {
-                src: ['dev/js_prod/loader.js','dev/js_prod/three.min.js'],
-                dest: '<%= pkg.jsDist %>ld.js'
+                src: ['dev/js_prod/lib/*.js','dev/js_prod/game.js'],
+                dest: '<%= pkg.jsDist %>game.js'
             }
-//            dist: {
-//                src: ['dev/js_prod/lib/*.js','dev/js_prod/game.js'],
-//                dest: '<%= pkg.jsDist %>game.js'
-//            }
         },
         uglify: {
             options: {
@@ -31,7 +31,7 @@ module.exports = function(grunt) {
             dist: {
 
                 files: {
-                    '<%= pkg.jsDist %>ld.min.js': ['<%= concat.dist.dest %>']
+                    '<%= pkg.jsDist %>game.min.js': ['<%= concat.dist.dest %>']
                 }
             }
         },
