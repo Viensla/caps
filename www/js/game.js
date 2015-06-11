@@ -1537,7 +1537,11 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
     return Physijs;
 })();
-;var CAPS = {
+;var Interface;
+$(function(){
+
+
+var CAPS = {
     camera : null,
     solo : false,
     quality:'high'
@@ -2704,8 +2708,7 @@ function animTypo($el, pauseDelay){
     "L'incapssable"
 ];
 var autoMessages,poteRelou;
-
-var Interface = {
+Interface = {
     $currentPart : null,
     curIndex: 0,
     multiRdy : false,
@@ -5100,3 +5103,4 @@ var Snds = {
 
 
 
+});
