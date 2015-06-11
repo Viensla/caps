@@ -58,8 +58,8 @@
             <img src="images/pictos/picto-tw.png" alt="Paye ta Pinte sur Twitter"/>
         </a>
          Powered by
-        <a href="http://viens-la.com" target="_blank">
-            <img class="vl" src="images/logo/logo-viens-la.png" alt="Powered by Viens-là!"/>
+        <a href="http://viens-la.com" class="vl" target="_blank">
+            <img src="images/logo/logo-viens-la.png" alt="Powered by Viens-là!"/>
         </a>
     </p>
 </footer>
@@ -68,7 +68,7 @@
 <canvas id="iswebgl"></canvas>
 
 <script src="js/three.min.js"></script>
-<!--<script src="js/PLYLoader.js"></script>-->
+<script src="js/PLYLoader.js"></script>
 <script src="js/physijs/physi.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <!--<script type="text/javascript" src="js/caps.min.js"></script>-->

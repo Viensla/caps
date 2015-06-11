@@ -1,0 +1,65 @@
+#browser-screen{
+  text-align: center;
+
+  .logo{
+    width: 175px;
+    height: auto;
+    margin-bottom: 30px;
+  }
+  h3{
+    margin-bottom: 20px;
+  }
+  p{
+    line-height: 20px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+  a{
+    padding: 10px;
+  }
+}
+
+#touch-screen{
+  text-align: center;
+
+  .logo{
+    width: 100px;
+    height: auto;
+    margin-bottom: 30px;
+  }
+  .txt-c{
+    padding: 10px;
+  }
+  h3{
+    margin-bottom: 20px;
+    font-size: 20px;
+
+  }
+  p{
+    line-height: 20px;
+    margin-top: 20px;
+  }
+}
+
+
+
+body.firefox{
+  #pickname .sc-content{
+    text-align: center;
+    #bt-send-name{
+      display: inline-block;
+    }
+  }
+  #pickcaps .sc-content{
+    text-align: center;
+    #beer-bg-slider{
+      .blc-msk{
+//        @include background(radial-gradient(50% 50%, rgba(0,0,0,0) 20%, rgba(0,0,0,1) 100%));
+//        @include mask(none);
+      }
+    }
+    #bt-send-caps{
+      display: inline-block;
+    }
+  }
+}

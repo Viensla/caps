@@ -2878,7 +2878,7 @@ initializeParty = function(){
                 $('#room-code').val(Game.gameId);
 
                 // Display the URL on screen
-                $('#room-code-lk').val(window.location.href.replace('www.', '')+'#'+Game.gameId);
+                $('#room-code-lk').val(window.location.href+'#'+Game.gameId);
                 $('.wait-section .wt-party-code').addClass('act').find('span').text(Game.gameId);
 
                 $('#host-part').addClass('rdy');

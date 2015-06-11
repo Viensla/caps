@@ -1,0 +1,299 @@
+.clear {
+  clear: both;
+}
+
+
+#bg-test {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  top:0
+}
+
+canvas {
+  width: 100%;
+  height: 100%;
+}
+
+body{
+  width: 100%;
+  //height: 100%;
+  margin: 0;
+  padding: 0;
+  //overflow: hidden;
+  font-family:$aleoReg;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-font-smoothing: antialiased;
+  -o-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #eebc66;
+
+  @include user-select(none);
+
+}
+
+h3{
+  font-size: 25px;
+  &.blck{
+    color: $darkGrey;
+  }
+  &.wh{
+    color: #fff;
+  }
+}
+
+
+section.sc{
+  position: relative;
+  width: 100%;
+  .sc-content{
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    h2{
+      font-size: 25px;
+      color: #fff;
+      letter-spacing: 3px;
+      text-align: center;
+      @include neutraUp();
+    }
+  }
+}
+
+
+#wrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  background-image: url('../images/bg/bg-caps.jpg');
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: 50% 50%;
+
+  #site-content{
+    position: relative;
+  }
+
+  &.solo{
+    section.wait-section, #multiplayer{
+      .sc-content{
+        display: none;
+      }
+    }
+  }
+}
+
+.bt{
+  cursor:pointer;
+
+  p{
+    text-align: center;
+  }
+  &.back{
+    &:hover p:before{
+      margin-left:-22px;
+    }
+    p{
+      font-style: italic;
+      font-size: 16px;
+      &:before{
+        margin-left: -18px;
+        margin-top: 3px;
+        content:" ";
+        display: inline-block;
+        position: absolute;
+        height: 9px;
+        width: 9px;
+        border-color:#fff;
+        border-top: 1px;
+        border-left: 1px;
+        border-top-style: solid;
+        border-left-style: solid;
+        @include transform(rotate(-45deg));
+        @include transition(.2s);
+      }
+    }
+  }
+  &.wh{
+    padding: 11px 15px;
+    border: 1px solid #fbf4e9;
+    position: relative;
+    overflow: hidden;
+    p{
+      height: 22px;
+      line-height: 22px;
+      letter-spacing: 1px;
+      font-family: $neutra;
+      font-size: 14px;
+      text-align: center;
+      text-transform: uppercase;
+      color: #fff;
+      font-weight: bold;
+      vertical-align: middle;
+      @include transition(0.2s);
+      @include transform(translateY(0%));
+    }
+    &:hover{
+      p{
+        @include transform(translateY(200%));
+      }
+      &:after{
+        @include transform(translateY(0%));
+      }
+    }
+    &:after{
+      content:" ";
+      display: table;
+      margin: 0 auto;
+      vertical-align: middle;
+      left: 0;
+      right: 0;
+      bottom: 0px;
+      position: absolute;
+      top: 50%;
+      z-index: -1;
+      @include transition(0.2s);
+      @include transform(translateY(-200%));
+
+      width: 36px;
+      height: 36px;
+      margin-top: -18px;
+      background-image: url('../images/pictos/btn-solo-hover.png');
+      -webkit-background-size: 36px 36px;
+      background-size: 36px 36px;
+    }
+  }
+  &.lgt-close{
+    &:hover{
+      .cl{
+        @include transform(rotate(360deg));
+      }
+    }
+    p{
+      font-style: italic;
+    }
+    .cl{
+      width: 14px;
+      height: 14px;
+      margin: 0 auto 8px;
+      display: block;
+      @include transition(.3s);
+      &:after, &:before{
+        content:" ";
+        width: 1px;
+        height: 14px;
+        position: absolute;
+        background: #fff;
+
+      }
+      &:after{
+        @include transform(rotate(45deg));
+      }
+      &:before{
+        @include transform(rotate(-45deg));
+      }
+    }
+  }
+}
+
+.bt-cap{
+  width: 104px;
+  height: 104px;
+  position: relative;
+  &:hover{
+    &:after{
+      @include transform(rotate(380deg));
+    }
+  }
+  &:active {
+    &:after{
+      background-image: url('../images/pictos/cap_bt_green_onclick.png');
+    }
+  }
+  p{
+    color: #fff;
+    font-size: 12px;
+    line-height: 20px;
+    padding: 35px 20px;
+    @include neutraUp;
+  }
+  &:after{
+    content:" ";
+    position: absolute;
+    width: 104px;
+    height: 104px;
+    background-image: url('../images/pictos/cap_bt_green.png');
+    -webkit-background-size: 104px;
+    background-size: 104px;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    @include transition(.3s);
+  }
+}
+
+@include keyframes(hoverWhite){
+  0%{
+    height: 0%;
+    @include transform(skewY(0deg));
+  }
+  10%{
+    height: 10%;
+  }
+  20%{
+    height: 20%;
+  }
+  30%{
+    height: 30%;
+    @include transform(skewY(-5deg));
+  }
+  40%{
+    height: 40%;
+  }
+  50%{
+    height: 50%;
+  }
+  60%{
+    height: 60%;
+    @include transform(skewY(5deg));
+  }
+  70%{
+    height: 70%;
+  }
+  80%{
+    height: 80%;
+  }
+  90%{
+    height: 90%;
+    @include transform(skewY(-5deg));
+
+  }
+  100%{
+    height: 100%;
+    @include transform(skewY(0eg));
+
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
