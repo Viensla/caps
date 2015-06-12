@@ -1537,11 +1537,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
     return Physijs;
 })();
-;var Interface;
-
-jQuery(function($){
-
-var CAPS = {
+;var CAPS = {
     camera : null,
     solo : false,
     quality:'high'
@@ -2340,9 +2336,12 @@ var shadowColors = {
             Viensla.score++;
             Player.drunked += 2;
             Player.lives -= 10;
+            var perfect = false;
 
             if(Player.lives==0 && Viensla.lives==Party.lives){
                 animTypo($perfectTypo, 800);
+                perfect=true;
+
             }else{
                 this.animCaps();
             }
@@ -2357,7 +2356,7 @@ var shadowColors = {
                 Player.generateCaps();
             }, 2000);
 
-            Party.setLife();
+            Party.setLife(perfect);
         }
     },
 
@@ -2373,15 +2372,20 @@ var shadowColors = {
 
             Game.Player.playerCaps();
 
+            var perfect = false;
+
             if(Viensla.lives==0 && Player.lives==Party.lives){
                 animTypo($perfectTypo, 800);
+                perfect=true;
             }else{
                 this.animCaps();
             }
             setTimeout(function(){
                 Viensla.generateCaps();
             }, 2000);
-            Party.setLife(true);
+
+
+            Party.setLife(perfect);
 
         }
 
@@ -4198,7 +4202,7 @@ initializeParty = function(){
                 if(data.playerID == Game.Enemy.id){
                     TweenMax.to($('#reset-party-c h4.quit'), 0.4, {scale:1, opacity:1, height:30, lineHeight:'30px'});
                     TweenMax.to($('#reset-party-c #bt-reset-party'), 0.4, {scale:0, opacity:0});
-                    TweenMax.to($('#reset-party-c #bt-quit-reset'), 0.4, {y: -120});
+                    TweenMax.to($('#reset-party-c #bt-quit-reset'), 0.4, {x: -102});
                 }
 
             }
@@ -4908,4 +4912,5 @@ var Snds = {
     }
 };
 
-});
+
+

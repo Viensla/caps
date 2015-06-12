@@ -7,10 +7,10 @@ module.exports = function(grunt) {
             options: {
                 separator: ';'
             },
-//            dist: {
-//                src: ['dev/js/lib/*.js','dev/js/*.js'],
-//                dest: '<%= pkg.jsDist %>game.js'
-//            }
+            dist: {
+                src: ['dev/js/lib/*.js','dev/js/*.js'],
+                dest: '<%= pkg.jsDist %>game.js'
+            }
 //            dist: {
 //                src: ['dev/js/*.js'],
 //                dest: 'dev/js_prod/game.js'
@@ -19,10 +19,10 @@ module.exports = function(grunt) {
 //                src: ['dev/js_prod/loader.js','dev/js_prod/three.min.js'],
 //                dest: '<%= pkg.jsDist %>ld.js'
 //            }
-            dist: {
-                src: ['dev/js_prod/lib/*.js','dev/js_prod/game.js'],
-                dest: '<%= pkg.jsDist %>game.js'
-            }
+//            dist: {
+//                src: ['dev/js_prod/lib/*.js','dev/js_prod/game.js'],
+//                dest: '<%= pkg.jsDist %>game.js'
+//            }
         },
         uglify: {
             options: {
@@ -47,18 +47,11 @@ module.exports = function(grunt) {
         watch: {
             scripts:{
                 files: ['<%= concat.dist.src %>'],
-                tasks: ['concat'],
-                options: {
-                    livereload: true
-                }
+                tasks: ['concat']
             },
-
             css: {
                 files: ['dev/sass/*/*.scss', 'dev/sass/*.scss'],
-                tasks: ['compass'],
-                options: {
-                    livereload: true
-                }
+                tasks: ['compass']
             }
         }
     });
@@ -66,6 +59,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-compass');
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.registerTask('default', ['concat', 'uglify', 'compass']);
 
 };

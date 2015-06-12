@@ -20,6 +20,7 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/images/perfectgifts" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/images/logo/share-fb.png" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/images/logo/share-tw.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dev/js_prod/begin.js" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dev/js_prod/game.js" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dev/js/lib/physi.js" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dev/js_prod/lib/physi.js" />
@@ -100,7 +101,7 @@
           <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/www/index.html">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="22" column="0" selection-start="533" selection-end="533" vertical-scroll-proportion="0.49107143" vertical-offset="0" max-vertical-offset="1515">
+                <state line="67" column="0" selection-start="2154" selection-end="2154" vertical-scroll-proportion="0.4419643" vertical-offset="708" max-vertical-offset="1515">
                   <folding />
                 </state>
               </provider>
@@ -191,10 +192,10 @@
       </split-first>
       <split-second>
         <leaf>
-          <file leaf-file-name="game.js" pinned="false" current="false" current-in-tab="false">
+          <file leaf-file-name="game.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/dev/js/game.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="3" column="13" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4560">
+                <state line="140" column="0" selection-start="4039" selection-end="4039" vertical-scroll-proportion="2.9207232" vertical-offset="0" max-vertical-offset="4680">
                   <folding />
                 </state>
               </provider>
@@ -203,7 +204,7 @@
           <file leaf-file-name="multi.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dev/js/multi.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="203" column="25" selection-start="7082" selection-end="7084" vertical-scroll-proportion="3.9230769" vertical-offset="3147" max-vertical-offset="6540">
+                <state line="259" column="81" selection-start="9426" selection-end="9426" vertical-scroll-proportion="-13.961538" vertical-offset="3522" max-vertical-offset="6540">
                   <folding />
                 </state>
               </provider>
@@ -218,15 +219,6 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="_players_options.scss" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dev/sass/templates/_players_options.scss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="80" column="9" selection-start="1656" selection-end="1656" vertical-scroll-proportion="95.26" vertical-offset="5963" max-vertical-offset="6645">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="_interface.scss" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dev/sass/templates/_interface.scss">
               <provider selected="true" editor-type-id="text-editor">
@@ -236,19 +228,10 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="_footer.scss" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/dev/sass/templates/_footer.scss">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="18" column="7" selection-start="332" selection-end="332" vertical-scroll-proportion="-11.25" vertical-offset="0" max-vertical-offset="570">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="Gruntfile.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="Gruntfile.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Gruntfile.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="68" column="52" selection-start="2055" selection-end="2055" vertical-scroll-proportion="0.8360656" vertical-offset="408" max-vertical-offset="1140">
+                <state line="30" column="19" selection-start="998" selection-end="998" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1035">
                   <folding />
                 </state>
               </provider>
@@ -257,7 +240,16 @@
           <file leaf-file-name="game.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dev/js_prod/game.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="3370" column="0" selection-start="101192" selection-end="101192" vertical-scroll-proportion="0.0" vertical-offset="49936" max-vertical-offset="50655">
+                <state line="3374" column="3" selection-start="101203" selection-end="101203" vertical-scroll-proportion="0.0" vertical-offset="49981" max-vertical-offset="50700">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="begin.js" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/dev/js_prod/begin.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="5" column="3" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
                   <folding />
                 </state>
               </provider>
@@ -275,7 +267,7 @@
           <file leaf-file-name="interface.js" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dev/js/interface.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="191" column="31" selection-start="5379" selection-end="5379" vertical-scroll-proportion="-4.8461537" vertical-offset="2739" max-vertical-offset="9135">
+                <state line="191" column="31" selection-start="5379" selection-end="5379" vertical-scroll-proportion="214.5" vertical-offset="8442" max-vertical-offset="9135">
                   <folding />
                 </state>
               </provider>
@@ -293,8 +285,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/www/js/physijs/physijs_worker.js" />
-        <option value="$PROJECT_DIR$/dev/sass/templates/_header.scss" />
         <option value="$PROJECT_DIR$/www/pickcaps.html" />
         <option value="$PROJECT_DIR$/www/pickname.html" />
         <option value="$PROJECT_DIR$/dev/js/lib/microcache.js" />
@@ -317,7 +307,6 @@
         <option value="$PROJECT_DIR$/dev/sass/_commons.scss" />
         <option value="$PROJECT_DIR$/dev/sass/templates/_start.scss" />
         <option value="$PROJECT_DIR$/dev/sass/screen.scss" />
-        <option value="$PROJECT_DIR$/dev/js/multi.js" />
         <option value="$PROJECT_DIR$/server/server.js" />
         <option value="$PROJECT_DIR$/dev/sass/templates/_multi.scss" />
         <option value="$PROJECT_DIR$/dev/js/lib/physi.js" />
@@ -341,8 +330,11 @@
         <option value="$PROJECT_DIR$/www/wait.html" />
         <option value="$PROJECT_DIR$/dev/sass/templates/_loader.scss" />
         <option value="$PROJECT_DIR$/www/index.html" />
-        <option value="$PROJECT_DIR$/dev/js/game.js" />
+        <option value="$PROJECT_DIR$/dev/js/multi.js" />
+        <option value="$PROJECT_DIR$/dev/js_prod/end.js" />
+        <option value="$PROJECT_DIR$/dev/js_prod/begin.js" />
         <option value="$PROJECT_DIR$/dev/js_prod/game.js" />
+        <option value="$PROJECT_DIR$/dev/js/game.js" />
         <option value="$PROJECT_DIR$/Gruntfile.js" />
       </list>
     </option>
@@ -864,10 +856,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="23" width="1920" height="1053" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18691589" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18691589" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18691589" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -914,20 +906,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/pickcaps.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="124" column="0" selection-start="4211" selection-end="4211" vertical-scroll-proportion="0.85655737" vertical-offset="1233" max-vertical-offset="1965">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/sass/_browser.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="20" selection-start="455" selection-end="455" vertical-scroll-proportion="0.26229507" vertical-offset="318" max-vertical-offset="1050">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/js/loadBottle.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="0" selection-start="0" selection-end="5469" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="2115">
@@ -1135,13 +1113,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/sass/templates/_multi.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="-1.8" vertical-offset="0" max-vertical-offset="3060">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/js/sounds.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="36" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="1620">
@@ -1159,13 +1130,6 @@
     <entry file="file://$PROJECT_DIR$/dev/sass/_fonts.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="45.125" vertical-offset="1083" max-vertical-offset="1755">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/sass/templates/_interface.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="307" column="5" selection-start="5215" selection-end="5215" vertical-scroll-proportion="-7.16" vertical-offset="4247" max-vertical-offset="17685">
           <folding />
         </state>
       </provider>
@@ -1191,13 +1155,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/js/multi.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="203" column="25" selection-start="7082" selection-end="7084" vertical-scroll-proportion="3.9230769" vertical-offset="3147" max-vertical-offset="6540">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/sass/_commons.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="57" column="15" selection-start="799" selection-end="800" vertical-scroll-proportion="-1.44" vertical-offset="783" max-vertical-offset="4545">
@@ -1208,13 +1165,6 @@
     <entry file="file://$PROJECT_DIR$/www/wait.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="8" selection-start="274" selection-end="274" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="360">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/js/interface.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="191" column="31" selection-start="5379" selection-end="5379" vertical-scroll-proportion="-4.8461537" vertical-offset="2739" max-vertical-offset="9135">
           <folding />
         </state>
       </provider>
@@ -1235,30 +1185,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/multi.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="259" column="81" selection-start="9426" selection-end="9426" vertical-scroll-proportion="-13.961538" vertical-offset="3522" max-vertical-offset="6540">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="533" selection-end="533" vertical-scroll-proportion="0.49107143" vertical-offset="0" max-vertical-offset="1515">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/js/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="13" selection-start="71" selection-end="71" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4560">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/js_prod/game.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3370" column="0" selection-start="101192" selection-end="101192" vertical-scroll-proportion="0.0" vertical-offset="49936" max-vertical-offset="50655">
+        <state line="67" column="0" selection-start="2154" selection-end="2154" vertical-scroll-proportion="0.4419643" vertical-offset="708" max-vertical-offset="1515">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Gruntfile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="52" selection-start="2055" selection-end="2055" vertical-scroll-proportion="0.8360656" vertical-offset="408" max-vertical-offset="1140">
+        <state line="30" column="19" selection-start="998" selection-end="998" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1035">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js_prod/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3374" column="3" selection-start="101203" selection-end="101203" vertical-scroll-proportion="0.0" vertical-offset="49981" max-vertical-offset="50700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js_prod/begin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="3" selection-start="41" selection-end="41" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/interface.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="191" column="31" selection-start="5379" selection-end="5379" vertical-scroll-proportion="214.5" vertical-offset="8442" max-vertical-offset="9135">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/sass/templates/_interface.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="307" column="5" selection-start="5215" selection-end="5215" vertical-scroll-proportion="-7.16" vertical-offset="4247" max-vertical-offset="17685">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/sass/templates/_multi.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="-1.8" vertical-offset="0" max-vertical-offset="3060">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/game.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="140" column="0" selection-start="4039" selection-end="4039" vertical-scroll-proportion="2.9207232" vertical-offset="0" max-vertical-offset="4680">
           <folding />
         </state>
       </provider>
