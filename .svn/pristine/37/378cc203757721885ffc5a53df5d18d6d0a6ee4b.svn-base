@@ -1,0 +1,291 @@
+
+
+
+capCollision = function ( collided, linearVelocity, angularVelocity, other ){
+
+    var capPlayed = this;
+    capPlayed.collisions++;
+
+    if(capPlayed.floating) return;
+
+    var collision = collided.name;
+
+
+    var velocity = Math.abs(linearVelocity.x) + Math.abs(linearVelocity.y) + Math.abs(linearVelocity.z);
+
+    switch(collision){
+        case 'level':
+            if(capPlayed.name == 'player'){
+                if(velocity > 60)
+                    Snds.playSd('simpletap3');
+            }
+            break;
+        case 'tapis':
+            if(velocity > 60)
+                Snds.playSd('simpletap1');
+            break;
+        case 'floor':
+            if(velocity > 60)
+                Snds.playSd('simpletap3');
+            break;
+        case 'vlCap':
+            if(capPlayed.name == 'player'){
+                collided.collided = true;
+                collided.__dirty_postion = true;
+                Snds.playSd('capcap');
+            }
+            break;
+        case 'plCap':
+            if(capPlayed.name == 'viensla'){
+                collided.collided = true;
+                collided.__dirty_postion = true;
+                Snds.playSd('capcap');
+            }
+            break;
+        case 'vlBottle':
+            if(velocity > 60)
+                Snds.playSd('clink');
+            break;
+        case 'plBottle':
+            if(velocity > 60)
+                Snds.playSd('clink');
+            break;
+        case '':
+            break;
+    }
+};
+
+
+
+
+function create_caps(who){
+    var mass = 2;
+
+    if(typeof who == 'undefined'){
+        who = 'pl';
+    }
+
+
+    var cap_mat;
+    if(who == 'pl'){
+        cap_mat = Player.capmat.clone();
+    }else{
+        cap_mat = Viensla.capmat.clone();
+    }
+
+    cap_mat.side = 2;
+
+
+    ball = new Physijs.CylinderMesh(geo_caps, cap_mat, mass, {friction : 1, restitution : 0.5});
+
+    ball.stopGravity = function(){
+        var cap = this;
+        var intv;
+        var i=0;
+        setTimeout(function(){
+            cap.material.materials[0].transparent = true;
+            cap.material.materials[1].transparent = true;
+            intv = setInterval(function(){
+                cap.material.materials[0].opacity = i%2 == 0 ? 0 : 1;
+                cap.material.materials[1].opacity = i%2 == 0 ? 0 : 1;
+                i++;
+                if(i == 10){
+                    clearInterval(intv);
+                    cap.material.materials[0].opacity = 1;
+                    cap.material.materials[1].opacity = 1;
+                    scene.remove(cap);
+                }
+            }, 200-i);
+      }, 4000);
+    };
+    ball.scale.set(capModelscale,capModelscale,capModelscale);
+
+
+    ball.collisions = 0;
+    ball.addEventListener('collision', capCollision);
+
+    var sub = new Physijs.CylinderMesh(
+        new THREE.CylinderGeometry(1.5, 1.5, 0, 32, 32 ),
+        new THREE.MeshLambertMaterial({
+            color: ball.material.materials[1].color,
+            transparent : true,
+            opacity:1
+        })
+        ,0);
+    sub.position.x = 0;
+    sub.position.y = 0.3;
+    sub.position.z = 0;
+
+    ball.add(sub);
+
+    ball.position.y = 50;
+    ball.position.x = 0;
+    ball.position.z = playerDistance * globalDirection;
+    ball.castShadow = true;
+    ball.receiveShadow = true;
+
+    scene.add(ball);
+    elements.push(ball);
+
+    playedCaps = ball;
+
+    playedCaps.floating = true;
+
+    playedCaps.name = who == 'vl' ?  'viensla' : 'player';
+
+
+    if(elements.length > 4){
+        var last = elements[0];
+        last.stopGravity();
+        elements.splice(0, 1);
+    }
+
+}
+
+
+
+
+
+var power = 0,
+    speedbar = 2,
+    powerDir = speedbar,
+    strengh = 6,
+    playerstrengh = 5;
+
+
+function setPower(){
+
+    function increasePower(){
+        if(holdingDown){
+
+            power += powerDir;
+
+            if(power > 100){
+                powerDir = -speedbar;
+            }
+
+            if(power < 0){
+                powerDir = +speedbar;
+            }
+
+            TweenMax.set($powerBar.find('.bar'), {height:power+'%'});
+
+        }
+        setTimeout(increasePower,5 + (Viensla.lives/10)*2);
+    }
+    increasePower();
+}
+
+
+
+
+
+
+initEventHandling = (function() {
+    var  handleMouseDown, handleMouseMove, handleMouseUp,
+        launchVector = new THREE.Vector3,
+        _vector = new THREE.Vector3,
+        _angVector = new THREE.Vector3;
+
+
+    handleMouseDown = function( evt ) {
+        if(!playedCaps) return;
+        holdingDown = true;
+        power = 0;
+        $powerBar.fadeIn();
+    };
+
+    handleMouseMove = function( evt ) {
+        var mouseX = evt.clientX,
+            mouseY = evt.clientY;
+
+
+        if(playedCaps && Player.isPlaying){
+            TweenMax.set($powerBar, {left:mouseX+50, top:mouseY-50});
+
+            if(Player.totalLaunched < 4){
+                TweenMax.set($helpPower, {left:mouseX+50, top:mouseY-50});
+            }
+        };
+
+        mouse3D.set(
+            ( mouseX / window.innerWidth ) * 2 - 1,
+            - ( mouseY / window.innerHeight ) * 2 + 1.07 ,
+            1 );
+        mouse3D.unproject(camera);
+        dir = mouse3D.sub( camera.position ).normalize();
+        distance = - camera.position.z / dir.z;
+        realpos = camera.position.clone().add( dir.multiplyScalar(distance/2) );
+        realpos.z = playerDistance*globalDirection;
+
+        if(!playedCaps) return;
+
+        DCMP = realpos;
+
+
+    };
+
+    handleMouseUp = function( evt ) {
+
+        if(!playedCaps) return;
+
+
+        holdingDown = false;
+
+        playedCaps.__dirtyPosition = true;
+        playedCaps.floating = false;
+
+        var rdms = [
+            Math.random()*3+4,
+            Math.random()*3+4,
+            Math.random()*3+4
+        ];
+
+        _vector.set( 1, 1, 1 );
+        _angVector.set( rdms[0], rdms[1], rdms[2]);
+
+        playedCaps.setAngularFactor( _vector );
+        playedCaps.setLinearFactor( _vector );
+        launchVector.set(1,1, -power*playerstrengh*globalDirection);
+        playedCaps.setLinearVelocity( launchVector );
+        playedCaps.setAngularVelocity( _angVector );
+
+        playedCaps.position.copy(DCMP);
+
+        playedCaps = null;
+
+        if(!CAPS.solo){
+            Game.Player.playerLaunch({x : DCMP.x, y : DCMP.y, z :-DCMP.z, pwr:power, rdms:rdms});
+        }else{
+            setTimeout(function(){
+                Party.resetStocks();
+                Party.vlplay();
+            }, 3000);
+        }
+        power = 0;
+
+        if(Player.totalLaunched < 4){
+            Interface.launchTuto.hide();
+        }
+
+        $powerBar.fadeOut();
+
+        Player.launched++;
+        Player.totalLaunched++;
+
+        Player.isPlaying = false;
+        Viensla.isPlaying = true;
+        Party.setTurn();
+
+        Party.resetStocks();
+
+
+
+    };
+
+    return function() {
+        renderer.domElement.addEventListener( 'mousedown', handleMouseDown );
+        renderer.domElement.addEventListener( 'mousemove', handleMouseMove );
+        renderer.domElement.addEventListener( 'mouseup', handleMouseUp );
+    };
+})();

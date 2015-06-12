@@ -1,0 +1,346 @@
+var Party = {
+    isPlaying : false,
+    capsPerTurn : 1,
+    lives : 60,
+    create : function(){
+        Viensla.generateCaps();
+
+        Viensla.score = Player.score = Viensla.launched = Player.launched = 0;
+        Viensla.lives = Player.lives = Party.lives;
+
+        Party.isPlaying = true;
+
+        this.resetStocks();
+
+        if(!CAPS.solo){
+            Viensla.isPlaying = Game.role == 'Player';
+            Player.isPlaying = Game.role == 'Host';
+        }else{
+            Viensla.isPlaying = false;
+            Player.isPlaying = true;
+        }
+
+        $vlpart.fadeIn(function(){
+            Party.setLife();
+        });
+
+        $plpart.fadeIn();
+
+        Player.generateCaps();
+
+        if(!Interface.txtoRdy)
+            Interface.textoBox.init();
+
+
+
+
+
+
+        setTimeout(function(){
+            $('#game-loader .tiny-loader').addClass('fade');
+            setTimeout(function(){
+                $('#game-loader').addClass('fade');
+                setTimeout(function(){
+                    $('#game-loader').remove();
+                    animTypo($startTypo);
+                    Party.setTurn();
+                    Snds.fadInSd('ambiance');
+                    Snds.playSd('open');
+
+                    var cookie = Cookies.get("tutorial");
+
+                    if(!cookie){
+                        setTimeout(function(){
+                            $('#bt-menu').click();
+                            $('#lk-tuto').click();
+                            Cookies.set("tutorial", 1, { expires : 10 });
+                        },1000);
+                    }
+                }, 500);
+            }, 1000);
+        }, 2000);
+    },
+
+    resetParty: function(){
+        var $resetC = $('#reset-party-c');
+
+        Viensla.score = Player.score = Viensla.launched = Player.launched = 0;
+        Viensla.lives = Player.lives = Party.lives;
+        Player.drunked = 1;
+
+        Party.isPlaying = true;
+
+        Party.setLife();
+
+        if(!CAPS.solo){
+//            Viensla.isPlaying = Game.role == 'Player';
+//            Player.isPlaying = Game.role == 'Host';
+        }else{
+            Viensla.isPlaying = false;
+            Player.isPlaying = true;
+        }
+
+        Party.setTurn();
+
+        camera.initialpos = new THREE.Vector3( 0, 160, 165 );
+
+        TweenMax.to($resetC, 1, {opacity:0, onComplete:function(){
+
+            TweenMax.set($resetC,{display:'none'});
+            animTypo($startTypo);
+            Snds.playSd('open');
+            TweenMax.set($resetC.find('h4'),{scale:0.5, opacity:0, height:0});
+        }});
+
+    },
+    setTurn:function(){
+        if(Player.isPlaying){
+            $('#versus-bar #cursor').removeClass().addClass('lf');
+            TweenMax.to($('#you-turn'), 1.5, {x:40, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:1.8});
+            TweenMax.to($('#you-turn'), 1, {x:-170, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:4.5});
+
+            if(Player.totalLaunched < 3)
+                Interface.capTuto.show();
+
+        }else {
+            $('#versus-bar #cursor').removeClass().addClass('rg');
+        }
+    },
+
+    vlplay : function(){
+
+        if(this.isPlaying && CAPS.solo){
+            if(Viensla.launched < Party.capsPerTurn && !Player.isPlaying){
+
+                $vlpart.find('.capsstock span').eq(Viensla.launched).removeClass().addClass('animated zoomOut');
+
+                Viensla.isPlaying = true;
+                Player.isPlaying = false;
+                Viensla.launchCaps();
+                Viensla.launched++;
+                Viensla.totalLaunched++;
+
+                Player.isPlaying = true;
+                Player.launched = 0;
+                Viensla.isPlaying = false;
+
+
+                Party.setTurn();
+                this.resetStocks();
+
+            }
+        }
+    },
+
+    plplay : function(){
+        if(this.isPlaying){
+
+            if(Player.launched < Party.capsPerTurn && !Viensla.isPlaying){
+                globalDirection = 1;
+                create_caps('pl');
+                Player.isPlaying = true;
+                Viensla.isPlaying = false;
+            }
+        }
+    },
+
+    vlcaps : function(){
+        if(this.isPlaying){
+            Viensla.isPlaying = false;
+            Player.isPlaying = true;
+            Viensla.score++;
+            Player.drunked += 2;
+            Player.lives -= 10;
+            var perfect = false;
+
+            if(Player.lives==0 && Viensla.lives==Party.lives){
+                animTypo($perfectTypo, 800);
+                perfect=true;
+
+            }else{
+                this.animCaps();
+            }
+
+            if(Viensla.launched < Party.capsPerTurn-1){
+
+                setTimeout(function(){
+                    Party.resetStocks();
+                }, 2000);
+            }
+            setTimeout(function(){
+                Player.generateCaps();
+            }, 2000);
+
+            Party.setLife(perfect);
+        }
+    },
+
+
+    plcaps : function(){
+        var txtos = [2, 4, 5, 7];
+
+        if(this.isPlaying){
+            Player.score++;
+            Viensla.lives -= 10;
+            Player.isPlaying = false;
+            Viensla.isPlaying = true;
+
+            Game.Player.playerCaps();
+
+            var perfect = false;
+
+            if(Viensla.lives==0 && Player.lives==Party.lives){
+                animTypo($perfectTypo, 800);
+                perfect=true;
+            }else{
+                this.animCaps();
+            }
+            setTimeout(function(){
+                Viensla.generateCaps();
+            }, 2000);
+
+
+            Party.setLife(perfect);
+
+        }
+
+    },
+
+    resetStocks : function(){
+        if(this.isPlaying){
+            $('.capsstock span.zoomOut').removeClass('zoomOut').addClass('zoomIn');
+            Viensla.launched = 0;
+            Player.launched = 0;
+        }
+
+        if(Player.drunked > 11){
+            Player.drunked -= 2;
+        }
+    },
+
+    setLife : function(perfect){
+
+        if(typeof perfect == 'undefined')
+            perfect = false;
+
+        var delay = perfect ? 2600 : 1600;
+        if(this.isPlaying){
+            var pctPlLife = Math.round(Player.lives / Party.lives * 100);
+            var pctVlLife = Math.round(Viensla.lives / Party.lives * 100);
+
+            $plpart.find('.life').height(pctPlLife+"%");
+            $vlpart.find('.life').height(pctVlLife+"%");
+
+            if(pctPlLife <= 0 || pctVlLife <= 0){
+                $('#share-tw-c iframe').remove();
+
+                Party.isPlaying = false;
+
+                setTimeout(function(){
+                    var share_text = "";
+                    if(pctPlLife <= 0){
+                        animTypo($loseTypo, 800);
+                        Snds.playSd('lose');
+                        setTimeout(Snds.playSd('clairon'), 3000);
+                        $('#reset-party-c').removeClass().addClass('looser').find('h3').text("Une petite revanche ?");
+                        if(CAPS.solo){
+                            Viensla.imprecision += 2;
+                        }
+                        share_text = "Je me suis fait éclater par "+Game.Enemy.name+" au caps ! J'en veux encore ! À qui le tour ?";
+
+                    }else if(pctVlLife <= 0){
+                        animTypo($winTypo, 800);
+                        Snds.playSd('win');
+                        $('#reset-party-c').removeClass().addClass('winner').find('h3').text("On prendra bien la ptite soeur ?");
+                        setTimeout(Snds.playSd('applause'), 3000);
+                        Viensla.imprecision = Math.max(0, Viensla.imprecision - 2);
+
+                        share_text = "J'ai éclaté "+Game.Enemy.name+" au caps ! À qui le tour ?";
+                    }
+
+
+
+
+
+                    $fbUrlLink.on('click', function(){
+
+                        FB.ui({
+                                method: 'feed',
+                                name: share_text,
+                                link: 'http://www.payetoncaps.com',
+                                picture:'http://www.payetoncaps.com/images/logo/fb-logo.png',
+                                caption: 'Paye ton caps !',
+                                description: 'Viens faire une petite partie de Caps !'
+                            },
+                            function(response) {
+                                if (response && response.post_id) {
+                                    // do nothing
+                                } else {
+                                    //alert('ERREUR');
+                                }
+                            }
+                        );
+
+//                        window.open('http://www.facebook.com/sharer.php?s=100&amp;p[title]='+encodeURI('Paye ton Caps')+'&amp;p[summary]='+encodeURI(share_text)+'&amp;p[url]='+window.location.href+'&amp;','sharer','toolbar=0,status=0,width=548,height=325');
+                    });
+                    twttr.widgets.createShareButton(
+                        'http://www.payetoncaps.com',
+                        document.getElementById('share-tw-c'),
+                        {
+                            text: share_text,
+                            size:'large',
+                            count:'none'
+                        }
+                    );
+
+
+
+                    TweenMax.to($('#reset-party-c'), 1, {opacity:1, display:'block', delay:3});
+
+                }, delay);
+            }
+        }
+    },
+    animCaps : function(){
+        animTypo($capsTypo);
+    }
+};
+
+
+
+
+
+
+function animTypo($el, pauseDelay){
+    if(typeof pauseDelay == 'undefined')
+        pauseDelay = 300;
+
+    var delay = 400;
+    $el.attr('class', 'capsIn1');
+    setTimeout(function(){
+        $el.attr('class', 'capsIn2');
+        setTimeout(function(){
+            $el.attr('class', 'capsIn3');
+            setTimeout(function(){
+                $el.attr('class', '');
+            },delay);
+        },delay+pauseDelay);
+    },delay);
+
+    if($el == $perfectTypo){
+        Snds.playSd('perfect');
+        var aleaGif = Math.ceil(Math.random()*10);
+
+        $('#perfect-b').removeClass().addClass('g'+aleaGif);
+
+        $('#perfect-b').addClass('active');
+
+        setTimeout(function(){
+            $('#perfect-b').removeClass('active');
+
+            setTimeout(function(){
+                $('#perfect-b').removeClass();
+            },1000);
+        },2500);
+    }
+}

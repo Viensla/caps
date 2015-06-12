@@ -1,0 +1,102 @@
+var extSnd = '.mp3';
+var path = 'assets/sounds/';
+var Snds = {
+    ambiance : new Audio(path+'ambiance'+extSnd),
+    simpletap1 : new Audio(path+"choc_simple_1"+extSnd),
+    simpletap2 : new Audio(path+"choc_simple_2"+extSnd),
+    simpletap3 : new Audio(path+"choc_simple_3"+extSnd),
+    clink : new Audio(path+"clink"+extSnd),
+    capcap : new Audio(path+"caps"+extSnd),
+    open : new Audio(path+"open"+extSnd),
+    pschit2 : new Audio(path+"pschit_2"+extSnd),
+    win : new Audio(path+"you-win"+extSnd),
+    lose: new Audio(path+"you-lose"+extSnd),
+    vibreur: new Audio(path+"vibreur"+extSnd),
+    clairon: new Audio(path+"fail"+extSnd),
+    applause: new Audio(path+"applause"+extSnd),
+    perfect: new Audio(path+"perfect"+extSnd),
+
+    mute : false,
+    init : function(){
+        var $mtbt = $('#mute');
+
+        $mtbt.on('click', function(){
+            $(this).toggleClass('off');
+            Snds.mute = !Snds.mute;
+            Snds.ambiance.muted = Snds.mute;
+            Snds.applause.muted = Snds.mute;
+            Snds.clairon.muted = Snds.mute;
+            Snds.vibreur.muted = Snds.mute;
+        });
+
+        Snds.simpletap1.volume=0.4;
+        Snds.perfect.volume=0.4;
+        Snds.simpletap2.volume=0.4;
+        Snds.simpletap3.volume=0.4;
+        Snds.clink.volume=0.4;
+        Snds.vibreur.volume=0.5;
+
+        Snds.ambiance.addEventListener('ended', function() {
+            this.currentTime = 0;
+            Snds.ambiance.play();
+        }, false);
+
+        Snds.ambiance.load();
+
+        Snds.playSd = function(sd){
+            if(!Snds.mute){
+                Snds[sd].currentTime = 0;
+                Snds[sd].play();
+                Snds[sd].isPlaying = true;
+            }
+        };
+
+        Snds.fadeSd = function(sd, to){
+            var interval;
+
+            if(typeof to == 'undefined')
+                to = 0;
+
+            if(!Snds[sd].isFading){
+                Snds[sd].isFading = true;
+
+                if(!Snds.mute){
+                    interval = setInterval(function(){
+                        if(Snds[sd].volume > to+0.05){
+                            Snds[sd].volume -= 0.05;
+                        }else{
+                            Snds[sd].volume = to;
+                            clearInterval(interval);
+                            Snds[sd].isFading = false;
+                        }
+                    }, 200);
+                }
+            }
+        };
+
+        Snds.fadInSd = function(sd){
+            var interval;
+
+            if(!Snds[sd].isFading){
+                Snds[sd].isFading = true;
+                Snds[sd].volume = 0;
+                Snds[sd].play();
+
+                if(!Snds.mute){
+                    interval = setInterval(function(){
+                        if(Snds[sd].volume < 0.3){
+                            Snds[sd].volume += 0.05;
+                        }else{
+                            clearInterval(interval);
+                            Snds[sd].isFading = false;
+                        }
+                    }, 300);
+                }
+            }
+        };
+
+    }
+};
+
+
+

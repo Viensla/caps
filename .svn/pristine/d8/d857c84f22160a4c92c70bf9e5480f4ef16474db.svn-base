@@ -1,0 +1,19 @@
+<section class="sc wait-section">
+
+    <div class="sc-content">
+
+        <h2>En attente de votre<br>adversaire...</h2>
+
+        <div class="tiny-loader">
+            <div></div>
+        </div>
+
+        <p class="wt-party-code">Code de la partie : <span></span></p>
+
+        <div class="bt lgt-close quit-party">
+            <div class="cl"></div>
+            <p>Annuler</p>
+        </div>
+    </div>
+
+</section>

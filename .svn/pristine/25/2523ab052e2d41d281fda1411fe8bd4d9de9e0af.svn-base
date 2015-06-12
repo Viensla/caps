@@ -1,0 +1,34 @@
+var playerCamera = {}, camera;
+var lookat;
+
+
+
+var VIEW_ANGLE = 75,
+    ASPECT = WIDTH / HEIGHT,
+    NEAR = 0.1,
+    FAR = 10000;
+
+function create_camera(){
+
+
+    playerCamera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR);
+    playerCamera.initialpos = new THREE.Vector3( 0, 160, 165 );
+    playerCamera.position.set(playerCamera.initialpos.x, playerCamera.initialpos.y, playerCamera.initialpos.z);
+    playerCamera.lookAt(scene);
+    scene.add(playerCamera);
+
+
+    lookat = new THREE.Vector3(0,50,-100);
+
+    camera = playerCamera;
+
+    mouse = {x : 0, y : 0};
+
+    document.addEventListener('mousemove', function(event){
+        mouse.x	= (event.clientX / window.innerWidth ) - 0.5;
+        mouse.y	= (event.clientY / window.innerHeight) - 0.5;
+
+        camera.position.x += (mouse.x * 20 - camera.position.x) * (0.3*3) + camera.initialpos.x;
+        camera.position.y += (mouse.y * 10 - camera.position.y) * (0.5*3) + camera.initialpos.y+80;
+    }, false);
+}
