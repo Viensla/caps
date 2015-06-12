@@ -1541,6 +1541,7 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
 jQuery(function($){
 
+
     var CAPS = {
     camera : null,
     solo : false,
@@ -1633,10 +1634,13 @@ initScene = function() {
     Viensla.changeBottle(Game.Enemy.caps);
 
 
-    Party.create();
     render();
     setPower();
     onWindowResize();
+
+
+    Party.create();
+
 
 };
 
@@ -1998,9 +2002,8 @@ var power = 0,
 
 
 function setPower(){
-    var powerInterval;
 
-    powerInterval = setInterval(function(){
+    function increasePower(){
         if(holdingDown){
 
             power += powerDir;
@@ -2014,8 +2017,11 @@ function setPower(){
             }
 
             TweenMax.set($powerBar.find('.bar'), {height:power+'%'});
+
         }
-    }, 10 + Viensla.lives/10 );
+        setTimeout(increasePower,5 + (Viensla.lives/10)*2);
+    }
+    increasePower();
 }
 
 
@@ -2238,6 +2244,11 @@ var shadowColors = {
         if(!Interface.txtoRdy)
             Interface.textoBox.init();
 
+
+
+
+
+
         setTimeout(function(){
             $('#game-loader .tiny-loader').addClass('fade');
             setTimeout(function(){
@@ -2248,6 +2259,16 @@ var shadowColors = {
                     Party.setTurn();
                     Snds.fadInSd('ambiance');
                     Snds.playSd('open');
+
+                    var cookie = Cookies.get("tutorial");
+
+                    if(!cookie){
+                        setTimeout(function(){
+                            $('#bt-menu').click();
+                            $('#lk-tuto').click();
+                            Cookies.set("tutorial", 1, { expires : 10 });
+                        },1000);
+                    }
                 }, 500);
             }, 1000);
         }, 2000);
@@ -2274,7 +2295,10 @@ var shadowColors = {
 
         Party.setTurn();
 
+        camera.initialpos = new THREE.Vector3( 0, 160, 165 );
+
         TweenMax.to($resetC, 1, {opacity:0, onComplete:function(){
+
             TweenMax.set($resetC,{display:'none'});
             animTypo($startTypo);
             Snds.playSd('open');
@@ -4598,7 +4622,7 @@ var Viensla = {
     launched : 0,
     totalLaunched : 0,
     isPerfect : false,
-    imprecision : 16,
+    imprecision : 8,
     isPlaying : false,
     isShooting : false,
     lives : 0,
