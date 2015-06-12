@@ -1537,7 +1537,11 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
     return Physijs;
 })();
-;var CAPS = {
+;var Interface;
+
+jQuery(function($){
+
+    var CAPS = {
     camera : null,
     solo : false,
     quality:'high'
@@ -2443,8 +2447,30 @@ var shadowColors = {
                         share_text = "J'ai éclaté "+Game.Enemy.name+" au caps ! À qui le tour ?";
                     }
 
+
+
+
+
                     $fbUrlLink.on('click', function(){
-                        window.open('http://www.facebook.com/sharer.php?s=100&amp;p[title]='+encodeURI('Paye ton Caps')+'&amp;p[summary]='+encodeURI(share_text)+'&amp;p[url]='+window.location.href+'&amp;','sharer','toolbar=0,status=0,width=548,height=325');
+
+                        FB.ui({
+                                method: 'feed',
+                                name: share_text,
+                                link: 'http://www.payetoncaps.com',
+                                picture:'http://www.payetoncaps.com/images/logo/fb-logo.png',
+                                caption: 'Paye ton caps !',
+                                description: 'Viens faire une petite partie de Caps !'
+                            },
+                            function(response) {
+                                if (response && response.post_id) {
+                                    // do nothing
+                                } else {
+                                    //alert('ERREUR');
+                                }
+                            }
+                        );
+
+//                        window.open('http://www.facebook.com/sharer.php?s=100&amp;p[title]='+encodeURI('Paye ton Caps')+'&amp;p[summary]='+encodeURI(share_text)+'&amp;p[url]='+window.location.href+'&amp;','sharer','toolbar=0,status=0,width=548,height=325');
                     });
                     twttr.widgets.createShareButton(
                         'http://www.payetoncaps.com',
@@ -4914,3 +4940,4 @@ var Snds = {
 
 
 
+});
