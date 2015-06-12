@@ -166,7 +166,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="game.js" pinned="false" current="true" current-in-tab="true">
+          <file leaf-file-name="game.js" pinned="false" current="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/dev/js_prod/game.js">
               <provider selected="true" editor-type-id="text-editor">
                 <state line="3416" column="25" selection-start="102547" selection-end="102547" vertical-scroll-proportion="0.62109953" vertical-offset="50822" max-vertical-offset="51495">
@@ -227,16 +227,16 @@
           <file leaf-file-name="_interface.scss" pinned="false" current="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/dev/sass/templates/_interface.scss">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="307" column="5" selection-start="5215" selection-end="5215" vertical-scroll-proportion="-7.16" vertical-offset="4247" max-vertical-offset="17685">
+                <state line="537" column="17" selection-start="10046" selection-end="10046" vertical-scroll-proportion="-6.86" vertical-offset="7712" max-vertical-offset="17685">
                   <folding />
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="Gruntfile.js" pinned="false" current="false" current-in-tab="true">
+          <file leaf-file-name="Gruntfile.js" pinned="false" current="true" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Gruntfile.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state line="61" column="52" selection-start="1888" selection-end="1888" vertical-scroll-proportion="0.8360656" vertical-offset="303" max-vertical-offset="1035">
+                <state line="61" column="43" selection-start="1879" selection-end="1879" vertical-scroll-proportion="0.8360656" vertical-offset="303" max-vertical-offset="1035">
                   <folding />
                 </state>
               </provider>
@@ -323,7 +323,6 @@
         <option value="$PROJECT_DIR$/dev/sass/templates/_players_options.scss" />
         <option value="$PROJECT_DIR$/dev/sass/templates/_footer.scss" />
         <option value="$PROJECT_DIR$/dev/js/sounds.js" />
-        <option value="$PROJECT_DIR$/dev/sass/templates/_interface.scss" />
         <option value="$PROJECT_DIR$/dev/js/interface.js" />
         <option value="$PROJECT_DIR$/www/wait.html" />
         <option value="$PROJECT_DIR$/dev/sass/templates/_loader.scss" />
@@ -342,6 +341,7 @@
         <option value="$PROJECT_DIR$/dev/js/_players.js" />
         <option value="$PROJECT_DIR$/dev/js/_game.js" />
         <option value="$PROJECT_DIR$/dev/js_prod/game.js" />
+        <option value="$PROJECT_DIR$/dev/sass/templates/_interface.scss" />
         <option value="$PROJECT_DIR$/Gruntfile.js" />
       </list>
     </option>
@@ -476,6 +476,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="caps" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dev" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sass" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -859,10 +881,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="23" width="1920" height="1053" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18691589" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18691589" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18691589" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
@@ -1111,23 +1133,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/sass/templates/_interface.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="307" column="5" selection-start="5215" selection-end="5215" vertical-scroll-proportion="-7.16" vertical-offset="4247" max-vertical-offset="17685">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/sass/templates/_multi.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="-1.8" vertical-offset="0" max-vertical-offset="3060">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/js/_leveldesign.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="17" selection-start="795" selection-end="795" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8685">
           <folding />
         </state>
       </provider>
@@ -1239,16 +1247,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gruntfile.js">
+    <entry file="file://$PROJECT_DIR$/dev/js_prod/game.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="52" selection-start="1888" selection-end="1888" vertical-scroll-proportion="0.8360656" vertical-offset="303" max-vertical-offset="1035">
+        <state line="3416" column="25" selection-start="102547" selection-end="102547" vertical-scroll-proportion="0.62109953" vertical-offset="50822" max-vertical-offset="51495">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/js_prod/game.js">
+    <entry file="file://$PROJECT_DIR$/dev/js/_leveldesign.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3416" column="25" selection-start="102547" selection-end="102547" vertical-scroll-proportion="0.62109953" vertical-offset="50822" max-vertical-offset="51495">
+        <state line="36" column="17" selection-start="795" selection-end="795" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8685">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/sass/templates/_interface.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="537" column="17" selection-start="10046" selection-end="10046" vertical-scroll-proportion="-6.86" vertical-offset="7712" max-vertical-offset="17685">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="43" selection-start="1879" selection-end="1879" vertical-scroll-proportion="0.8360656" vertical-offset="303" max-vertical-offset="1035">
           <folding />
         </state>
       </provider>

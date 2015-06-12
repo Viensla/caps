@@ -4661,8 +4661,8 @@ footer p.copy img.vl {
 /* line 530, ../../dev/sass/templates/_interface.scss */
 #launch-tuto {
   position: absolute;
-  left: 0px;
-  top: 0px;
+  left: -100%;
+  top: -100%;
   margin-top: 30px;
   margin-left: 50px;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
