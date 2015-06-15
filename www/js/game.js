@@ -1541,7 +1541,6 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
 jQuery(function($){
 
-
     var CAPS = {
     camera : null,
     solo : false,
@@ -1560,7 +1559,8 @@ var holdingDown = false;
 
 var $powerBar, $helpPower, $fbUrlLink;
 
-var $capsTypo,$startTypo, $winTypo, $loseTypo, $perfectTypo;
+var $capsTypo,$startTypo, $winTypo, $loseTypo, $perfectTypo,
+    $cp, $vs, $vlLine, $plLine;
 
 
 Physijs.scripts.worker = '/js/physics/physics_wkr.js';
@@ -2080,6 +2080,8 @@ initEventHandling = (function() {
 
         holdingDown = false;
 
+        Party.clearPlayerTimeout();
+
         playedCaps.__dirtyPosition = true;
         playedCaps.floating = false;
 
@@ -2215,6 +2217,11 @@ var shadowColors = {
     isPlaying : false,
     capsPerTurn : 1,
     lives : 60,
+    delayToPlay: 40,
+    timeout: null,
+    intervalCount:null,
+    intervalCountVl:null,
+    playerLeaveTimeout:null,
     create : function(){
         Viensla.generateCaps();
 
@@ -2244,10 +2251,8 @@ var shadowColors = {
         if(!Interface.txtoRdy)
             Interface.textoBox.init();
 
-
-
-
-
+        this.timeout = setTimeout(function(){},0);
+        this.intervalCount = setInterval(function(){},100000);
 
         setTimeout(function(){
             $('#game-loader .tiny-loader').addClass('fade');
@@ -2306,21 +2311,9 @@ var shadowColors = {
         }});
 
     },
-    setTurn:function(){
-        if(Player.isPlaying){
-            $('#versus-bar #cursor').removeClass().addClass('lf');
-            TweenMax.to($('#you-turn'), 1.5, {x:40, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:1.8});
-            TweenMax.to($('#you-turn'), 1, {x:-170, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:4.5});
 
-            if(Player.totalLaunched < 3)
-                Interface.capTuto.show();
 
-        }else {
-            $('#versus-bar #cursor').removeClass().addClass('rg');
-        }
-    },
-
-    vlplay : function(){
+     vlplay : function(){
 
         if(this.isPlaying && CAPS.solo){
             if(Viensla.launched < Party.capsPerTurn && !Player.isPlaying){
@@ -2412,9 +2405,7 @@ var shadowColors = {
                 Viensla.generateCaps();
             }, 2000);
 
-
             Party.setLife(perfect);
-
         }
 
     },
@@ -2430,7 +2421,28 @@ var shadowColors = {
             Player.drunked -= 2;
         }
     },
+    setTurn:function(){
 
+        if(!CAPS.solo) Party.refreshDelay();
+
+        if(Player.isPlaying){
+            $('#versus-bar #cursor').removeClass().addClass('lf');
+            TweenMax.to($('#you-turn'), 1.5, {x:40, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:1.8});
+            TweenMax.to($('#you-turn'), 1, {x:-170, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:4.5});
+
+            if(Player.totalLaunched < 3)
+                Interface.capTuto.show();
+
+
+
+        }else {
+
+            $('#versus-bar #cursor').removeClass().addClass('rg');
+            TweenLite.to($cp, 0.3, {scale:0, opacity:0});
+            TweenLite.to($vs, 0.3, {scale:1, opacity:1, delay:0.2});
+        }
+
+    },
     setLife : function(perfect){
 
         if(typeof perfect == 'undefined')
@@ -2446,7 +2458,7 @@ var shadowColors = {
 
             if(pctPlLife <= 0 || pctVlLife <= 0){
                 $('#share-tw-c iframe').remove();
-
+                Party.clearPlayerTimeout();
                 Party.isPlaying = false;
 
                 setTimeout(function(){
@@ -2471,10 +2483,6 @@ var shadowColors = {
                         share_text = "J'ai éclaté "+Game.Enemy.name+" au caps ! À qui le tour ?";
                     }
 
-
-
-
-
                     $fbUrlLink.on('click', function(){
 
                         FB.ui({
@@ -2485,17 +2493,11 @@ var shadowColors = {
                                 caption: 'Paye ton caps !',
                                 description: 'Viens faire une petite partie de Caps !'
                             },
-                            function(response) {
-                                if (response && response.post_id) {
-                                    // do nothing
-                                } else {
-                                    //alert('ERREUR');
-                                }
-                            }
+                            function(response) {}
                         );
 
-//                        window.open('http://www.facebook.com/sharer.php?s=100&amp;p[title]='+encodeURI('Paye ton Caps')+'&amp;p[summary]='+encodeURI(share_text)+'&amp;p[url]='+window.location.href+'&amp;','sharer','toolbar=0,status=0,width=548,height=325');
                     });
+
                     twttr.widgets.createShareButton(
                         'http://www.payetoncaps.com',
                         document.getElementById('share-tw-c'),
@@ -2506,8 +2508,6 @@ var shadowColors = {
                         }
                     );
 
-
-
                     TweenMax.to($('#reset-party-c'), 1, {opacity:1, display:'block', delay:3});
 
                 }, delay);
@@ -2516,7 +2516,100 @@ var shadowColors = {
     },
     animCaps : function(){
         animTypo($capsTypo);
+    },
+    refreshDelay:function(){
+
+        clearTimeout(Party.timeout);
+        clearInterval(Party.intervalCount);
+
+        var i = Party.delayToPlay;
+
+//        $cp.text(i);
+
+        if(Player.isPlaying){
+
+            clearInterval(Party.intervalCountVl);
+            $vlLine.css({width:0});
+
+            Party.timeout = setTimeout(function(){
+
+                if(Player.isPlaying && !Viensla.isPlaying){
+                    Player.isPlaying = false;
+                    Viensla.isPlaying = true;
+                    Party.resetStocks();
+                    Party.setTurn();
+                    playedCaps = null;
+                    $powerBar.fadeOut();
+                    holdingDown = false;
+                    if(Player.totalLaunched < 4){
+                        Interface.launchTuto.hide();
+                    }
+                    Game.Player.playerTimeout();
+                }
+            }, Party.delayToPlay*1000);
+
+            Party.intervalCount = setInterval(function(){
+
+                i--;
+
+                $plLine.css({width:i/Party.delayToPlay * 200});
+
+                if(i < Party.delayToPlay/2){
+                    $cp.text(i);
+                    TweenLite.to($vs, 0.3, {scale:0, opacity:0});
+                    TweenLite.to($cp, 0.3, {scale:1, opacity:1, delay:0.2});
+                }else{
+                    TweenLite.to($cp, 0.3, {scale:0, opacity:0});
+                    TweenLite.to($vs, 0.3, {scale:1, opacity:1, delay:0.2});
+                }
+
+                if(i==0){
+                    $cp.text('0');
+                    $plLine.css({width:0});
+                    clearInterval(Party.intervalCount);
+                }
+            }, 1000);
+        }else{
+            Party.intervalCountVl = setInterval(function(){
+                i--;
+                $vlLine.css({width:i/Party.delayToPlay * 200});
+                if(i==0){
+                    clearInterval(Party.intervalCountVl);
+                    $vlLine.css({width:0});
+                    TweenLite.to($cp, 0.3, {scale:0, opacity:0});
+                    TweenLite.to($vs, 0.3, {scale:1, opacity:1, delay:0.2});
+
+                    Party.playerLeaveTimeout=setTimeout(function(){
+                        Party.enemyTimeout();
+                    }, 5000);
+                }
+            }, 1000);
+        }
+
+        Party.delayToPlay=20;
+
+    },
+
+    enemyTimeout : function(){
+        Viensla.isPlaying = false;
+        Player.isPlaying = true;
+        Party.resetStocks();
+        Party.setTurn();
+        $vlLine.css({width:0});
+        clearInterval(Party.intervalCountVl);
+        clearTimeout(Party.playerLeaveTimeout);
+        TweenLite.to($cp, 0.3, {scale:0, opacity:0});
+    },
+
+    clearPlayerTimeout:function(){
+        clearInterval(Party.intervalCount);
+        clearInterval(Party.intervalCountVl);
+        clearTimeout(Party.playerLeaveTimeout);
+        clearTimeout(Party.timeout);
+        TweenLite.to($cp, 0.3, {scale:0, opacity:0});
+        $plLine.css({width:0});
     }
+
 };
 
 
@@ -2601,6 +2694,12 @@ Interface = {
         $powerBar = $('.powerbar');
         $helpPower = $('#launch-tuto');
         $fbUrlLink = $('#reset-party-c').find('#fb_share');
+
+        $cp = $('#cp-c');
+        $vs = $('#vs-logo');
+
+        $plLine = $('#versus-bar .pl .ct-line');
+        $vlLine = $('#versus-bar .vl .ct-line');
 
         this.resize();
         this.initWelcome();
@@ -4027,6 +4126,8 @@ initializeParty = function(){
             IO.socket.on('playerAskReset', Game.Host.playerAskReset);
             IO.socket.on('playerAskQuit', Game.Host.playerAskQuit);
 
+            IO.socket.on('enemyTimeout', Game.Host.enemyTimeout);
+
             IO.socket.on('getHostInfo', Game.Player.getHostInfo);
             //Display errors
             IO.socket.on('error', IO.error );
@@ -4055,6 +4156,9 @@ initializeParty = function(){
 
         error : function(data) {
             alert(data.message);
+            setTimeout(function(){
+                window.location = location.href.replace(location.hash,'');
+            }, 1000)
         }
     };
 
@@ -4255,6 +4359,11 @@ initializeParty = function(){
                     TweenMax.to($('#reset-party-c #bt-quit-reset'), 0.4, {x: -102});
                 }
 
+            },
+            enemyTimeout:function(data){
+                if(data.playerID == Game.Enemy.id){
+                    Party.enemyTimeout();
+                }
             }
         },
         // PlAYERS -------------------------------------------------------------------------------------------------------------------
@@ -4407,6 +4516,12 @@ initializeParty = function(){
             },
             playerQuit : function(){
                 IO.socket.emit('playerQuit', {
+                    gameId: Game.gameId,
+                    playerID:Game.Player.socketId
+                });
+            },
+            playerTimeout : function(){
+                IO.socket.emit('playerTimeout', {
                     gameId: Game.gameId,
                     playerID:Game.Player.socketId
                 });

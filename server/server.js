@@ -24,6 +24,8 @@ exports.initGame = function(sio, s){
     socket.on('playerReset', playerReset);
     socket.on('playerQuit', playerQuit);
 
+    socket.on('playerTimeout', playerTimeout);
+
     socket.on('playerChooseBottle', playerChooseBottle);
 };
 
@@ -143,4 +145,8 @@ function playerReset(data){
 function playerQuit(data){
     console.log('player ask quit');
     io.sockets.in(data.gameId).emit('playerAskQuit', data);
+}
+function playerTimeout(data){
+    console.log('player timeout');
+    io.sockets.in(data.gameId).emit('enemyTimeout', data);
 }
