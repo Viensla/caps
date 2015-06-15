@@ -398,6 +398,14 @@ $(function(){
     var hash = location.hash ? location.hash.replace('#', '') : null;
     var curUrl = location.href.replace(location.hash,'');
 
+    var without_queries = location.href.split("?");
+
+    if(without_queries.length > 1 && without_queries[0] != location.href){
+        console.log(location.href);
+        console.log('dedededed')
+        location.href = without_queries[0];
+    }
+
     loadImg.src = "images/sprites/sprite_load.png";
 
     console.log("Paye ton Caps développé par Viens-là avec THREE.JS, GreenSocks, Physijs, et beaucoup de bières !");

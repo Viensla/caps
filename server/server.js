@@ -117,17 +117,14 @@ function playerMove(data){
 
 
 function playerShoot(data){
-    console.log(data);
     io.sockets.in(data.gameId).emit('playerUpdateLaunch', data);
 }
 
 function hostSendInfo(data){
-    console.log(data);
     io.sockets.in(data.gameId).emit('getHostInfo', data);
 }
 
 function playerChooseBottle(data){
-    console.log(data);
     io.sockets.in(data.gameId).emit('enemyChooseBottle', data);
 }
 
@@ -143,10 +140,8 @@ function playerReset(data){
     io.sockets.in(data.gameId).emit('playerAskReset', data);
 }
 function playerQuit(data){
-    console.log('player ask quit');
     io.sockets.in(data.gameId).emit('playerAskQuit', data);
 }
 function playerTimeout(data){
-    console.log('player timeout');
     io.sockets.in(data.gameId).emit('enemyTimeout', data);
 }
