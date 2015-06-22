@@ -401,14 +401,15 @@ $(function(){
     var without_queries = location.href.split("?");
 
     if(without_queries.length > 1 && without_queries[0] != location.href){
-        console.log(location.href);
-        console.log('dedededed')
         location.href = without_queries[0];
     }
-
     loadImg.src = "images/sprites/sprite_load.png";
 
-    console.log("Paye ton Caps développé par Viens-là avec THREE.JS, GreenSocks, Physijs, et beaucoup de bières !");
+    if(LANG=='en'){
+        console.log('Paye ton Caps, an app developped by Viens-là with THREE.JS, GreenSocks, Physijs and loads of beers!');
+    }else{
+        console.log("Paye ton Caps développé par Viens-là avec THREE.JS, GreenSocks, Physijs, et beaucoup de bières !");
+    }
 
     $(loadImg).load(function(){
         loaderInterval = setInterval(function(){
@@ -504,13 +505,28 @@ $(function(){
 
 
                         if(b.browser == 'Safari' && b.version > 6){
-                            $('#browser-message').html("WebGL ne semble pas actif sur votre navigateur ! <br/> Pour l'activer sur Safari : " +
-                                "Ouvrez le menu « Safari » et sélectionnez « Préférences ».<br/>"+
-                                "Cliquez sur l’onglet « Avancés ».<br/>"+
-                                "Cochez le champ « Afficher le menu Développement dans la barre des menus ».<br/>"+
-                                "Ouvrez le menu « Développement » et cliquez sur « Activer WebGL ».<br/>");
+                            if(LANG=='en'){
+                                $('#browser-message').html("WebGL doesn't seem to be activated on your browser! <br/> To activate it on Safari :" +
+                                    'Open the "Safari" Menu and select "Preferences".<br/>'+
+                                    'Click on the tab "advanced".<br/>'+
+                                    'Tick the box "show the development menu on task bar".<br/>'+
+                                    'Open "development menu" then select on "activate WebGL".<br/>');
+                            }else{
+                                $('#browser-message').html("WebGL ne semble pas actif sur votre navigateur ! <br/> Pour l'activer sur Safari : " +
+                                    "Ouvrez le menu « Safari » et sélectionnez « Préférences ».<br/>"+
+                                    "Cliquez sur l’onglet « Avancés ».<br/>"+
+                                    "Cochez le champ « Afficher le menu Développement dans la barre des menus ».<br/>"+
+                                    "Ouvrez le menu « Développement » et cliquez sur « Activer WebGL ».<br/>");
+                            }
+
                         }else{
-                            $('#browser-message').html("Pour jouer au Caps, il faut mettre à jour ton navigateur !<br/>Ou squatter l'ordi de ton pote !");
+                            if(LANG=='en'){
+                                $('#browser-message').html('You need to update your browser to play "Caps"!');
+
+                            }else{
+                                $('#browser-message').html("Pour jouer au Caps, il faut mettre à jour ton navigateur !<br/>Ou squatter l'ordi de ton pote !");
+
+                            }
                         }
 
                         setTimeout(function(){

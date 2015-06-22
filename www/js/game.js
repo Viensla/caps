@@ -1537,7 +1537,12 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
     return Physijs;
 })();
-;var CAPS = {
+;var Interface;
+
+jQuery(function($){
+
+
+    var CAPS = {
     camera : null,
     solo : false,
     quality:'high'
@@ -2212,7 +2217,7 @@ var shadowColors = {
 };;var Party = {
     isPlaying : false,
     capsPerTurn : 1,
-    lives : 10,
+    lives : 60,
     delayToPlay: 40,
     timeout: null,
     intervalCount:null,
@@ -2469,7 +2474,8 @@ var shadowColors = {
                         animTypo($loseTypo, 800);
                         Snds.playSd('lose');
                         setTimeout(Snds.playSd('clairon'), 3000);
-                        $('#reset-party-c').removeClass().addClass('looser').find('h3').text("Une petite revanche ?");
+                        var reset_text = LANG == 'en' ? "Revenge" : "Une petite revanche ?";
+                        $('#reset-party-c').removeClass().addClass('looser').find('h3').text(reset_text);
                         if(CAPS.solo){
                             Viensla.imprecision += 2;
                         }
@@ -2480,7 +2486,8 @@ var shadowColors = {
                     }else if(pctVlLife <= 0){
                         animTypo($winTypo, 800);
                         Snds.playSd('win');
-                        $('#reset-party-c').removeClass().addClass('winner').find('h3').text("On prendra bien la ptite soeur ?");
+                        var reset_text = LANG == 'en' ? "Another round ?" : "On prendra bien la ptite soeur ?";
+                        $('#reset-party-c').removeClass().addClass('winner').find('h3').text(reset_text);
                         setTimeout(Snds.playSd('applause'), 3000);
                         Viensla.imprecision = Math.max(0, Viensla.imprecision - 2);
 
@@ -2649,6 +2656,7 @@ function animTypo($el, pauseDelay){
 
     if($el == $perfectTypo){
         Snds.playSd('perfect');
+
         var aleaGif = Math.ceil(Math.random()*10);
 
         $('#perfect-b').removeClass().addClass('g'+aleaGif);
@@ -2765,6 +2773,11 @@ Interface = {
         TweenLite.set($('#site-content'),{y : -Interface.curIndex*window.innerHeight});
     },
     navigate : function(to){
+        if(to == 0){
+            TweenLite.to($('.usechrome, .alcoholmention'), 0.3, {opacity:1, delay:0.3});
+        }else{
+            TweenLite.to($('.usechrome, .alcoholmention'), 0.1, {opacity:0});
+        }
 
         if(to == 3){
             if(!this.pickNameRdy)
@@ -2797,7 +2810,7 @@ Interface = {
         }
 
 
-        TweenLite.to($('#site-content'), 0.3, {y : -to*window.innerHeight});
+        TweenLite.to($('#site-content'), 0.4, {y : -to*window.innerHeight, ease:Quad.easeInOut});
         this.curIndex = to;
     },
     navigateBack : function(){
@@ -5129,3 +5142,4 @@ var Snds = {
 
 
 
+});

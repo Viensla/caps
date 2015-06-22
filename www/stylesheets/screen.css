@@ -3861,6 +3861,35 @@ header .bt {
   margin-top: 60px;
 }
 
+/* line 29, ../../dev/sass/templates/_header.scss */
+#lang-select {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  color: rgba(255, 255, 255, 0.8);
+  font-family: "neutra";
+  text-transform: uppercase;
+  z-index: 200;
+  line-height: 1;
+}
+/* line 37, ../../dev/sass/templates/_header.scss */
+#lang-select a {
+  display: inline-block;
+  position: relative;
+  color: #fff;
+  text-decoration: none;
+}
+/* line 42, ../../dev/sass/templates/_header.scss */
+#lang-select a:after {
+  content: " ";
+  display: block;
+  width: 100%;
+  position: absolute;
+  top: 16px;
+  height: 2px;
+  background: #fff;
+}
+
 /* line 1, ../../dev/sass/templates/_footer.scss */
 footer {
   position: fixed;
