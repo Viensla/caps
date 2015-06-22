@@ -1541,7 +1541,6 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
 jQuery(function($){
 
-
     var CAPS = {
     camera : null,
     solo : false,
@@ -3034,16 +3033,14 @@ Interface = {
 
             autoMessages = LANG == 'en' ? [
                 "<p>Mommy :</p><p>Still.at.the.bar?XoXo.Mom</p>",
-                "<p>Sweety <3 :</p><p>"+Game.Player.name+", we're over, I'm with Alex now.</p>",
-                "<p>Sista :</p><p>Where the hell are you "+Game.Player.name+"?! We're all at Sam' wedding, waiting for you!</p>",
+                "<p>Sweety <3 :</p><p>"+Game.Player.name+", we're over, I'm leaving you for Alex.</p>",
+                "<p>Sista :</p><p>Where the hell are you "+Game.Player.name+"?! We're all at Sam's wedding, waiting for you!</p>",
                 "<p>Boss :</p><p>Good evening, I'll be expecting your presentation on my desk tomorrow morning at 6AM.</p>",
                 "<p>PizzaPingui :</p><p>Hurry-up! Buy 2 Sushibuger pizzas, get one free!</p>",
                 "<p>Crook Brothers Bank :</p><p>- Automated alert - You reached your 5000€ overdraft limit.</p>",
                 "<p>Tony Thickdumb :</p><p>We aren't finished with you yet "+Game.Player.name+ ", we got your mom!</p>",
                 "<p>Ben :</p><p>What up, yo! Say, dude, times are tight, d'you think you could help me out with a 100€?</p>",
                 "<p>6917 :</p><p>Send VIENSLA to the 6917 and meet the hottest people in your neighborhood!</p>"
-
-
             ] : [
                 "<p>Maman :</p><p>encore.au.bar?bisou.maman</p>",
                 "<p>Chaton <3 :</p><p>"+Game.Player.name+", c'est fini nous deux, je pars avec Clem.</p>",
@@ -4296,7 +4293,7 @@ initializeParty = function(){
                 $('#room-code').val(Game.gameId);
 
                 // Display the URL on screen
-                $('#room-code-lk').val(window.location.href.replace('www.', '')+'#'+Game.gameId);
+                $('#room-code-lk').val((window.location.href.replace('www.', '')+'#'+Game.gameId).toLowerCase());
                 $('.wait-section .wt-party-code').addClass('act').find('span').text(Game.gameId);
 
                 $('#host-part').addClass('rdy');
@@ -4800,7 +4797,7 @@ var Viensla = {
     launched : 0,
     totalLaunched : 0,
     isPerfect : false,
-    imprecision : 12,
+    imprecision : 10,
     isPlaying : false,
     isShooting : false,
     lives : 0,
