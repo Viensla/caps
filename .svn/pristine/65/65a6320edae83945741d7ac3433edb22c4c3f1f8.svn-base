@@ -1,0 +1,126 @@
+<section class="sc" id="pickcaps">
+    <div class="sc-content">
+        <div class="title-c">
+            <h3 class="pcfc wh">Caps Player always has the right tools.</h3>
+            <h4>Choose the right beer that meet your skills</h4>
+            <hr>
+        </div>
+
+        <div id="beer-slide-c">
+            <div class="arw lf-arw"></div>
+            <div class="arw rg-arw"></div>
+
+
+
+            <ul class="cap-list">
+                <li id="ptp">
+                    <div class="blason">
+                        <img src="../images/beers/stickers/ptp.png" alt=""/>
+                    </div>
+                    <div class="mention">
+                        <p><span>‘‘</span>
+                            Beer expertise serves friendliness
+                            <span>’’</span></p>
+                    </div>
+                </li>
+
+                <li id="chouffe" class="rg">
+                    <div class="blason">
+                        <img src="../images/beers/stickers/shouffe.png" alt=""/>
+                    </div>
+                    <div class="mention">
+                        <p><span>‘‘</span>
+                            The beer that rhymes with binge drinking
+                            <span>’’</span></p>
+                    </div>
+                </li>
+
+                <li id="pelle" class="rg">
+                    <div class="blason">
+                        <img src="../images/beers/stickers/pelle.png" alt=""/>
+                    </div>
+                    <div class="mention">
+                        <p><span>‘‘</span>
+                            The beer that knocks you out
+                            <span>’’</span></p>
+                    </div>
+                </li>
+
+
+
+                <li id="foster" class="rg">
+                    <div class="blason">
+                        <img src="../images/beers/stickers/faustaire.png" alt=""/>
+                    </div>
+                    <div class="mention">
+                        <p><span>‘‘</span>
+                            Focus is the Mother of all virtues
+                            <span>’’</span></p>
+                    </div>
+                </li>
+                <li id="lef" class="rg">
+                    <div class="blason">
+                        <img src="../images/beers/stickers/lef.png" alt=""/>
+                    </div>
+                    <div class="mention">
+                        <p><span>‘‘</span>
+                            Trust no one and watch your back
+                            <span>’’</span></p>
+                    </div>
+                </li>
+                <li id="chimey" class="lf">
+                    <div class="blason">
+                        <img src="../images/beers/stickers/chimais.png" alt=""/>
+                    </div>
+                    <div class="mention">
+                        <p><span>‘‘</span>
+                            Beer IS the quiet strength
+                            <span>’’</span></p>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="nav-bottle">
+                <li class="act"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </div>
+
+        <div id="beer-bg-slider">
+
+            <div class="blc-msk ptp"></div>
+
+            <ul>
+                <li class="ptp act">
+                    <div class="motifs"></div>
+                </li>
+                <li class="chouffe">
+                    <div class="motifs"></div>
+                </li>
+                <li class="pelle">
+                    <div class="motifs"></div>
+                </li>
+                <li class="foster">
+                    <div class="motifs"></div>
+                </li>
+                <li class="lef">
+                    <div class="motifs"></div>
+                </li>
+                <li class="chimey">
+                    <div class="motifs"></div>
+                </li>
+            </ul>
+
+
+        </div>
+
+        <div class="bt wh" id="bt-send-caps">
+            <p>validate</p>
+        </div>
+    </div>
+
+</section>

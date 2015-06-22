@@ -6017,10 +6017,10 @@ footer p.copy img.vl {
 }
 /* line 192, ../../dev/sass/templates/_multi.scss */
 #multiplayer.hosting .rt-pt {
-  -moz-transform: translateX(52%);
-  -ms-transform: translateX(52%);
-  -webkit-transform: translateX(52%);
-  transform: translateX(52%);
+  -moz-transform: translateX(60%);
+  -ms-transform: translateX(60%);
+  -webkit-transform: translateX(60%);
+  transform: translateX(60%);
 }
 /* line 195, ../../dev/sass/templates/_multi.scss */
 #multiplayer.hosting .separator {

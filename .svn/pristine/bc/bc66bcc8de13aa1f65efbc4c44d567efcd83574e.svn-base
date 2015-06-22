@@ -1,0 +1,275 @@
+<section class="sc" id="gamearea">
+    <div id="game-loader">
+        <div class="tiny-loader"><div></div></div>
+    </div>
+
+    <div id="pause-menu">
+
+        <div id="tuto-pause" class="volet hidden">
+            <div class="help-c help-1">
+                <div class="arr"></div>
+                <p class="pcfc"><span>1</span>/ Prends une caps</p>
+                <p class="st">en cliquant dessus</p>
+            </div>
+
+            <div class="help-c help-2">
+                <div class="arr"></div>
+                <p class="pcfc"><span>2</span>/ Vise la capsule de ton adversaire,</p>
+                <p class="st">ajuste ta puissance en maintenant le click, <br/>
+                    et relâche pour lancer ta capsule ! <br/>Attention au temps, si tu es trop lent, tu passes ton tour !
+                </p>
+            </div>
+
+            <div class="help-c  help-3">
+                <div class="arr"></div>
+                <p class="pcfc"><span>3</span>/ Si ton adversaire te capse, tu dois boire...</p>
+                <p class="st">Plus tu bois, plus il te sera difficile de <br/>viser correctement</p>
+            </div>
+
+            <div class="bt wh" id="bt-close-tuto">
+                <p>Ok j'ai compris !</p>
+            </div>
+        </div>
+
+        <div class="sc-content">
+            <img class="pause-logo" src="images/typos/pause.png" alt="" width="604" height="358"/>
+
+            <div id="volets-c">
+
+                <div class="volet" id="home-pause">
+                    <p class="lk" id="lk-about">À propos</p>
+                    <p class="lk" id="lk-tuto">Comment jouer ?</p>
+                    <p class="lk" id="lk-quit">Quitter la partie</p>
+                </div>
+
+                <div class="volet hidden" id="quit-pause">
+                    <p class="st">Tu veux vraiment quitter la partie ?</p>
+                    <div class="bts">
+                        <div class="bt wh no">
+                            <p>Nooooon !</p>
+                        </div>
+                        <div class="bt wh yes">
+                            <p>Ouaip j'arrête là !</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="volet hidden" id="about-pause">
+                    <div class="bt back"><p>Retour</p></div>
+                    <h3 class="pcfc">Paye ton Caps est un jeu créé par Paye Ta Pinte.</h3>
+                    <div class="txt-c">
+                        <p>Paye Ta Pinte est une web application gratuite qui te permet de trouver<br/>les bars autours de toi et de comparer le prix de leur pinte.</p>
+                        <p>Il suffit de te promener dans la rue, d'allumer ton smartphone et<br/>d'ouvrir Paye Ta Pinte... <span class="pcfc">Bingo !</span></p>
+                    </div>
+
+                    <p class="stores">
+                        <a href="http://payetapinte.fr" class="ptp" target="_blank">
+                            <img src="images/logo/logo-ptp.png" alt="Paye ta Pinte"/>
+                        </a>
+                        <a href="https://itunes.apple.com/fr/app/paye-ta-pinte/id872737211?mt=8" class="apple" target="_blank">
+                            <img src="images/logo/logo-app-store.png" alt="Paye ta pinte sur l'App Store"/>
+                        </a>
+                        <a href="https://play.google.com/store/apps/details?id=com.payetapinte.payetapinte&hl=fr_FR"  class="gl" target="_blank">
+                            <img src="images/logo/logo-google-play.png" alt="Paye ta pinte sur Google Play"/>
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+
+
+
+            <div class="bt lgt-close" id="bt-close-menu">
+                <div class="cl"></div>
+                <p>Fermer</p>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="reset-party-c">
+        <div class="sc-content">
+            <img class="typohand win" src="images/typos/you_win.png" alt=""/>
+            <img class="typohand lose" src="images/typos/you_lose.png" alt=""/>
+
+            <div class="tiny-loader"><div></div></div>
+
+            <div class="share-pt">
+                <h5>Partage ton score !</h5>
+                <a id="fb_share" href="javascript: void(0)"><img src="images/logo/share-fb.png" alt=""/></a>
+                <a id="tw_share" href="javascript: void(0)"><img src="images/logo/share-tw.png" alt=""/><span id="share-tw-c"></span></a>
+            </div>
+
+            <h3>Une petite revanche ?</h3>
+
+            <h4 class="again"><span></span> en veut encore !</h4>
+            <h4 class="quit"><span></span> abandonne !</h4>
+
+            <div class="bts">
+                <div class="bt wh yes" id="bt-reset-party">
+                    <p>C'est reparti !</p>
+                </div>
+
+                <div class="bt wh no" id="bt-quit-reset">
+                    <p>Nope, j'arrête !</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="sc-content">
+        <div id="caps-game">
+            <div id="header">
+                <div id="mute"><span class="on"></span><span class="off"></span></div>
+                <div id="quality">Quality : <span>1</span></div>
+                <div id="versus-bar">
+                    <div class="line"></div>
+                    <div id="cursor" class="lf"></div>
+                    <div id="cp-vs">
+                        <img id="vs-logo" src="images/bg/versus.png" alt=""/>
+                        <span id="cp-c">15</span>
+                    </div>
+                    <div class="los pl"><div class="ct-line"></div></div>
+                    <div class="los vl"><div class="ct-line"></div></div>
+                </div>
+
+                <div class="pl-part chimey">
+                    <h3><span>You</span></h3>
+                    <div class="blason"></div>
+
+                    <div class="life-bloc">
+                        <div class="life-c">
+                            <svg>
+                                <defs>
+                                    <mask id="mask" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+                                        <image width="35px" height="140px" xlink:href="images/bottle_mask.png"></image>
+                                    </mask>
+                                </defs>
+                                <foreignObject width="35px" height="140px" style="mask: url(#mask);">
+                                    <div class="life"></div>
+                                </foreignObject>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="capsstock"></div>
+                    <div class="cap-tuto">
+                        <div class="arr"></div>
+                        <p>clique sur la caps</p>
+                    </div>
+                </div>
+                <div class="vl-part">
+                    <h3><span>PayeTaPinte</span></h3>
+                    <div class="blason"></div>
+                    <div class="life-bloc">
+                        <div class="life-c">
+                            <svg>
+                                <defs>
+                                    <mask id="mask_2" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+                                        <image width="35px" height="140px" xlink:href="images/bottle_mask.png"></image>
+                                    </mask>
+                                </defs>
+                                <foreignObject width="35px" height="140px" style="mask: url(#mask_2);">
+                                    <div class="life"></div>
+                                </foreignObject>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="capsstock"></div>
+                </div>
+            </div>
+            <div id="viewport"></div>
+            <div class="powerbar">
+                <svg width="20px" height="200px">
+                    <defs>
+                        <mask id="maskpower" maskUnits="userSpaceOnUse" maskContentUnits="userSpaceOnUse">
+                            <image width="20px" height="200px" xlink:href="images/mask/jauge.png"></image>
+                        </mask>
+                    </defs>
+                    <foreignObject width="20px" height="200px" style="mask: url(#maskpower);">
+                        <div class="bar"></div>
+                    </foreignObject>
+                </svg>
+            </div>
+            <div id="launch-tuto">
+                <div class="arr"></div>
+                <p>Reste appuyé et relâche pour lancer !</p>
+            </div>
+
+
+            <div class="hand-typo">
+                <div id="caps-m"></div>
+                <div id="start-m"></div>
+                <div id="win-m"></div>
+                <div id="lose-m"></div>
+                <div id="perfect-m"></div>
+                <div id="perfect-b">
+                    <img class="g1" src="images/perfectgifts/perfect_gift_01.gif"/>
+                    <img class="g2" src="images/perfectgifts/perfect_gift_02.gif"/>
+                    <img class="g3" src="images/perfectgifts/perfect_gift_03.gif"/>
+                    <img class="g4" src="images/perfectgifts/perfect_gift_04.gif"/>
+                    <img class="g5" src="images/perfectgifts/perfect_gift_05.gif"/>
+                    <img class="g6" src="images/perfectgifts/perfect_gift_06.gif"/>
+                    <img class="g7" src="images/perfectgifts/perfect_gift_07.gif"/>
+                    <img class="g8" src="images/perfectgifts/perfect_gift_08.gif"/>
+                    <img class="g9" src="images/perfectgifts/perfect_gift_09.gif"/>
+                    <img class="g10" src="images/perfectgifts/perfect_gift_10.gif"/>
+                </div>
+                <div id="you-turn"></div>
+            </div>
+
+
+
+            <div id="txto-sd">
+                <div class="bt wh" id="bt-texto">
+                    <p>Envoyer un message</p>
+                </div>
+
+                <div id="sd-messages-box">
+                    <ul>
+                        <li>
+                            <div><p>Yo ! C'est à ton tour de jouer, <br/>je t'attends !</p></div>
+                        </li>
+                        <li>
+                            <div><p>Et BIIIIIIM ! SUPERBE !</p></div>
+                        </li>
+                        <li>
+                            <div><p>chj'uuis tro bourrai lha, <br/>C cho !</p></div>
+                        </li>
+                        <li>
+                            <div><p>Call me DADDY. Loser.</p></div>
+                        </li>
+                        <li>
+                            <div><p>Vas-y fais pas le malin toi, <br/>j'vais te capser la tronche !</p></div>
+                        </li>
+                        <li>
+                            <div><p>Oh ! Tu serais pas cocu ?!</p></div>
+                        </li>
+                        <li>
+                            <div><p>Je re j'vais pisser</p></div>
+                        </li>
+                        <li>
+                            <div><p>T'as deux mains gauches ?</p></div>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+
+
+            <div id="txto-rc">
+                <div id="rc-messages-box">
+                    <div class="center">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="bt wh" id="bt-menu">
+                <p>Menu</p>
+            </div>
+
+        </div>
+    </div>
+</section>
