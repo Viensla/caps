@@ -1,0 +1,271 @@
+var CAPS = {
+    camera : null,
+    solo : false,
+    quality:'high'
+};
+
+
+var container, scene, renderer, light, ball, plane, bottle, bottlecaps, initEventHandling, initScene;
+var WIDTH, HEIGHT, planeWIDTH, planeHEIGHT;
+var elements = [], playedCaps = null,_i,lookatobj, mouse,
+    mouse3D = new THREE.Vector3;
+var DCMP  = new THREE.Vector3(0,0,0);
+var clock = new THREE.Clock(), dir, distance;
+
+var holdingDown = false;
+
+var $powerBar, $helpPower, $fbUrlLink;
+
+var $capsTypo,$startTypo, $winTypo, $loseTypo, $perfectTypo,
+    $cp, $vs, $vlLine, $plLine;
+
+
+Physijs.scripts.worker = '/js/physics/physics_wkr.js';
+Physijs.scripts.ammo = 'ammo.js';
+WIDTH = window.innerWidth;
+HEIGHT = window.innerHeight;
+var playerDistance = 100;
+var globalDirection = 1;
+var capModelscale = 1.6;
+var texture;
+
+
+
+
+
+var DPR = window.devicePixelRatio || 1;
+
+
+initScene = function() {
+
+    container = document.getElementById('viewport');
+
+    scene = new Physijs.Scene();
+    scene.setGravity(new THREE.Vector3( 0, -80, 0 ));
+
+    renderer = new THREE.WebGLRenderer({
+        antialias: true,
+        alpha : true,
+        precision:"lowp",
+        devicePixelRatio: DPR
+    });
+    renderer.setPixelRatio( DPR );
+
+    if(DPR > 1){
+        renderer.setViewport( 0, 0, WIDTH/2, HEIGHT/2 );
+        renderer.setSize(WIDTH/1.5, HEIGHT/1.5);
+        $(renderer.domElement).css({width:WIDTH, height:HEIGHT});
+    }else{
+        renderer.setSize(WIDTH, HEIGHT);
+        renderer.setViewport( 0, 0, WIDTH, HEIGHT);
+    }
+
+    renderer.shadowMapEnabled = false;
+    renderer.shadowMapSoft = false;
+    renderer.shadowMapType = THREE.PCFShadowMap;
+    renderer.shadowMapAutoUpdate = false;
+    renderer.gammaInput = true;
+    renderer.gammaOutput = true;
+
+    container.appendChild(renderer.domElement);
+    create_camera();
+    create_lights();
+    create_table();
+
+
+    Viensla.initialize();
+    Player.initialize();
+
+    lookatobj = Viensla.bottle;
+    scene.simulate();
+    initEventHandling();
+
+    create_caps_group();
+
+    $plpart.addClass(Game.Player.caps);
+    $('#versus-bar .pl').addClass(Game.Player.caps);
+    Player.capmat = caps_material[Game.Player.caps].clone();
+    Player.stickermat = sticker_materials[Game.Player.caps].clone();
+    Player.bottle.material.color = Player.capmat.materials[1].color;
+    Player.changeSticker();
+    Viensla.changeBottle(Game.Enemy.caps);
+
+
+    render();
+    setPower();
+    onWindowResize();
+
+
+    Party.create();
+
+
+};
+
+function render() {
+    if(Party.isPlaying){
+        if( (Viensla.bottlecaps.position.y <= Viensla.bottle.position.y
+                || Viensla.bottlecaps.position.y > Viensla.bottle.position.y + 35
+                || Viensla.bottlecaps.position.x > Viensla.bottle.position.x + 7
+                || Viensla.bottlecaps.position.x < Viensla.bottle.position.x - 7
+                || Viensla.bottlecaps.position.z > Viensla.bottle.position.z + 7
+                || Viensla.bottlecaps.position.z < Viensla.bottle.position.z - 7)
+                && !Viensla.bottlecaps.capsed){
+            Viensla.bottlecaps.capsed = true;
+            Viensla.bottlecaps.collided = false;
+            Party.plcaps();
+        }
+
+
+        if((Player.bottlecaps.position.y <= Player.bottle.position.y
+            || Player.bottlecaps.position.y > Player.bottle.position.y + 35
+            || Player.bottlecaps.position.x > Player.bottle.position.x + 7
+            || Player.bottlecaps.position.x < Player.bottle.position.x - 7
+            || Player.bottlecaps.position.z > Player.bottle.position.z + 7
+            || Player.bottlecaps.position.z < Player.bottle.position.z - 7)
+             && !Player.bottlecaps.capsed){
+            Player.bottlecaps.capsed = true;
+            Player.bottlecaps.collided = false;
+
+            if(CAPS.solo) Party.vlcaps();
+        }
+    }
+
+
+    if(playedCaps){
+        if(Player.isPlaying && !Viensla.isPlaying){
+            playedCaps.position.copy(DCMP);
+        }
+    }
+
+    if(Viensla.cursor && Viensla.liveVector){
+        Viensla.cursor.__dirtyPosition = false;
+        Viensla.cursor.position.copy(Viensla.liveVector);
+    }
+
+    scene.simulate(undefined, 2);
+
+    camera.lookAt(lookat);
+
+    var time = Date.now() * 0.0005;
+
+    drunk_effect(time);
+
+    if( Math.sin( time*2 ) > 0.5){
+        pointlightbar.animeLight();
+    }
+
+    if(phone){
+        var phonePos = toScreenPosition(phone, camera);
+    }
+    TweenLite.set($('#txto-rc'),{y:phonePos.y, x:phonePos.x});
+
+    animateDust(time/10);
+
+    renderer.render(scene, camera);
+
+    requestAnimationFrame(render);
+
+
+}
+
+function animateDust(time){
+    for ( var i = 0; i < dust.length; i ++ ) {
+        var object = dust[ i ];
+        if ( object instanceof THREE.PointCloud ) {
+            object.rotation.y = time * ( i < 4 ? i + 1 : - ( i + 1 ) );
+        }
+    }
+}
+
+
+function drunk_effect(time){
+    camera.initialpos.x += Math.sin( time*2 ) * Player.drunked/70;
+    camera.initialpos.y += Math.cos( time*2 ) * Player.drunked/70;
+    camera.initialpos.z += Math.sin( time*2 ) * Player.drunked/70;
+    camera.position.x += (mouse.x * 20 - camera.position.x) * (0.3*3) + camera.initialpos.x;
+    camera.position.y += (mouse.y * 10 - camera.position.y) * (0.5*3) + camera.initialpos.y+80;
+}
+
+
+
+
+CAPS.launchGame = function(){
+    loadBottleTools();
+
+    window.addEventListener( 'resize', onWindowResize, false );
+
+    $plpart.find('h3 span').text(Game.Player.name);
+    $vlpart.find('h3 span').text(Game.Enemy.name);
+    $('#reset-party-c h4').find('span').text(Game.Enemy.name);
+
+
+
+    $('#quality').click(function(){
+        $(this).toggleClass('low');
+        if($(this).hasClass('low'))
+            CAPS.quality = 'low';
+        else
+            CAPS.quality = 'high';
+        onWindowResize();
+    });
+
+    for(var i =0; i < Party.capsPerTurn; i++){
+        $('.capsstock').append('<span class="animated zoomIn"></span>');
+    }
+
+    $plpart.find('.capsstock span').click(function(){
+        if(!Viensla.isPlaying){
+            $(this).removeClass().addClass('animated zoomOut');
+            Party.plplay();
+
+            if(Player.totalLaunched < 4){
+                Interface.capTuto.hide();
+                if(Player.totalLaunched < 3){
+                    Interface.launchTuto.show();
+                }
+            }
+        }
+    });
+};
+
+
+function onWindowResize( event ) {
+    WIDTH = window.innerWidth;
+    HEIGHT = window.innerHeight;
+
+    if(DPR > 1){
+        renderer.setViewport( 0, 0, WIDTH/2, HEIGHT/2 );
+        renderer.setSize(WIDTH/1.5, HEIGHT/1.5);
+        $(renderer.domElement).css({width:WIDTH, height:HEIGHT});
+    }else{
+        renderer.setSize(WIDTH, HEIGHT);
+        renderer.setViewport( 0, 0, WIDTH, HEIGHT);
+    }
+
+    camera.aspect = WIDTH / HEIGHT;
+    camera.updateProjectionMatrix();
+    Interface.resize();
+}
+
+
+
+function toScreenPosition(obj, camera)
+{
+    var vector = new THREE.Vector3();
+
+    var widthHalf = 0.5*WIDTH;
+    var heightHalf = 0.5*HEIGHT;
+
+    obj.updateMatrixWorld();
+    vector.setFromMatrixPosition(obj.matrixWorld);
+    vector.project(camera);
+
+    vector.x = ( vector.x * widthHalf ) + widthHalf;
+    vector.y = - ( vector.y * heightHalf ) + heightHalf;
+
+    return {
+        x: Math.round(vector.x),
+        y: Math.round(vector.y)
+    };
+
+};

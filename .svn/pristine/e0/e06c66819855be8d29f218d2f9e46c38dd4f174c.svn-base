@@ -90,8 +90,8 @@
 
     <div id="reset-party-c">
         <div class="sc-content">
-            <img class="typohand win" src="images/typos/you_win.png" alt=""/>
-            <img class="typohand lose" src="images/typos/you_lose.png" alt=""/>
+            <img class="typohand win" src="../images/typos/you_win.png" alt=""/>
+            <img class="typohand lose" src="../images/typos/you_lose.png" alt=""/>
 
             <div class="tiny-loader"><div></div></div>
 

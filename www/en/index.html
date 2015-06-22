@@ -16,27 +16,27 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="../js/jquery-2.1.4.min.js"></script>
+
 
     <title>Paye ton caps</title>
 
-    <link rel="stylesheet" type="text/css" media="" href="stylesheets/screen.css" />
+    <link rel="stylesheet" type="text/css" media="" href="../stylesheets/screen.css" />
     <link href="favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <script>var LANG='fr';</script>
-
+    <script>var LANG='en';</script>
     <meta property="og:title" content="Paye ton Caps"/>
     <meta property="og:type" content="game"/>
     <meta property="og:url" content="http://www.payetoncaps.com/"/>
     <meta property="og:image" content="http://www.payetoncaps.com/images/logo/fb-logo.png"/>
     <meta property="og:site_name" content="Paye ton Caps"/>
-    <meta property="og:description" content="Paye ton Caps est un jeu en ligne multijoueur où tu peux affronter des potes !"/>
+    <meta property="og:description" content="'Paye ton Cap' is a multiplayer online game where you can face your friends !"/>
 </head>
 
 <body>
 <header>
-    <h1><img class="logo" src="images/logo/logo@2x.png" alt="Paye ton Caps!"/></h1>
+    <h1><img class="logo" src="../images/logo/logo@2x.png" alt="Paye ton Caps!"/></h1>
     <div class="bt back" id="bt-back-global">
-        <p>Retour</p>
+        <p>Back</p>
     </div>
 </header>
 
@@ -51,25 +51,25 @@
 
 <footer>
     <p class="copy">
-        Par Paye Ta Pinte © 2015 Tout droits reservés - Suivez, Aimez, Partagez :
+        By Paye Ta Pinte © 2015 All right reserved - Follow, Like, Share :
         <a href="http://facebook.com/payetapinte/" class="fb" target="_blank">
-            <img src="images/pictos/picto-fb.png" alt="Paye ta Pinte sur Facebook"/>
+            <img src="../images/pictos/picto-fb.png" alt="Paye ta Pinte sur Facebook"/>
         </a>
         <a href="http://twitter.com/payetapinte/" class="tw" target="_blank">
-            <img src="images/pictos/picto-tw.png" alt="Paye ta Pinte sur Twitter"/>
+            <img src="../images/pictos/picto-tw.png" alt="Paye ta Pinte sur Twitter"/>
         </a>
          Powered by
         <a href="http://viens-la.com" target="_blank">
-            <img class="vl" src="images/logo/logo-viens-la.png" alt="Powered by Viens-là!"/>
+            <img class="vl" src="../images/logo/logo-viens-la.png" alt="Powered by Viens-là!"/>
         </a>
     </p>
 </footer>
 
 
 <canvas id="iswebgl"></canvas>
-<script type="text/javascript" src="js/ld.min.js"></script>
+<script type="text/javascript" src="../js/ld.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
-<script type="text/javascript" src="js/game.min.js"></script>
+<script type="text/javascript" src="../js/game.min.js"></script>
 <script type="x-shader/x-vertex" id="vertexShader">
     varying vec3 vWorldPosition;
     void main() {

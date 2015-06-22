@@ -1537,7 +1537,11 @@ if( typeof module !== "undefined" && ('exports' in module)){
 
     return Physijs;
 })();
-;var CAPS = {
+;var Interface;
+
+jQuery(function($){
+
+    var CAPS = {
     camera : null,
     solo : false,
     quality:'high'
@@ -2073,6 +2077,7 @@ initEventHandling = (function() {
 
         if(!playedCaps) return;
 
+
         holdingDown = false;
 
         Party.clearPlayerTimeout();
@@ -2124,7 +2129,6 @@ initEventHandling = (function() {
 
         Party.resetStocks();
 
-        TweenLite.to($cp, 0.3, {scale:0, opacity:0});
 
 
     };
@@ -2212,13 +2216,12 @@ var shadowColors = {
 };;var Party = {
     isPlaying : false,
     capsPerTurn : 1,
-    lives : 10,
+    lives : 60,
     delayToPlay: 40,
     timeout: null,
     intervalCount:null,
     intervalCountVl:null,
     playerLeaveTimeout:null,
-    turnTimeout:null,
     create : function(){
         Viensla.generateCaps();
 
@@ -2424,24 +2427,20 @@ var shadowColors = {
 
         if(Player.isPlaying){
             $('#versus-bar #cursor').removeClass().addClass('lf');
+            TweenMax.to($('#you-turn'), 1.5, {x:40, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:1.8});
+            TweenMax.to($('#you-turn'), 1, {x:-170, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:4.5});
 
-            this.turnTimeout = setTimeout(function(){
-                if(Party.isPlaying){
-                    TweenMax.to($('#you-turn'), 1.5, {x:40, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:0});
-                    TweenMax.to($('#you-turn'), 1, {x:-170, opacity:0, ease:Elastic.easeOut.config(1, 0.4), delay:2.7});
-                    if(Player.totalLaunched < 3)
-                        Interface.capTuto.show();
-                }
-            }, 1800);
+            if(Player.totalLaunched < 3)
+                Interface.capTuto.show();
 
 
 
         }else {
-            $('#versus-bar #cursor').removeClass().addClass('rg');
-        }
 
-        TweenLite.to($cp, 0.3, {scale:0, opacity:0});
-        TweenLite.to($vs, 0.3, {scale:1, opacity:1, delay:0.2});
+            $('#versus-bar #cursor').removeClass().addClass('rg');
+            TweenLite.to($cp, 0.3, {scale:0, opacity:0});
+            TweenLite.to($vs, 0.3, {scale:1, opacity:1, delay:0.2});
+        }
 
     },
     setLife : function(perfect){
@@ -2460,7 +2459,6 @@ var shadowColors = {
             if(pctPlLife <= 0 || pctVlLife <= 0){
                 $('#share-tw-c iframe').remove();
                 Party.clearPlayerTimeout();
-                clearTimeout(Party.turnTimeout);
                 Party.isPlaying = false;
 
                 setTimeout(function(){
@@ -2473,9 +2471,7 @@ var shadowColors = {
                         if(CAPS.solo){
                             Viensla.imprecision += 2;
                         }
-                        share_text = LANG=='en' ?
-                            Game.Enemy.name+" kicked my ass at 'Caps' ! I'm not giving up ! Who's next ?"
-                            : "Je me suis fait éclater par "+Game.Enemy.name+" au caps ! J'en veux encore ! À qui le tour ?";
+                        share_text = "Je me suis fait éclater par "+Game.Enemy.name+" au caps ! J'en veux encore ! À qui le tour ?";
 
                     }else if(pctVlLife <= 0){
                         animTypo($winTypo, 800);
@@ -2484,27 +2480,23 @@ var shadowColors = {
                         setTimeout(Snds.playSd('applause'), 3000);
                         Viensla.imprecision = Math.max(0, Viensla.imprecision - 2);
 
-                        share_text = LANG=='en' ?
-                            "I kicked "+Game.Enemy.name+"'s ass at 'Caps' ! Who's next ?"
-                            : "J'ai éclaté "+Game.Enemy.name+" au caps ! À qui le tour ?";
+                        share_text = "J'ai éclaté "+Game.Enemy.name+" au caps ! À qui le tour ?";
                     }
 
-                    $fbUrlLink.off('click', shareFb);
-                    shareFb = function(){
-                        console.log(share_text);
+                    $fbUrlLink.on('click', function(){
+
                         FB.ui({
                                 method: 'feed',
                                 name: share_text,
                                 link: 'http://www.payetoncaps.com',
                                 picture:'http://www.payetoncaps.com/images/logo/fb-logo.png',
                                 caption: 'Paye ton caps !',
-                                description: LANG=='en' ? "Have a nice time, play Caps!" : 'Viens faire une petite partie de Caps !'
+                                description: 'Viens faire une petite partie de Caps !'
                             },
                             function(response) {}
                         );
-                    };
-                    $fbUrlLink.on('click', shareFb);
 
+                    });
 
                     twttr.widgets.createShareButton(
                         'http://www.payetoncaps.com',
@@ -2539,9 +2531,6 @@ var shadowColors = {
             clearInterval(Party.intervalCountVl);
             $vlLine.css({width:0});
 
-            TweenLite.to($cp, 0.3, {scale:0, opacity:0});
-            TweenLite.to($vs, 0.3, {scale:1, opacity:1, delay:0.2});
-
             Party.timeout = setTimeout(function(){
 
                 if(Player.isPlaying && !Viensla.isPlaying){
@@ -2565,16 +2554,17 @@ var shadowColors = {
 
                 $plLine.css({width:i/Party.delayToPlay * 200});
 
-                if(i==Party.delayToPlay/2){
+                if(i < Party.delayToPlay/2){
                     $cp.text(i);
                     TweenLite.to($vs, 0.3, {scale:0, opacity:0});
                     TweenLite.to($cp, 0.3, {scale:1, opacity:1, delay:0.2});
-                }else if(i < Party.delayToPlay/2){
-                    $cp.text(i);
+                }else{
+                    TweenLite.to($cp, 0.3, {scale:0, opacity:0});
+                    TweenLite.to($vs, 0.3, {scale:1, opacity:1, delay:0.2});
                 }
 
                 if(i==0){
-                    $cp.text(0);
+                    $cp.text('0');
                     $plLine.css({width:0});
                     clearInterval(Party.intervalCount);
                 }
@@ -2596,7 +2586,8 @@ var shadowColors = {
             }, 1000);
         }
 
-        Party.delayToPlay=16;
+        Party.delayToPlay=20;
+
     },
 
     enemyTimeout : function(){
@@ -2608,7 +2599,6 @@ var shadowColors = {
         clearInterval(Party.intervalCountVl);
         clearTimeout(Party.playerLeaveTimeout);
         TweenLite.to($cp, 0.3, {scale:0, opacity:0});
-        TweenLite.to($vs, 0.3, {scale:1, opacity:1, delay:0.2});
     },
 
     clearPlayerTimeout:function(){
@@ -2617,14 +2607,10 @@ var shadowColors = {
         clearTimeout(Party.playerLeaveTimeout);
         clearTimeout(Party.timeout);
         TweenLite.to($cp, 0.3, {scale:0, opacity:0});
-        TweenLite.to($vs, 0.3, {scale:1, opacity:1, delay:0.2});
-
         $plLine.css({width:0});
     }
 
 };
-
-var shareFb;
 
 
 
@@ -2664,25 +2650,7 @@ function animTypo($el, pauseDelay){
         },2500);
     }
 }
-;var generatedNames = LANG == 'en' ? [
-    "Master Brewer",
-    "Golden Caps Lord",
-    "John Beer",
-    "Brad Pint",
-    "Beerlusconi",
-    "Capsolator",
-    "Chuck Beeris",
-    "The Uncapsable",
-    "Counter Pillar",
-    "Pukito",
-    "Oliver Cirrhosis",
-    "The Undertaker",
-    "BURP",
-    "Starch Addict",
-    "Fred Boozer",
-    "Bob Beer-Sponge",
-
-] : [
+;var generatedNames = [
     "Sac à bière",
     "Maître Brasseur",
     "Chuck Boris",
@@ -2745,7 +2713,7 @@ Interface = {
 
         this.capTuto = $plpart.find('.cap-tuto');
         this.capTuto.show = function(){
-            TweenMax.fromTo(Interface.capTuto,0.5,{scale:0, opacity:0}, {scale:1, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:0});
+            TweenMax.fromTo(Interface.capTuto,0.5,{scale:0, opacity:0}, {scale:1, opacity:1, ease:Elastic.easeOut.config(1, 0.4),  delay:1.8});
         };
         this.capTuto.hide = function(){
             TweenMax.to(Interface.capTuto, 0.5, {scale:0, opacity:0});
@@ -3019,19 +2987,7 @@ Interface = {
 
             Interface.txtoRdy = true;
 
-            autoMessages = LANG == 'en' ? [
-                "<p>Mommy :</p><p>Still.at.the.bar?XoXo.Mom</p>",
-                "<p>Sweety <3 :</p><p>"+Game.Player.name+", we're over, I'm with Alex now.</p>",
-                "<p>Sista :</p><p>Where the hell are you "+Game.Player.name+"?! We're all at Sam' wedding, waiting for you!</p>",
-                "<p>Boss :</p><p>Good evening, I'll be expecting your presentation on my desk tomorrow morning at 6AM.</p>",
-                "<p>PizzaPingui :</p><p>Hurry-up! Buy 2 Sushibuger pizzas, get one free!</p>",
-                "<p>Crook Brothers Bank :</p><p>- Automated alert - You reached your 5000€ overdraft limit.</p>",
-                "<p>Tony Thickdumb :</p><p>We aren't finished with you yet "+Game.Player.name+ ", we got your mom!</p>",
-                "<p>Ben :</p><p>What up, yo! Say, dude, times are tight, d'you think you could help me out with a 100€?</p>",
-                "<p>6917 :</p><p>Send VIENSLA to the 6917 and meet the hottest people in your neighborhood!</p>"
-
-
-            ] : [
+            autoMessages = [
                 "<p>Maman :</p><p>encore.au.bar?bisou.maman</p>",
                 "<p>Chaton <3 :</p><p>"+Game.Player.name+", c'est fini nous deux, je pars avec Clem.</p>",
                 "<p>Soeurette :</p><p>Qu'est-ce que tu fous "+Game.Player.name+" ?! Tout le monde t'attend au mariage de Tata Jacqueline !</p>",
@@ -3043,18 +2999,12 @@ Interface = {
                 "<p>6917 :</p><p>Envoie VIENSLA au 6917 et rencontre les personnes HOT de ton quartier !</p>"
             ];
 
-            poteRelou = LANG == 'en' ? [
-                "<p>John :</p><p>Dude, where you at? Are you dead, or what?</p>",
-                "<p>John :</p><p>Drinks tonight?</p>",
-                "<p>John :</p><p>Any cool plans 4 tonight?</p>",
-                "<p>John :</p><p>???????</p>",
-                "<p>John :</p><p>PICK UP YOUR PHONE!</p>"
-            ] : [
-                "<p>Alex :</p><p>Alors tu viens plus aux soirées ?</p>",
-                "<p>Alex :</p><p>Apéro ce soir ?</p>",
-                "<p>Alex :</p><p>Alors, ça sort ce soir ?</p>",
-                "<p>Alex :</p><p>Allooooooooo</p>",
-                "<p>Alex :</p><p>???????</p>"
+            poteRelou = [
+                "<p>Alex:</p><p>Alors tu viens plus aux soirées ?</p>",
+                "<p>Alex:</p><p>Apéro ce soir ?</p>",
+                "<p>Alex:</p><p>Alors, ça sort ce soir ?</p>",
+                "<p>Alex:</p><p>Allooooooooo</p>",
+                "<p>Alex:</p><p>???????</p>"
             ];
 
             this.$sdBox = $('#sd-messages-box');
@@ -4241,11 +4191,11 @@ initializeParty = function(){
 
             // Templates
             Game.$area = $('#game-area');
-//            Game.$tplIntroScreen = $('#intro-screen-template').html();
-//            Game.$tplNewGame = $('#new-game-screen-template').html();
-//            Game.$tplJoinGame = $('#join-game-template').html();
-//            Game.$tplGamerScreen = $('#gamer-screen-template').html();
-//            Game.$tplPartyScreen = $('#party-screen-template').html();
+            Game.$tplIntroScreen = $('#intro-screen-template').html();
+            Game.$tplNewGame = $('#new-game-screen-template').html();
+            Game.$tplJoinGame = $('#join-game-template').html();
+            Game.$tplGamerScreen = $('#gamer-screen-template').html();
+            Game.$tplPartyScreen = $('#party-screen-template').html();
         },
         showIntroTpl : function(){
 //            Game.$area.html(Game.$tplIntroScreen);
@@ -4295,7 +4245,7 @@ initializeParty = function(){
 
             updateWaitingScreen: function(data) {
                 // Update host screen
-//                $('#playersWaiting').append('<p>Player ' + data.playerName + ' joined the game.</p>');
+                $('#playersWaiting').append('<p>Player ' + data.playerName + ' joined the game.</p>');
                 // Store the new player's data on the Host.
                 Game.Host.players.push(data);
 
@@ -4462,7 +4412,7 @@ initializeParty = function(){
                     Game.role = 'Player';
                     Game.gameId = data.gameId;
                     Game.Player.socketId = data.socketId;
-//                    $('#playerWaitingMessage').text('Joined Game ' + data.gameId + '. Please wait for game to begin.');
+                    $('#playerWaitingMessage').text('Joined Game ' + data.gameId + '. Please wait for game to begin.');
 
                     if(data.hostReady && Interface.curIndex < 3){
                         Interface.navigate(3);
@@ -4787,7 +4737,7 @@ var Viensla = {
     launched : 0,
     totalLaunched : 0,
     isPerfect : false,
-    imprecision : 12,
+    imprecision : 8,
     isPlaying : false,
     isShooting : false,
     lives : 0,
@@ -5129,3 +5079,4 @@ var Snds = {
 
 
 
+});
